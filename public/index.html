@@ -344,7 +344,7 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 @media (min-width:820px){.dm-grid{grid-template-columns:.9fr 1.1fr;align-items:stretch}}
 .dm-photo{position:relative;margin:0;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;max-height:640px;background:var(--soft)}
 @media (max-width:819px){.dm-photo{aspect-ratio:4/3}}
-.dm-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.dm-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 .dm-tag{position:absolute;top:var(--y);left:var(--x);background:var(--lime);color:var(--ink);font:700 13px/1 Geist,sans-serif;padding:8px 11px;border-radius:999px;box-shadow:0 6px 14px rgba(0,0,0,.25);white-space:nowrap}
 .dm-photo figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border-radius:999px;padding:8px 14px 8px 8px;font-weight:650;display:flex;gap:8px;align-items:center}
 .cap-n{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font:800 14px/1 var(--display)}
@@ -425,12 +425,12 @@ html{scroll-behavior:smooth}
       <h1 class="display">Don't know what to <span>3D print?</span></h1>
       <p>Take a photo of any room. Get 3D prints that fit what's in it.</p>
       <a class="proof" href="#example" aria-label="See the example: a desk photo and the prints it found">
-        <span class="pf-photo"><img src="/demo/desk-s.jpg" alt="" width="600" height="800"><span class="pf-tag" style="top:42%;left:36%">cables</span><span class="pf-tag" style="top:60%;left:46%">remote</span><span class="pf-tag" style="top:8%;left:12%">posters</span></span>
+        <span class="pf-photo"><img src="/demo/setup-s.jpg" alt="" width="600" height="800"><span class="pf-tag" style="top:27%;left:14%">plant</span><span class="pf-tag" style="top:46%;left:4%">PC</span><span class="pf-tag" style="top:56%;left:22%">controller</span></span>
         <span class="pf-arrow" aria-hidden="true">→</span>
         <span class="pf-list">
-          <span class="pf-row" data-q="under desk cable tray"><span class="pic"></span><b>Cable tray</b></span>
-          <span class="pf-row" data-q="apple tv remote holder"><span class="pic"></span><b>Remote holder</b></span>
-          <span class="pf-row" data-q="poster hanger"><span class="pic"></span><b>Poster hanger</b></span>
+          <span class="pf-row" data-q="controller stand"><span class="pic"></span><b>Controller stand</b></span>
+          <span class="pf-row" data-q="self watering planter"><span class="pic"></span><b>Self-watering planter</b></span>
+          <span class="pf-row" data-q="under desk drawer"><span class="pic"></span><b>Under-desk drawer</b></span>
           <small>+3 more for this desk</small>
         </span>
       </a>
@@ -449,22 +449,22 @@ html{scroll-behavior:smooth}
       <div class="dm-head"><h2 class="display">I took a photo of my desk.<br>Here's what it found.</h2></div>
       <div class="dm-grid">
         <figure class="dm-photo">
-          <img src="/demo/desk.jpg" alt="A desk with a curved monitor, keyboard, cables and a PC" loading="lazy" width="900" height="1200">
-          <span class="dm-tag" style="--x:50%;--xm:44%;--y:44%;--ym:28%">loose cables</span>
-          <span class="dm-tag" style="--x:64%;--xm:70%;--y:51%;--ym:47%">remote</span>
-          <span class="dm-tag" style="--x:58%;--xm:50%;--y:60%;--ym:66%">hard drive</span>
-          <span class="dm-tag" style="--x:22%;--xm:20%;--y:14%;--ym:6%">posters</span>
-          <span class="dm-tag" style="--x:8%;--xm:6%;--y:42%;--ym:30%">guitar</span>
+          <img src="/demo/setup.jpg" alt="A desk setup with an ultrawide monitor, a gaming PC, a controller, headphones and a plant on a shelf" loading="lazy" width="900" height="1200">
+          <span class="dm-tag" style="--x:24%;--xm:22%;--y:27%;--ym:18%">plant</span>
+          <span class="dm-tag" style="--x:36%;--xm:37%;--y:30%;--ym:25%">books</span>
+          <span class="dm-tag" style="--x:13%;--xm:12%;--y:45%;--ym:48%">PC</span>
+          <span class="dm-tag" style="--x:28%;--xm:28%;--y:53%;--ym:58%">controller</span>
+          <span class="dm-tag" style="--x:70%;--xm:60%;--y:44%;--ym:50%">headphones</span>
           <figcaption><span class="cap-n">1</span> Take a photo</figcaption>
         </figure>
         <div class="dm-res">
           <div class="dm-cap"><span class="cap-n">2</span> Get prints that fit</div>
-          <div class="dm-row" data-q="under desk cable tray"><span class="pic"></span><span class="dm-t"><b>Under-desk cable tray</b><small>Hides the cables on your desk</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="desk cable clip"><span class="pic"></span><span class="dm-t"><b>Desk edge cable clips</b><small>Keeps the charger cables in place</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="apple tv remote holder"><span class="pic"></span><span class="dm-t"><b>Remote holder</b><small>The remote lies loose on the desk</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="poster hanger"><span class="pic"></span><span class="dm-t"><b>Poster hanger</b><small>For the two posters on the wall</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="guitar wall mount"><span class="pic"></span><span class="dm-t"><b>Guitar wall mount</b><small>The guitar leans against the wall</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="under desk headphone hook"><span class="pic"></span><span class="dm-t"><b>Under-desk headphone hook</b><small>Keeps headphones off the desk</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="controller stand"><span class="pic"></span><span class="dm-t"><b>Controller stand</b><small>The controller lies on the desk</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="under desk drawer"><span class="pic"></span><span class="dm-t"><b>Under-desk drawer</b><small>Extra storage, out of sight</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="bookends"><span class="pic"></span><span class="dm-t"><b>Bookends</b><small>Keeps the books on your shelf standing</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="self watering planter"><span class="pic"></span><span class="dm-t"><b>Self-watering planter</b><small>For the plant on the shelf</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="under desk cable tray"><span class="pic"></span><span class="dm-t"><b>Under-desk cable tray</b><small>Hides the PC and monitor cables</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="under desk headphone hook"><span class="pic"></span><span class="dm-t"><b>Under-desk headphone hook</b><small>Frees up space on the desk</small><small class="dm-src"></small></span></div>
           <small class="dm-more">6 ideas · real models to download</small>
         </div>
       </div>
