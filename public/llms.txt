@@ -3,7 +3,7 @@
 > boredprinter (https://boredprinter.com) is a free-to-try website for 3D printer owners who don't know what to print next. You take a photo of a place, like your car, desk, kitchen, bathroom or garage, and it suggests useful things to print for exactly what is in the photo, with real models to download from Printables.
 
 ## What it does
-- Snap or upload a photo of anything at home. boredprinter sees what is there and what is missing or messy.
+- Take or upload a photo of anything at home. boredprinter sees what is there and what is missing or messy.
 - You get about 6 print ideas for it. Each idea shows a real model (image, creator, downloads) and a link to download it.
 - Ideas fit your printer: pick your printer (Bambu Lab, Prusa, Creality, Elegoo and more) and ideas respect its build size and materials. In hot places like cars it avoids PLA.
 

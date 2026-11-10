@@ -103,7 +103,7 @@ def page(slug, room, title, intro, ideas):
         <div><h2>{i + 1}. {e(n)}</h2><p>{e(w)}</p><small>Material: {e(m)}</small></div></li>''' for i, (n, w, q, m) in enumerate(ideas))
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>3D print ideas for your {e(room)} – boredprinter</title>
-<meta name="description" content="{len(ideas)} useful 3D prints for your {e(room)}, with real models to download. Out of ideas? Snap a photo of your {e(room)} and get ideas for it.">
+<meta name="description" content="{len(ideas)} useful 3D prints for your {e(room)}, with real models to download. Out of ideas? Take a photo of your {e(room)} and get ideas for it.">
 <link rel="canonical" href="{url}">
 <meta property="og:title" content="3D print ideas for your {e(room)}"><meta property="og:description" content="Useful prints for your {e(room)}, with real models to download."><meta property="og:image" content="{SITE}/og.png"><meta property="og:url" content="{url}"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -130,7 +130,7 @@ footer{{margin-top:40px;color:var(--muted);font-size:13px}}
 <nav class="crumbs"><a href="/ideas">Print ideas</a> / {e(title)}</nav>
 <h1>3D print ideas for your {e(room)}</h1>
 <p class="lead">{e(intro)}</p>
-<div class="cta"><b>Want ideas for <em>your</em> {e(room)}? Snap a photo and get ideas made for it.</b><a class="btn" href="/">Snap a photo</a></div>
+<div class="cta"><b>Want ideas for <em>your</em> {e(room)}? Take a photo and get ideas made for it.</b><a class="btn" href="/">Try it free</a></div>
 <ol>
 {items}
 </ol>
@@ -170,11 +170,11 @@ li a{{display:grid;gap:2px;background:var(--card);border:1px solid var(--line);b
 </style></head><body><main>
 <a class="top" href="/"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a>
 <h1>3D print ideas for every room</h1>
-<p>Pick a room to see useful prints. Or snap a photo of your own space and get ideas made for it.</p>
+<p>Pick a room to see useful prints. Or take a photo of your own space and get ideas made for it.</p>
 <ul>
 {cards}
 </ul>
-<a class="btn" href="/">Snap a photo</a>
+<a class="btn" href="/">Try it free</a>
 </main><script defer src="/_vercel/insights/script.js"></script></body></html>'''
 
 os.makedirs(OUT, exist_ok=True)

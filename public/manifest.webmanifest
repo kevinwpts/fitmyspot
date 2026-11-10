@@ -1,7 +1,7 @@
 {
   "name": "boredprinter",
   "short_name": "boredprinter",
-  "description": "Don't know what to print? Snap a photo.",
+  "description": "Don't know what to print? Take a photo.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F3F4F6",
