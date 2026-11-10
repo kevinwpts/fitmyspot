@@ -7,11 +7,11 @@
 <link rel="canonical" href="https://boredprinter.com/">
 <meta property="og:url" content="https://boredprinter.com/">
 <meta property="og:site_name" content="boredprinter">
-<meta name="twitter:title" content="Don't know what to print? Snap a photo.">
+<meta name="twitter:title" content="Don't know what to 3D print? Snap a photo.">
 <meta name="twitter:description" content="Out of 3D print ideas? Snap a photo of any spot and get useful things to print for it.">
 <meta name="twitter:image" content="https://boredprinter.com/og.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://boredprinter.com/#site", "name": "boredprinter", "url": "https://boredprinter.com/", "description": "Out of 3D print ideas? Snap a photo of any spot and get useful things to print for it."}, {"@type": "Organization", "@id": "https://boredprinter.com/#org", "name": "boredprinter", "url": "https://boredprinter.com/", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}, {"@type": "WebApplication", "name": "boredprinter", "url": "https://boredprinter.com/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Any (web browser)", "description": "Out of ideas for your 3D printer? Take a photo of your car, desk, kitchen or any room and get useful things to print for that exact spot, with real models from Printables. Save rooms in My home and get new print ideas every week.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "First photo free, 3 credits on sign-up"}, "publisher": {"@id": "https://boredprinter.com/#org"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are the models free?", "acceptedAnswer": {"@type": "Answer", "text": "Most are. You download them from the creator's page."}}, {"@type": "Question", "name": "What are weekly ideas?", "acceptedAnswer": {"@type": "Answer", "text": "Turn them on for a spot, like your kitchen, and you get new prints for it every week."}}, {"@type": "Question", "name": "Do you keep my photo?", "acceptedAnswer": {"@type": "Answer", "text": "No. We only keep a short list of what we saw, like \"bed, lamp\"."}}, {"@type": "Question", "name": "Which printers does it work with?", "acceptedAnswer": {"@type": "Answer", "text": "All of them. Pick yours on your account page and ideas fit its size."}}, {"@type": "Question", "name": "What if an idea doesn't fit?", "acceptedAnswer": {"@type": "Answer", "text": "Bad photo? You get your credit back."}}, {"@type": "Question", "name": "What does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "First photo free, plus 3 credits when you sign up. 1 photo = 1 credit."}}]}]}</script>
-<meta property="og:title" content="Don't know what to print? Snap a photo.">
+<meta property="og:title" content="Don't know what to 3D print? Snap a photo.">
 <meta property="og:description" content="Out of 3D print ideas? Snap a photo of any spot and get useful things to print for it.">
 <meta property="og:image" content="https://boredprinter.com/og.png">
 <meta property="og:type" content="website">
@@ -374,7 +374,7 @@ html{scroll-behavior:smooth}
   <section id="landing">
     <div class="hero">
       <div class="mascot" aria-hidden="true"><svg><use href="#bp"/></svg><span class="z">z</span><span class="z">z</span></div>
-      <h1 class="display">Don't know what to <span>print?</span></h1>
+      <h1 class="display">Don't know what to <span>3D print?</span></h1>
       <p>Snap a photo of any spot. Get useful things to print for it.</p>
       <label class="upload" for="file">
         <span class="up-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg></span>
@@ -950,7 +950,7 @@ async function shareImage(){
   g.fillStyle = "#6F6A62"; g.font = '600 34px Geist, sans-serif'; g.fillText("Your printer bored too? → " + location.host, 60, 1820);
   const blob = await new Promise(res => c.toBlob(res, "image/png"));
   const file = new File([blob], "boredprinter.png", { type: "image/png" });
-  if (navigator.canShare?.({ files: [file] })) { try { await navigator.share({ files: [file], text: "Don't know what to print? " + location.origin }); return; } catch (e) { if (e.name === "AbortError") return; } }
+  if (navigator.canShare?.({ files: [file] })) { try { await navigator.share({ files: [file], text: "Don't know what to 3D print? " + location.origin }); return; } catch (e) { if (e.name === "AbortError") return; } }
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "boredprinter.png"; a.click();
 }
 $("shareBtn").onclick = shareImage;
