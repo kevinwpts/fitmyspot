@@ -1284,8 +1284,16 @@ async function loadModels(p, i){
   }
 }
 
+async function loadImg(file){
+  // 1) createImageBitmap (snabbast). 2) Vanlig <img> via objekt-URL (äldre iPhone/Instagram). 
+  try { return await createImageBitmap(file, { imageOrientation: "from-image" }); } catch {}
+  try { return await createImageBitmap(file); } catch {}
+  const url = URL.createObjectURL(file);
+  try { const im = new Image(); im.src = url; await im.decode(); return im; } finally { setTimeout(() => URL.revokeObjectURL(url), 5000); }
+}
 async function shrink(file){
-  const img = await createImageBitmap(file);
+  const img = await loadImg(file);
+  if (!img.width || !img.height) throw new Error("empty");
   const max = 1280, s = Math.min(1, max / Math.max(img.width, img.height));
   const c = document.createElement("canvas");
   c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
@@ -1294,10 +1302,12 @@ async function shrink(file){
 }
 
 async function pick(file){
-  if (!file || !file.type.startsWith("image/")) return;
+  if (!file) return;
   track("file_picked");
   $("error").hidden = true;
-  try { photoUrl = await shrink(file); } catch { $("error").textContent = "That photo couldn't be read. Try another one."; $("error").hidden = false; return; }
+  // Vissa mobiler (t.ex. Instagrams webbläsare) skickar bilder utan filtyp. Försök läsa ändå.
+  if (file.type && !file.type.startsWith("image/")) { track("file_error"); toast("That file isn't a photo. Pick a photo instead."); return; }
+  try { photoUrl = await shrink(file); } catch { track("file_error"); toast("That photo couldn't be read. Try another one, or take a new photo."); return; }
   imageB64 = photoUrl.split(",")[1];
   $("scanImg").src = photoUrl;
   
@@ -1317,24 +1327,25 @@ async function analyze(){
     const d = await r.json();
     if (r.status === 401) { track("gate"); renderGate(); return; }
     if (r.status === 402) { show("landing"); outOfPhotos(); return; }
-    if (r.status === 503 && d.error === "busy") { show("landing"); $("error").textContent = "We're very busy right now. Try again in a little while."; $("error").hidden = false; return; }
+    if (r.status === 503 && d.error === "busy") { show("landing"); toast("We're very busy right now. Try again in a little while."); track("analyze_error"); return; }
     if (!r.ok || d.error) throw new Error(d.error);
     if (d.locked) { track("result_locked"); renderLocked(d); return; }
     if (!(d.prints || []).length) {
       show("landing");
-      $("error").textContent = (d.photo_issue || "We couldn't find print ideas for this photo. Try another photo.") + " Your credit was given back.";
-      $("error").hidden = false; refreshQuota(); return;
+      toast((d.photo_issue || "We couldn't find print ideas for this photo. Try another photo.") + (session ? " Your credit was given back." : ""));
+      track("no_ideas"); refreshQuota(); return;
     }
     track(d.free ? "result_full" : "result_signed"); render(d); savePhoto(d);
     refreshQuota();
   } catch {
     show("landing");
-    $("error").textContent = "Something went wrong. Try again with another photo.";
-    $("error").hidden = false;
+    toast("Something went wrong. Try again with another photo.");
+    track("analyze_error");
   } finally { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); $("file").value = ""; }
 }
 
 $("file").addEventListener("change", e => pick(e.target.files[0]));
+$("file").addEventListener("cancel", () => track("picker_cancel"));
 document.addEventListener("dragover", e => e.preventDefault());
 document.addEventListener("drop", e => { e.preventDefault(); pick(e.dataTransfer.files[0]); });
 </script>
