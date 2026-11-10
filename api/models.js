@@ -62,6 +62,19 @@ async function makerworld(q) {
   return out;
 }
 
+// Brave ger en liten (200 px) kopia av MakerWorlds bild. Originaladressen ligger
+// base64-kodad i Brave-länken, så vi plockar ut den och ber om en skarp version.
+function sharp(m) {
+  if (!m?.image || !m.image.startsWith("https://imgs.search.brave.com/")) return m;
+  try {
+    const enc = m.image.split("/g:ce/")[1]; if (!enc) return m;
+    let orig = Buffer.from(enc.replace(/\//g, "").replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8");
+    if (!/^https:\/\/makerworld\.bblmw\.com\/[\w\/.\-]+\.(jpe?g|png|webp)/i.test(orig)) return m;
+    orig = orig.split("?")[0] + "?x-oss-process=image/resize,w_800/format,webp";
+    return { ...m, image: orig, thumb: m.image };
+  } catch { return m; }
+}
+
 async function search(t) {
   const [mw, pr] = await Promise.all([makerworld(t).catch(() => []), printables(t).catch(() => [])]);
   // MakerWorld först (flest användare), sen Printables. Varvat så båda syns om fler visas.
@@ -77,9 +90,9 @@ async function handler(req) {
   if (q.length < 2) return json({ models: [] });
   // Egen cache-nyckel när MakerWorld är på, så gamla "bara Printables"-svar inte fastnar
   const key = (process.env.BRAVE_API_KEY ? "mw|" : "") + q + "|" + alt;
-  if (mem.has(key)) return json({ models: mem.get(key) });
+  if (mem.has(key)) return json({ models: mem.get(key).map(sharp) });
   // Delad cache i databasen (7 dagar), så samma sökning inte kostar igen
-  try { const hit = await rpc("get_models", { p_key: SCAN_KEY, p_q: key }, anon()); if (Array.isArray(hit) && hit.length) { mem.set(key, hit); return json({ models: hit }); } } catch {}
+  try { const hit = await rpc("get_models", { p_key: SCAN_KEY, p_q: key }, anon()); if (Array.isArray(hit) && hit.length) { mem.set(key, hit); return json({ models: hit.map(sharp) }); } } catch {}
 
   // Prova flera sökningar tills vi hittar något: huvudsök, alternativ, sen kortare.
   const words = q.split(/\s+/);
@@ -94,7 +107,7 @@ async function handler(req) {
     mem.set(key, models);
     await rpc("put_models", { p_key: SCAN_KEY, p_q: key, p_models: models }, anon()).catch(() => {});
   }
-  return json({ models });
+  return json({ models: models.map(sharp) });
 }
 
 export const GET = handler;

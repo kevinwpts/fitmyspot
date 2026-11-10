@@ -6,8 +6,8 @@ const MODELS = ["gemini-3.1-flash-lite", "gemini-3.8-flash"];
 const PROMPT = `You are boredprinter, an assistant for 3D printing hobbyists.
 Look at the attached photo of a place (for example a car interior, a desk, a sofa, a kitchen, a garage or a hallway).
 1. Name the ONE main spot in the photo in 2-3 plain lowercase words starting with "your", like "your bathroom", "your curtains", "your car", "your desk". Never list two things. No description.
-2. List up to 8 concrete things you can see that matter for 3D prints (objects, surfaces, gaps, mess, cables, missing storage). Look at the WHOLE photo: the main spot, but also the background, walls, floor and shelves (for example posters, plants, a guitar, lamps, a chair).
-3. Suggest 6 useful 3D prints for THIS exact photo, each solving or upgrading something you can see. About 4 should be for the main spot and 1-2 for other things in the photo (for example a poster or frame hanger, a plant pot or a guitar wall mount). Never suggest two prints for the same thing. Be specific to the photo, not generic.
+2. List up to 10 concrete things you can see that matter for 3D prints (objects, surfaces, gaps, mess, cables, missing storage). Look at the WHOLE photo: the main spot, but also the background, walls, floor and shelves (for example posters, plants, a guitar, lamps, a chair).
+3. Suggest 10 useful 3D prints for THIS exact photo, each solving or upgrading something you can see. About 6 should be for the main spot and 3-4 for other things in the photo (for example a poster or frame hanger, a plant pot or a guitar wall mount). Never suggest two prints for the same thing. Be specific to the photo, not generic.
 For each print give:
 - name: short product-style name
 - why: one sentence that points to what you saw in the photo
@@ -94,7 +94,7 @@ async function handler(req) {
       const text = (data.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? "").join("");
       const out = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
       if (!Array.isArray(out.prints)) continue;
-      out.prints = out.prints.slice(0, 8);
+      out.prints = out.prints.slice(0, 10);
       // Dåligt foto eller inget att föreslå: ge tillbaka krediten
       if (!out.prints.length) {
         try { await rpc("refund_scan", { p_ip: ipHash(req), p_key: SCAN_KEY }, req); } catch {}

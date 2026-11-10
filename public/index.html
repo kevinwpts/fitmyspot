@@ -19,6 +19,7 @@
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
+<meta name="referrer" content="no-referrer">
 <meta name="apple-mobile-web-app-title" content="boredprinter">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1032,20 +1033,28 @@ setTimeout(() => track("visit"), 0);
 try { new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { track("see_example"); o.disconnect(); } }, { threshold: .4 }).observe($("example")); } catch {}
 document.addEventListener("click", e => { if (e.target.closest('label[for="file"]')) track("tap_upload"); }, true);
 
+/* Bakgrundsbild med reserv: skarp bild först, annars den lilla */
+function setBg(el, m){
+  if (!el || !m?.image) return;
+  const im = new Image(); im.referrerPolicy = "no-referrer";
+  im.onload = () => el.style.backgroundImage = `url("${safe(m.image)}")`;
+  im.onerror = () => { if (m.thumb) el.style.backgroundImage = `url("${safe(m.thumb)}")`; };
+  im.src = safe(m.image);
+}
 /* Real model photos in the hero demo */
 document.querySelectorAll(".dm-row").forEach(async a => {
   try {
     const d = await (await fetch("/api/models?q=" + encodeURIComponent(a.dataset.q))).json();
     const m = d.models?.[0]; if (!m) return;
-    a.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`;
+    setBg(a.querySelector(".pic"), m);
     a.querySelector(".dm-src").textContent = (m.creator ? "by " + m.creator + " · " : "") + (m.source || "Printables");
   } catch {}
 });
 document.querySelectorAll(".pf-row").forEach(async el => {
-  try { const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json(); const m = d.models?.[0]; if (m) el.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`; } catch {}
+  try { const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json(); const m = d.models?.[0]; if (m) setBg(el.querySelector(".pic"), m); } catch {}
 });
 document.querySelectorAll(".hp-idea").forEach(async el => {
-  try { const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json(); const m = d.models?.[0]; if (m) el.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`; } catch {}
+  try { const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json(); const m = d.models?.[0]; if (m) setBg(el.querySelector(".pic"), m); } catch {}
 });
 document.querySelectorAll("#demoCards .pic, .pv-row .pic").forEach(async el => {
   try {
@@ -1110,6 +1119,7 @@ async function loadModels(p, i){
       const m = models[j];
       let img = media.querySelector("img.main");
       if (!img) { img = document.createElement("img"); img.className = "main"; img.alt = ""; img.referrerPolicy = "no-referrer"; media.prepend(img); }
+      img.onerror = () => { if (m.thumb && img.src !== m.thumb) img.src = safe(m.thumb); };
       img.src = safe(m.image);
       media.href = safe(m.url);
       $("open" + i).href = safe(m.url); $("open" + i).innerHTML = "Open model " + I("arrow", 15);
@@ -1122,8 +1132,8 @@ async function loadModels(p, i){
     // "More like this": fler modeller av samma idé, gratis
     if (models.length > 1) {
       const alts = $("alts" + i), btn = $("moreBtn" + i);
-      alts.innerHTML = models.map((m, j) => `<button type="button" class="alt" data-j="${j}" aria-pressed="${j === 0}"><img src="${esc(safe(m.image))}" alt="" loading="lazy" referrerpolicy="no-referrer"><span>${esc(m.title)}</span><small>${esc(m.source || "Printables")}</small></button>`).join("");
-      alts.querySelectorAll("img").forEach(im => im.onerror = () => im.closest(".alt").remove());
+      alts.innerHTML = models.map((m, j) => `<button type="button" class="alt" data-j="${j}" aria-pressed="${j === 0}"><img src="${esc(safe(m.image))}" data-fb="${esc(safe(m.thumb || ""))}" alt="" loading="lazy" referrerpolicy="no-referrer"><span>${esc(m.title)}</span><small>${esc(m.source || "Printables")}</small></button>`).join("");
+      alts.querySelectorAll("img").forEach(im => im.onerror = () => { if (im.dataset.fb && im.dataset.fb !== "#" && im.src !== im.dataset.fb) im.src = im.dataset.fb; else im.closest(".alt")?.remove(); });
       alts.onclick = e => { const a = e.target.closest(".alt"); if (a) pickModel(+a.dataset.j); };
       const label = open => btn.innerHTML = open ? `Less <span class="chev up">›</span>` : `+${models.length - 1} more <span class="chev">›</span>`;
       label(false); btn.hidden = false;
