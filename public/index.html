@@ -566,6 +566,8 @@ const SB = window.supabase ? window.supabase.createClient("https://rcntkzrbanwig
 let session = null, me = null;
 const store = { get: k => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 const ref = new URLSearchParams(location.search).get("ref"); if (ref) store.set("ref", ref.slice(0, 12));
+// Ägarens testläge: boredprinter.com/?test=NYCKEL sparas på enheten
+{ const t = new URLSearchParams(location.search).get("test"); if (t) { store.set("testKey", t.slice(0, 40)); history.replaceState(null, "", "/"); } }
 async function authHeader(){ return session?.access_token ? { authorization: "Bearer " + session.access_token } : {}; }
 const creditsTotal = q => (q?.free_left || 0) + (q?.credits || 0);
 function showQuota(q){
@@ -787,7 +789,9 @@ function renderGate(){
   $("lockTitle").textContent = "Sign up to see ideas for this photo";
   $("lockSub").textContent = "You've used today's free previews. Create a free account and we'll find prints for this photo right away. You get 3 credits.";
   $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
-  $("grid").innerHTML = "";
+  $("grid").innerHTML = photoUrl ? Array.from({ length: 2 }, (_, i) => `
+    <article class="idea locked"><div class="media"><img src="${photoUrl}" alt="" style="filter:blur(18px) saturate(1.2);transform:scale(1.2)"><span class="num">${i + 1}</span><span class="lock"><span class="lockpill">${I("lock", 16)} Sign up to see</span></span></div>
+      <div class="body"><h3>████████ ████</h3><p>██████ ███ ██████████ ████</p></div></article>`).join("") : "";
   store.set("pending", null);
   try { localStorage.setItem("gatePhoto", photoUrl); } catch {}
   show("result"); $("dock").hidden = true;
@@ -1056,7 +1060,7 @@ async function analyze(){
   const t2 = setTimeout(() => go(2), 4800);
   const t3 = setTimeout(() => go(3), 8000);
   try {
-    const r = await fetch("/api/analyze", { method: "POST", headers: {"content-type": "application/json", ...(await authHeader())}, body: JSON.stringify({ image: imageB64, mime: "image/jpeg", printer: getPrinter(), room: scanMode === "room" }) });
+    const r = await fetch("/api/analyze", { method: "POST", headers: {"content-type": "application/json", ...(await authHeader()), ...(store.get("testKey") ? { "x-test-key": store.get("testKey") } : {})}, body: JSON.stringify({ image: imageB64, mime: "image/jpeg", printer: getPrinter(), room: scanMode === "room" }) });
     const d = await r.json();
     if (r.status === 401) { renderGate(); return; }
     if (r.status === 402) { show("landing"); outOfPhotos(); return; }

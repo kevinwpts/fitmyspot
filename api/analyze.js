@@ -1,5 +1,5 @@
 // boredprinter – tittar på bilden med Gemini och föreslår prints.
-import { rpc, ipHash, SCAN_KEY } from "../lib/supa.js";
+import { rpc, ipHash, SCAN_KEY, testKey } from "../lib/supa.js";
 // Nyckeln ligger i Netlify: Environment variables -> GEMINI_API_KEY
 const MODELS = ["gemini-3.1-flash-lite", "gemini-3.8-flash"];
 
@@ -72,7 +72,7 @@ async function handler(req) {
   try {
     quota = signedIn
       ? await rpc("use_scan", { p_ip: ipHash(req), p_key: SCAN_KEY }, req)
-      : await rpc("use_preview", { p_ip: ipHash(req), p_key: SCAN_KEY }, req);
+      : await rpc("use_preview", { p_ip: ipHash(req), p_key: SCAN_KEY, p_test: !!SCAN_KEY && req.headers.get("x-test-key") === testKey() }, req);
   } catch { return json({ error: "quota_check_failed" }, 503); }
   if (!quota.ok && quota.reason === "busy") return json({ error: "busy" }, 503);
   if (!quota.ok && quota.reason === "preview_limit") return json({ error: "signin_required" }, 401);
