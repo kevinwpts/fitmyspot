@@ -15,10 +15,11 @@ For each print give:
 - alt: a different, simpler 2-3 word English search for the same thing (fallback)
 - material: PLA, PETG, TPU or ASA. If the place gets hot (car interior, near a heater, in sunlight) never use PLA.
 - time: rough print time like "45 min" or "3 h"
+- grams: rough filament use in grams for one print (whole number, typical settings)
 - level: Easy, Medium or Hard
 - buy_price: what a similar ready-made product typically costs in a store, in US dollars (whole number)
 If the photo is too dark, too blurry, or does not show a place where prints make sense, return an empty prints list and set "photo_issue" to a short friendly tip (for example "The photo is too dark. Turn on a light and try again."). Otherwise "photo_issue" is null.
-Reply ONLY with JSON: {"place":"...","seen":["..."],"hot":true,"photo_issue":null,"prints":[{"name":"","why":"","search":"","alt":"","material":"","time":"","level":"","buy_price":0}]}`;
+Reply ONLY with JSON: {"place":"...","seen":["..."],"hot":true,"photo_issue":null,"prints":[{"name":"","why":"","search":"","alt":"","material":"","time":"","grams":0,"level":"","buy_price":0}]}`;
 
 // Kända printrar: byggvolym (mm), skåp, flerfärg
 const PRINTERS = {
@@ -119,7 +120,7 @@ async function handler(req) {
         if (full) return json({ ...out, free: true });
         if (!id) return json({ error: "ai_failed" }, 502);
         // Namn och varför visas direkt (så man ser att den hittat något). Modeller och länkar först efter konto.
-        const preview = out.prints.map((p) => ({ name: String(p.name || "").slice(0, 80), why: String(p.why || "").slice(0, 200), material: p.material, time: p.time, level: p.level }));
+        const preview = out.prints.map((p) => ({ name: String(p.name || "").slice(0, 80), why: String(p.why || "").slice(0, 200), material: p.material, time: p.time, grams: p.grams, level: p.level }));
         return json({ locked: true, id, place: out.place, seen: Array.isArray(out.seen) ? out.seen.slice(0, 5) : [], hot: !!out.hot, count: out.prints.length, first: out.prints[0]?.name || null, preview });
       }
       out.quota = { free_left: quota.free_left ?? null, credits: quota.credits ?? null, via: quota.via };

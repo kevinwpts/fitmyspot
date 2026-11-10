@@ -854,7 +854,7 @@ async function tinyThumb(src){
 }
 async function savePhoto(r){
   if (!session || !SB || !(r?.prints || []).length) return;
-  const prints = r.prints.slice(0, 10).map(p => ({ name: p.name, why: p.why, search: p.search, alt: p.alt, material: p.material, time: p.time }));
+  const prints = r.prints.slice(0, 10).map(p => ({ name: p.name, why: p.why, search: p.search, alt: p.alt, material: p.material, time: p.time, grams: p.grams }));
   try { const { error } = await SB.from("photos").insert({ place: String(r.place || "").slice(0, 80), seen: (r.seen || []).slice(0, 6), prints, thumb: await tinyThumb(photoUrl) }); if (!error) toast("Saved to Your photos"); } catch {}
 }
 let photoRows = [];
@@ -951,7 +951,7 @@ function renderLocked(d){
   $("grid").innerHTML = list.map((p, i) => `
     <article class="idea locked" style="animation-delay:${i * 70}ms">
       <div class="media"><img src="${photoUrl}" alt="" style="filter:blur(18px) saturate(1.2);transform:scale(1.2)"><span class="num">${i + 1}</span>
-        <span class="badges">${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
+        <span class="badges">${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}${+p.grams > 0 ? `<span>${I("layers", 12)} ~${Math.round(+p.grams)} g</span>` : ""}</span>
         <span class="lock"><span class="lockpill">${I("lock", 16)} Model hidden</span></span></div>
       <div class="body"><h3>${p.name ? esc(capFirst(p.name)) : "████████ ████"}</h3><p>${p.why ? esc(capFirst(p.why)) : "██████ ███ ██████████ ████"}</p>
         <div class="actions"><span class="a1 ghost">${I("lock", 14)} Sign up to open</span></div></div>
@@ -1089,7 +1089,7 @@ function ideaCard(p, i, r){ p.name = capFirst(p.name); p.why = capFirst(p.why); 
       <a class="media" id="media${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">
         <div class="shimmer"></div>
         <span class="num">${p.isNew ? "New" : i + 1}</span>
-        <span class="badges">${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
+        <span class="badges">${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}${+p.grams > 0 ? `<span>${I("layers", 12)} ~${Math.round(+p.grams)} g</span>` : ""}</span>
       </a>
       <div class="body">
         <h3>${esc(p.name)}</h3>
