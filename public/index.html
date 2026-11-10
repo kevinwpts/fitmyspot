@@ -177,7 +177,7 @@ details p{margin:10px 0 0;color:var(--muted)}
 .rhead img{flex:none;width:96px;height:96px;object-fit:cover;border-radius:20px}
 .rhead h2{margin:2px 0 6px;font-family:var(--display);font-size:clamp(28px,5vw,40px);line-height:1.02;font-weight:800;letter-spacing:-.035em}
 .seenline{margin:2px 0 10px;color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rtools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.rtools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .grid{margin-top:22px;display:grid;grid-template-columns:1fr;gap:16px}
 @media (min-width:700px){.grid{grid-template-columns:1fr 1fr}}
 .idea{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;animation:up .45s both}
@@ -193,7 +193,7 @@ details p{margin:10px 0 0;color:var(--muted)}
 .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
 .body h3{margin:0;font-family:var(--display);font-size:21px;line-height:1.12;font-weight:750;letter-spacing:-.02em}
 .body p{margin:0;color:var(--muted);font-size:15px}
-.credit{font-size:12.5px;color:var(--muted)}.credit b{color:var(--ink);font-weight:600}
+.credit{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .actions{display:flex;gap:8px;margin-top:auto;padding-top:6px;flex-wrap:wrap}
 .actions a{flex:1;min-width:130px;text-align:center;font-weight:700;font-size:14px;padding:13px 12px;border-radius:14px;text-decoration:none}
 .a1{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--ink);color:#fff}
@@ -256,7 +256,7 @@ dialog::backdrop{background:rgba(26,25,24,.4);backdrop-filter:blur(3px)}
 .dlg p{margin:0;color:var(--muted)}
 .dlg input{font:16px Geist,sans-serif;padding:15px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
 .dlg .btn{width:100%}
-.dlg .x:focus:not(:focus-visible){outline:0}.dlg .x{justify-self:end;background:none;border:0;color:var(--muted);font:600 14px Geist,sans-serif;cursor:pointer;padding:0}
+.dlg .x:focus{outline:0}.dlg .x:focus-visible{text-decoration:underline}.dlg .x{justify-self:end;background:none;border:0;color:var(--muted);font:600 14px Geist,sans-serif;cursor:pointer;padding:0}
 .ok{background:var(--soft);border-radius:14px;padding:14px;font-weight:600}
 .gift{justify-self:start;display:inline-flex;align-items:center;gap:6px;background:var(--lime);color:var(--ink);font-weight:700;font-size:13px;padding:6px 10px;border-radius:999px}
 .gbtn{gap:12px}.gbtn svg{background:#fff;border-radius:50%;padding:2px;width:24px;height:24px}
@@ -288,6 +288,18 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 .lockpill{display:inline-flex;align-items:center;gap:6px;background:rgba(26,25,24,.8);color:#fff;font-size:13px;font-weight:600;padding:8px 12px;border-radius:999px}
 .a1.ghost{flex:1;background:var(--soft);color:var(--muted);font-weight:700;font-size:14px;padding:13px 12px;border-radius:14px;text-align:center}
 .idea.locked .body h3{color:var(--ink);letter-spacing:-.02em}.idea.locked .body p{letter-spacing:normal}
+.back{appearance:none;display:inline-flex;align-items:center;gap:4px;margin-top:18px;background:none;border:0;padding:6px 0;color:var(--muted);font:600 14px Geist,sans-serif;cursor:pointer}.back:hover{color:var(--ink)}
+.back+.rhead{margin-top:8px}
+.rhead{align-items:flex-start}.rhead h2{overflow-wrap:anywhere}
+@media (max-width:420px){.rhead img{width:76px;height:76px;border-radius:16px}}
+.soonbox{display:grid;gap:6px;background:var(--accent-soft);border-radius:16px;padding:16px}.soonbox b{font-size:16px}.soonbox span{color:var(--muted);font-size:14px}.soonbox .btn{margin-top:6px;padding:15px}
+.btn:disabled{opacity:.6;cursor:default}
+.homepromo{grid-template-columns:1fr;gap:22px;align-items:center}
+@media (min-width:820px){.homepromo{grid-template-columns:1fr 1fr}}
+.hp-copy{display:grid;gap:14px}
+.hp-demo{background:var(--soft);border-radius:28px;padding:18px;display:grid;gap:8px}
+.hp-demo .hrow{cursor:default;padding:14px 16px}.hp-demo .hrow:hover{border-color:var(--line)}
+.wkrow .pic{width:72px;height:72px;border-radius:12px;background:var(--card) center/cover no-repeat;display:block}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -369,13 +381,30 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
       </div>
     </section>
     <div class="examples" id="examples" hidden><div class="track" id="track"></div></div>
+    <section class="block homepromo" aria-label="My home">
+      <div class="hp-copy">
+        <span class="soon" style="margin:0;justify-self:start">New</span>
+        <h2 class="display">Your whole home. New prints every week.</h2>
+        <p class="lead2">Take one photo of each room. boredprinter remembers what's there and finds new things to print for it, every week. In the app and by email.</p>
+        <label for="file" class="btn btn-ink" style="justify-self:start">Start with one room</label>
+      </div>
+      <div class="hp-demo" aria-hidden="true">
+        <div class="h3" style="margin:0 0 10px">New this week</div>
+        <div class="wkrow"><span class="pic" data-q="razor holder"></span><div><b>Razor wall mount</b><small>For your bathroom</small></div></div>
+        <div class="wkrow"><span class="pic" data-q="spice rack"></span><div><b>Spice rack</b><small>For your kitchen</small></div></div>
+        <div class="h3" style="margin:18px 0 10px">My rooms</div>
+        <div class="hrow"><span class="hl"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><b>Bathroom</b><em>2 new</em></span><span class="items">Sink · Towels · Razor</span></div>
+        <div class="hrow"><span class="hl"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><b>Kitchen</b><em>1 new</em></span><span class="items">Spices · Drawer · Counter</span></div>
+        <div class="hrow"><span class="hl"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><b>Car</b></span><span class="items">Cup holders · Vents · Seats</span></div>
+      </div>
+    </section>
     <section class="block" id="pricing">
       <h2 class="display">Simple pricing</h2>
       <p class="lead2">Start free. 1 photo = 1 credit. <span class="soon">Paid plans open soon</span></p>
       <div class="tiers">
         <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>First photo free</li><li>+3 credits when you sign up</li><li>New prints for your home every week</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
-        <div class="tier"><span class="tn">30 credits</span><b>$2.99</b><ul><li>30 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-soft" data-buy>Coming soon</button></div>
-        <div class="tier hot"><em>Best value</em><span class="tn">100 credits</span><b>$6.99</b><ul><li>100 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-ink" data-buy>Coming soon</button></div>
+        <div class="tier"><span class="tn">30 credits</span><b>$2.99</b><ul><li>30 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-soft" data-notify>Notify me</button></div>
+        <div class="tier hot"><em>Best value</em><span class="tn">100 credits</span><b>$6.99</b><ul><li>100 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-ink" data-notify>Notify me</button></div>
       </div>
     </section>
     <section class="block" id="faq">
@@ -406,6 +435,7 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
   </section>
 
   <section id="result" hidden>
+    <button type="button" class="back" data-back hidden><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>My home</button>
     <div class="rhead">
       <img id="thumb" alt="Your photo">
       <div style="min-width:0"><h2 class="display" id="placeName">Prints for your spot</h2><p class="seenline" id="seenLine" hidden></p>
@@ -436,7 +466,8 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
   </section>
 
   <section id="account" hidden>
-    <div class="rhead" style="grid-template-columns:1fr"><div><div class="k">Account</div><h2 class="display">Your profile</h2></div></div>
+    <button type="button" class="back" data-back hidden><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>My home</button>
+    <div class="rhead"><div><h2 class="display">Your account</h2></div></div>
     <div class="acc">
       <div class="acard"><span class="k2">Signed in as</span><b id="aEmail">–</b><small id="aSince"></small></div>
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
@@ -500,13 +531,12 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
     <div class="pack best"><b>100 credits</b><span>$6.99</span><em>Best value</em></div>
     <div class="pack"><b>300 credits</b><span>$14.99</span></div>
   </div>
-  <div class="ok">Coming soon. Invite friends for free credits.</div>
+  <div class="soonbox"><b>Buying credits opens soon</b><span>Get an email the day it opens.</span><button type="button" class="btn btn-ink" data-notify>Notify me</button></div>
   <div class="invite" id="inviteBuy"></div>
 </form></dialog>
 <dialog id="dlgLimit"><form class="dlg" method="dialog">
   <button class="x" value="cancel">Close</button>
   <h3>You're out of credits</h3>
-  <p>Invite a friend and you both get 3 credits.</p>
   <div class="invite" id="inviteLimit"></div>
   <button class="btn btn-ink" value="buy">See credit packs</button>
 </form></dialog>
@@ -554,6 +584,8 @@ async function afterSignIn(){
   // Inbjudningskod och mejl-samtycke sparas en gång
   const r = store.get("ref"); if (r) { try { await SB.rpc("apply_referral", { p_code: r }); } catch {} store.set("ref", null); }
   if (store.get("mkt")) { try { await SB.rpc("set_marketing", { p_ok: true }); } catch {} store.set("mkt", null); }
+  if (store.get("notify")) { store.set("notify", null); try { await SB.rpc("set_notify_paid"); markNotified(); } catch {} }
+  SB.rpc("my_profile").then(({ data }) => { if (data?.notify_paid) markNotified(); }, () => {});
   // Välkomstruta för nya konton (en gång)
   try {
     const created = new Date(session?.user?.created_at || 0).getTime();
@@ -656,7 +688,15 @@ $("formSignin").addEventListener("submit", async e => {
 function outOfPhotos(){ refreshQuota(); $("dlgLimit").showModal(); }
 $("dlgLimit").addEventListener("close", () => { if ($("dlgLimit").returnValue === "buy") $("dlgBuy").showModal(); });
 $("left").onclick = () => $("dlgBuy").showModal();
-document.querySelectorAll("[data-buy]").forEach(b => b.onclick = () => session ? $("dlgBuy").showModal() : openSignup("Create your free account", "You get 3 free credits."));
+/* Väntelista för köp: ett klick, sparas på kontot */
+let notified = false;
+function markNotified(){ notified = true; document.querySelectorAll("[data-notify]").forEach(b => { b.textContent = "You're on the list ✓"; b.disabled = true; }); }
+async function notifyMe(){
+  if (!session) { store.set("notify", 1); openSignup("Get notified", "Create a free account and we'll email you when buying opens. You also get 3 credits."); return; }
+  const { error } = await SB.rpc("set_notify_paid");
+  if (!error) markNotified();
+}
+document.addEventListener("click", e => { if (e.target.closest("[data-notify]") && !notified) notifyMe(); });
 document.addEventListener("click", e => { if (e.target.id === "nudgeBtn") $("dlgBuy").showModal(); });
 
 
@@ -703,7 +743,8 @@ $("delBtn").onclick = async () => {
 /* Locked result for visitors without account */
 /* "Prints for your bathroom" – tydlig rubrik från platsen */
 function placeTitle(place){
-  let t = String(place || "").split(/[.,:;]/)[0].trim().toLowerCase().slice(0, 32);
+  let t = String(place || "").split(/[.,:;]/)[0].trim().toLowerCase();
+  if (t.length > 30) t = t.slice(0, 30).replace(/\s+\S*$/, "");
   if (!t) return "Prints for your spot";
   if (!/^(your|the|my)\b/.test(t)) t = "your " + t;
   t = t.replace(/^(the|my)\b/, "your");
@@ -712,7 +753,7 @@ function placeTitle(place){
 function renderLocked(d){
   $("placeName").textContent = placeTitle(d.place);
   const seen = (d.seen || []).slice(0, 5).map(String).join(" · ");
-  $("seenLine").textContent = seen ? "We saw: " + seen : ""; $("seenLine").hidden = !seen;
+  $("seenLine").hidden = true;
   $("savedPill").hidden = true;
   lastResult = null;
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
@@ -891,7 +932,7 @@ if (matchMedia("(pointer:fine) and (min-width:900px)").matches) {
 }
 
 /* Real model photos in the hero demo */
-document.querySelectorAll("#demoCards .pic, .pv-row .pic").forEach(async el => {
+document.querySelectorAll("#demoCards .pic, .pv-row .pic, .hp-demo .pic").forEach(async el => {
   try {
     const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json();
     const m = d.models?.[0]; if (!m) return;
@@ -911,12 +952,13 @@ const EXAMPLES = [["car cup holder organizer","Car"],["desk cable organizer","De
   $("examples").hidden = false;
 })();
 
-function show(id){ ["landing","scanning","result","history","account"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
+function show(id){ ["landing","scanning","result","history","account"].forEach(s => $(s).hidden = s !== id); document.querySelectorAll("[data-back]").forEach(b => b.hidden = !session); window.scrollTo({top: 0, behavior: "smooth"}); }
+document.addEventListener("click", e => { if (e.target.closest("[data-back]")) openHome(); });
 
 function render(r){
   $("placeName").textContent = placeTitle(r.place);
   const seen = (r.seen || []).slice(0, 5).map(x => String(x)).join(" · ");
-  $("seenLine").textContent = seen ? "We saw: " + seen : ""; $("seenLine").hidden = !seen;
+  $("seenLine").hidden = true;
   lastSpot = session && r.id ? { id: r.id, kind: r.kind } : null;
   $("savedPill").hidden = !lastSpot;
   $("savedPill").innerHTML = r.kind === "room" ? I("check", 14) + " Saved to My rooms" : "+ Add to My rooms";
@@ -927,7 +969,7 @@ function render(r){
       <a class="media" id="media${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">
         <div class="shimmer"></div>
         <span class="num">${p.isNew ? "New" : i + 1}</span>
-        <span class="badges">${p.material ? `<span>${I("layers", 12)} ${esc(p.material)}${r.hot && p.material !== "PLA" ? " · heat-safe" : ""}</span>` : ""}${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}${p.level ? `<span>${I("gauge", 12)} ${esc(p.level)}</span>` : ""}</span>
+        <span class="badges">${p.material ? `<span>${I("layers", 12)} ${esc(p.material)}${r.hot && p.material !== "PLA" ? " · heat-safe" : ""}</span>` : ""}${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
       </a>
       <div class="body">
         <h3>${esc(p.name)}</h3>
@@ -966,9 +1008,9 @@ async function loadModels(p, i){
       if (!img) { img = document.createElement("img"); img.className = "main"; img.alt = ""; img.referrerPolicy = "no-referrer"; media.prepend(img); }
       img.src = safe(m.image);
       media.href = safe(m.url);
-      $("open" + i).href = safe(m.url); $("open" + i).innerHTML = "Open on " + esc(m.source || "Printables") + " " + I("arrow", 15);
+      $("open" + i).href = safe(m.url); $("open" + i).innerHTML = "Open model " + I("arrow", 15);
       currentModels[i] = m;
-      $("credit" + i).innerHTML = `<b>${esc(m.title)}</b>${m.creator ? ` by ${esc(m.creator)}` : ""}${m.downloads ? ` · ${k(m.downloads)} downloads` : ""} · ${esc(m.source || "Printables")}`;
+      $("credit" + i).innerHTML = `${m.creator ? `by ${esc(m.creator)} · ` : ""}${m.downloads ? `${k(m.downloads)} downloads · ` : ""}${esc(m.source || "Printables")}`;
       media.querySelectorAll(".thumbs a").forEach((a, n) => a.classList.toggle("on", n === j));
     };
     media.querySelector(".shimmer")?.remove();

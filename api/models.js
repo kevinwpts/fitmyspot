@@ -48,7 +48,10 @@ async function makerworld(q) {
     const image = it.thumbnail?.src || "";
     if (!/^https:\/\/imgs\.search\.brave\.com\//.test(image)) continue;
     // Titlar ser ut som "Cup Holder Organizer by Maker - MakerWorld: Download Free 3D Models"
-    let title = String(it.title || "").replace(/\s*[-|–]\s*MakerWorld.*$/i, "").replace(/<[^>]+>/g, "").trim();
+    let title = String(it.title || "").replace(/<[^>]+>/g, "")
+      .replace(/\s*[-|–·:]\s*MakerWorld.*$/i, "")
+      .replace(/\s*[-|–·:]\s*(Free\s+)?3D\s+(Print(able)?\s+)?Models?.*$/i, "")
+      .replace(/\s*[-|–·:]\s*Download.*$/i, "").trim();
     let creator = null;
     const by = title.match(/^(.*)\s+by\s+([^-|]+)$/i);
     if (by) { title = by[1].trim(); creator = by[2].trim(); }
