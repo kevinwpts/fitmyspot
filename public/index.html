@@ -536,6 +536,26 @@ body{background:var(--bg);color:var(--ink)}
 .ba-row .pf-row b{font-size:13px}
 #landing .hv.ba{aspect-ratio:1/1.08}
 @media (min-width:1040px){.ba-row{grid-template-columns:repeat(4,auto);justify-content:start;gap:12px 20px}#landing .hv.ba{aspect-ratio:1/1.05}}
+
+/* Topp: foto med siffror + 3 riktiga modeller */
+#landing .hv.hx{aspect-ratio:1/1;background:var(--soft)}
+.hx img{width:100%;height:100%;object-fit:cover}
+.hx-n{position:absolute;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:var(--lime);color:var(--ink);border:3px solid #fff;display:grid;place-items:center;font:800 18px/1 var(--display);box-shadow:0 4px 14px rgba(0,0,0,.35);animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+.hx-n:nth-of-type(2){animation-delay:.15s}.hx-n:nth-of-type(3){animation-delay:.3s}
+@keyframes pop{from{transform:translate(-50%,-50%) scale(0)}to{transform:translate(-50%,-50%) scale(1)}}
+.hx-k{position:absolute;left:12px;top:12px;background:rgba(12,13,16,.72);color:#fff;font:600 12px/1 Geist,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;border-radius:999px}
+.hx-cards{grid-area:f;width:100%;max-width:520px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:left}
+.hx-c{position:relative;display:grid;gap:3px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 6px 10px}
+.hx-c .pic{width:100%;height:auto;aspect-ratio:1;border-radius:9px;background:var(--soft) center/cover no-repeat;margin-bottom:5px}
+.hx-cn{position:absolute;top:10px;left:10px;width:24px;height:24px;border-radius:50%;background:var(--lime);color:var(--ink);display:grid;place-items:center;font:800 13px/1 var(--display);border:2px solid #fff}
+.hx-c b{font:700 15px/1.15 var(--display);letter-spacing:-.02em;padding:0 4px}
+.hx-c small{font-size:12px;color:var(--muted);line-height:1.3;padding:0 4px}
+.hx-more{grid-column:1/-1;font-size:12.5px;color:var(--muted);text-align:center}
+@media (min-width:1040px){.hx-cards{max-width:none}#landing .hv.hx{aspect-ratio:1/1}}
+#landing .hv.hx{aspect-ratio:1/.85}
+@media (min-width:1040px){#landing .hv.hx{aspect-ratio:1/.85}}
+.hx-c small{display:none}.hx-c{padding:6px 6px 9px}.hx-c .pic{aspect-ratio:4/3}
+@media (max-width:1039px){#landing .hero{gap:14px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -554,21 +574,18 @@ body{background:var(--bg);color:var(--ink)}
     <div class="hero">
       <h1 class="display h-t">Don't know what to <span>3D print?</span></h1>
       <p class="h-p">Take a photo of any room. Get 3D prints that fit what's in it.</p>
-      <figure class="hv ba" id="example" style="--p:50%">
-        <img class="ba-b" src="/demo/setup.jpg" alt="A desk setup before: controller on the desk, loose cables, books lying down" width="900" height="1200">
-        <div class="ba-a" aria-hidden="true"><img src="/demo/setup-after.jpg" alt="" width="900" height="1200"></div>
-        <span class="ba-l ba-l1">Before</span><span class="ba-l ba-l2">After</span>
-        <span class="ba-h" aria-hidden="true"><span>‹ ›</span></span>
-        <input class="ba-r" type="range" min="0" max="100" value="50" aria-label="Drag to compare the desk before and after the prints">
+      <figure class="hv hx" id="example" aria-label="Example: a photo of a desk with 3 things marked">
+        <img src="/demo/desk2.jpg" alt="A white desk with a curved monitor, a notebook and pen, loose cables and an external hard drive" width="1000" height="1000">
+        <span class="hx-n" style="left:79%;top:53.5%">1</span>
+        <span class="hx-n" style="left:26%;top:40.6%">2</span>
+        <span class="hx-n" style="left:72%;top:85.3%">3</span>
+        <span class="hx-k">My desk</span>
       </figure>
-      <div class="ba-found">
-        <span class="ba-k">Found for this desk · <em>illustration</em></span>
-        <div class="ba-row">
-          <span class="pf-row" data-q="controller stand"><span class="pic"></span><b>Controller stand</b></span>
-          <span class="pf-row" data-q="self watering planter"><span class="pic"></span><b>Planter</b></span>
-          <span class="pf-row" data-q="bookends"><span class="pic"></span><b>Bookends</b></span>
-          <span class="pf-row" data-q="under desk cable tray"><span class="pic"></span><b>Cable tray</b></span>
-        </div>
+      <div class="hx-cards" aria-label="What it found">
+        <div class="hx-c pf-row" data-q="desk cable clip"><span class="pic"></span><span class="hx-cn">1</span><b>Cable clips</b><small>For the loose cables</small></div>
+        <div class="hx-c pf-row" data-q="pen holder"><span class="pic"></span><span class="hx-cn">2</span><b>Pen holder</b><small>For the pen and notebook</small></div>
+        <div class="hx-c pf-row" data-q="external hard drive stand"><span class="pic"></span><span class="hx-cn">3</span><b>Drive stand</b><small>For the hard drive</small></div>
+        <span class="hx-more">+7 more ideas for this desk · real models to download</span>
       </div>
       <div class="h-c">
         <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
