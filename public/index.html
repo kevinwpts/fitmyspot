@@ -1,9 +1,16 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Don't know what to print? Snap a photo of your car, desk or sofa and get 3D print ideas that fit.">
+<meta name="description" content="Don't know what to 3D print? Snap a photo of your car, desk, kitchen or any room and get print ideas that fit, with real models to download. First photo free.">
 <meta name="theme-color" content="#0B0C0F">
-<title>FitMySpot</title>
+<title>fitmyspot – 3D print ideas that fit your space</title>
+<link rel="canonical" href="https://fitmyspot.com/">
+<meta property="og:url" content="https://fitmyspot.com/">
+<meta property="og:site_name" content="fitmyspot">
+<meta name="twitter:title" content="Don't know what to print? Snap a photo.">
+<meta name="twitter:description" content="Snap a photo of any spot and get 3D print ideas that fit, with real models to download.">
+<meta name="twitter:image" content="https://fitmyspot.com/og.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://fitmyspot.com/#site", "name": "fitmyspot", "url": "https://fitmyspot.com/", "description": "Snap a photo of any spot and get 3D print ideas that fit."}, {"@type": "Organization", "@id": "https://fitmyspot.com/#org", "name": "fitmyspot", "url": "https://fitmyspot.com/", "logo": "https://fitmyspot.com/icon-512.png", "sameAs": ["https://www.instagram.com/fitmyspot/"]}, {"@type": "WebApplication", "name": "fitmyspot", "url": "https://fitmyspot.com/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Any (web browser)", "description": "Take a photo of your car, desk, kitchen or any room and get 3D print ideas that fit that exact spot, with real models from Printables. Save rooms in My home and get new print ideas every week.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "First photo free, 3 credits on sign-up"}, "publisher": {"@id": "https://fitmyspot.com/#org"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are the models free?", "acceptedAnswer": {"@type": "Answer", "text": "Most are. You download them from the creator's page."}}, {"@type": "Question", "name": "What is My home?", "acceptedAnswer": {"@type": "Answer", "text": "Photo each room once. Every week you get new prints that fit what's there."}}, {"@type": "Question", "name": "Do you keep my photo?", "acceptedAnswer": {"@type": "Answer", "text": "No. We only keep a short list of what we saw, like \"bed, lamp\"."}}, {"@type": "Question", "name": "Which printers does it work with?", "acceptedAnswer": {"@type": "Answer", "text": "All of them. Pick yours and ideas fit its size."}}, {"@type": "Question", "name": "What if an idea doesn't fit?", "acceptedAnswer": {"@type": "Answer", "text": "Bad photo? You get your credit back."}}, {"@type": "Question", "name": "What does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "First photo free, plus 3 credits when you sign up. 1 photo = 1 credit."}}]}]}</script>
 <meta property="og:title" content="Don't know what to print? Snap a photo.">
 <meta property="og:description" content="Take a photo of your car, desk or kitchen and get 3D print ideas that fit right there.">
 <meta property="og:image" content="https://fitmyspot.com/og.png">
@@ -366,6 +373,7 @@ nav{position:relative;gap:12px}
 .homeempty{background:var(--card);border-radius:20px;padding:22px;display:grid;gap:8px}
 .homeempty b{font-size:19px;font-weight:650}.homeempty p{margin:0;color:var(--muted)}
 .seenline{margin:2px 0 10px;color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.foot .rooms{font-size:13px;color:var(--muted)}.foot .rooms a{color:var(--muted)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -461,6 +469,7 @@ nav{position:relative;gap:12px}
       <details><summary>Do you keep my photo?</summary><p>No. We only keep a short list of what we saw, like "bed, lamp".</p></details>
       <details><summary>Which printers does it work with?</summary><p>All of them. Pick yours and ideas fit its size.</p></details>
       <details><summary>What if an idea doesn't fit?</summary><p>Bad photo? You get your credit back.</p></details>
+      <details><summary>What does it cost?</summary><p>First photo free, plus 3 credits when you sign up. 1 photo = 1 credit.</p></details>
     </section>
     <section class="maker">
       <div class="mk-badge">4.9M</div>
@@ -529,7 +538,8 @@ nav{position:relative;gap:12px}
   <footer class="foot">
     <a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a>
     <p>Models belong to their creators. We only link to them.</p>
-    <div class="flinks"><a href="https://www.instagram.com/fitmyspot/" target="_blank" rel="noopener">Instagram</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/removal">Contact &amp; removal</a></div>
+    <p class="rooms">Ideas for your <a href="/ideas/car">car</a> · <a href="/ideas/desk">desk</a> · <a href="/ideas/kitchen">kitchen</a> · <a href="/ideas/bathroom">bathroom</a> · <a href="/ideas/bedroom">bedroom</a> · <a href="/ideas/garage">garage</a> · <a href="/ideas/living-room">living room</a> · <a href="/ideas/hallway">hallway</a></p>
+    <div class="flinks"><a href="/ideas">Print ideas</a><a href="https://www.instagram.com/fitmyspot/" target="_blank" rel="noopener">Instagram</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/removal">Contact &amp; removal</a></div>
   </footer>
 </div>
 
