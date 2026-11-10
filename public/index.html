@@ -433,7 +433,7 @@ nav{position:relative;gap:12px}
       <h2 class="display">Simple pricing</h2>
       <p class="lead2">Start free. 1 photo = 1 credit. <span class="soon">Paid plans open soon</span></p>
       <div class="tiers">
-        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>10 credits when you sign up</li><li>1 free photo every day</li><li>All your spots saved</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
+        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>First photo free</li><li>+3 credits when you sign up</li><li>Invite a friend: +3 each</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
         <div class="tier"><span class="tn">30 credits</span><b>$2.99</b><ul><li>30 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-soft" data-buy>Coming soon</button></div>
         <div class="tier hot"><em>Best value</em><span class="tn">100 credits</span><b>$6.99</b><ul><li>100 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-ink" data-buy>Coming soon</button></div>
       </div>
@@ -471,7 +471,7 @@ nav{position:relative;gap:12px}
     </div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
-      <span>Sign up free to see them. You get 10 credits.</span>
+      <span>Sign up free to see them. You get 3 extra credits.</span>
       <button class="btn btn-ink" id="unlock">Show my ideas →</button>
     </div>
     <div class="grid" id="grid"></div>
@@ -492,7 +492,7 @@ nav{position:relative;gap:12px}
     <div class="acc">
       <div class="acard"><span class="k2">Signed in as</span><b id="aEmail">–</b><small id="aSince"></small></div>
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
-      <div class="acard"><span class="k2">Invite friends</span><b>+5 credits each</b><small id="aInvited"></small><div class="invite" id="inviteAcc"></div></div>
+      <div class="acard"><span class="k2">Invite friends</span><b>+3 credits each</b><small id="aInvited"></small><div class="invite" id="inviteAcc"></div></div>
       <div class="acard"><span class="k2">Emails</span><label class="chk"><input type="checkbox" id="aMkt"> Send me new print ideas and offers</label></div>
       <div class="acard"><button class="btn btn-soft" id="aOut">Sign out</button></div>
       <details class="danger"><summary>Delete account</summary>
@@ -516,7 +516,7 @@ nav{position:relative;gap:12px}
   <button class="x" value="cancel" formnovalidate>Close</button>
   <span class="gift"><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg> 10 free credits</span>
   <h3 id="signTitle">Create your free account</h3>
-  <p id="signText">Get 10 free credits.</p>
+  <p id="signText">Get 3 free credits.</p>
   <button class="btn btn-ink gbtn" id="google" type="button" value="google"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>Continue with Google</button>
   <div class="or"><span>or</span></div>
   <input id="email" type="email" required placeholder="you@email.com" autocomplete="email">
@@ -528,8 +528,8 @@ nav{position:relative;gap:12px}
 <dialog id="dlgWelcome"><form class="dlg" method="dialog" style="text-align:center;justify-items:center">
   <div class="wl-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></div>
   <h3>Welcome to fitmyspot!</h3>
-  <p>You got <b style="color:var(--ink)">10 free credits</b>.</p>
-  <div class="wl-steps"><span>1 photo = 1 credit</span><span>+1 free photo every day</span><span>Invite a friend: +5 each</span></div>
+  <p>You got <b style="color:var(--ink)">3 free credits</b>.</p>
+  <div class="wl-steps"><span>1 photo = 1 credit</span><span>Invite a friend: +3 each</span></div>
   <button class="btn btn-ink" value="ok" style="width:100%">Let's go</button>
 </form></dialog>
 <dialog id="dlgBuy"><form class="dlg" method="dialog">
@@ -547,7 +547,7 @@ nav{position:relative;gap:12px}
 <dialog id="dlgLimit"><form class="dlg" method="dialog">
   <button class="x" value="cancel">Close</button>
   <h3>You're out of credits</h3>
-  <p>You get 1 free photo every day.</p>
+  <p>Invite a friend and you both get 3 credits.</p>
   <div class="invite" id="inviteLimit"></div>
   <button class="btn btn-ink" value="buy">See credit packs</button>
 </form></dialog>
@@ -580,7 +580,7 @@ function showQuota(q){
   $("left").hidden = false;
   $("sub").textContent = q.plan === "pro" ? "Unlimited photos" : `${n} credit${n === 1 ? "" : "s"} left · 1 photo = 1 credit`;
   const link = q.ref_code ? location.origin + "/?ref=" + q.ref_code : "";
-  const inv = link ? `<b>Invite a friend, you both get 5 credits</b><div class="copy"><input readonly value="${esc(link)}"><button type="button" class="nbtn ink" data-copy="${esc(link)}">Copy</button></div>` : "";
+  const inv = link ? `<b>Invite a friend, you both get 3 credits</b><div class="copy"><input readonly value="${esc(link)}"><button type="button" class="nbtn ink" data-copy="${esc(link)}">Copy</button></div>` : "";
   $("inviteBuy").innerHTML = inv; $("inviteLimit").innerHTML = inv;
 }
 async function refreshQuota(){
@@ -610,6 +610,7 @@ async function afterSignIn(){
     try {
       const r2 = await fetch("/api/claim", { method: "POST", headers: { "content-type": "application/json", ...(await authHeader()) }, body: JSON.stringify({ id: pend.id }) });
       if (r2.ok) { photoUrl = pend.photo || ""; render(await r2.json()); }
+      else if (r2.status === 402) outOfPhotos();
     } catch {}
   }
   refreshQuota();
@@ -628,10 +629,10 @@ if (SB) {
 } else { $("signin").hidden = true; }
 function openSignup(title, text){
   $("signTitle").textContent = title || "Create your free account";
-  $("signText").textContent = text || "Get 10 free credits.";
+  $("signText").textContent = text || "Get 3 free credits.";
   $("sent").hidden = true; $("dlgSignin").showModal();
 }
-$("signin").onclick = () => openSignup("Sign in", "New here? You get 10 free credits.");
+$("signin").onclick = () => openSignup("Sign in", "New here? You get 3 free credits.");
 $("mkt").onchange = e => store.set("mkt", e.target.checked || null);
 $("google").onclick = async () => {
   const { error } = await SB.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin } });
@@ -649,7 +650,7 @@ $("formSignin").addEventListener("submit", async e => {
 function outOfPhotos(){ refreshQuota(); $("dlgLimit").showModal(); }
 $("dlgLimit").addEventListener("close", () => { if ($("dlgLimit").returnValue === "buy") $("dlgBuy").showModal(); });
 $("left").onclick = () => $("dlgBuy").showModal();
-document.querySelectorAll("[data-buy]").forEach(b => b.onclick = () => session ? $("dlgBuy").showModal() : openSignup("Create your free account", "You get 10 free credits."));
+document.querySelectorAll("[data-buy]").forEach(b => b.onclick = () => session ? $("dlgBuy").showModal() : openSignup("Create your free account", "You get 3 free credits."));
 document.addEventListener("click", e => { if (e.target.id === "nudgeBtn") $("dlgBuy").showModal(); });
 
 
@@ -663,8 +664,8 @@ async function openAccount(){
   $("aSince").textContent = "Member since " + new Date(p.created_at).toLocaleDateString();
   const n = (me?.free_left || 0) + (p.credits || 0);
   $("aCredits").textContent = p.plan === "pro" ? "Unlimited" : `${n} credit${n === 1 ? "" : "s"}`;
-  $("aPlan").textContent = p.plan === "pro" ? "Pro plan" : "Free plan · 1 free photo every day";
-  $("aInvited").textContent = p.invited ? `${p.invited} friend${p.invited === 1 ? "" : "s"} joined with your link` : "Share your link. When a friend signs up, you both get 5 credits.";
+  $("aPlan").textContent = p.plan === "pro" ? "Pro plan" : "Free plan";
+  $("aInvited").textContent = p.invited ? `${p.invited} friend${p.invited === 1 ? "" : "s"} joined with your link` : "Share your link. When a friend signs up, you both get 3 credits.";
   const link = location.origin + "/?ref=" + p.ref_code;
   $("inviteAcc").innerHTML = `<div class="copy"><input readonly value="${esc(link)}"><button type="button" class="nbtn ink" data-copy="${esc(link)}">Copy</button></div>`;
   $("aMkt").checked = !!p.marketing_ok;
@@ -713,7 +714,7 @@ function renderGate(){
   try { localStorage.setItem("gatePhoto", photoUrl); } catch {}
   $("lockTitle").textContent = "Your ideas are one step away";
 }
-$("unlock").onclick = () => openSignup("See your ideas", "Sign up free. You get 10 credits.");
+$("unlock").onclick = () => openSignup("See your ideas", "Sign up free. You get 3 extra credits.");
 $("grid").addEventListener("click", e => { if (e.target.closest(".idea.locked")) $("unlock").click(); });
 
 /* Social proof on the landing page (only when the number is big enough) */
@@ -859,7 +860,7 @@ function render(r){
   showPrinter();
   const left = r.quota ? (r.quota.free_left || 0) + (r.quota.credits || 0) : null;
   $("nudge").hidden = !(left != null && left <= 2);
-  if (left != null && left <= 2) $("nudge").innerHTML = `<b>${left} credit${left === 1 ? "" : "s"} left.</b> Invite a friend and you both get 5 more. <button class="nbtn ink" id="nudgeBtn">Get credits</button>`;
+  if (left != null && left <= 2) $("nudge").innerHTML = `<b>${left} credit${left === 1 ? "" : "s"} left.</b> Invite a friend and you both get 3 more. <button class="nbtn ink" id="nudgeBtn">Get credits</button>`;
   prints.forEach((p, i) => loadModels(p, i));
 }
 

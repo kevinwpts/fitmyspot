@@ -1,4 +1,4 @@
-// Hämta ett låst resultat efter registrering (gratis, sparas i historiken)
+// Hämta ett låst resultat efter registrering (första gratis, sedan 1 kredit)
 import { rpc, SCAN_KEY } from "../lib/supa.js";
 const json = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { "content-type": "application/json", "cache-control": "no-store" } });
 async function handler(req) {
@@ -8,6 +8,7 @@ async function handler(req) {
   if (!/^[0-9a-f-]{36}$/.test(String(id || ""))) return json({ error: "bad_id" }, 400);
   try {
     const r = await rpc("claim_scan", { p_key: SCAN_KEY, p_id: id }, req);
+    if (r?.error === "no_credits") return json(r, 402);
     return r ? json(r) : json({ error: "not_found" }, 404);
   } catch { return json({ error: "failed" }, 500); }
 }
