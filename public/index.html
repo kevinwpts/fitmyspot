@@ -500,6 +500,21 @@ body{background:var(--bg);color:var(--ink)}
 .rtools2 .nbtn{justify-content:center;padding:14px;font-size:15px;border-radius:12px}
 @media (min-width:700px){.rtools2{grid-template-columns:auto auto;justify-content:start}.rtools2 .nbtn{padding:12px 20px}}
 .nbtn.avatar{background:var(--lime);color:var(--ink);border:0}
+
+/* ===== Personlighet tillbaka: eget typsnitt i rubriker, maskot, maker-rad ===== */
+:root{--display:"Bricolage Grotesque",Geist,system-ui,sans-serif}
+.display,.hero h1,.block h2,.final h2,.rhead h2,.dm-head h2,#placeName{font-family:var(--display);font-weight:700;letter-spacing:-.04em}
+.hero h1{font-weight:800;letter-spacing:-.045em}
+.body h3{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.025em}
+.how li b{font-family:var(--display);font-weight:700;font-size:19px}
+.acard b{font-family:var(--display);font-weight:700}
+.hv-k{color:var(--ink)}
+.final .fm{width:84px;height:84px;margin-bottom:4px}
+.final .mascot .z{color:#A6AAB2}
+.mkline{display:inline-flex;flex-direction:row;background:none;border:0;padding:0;font-weight:400;align-items:center;gap:10px;margin-top:6px;text-decoration:none;color:var(--muted);font-size:13px;text-align:left}
+.mkline b{color:var(--ink);font-weight:600;display:inline;font-size:inherit}
+.mk-av{width:28px;height:28px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}
+.mk-av svg{width:100%;height:100%;border-radius:50%;background:#fff;display:block}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -536,6 +551,7 @@ body{background:var(--bg);color:var(--ink)}
         <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
         <span class="sub" id="sub">No sign-up · Real models from MakerWorld &amp; Printables</span>
         <span class="h-drop">Or drop a photo anywhere on this page</span>
+        <a class="mkline" href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener"><span class="mk-av"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bp"/></svg></span><span>Made by <b>@boredprinter</b> · 13.6k on Instagram</span></a>
         <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
       </div>
     </div>
@@ -558,6 +574,7 @@ body{background:var(--bg);color:var(--ink)}
     </section>
 
     <section class="final">
+      <div class="mascot fm" aria-hidden="true"><svg><use href="#bp"/></svg><span class="z">z</span><span class="z">z</span></div>
       <h2 class="display">Your printer is bored.</h2>
       <p>Give it something useful to do.</p>
       <label for="file" class="btn btn-light"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it free</label>
