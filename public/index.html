@@ -340,6 +340,8 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 .price li{display:flex;gap:10px;align-items:center}.price li:before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231A1918%27 stroke-width=%273.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M20 6 9 17l-5-5%27/%3E%3C/svg%3E") center/12px no-repeat}
 .price-more{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;color:var(--muted)}
 .price-more b{color:var(--ink)}.price-more span{flex:1;min-width:220px}.price-more .btn{padding:14px 22px;font-size:15px}
+.seeex{font-weight:600;font-size:15px;color:var(--ink);text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:3px;text-underline-offset:4px}
+html{scroll-behavior:smooth}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -366,9 +368,10 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
         <span class="btn btn-ink up-btn">Find prints</span>
       </label>
       <span class="sub" id="sub">Free to try · Real models from Printables &amp; MakerWorld</span>
+      <a class="seeex" href="#example">No photo handy? See a real example ↓</a>
       <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
     </div>
-    <section class="demo" aria-label="Example">
+    <section class="demo" id="example" aria-label="Example">
       <div class="dm-head"><span class="soon" style="margin:0">Real example</span><h2 class="display">I snapped my kitchen.<br>Here's what it found.</h2></div>
       <div class="dm-grid">
         <figure class="dm-photo">
