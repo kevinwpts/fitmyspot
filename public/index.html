@@ -317,12 +317,29 @@ details p{margin:10px 0 0;color:var(--muted)}
 .plimg img{width:100%;height:100%;object-fit:cover}
 .plbody{min-width:0;display:grid;gap:4px;align-content:center}.plbody b{font-size:16px}.plbody small{color:var(--muted)}
 .placts{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}.placts .nbtn{text-decoration:none}
+
+nav{position:relative;gap:12px}
+.navr{flex-wrap:nowrap;min-width:0;position:relative}
+.navlink{white-space:nowrap}
+@media (max-width:640px){.navlink{display:none!important}.logo span{font-size:18px}.logo svg{width:28px;height:28px}}
+.menu{position:absolute;right:0;top:calc(100% + 8px);z-index:60;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 20px 50px -10px rgba(0,0,0,.8);display:grid}
+.menu button{appearance:none;background:none;border:0;color:var(--ink);text-align:left;font:500 15px Geist,sans-serif;padding:11px 12px;border-radius:10px;cursor:pointer}
+.menu button:hover{background:var(--soft)}
+.menu hr{border:0;height:1px;background:var(--line);margin:4px 6px}
+.left{white-space:nowrap}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <nav><a class="logo" href="/"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#lg)"/><g fill="none" stroke="#0B0C0F" stroke-width="5" stroke-linecap="round"><path d="M14 24v-6a4 4 0 0 1 4-4h6M40 14h6a4 4 0 0 1 4 4v6M50 40v6a4 4 0 0 1-4 4h-6M24 50h-6a4 4 0 0 1-4-4v-6"/></g><g fill="none" stroke="#0B0C0F" stroke-width="4" stroke-linejoin="round"><path d="M32 21 43 27v12l-11 6-11-6V27z"/><path d="M21 27l11 6 11-6M32 33v12"/></g></svg><span>fitmyspot</span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn" id="mine" hidden>My spots</button><button class="nbtn" id="listBtn" hidden>List</button><button class="nbtn avatar" id="acct" hidden aria-label="Account"></button><button id="signout" hidden></button></div></nav>
+  <nav><a class="logo" href="/"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#lg)"/><g fill="none" stroke="#0B0C0F" stroke-width="5" stroke-linecap="round"><path d="M14 24v-6a4 4 0 0 1 4-4h6M40 14h6a4 4 0 0 1 4 4v6M50 40v6a4 4 0 0 1-4 4h-6M24 50h-6a4 4 0 0 1-4-4v-6"/></g><g fill="none" stroke="#0B0C0F" stroke-width="4" stroke-linejoin="round"><path d="M32 21 43 27v12l-11 6-11-6V27z"/><path d="M21 27l11 6 11-6M32 33v12"/></g></svg><span>fitmyspot</span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn navlink" id="mine" hidden>My spots</button><button class="nbtn navlink" id="listBtn" hidden>Print list</button><button class="nbtn avatar" id="acct" hidden aria-label="Account menu" aria-haspopup="menu"></button><button id="signout" hidden></button>
+    <div class="menu" id="menu" hidden role="menu">
+      <button role="menuitem" data-go="mine">My spots</button>
+      <button role="menuitem" data-go="listBtn">Print list</button>
+      <button role="menuitem" data-go="account">Account</button>
+      <button role="menuitem" data-go="buy">Get credits</button>
+      <hr><button role="menuitem" data-go="out">Sign out</button>
+    </div></div></nav>
 
   <section id="landing">
     <div class="hero">
@@ -668,7 +685,17 @@ async function openAccount(){
   $("inviteAcc").innerHTML = `<div class="copy"><input readonly value="${esc(link)}"><button type="button" class="nbtn ink" data-copy="${esc(link)}">Copy</button></div>`;
   $("aMkt").checked = !!p.marketing_ok;
 }
-$("acct").onclick = openAccount;
+$("acct").onclick = e => { e.stopPropagation(); $("menu").hidden = !$("menu").hidden; };
+document.addEventListener("click", e => { if (!e.target.closest("#menu")) $("menu").hidden = true; });
+$("menu").onclick = async e => {
+  const b = e.target.closest("[data-go]"); if (!b) return;
+  $("menu").hidden = true;
+  const g = b.dataset.go;
+  if (g === "account") openAccount();
+  else if (g === "buy") $("dlgBuy").showModal();
+  else if (g === "out") { await SB?.auth.signOut(); show("landing"); }
+  else $(g).click();
+};
 $("aBuy").onclick = () => $("dlgBuy").showModal();
 $("aIdeas").onclick = () => $("mine").click();
 $("aList").onclick = openList;
