@@ -600,6 +600,9 @@ async function afterSignIn(){
     const created = new Date(session?.user?.created_at || 0).getTime();
     if (Date.now() - created < 30 * 60 * 1000 && !store.get("welcomed:" + session.user.id)) { store.set("welcomed:" + session.user.id, 1); setTimeout(() => $("dlgWelcome").showModal(), 600); }
   } catch {}
+  // Foto som väntar på konto? Analysera det nu.
+  let gp = null; try { gp = localStorage.getItem("gatePhoto"); localStorage.removeItem("gatePhoto"); } catch {}
+  if (gp) { photoUrl = gp; imageB64 = gp.split(",")[1]; $("scanImg").src = gp; $("dock").hidden = true; show("scanning"); await analyze(); }
   // Låst resultat? Visa det nu.
   const pend = store.get("pending");
   if (pend?.id) {
@@ -702,6 +705,13 @@ function renderLocked(d){
     </article>`).join("");
   store.set("pending", { id: d.id, photo: photoUrl && photoUrl.length < 900000 ? photoUrl : "" });
   show("result"); $("dock").hidden = false;
+}
+/* Free tries used up: show blurred cards, analyze the photo right after sign-up */
+function renderGate(){
+  renderLocked({ count: 6, place: "", first: null });
+  store.set("pending", null);
+  try { localStorage.setItem("gatePhoto", photoUrl); } catch {}
+  $("lockTitle").textContent = "Your ideas are one step away";
 }
 $("unlock").onclick = () => openSignup("See your ideas", "Sign up free. You get 10 credits.");
 $("grid").addEventListener("click", e => { if (e.target.closest(".idea.locked")) $("unlock").click(); });
@@ -909,7 +919,7 @@ async function analyze(){
   try {
     const r = await fetch("/api/analyze", { method: "POST", headers: {"content-type": "application/json", ...(await authHeader())}, body: JSON.stringify({ image: imageB64, mime: "image/jpeg", printer: getPrinter(), lang: navigator.language || "en" }) });
     const d = await r.json();
-    if (r.status === 401) { show("landing"); openSignup("Create a free account", "Free tries used for today. Sign up for 10 free credits."); return; }
+    if (r.status === 401) { renderGate(); return; }
     if (r.status === 402) { show("landing"); outOfPhotos(); return; }
     if (r.status === 503 && d.error === "busy") { show("landing"); $("error").textContent = "We're very busy right now. Try again in a little while."; $("error").hidden = false; return; }
     if (!r.ok || d.error) throw new Error(d.error);
