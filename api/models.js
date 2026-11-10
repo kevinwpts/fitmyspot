@@ -72,7 +72,8 @@ async function handler(req) {
   const q = (sp.get("q") || "").trim().toLowerCase().slice(0, 60);
   const alt = (sp.get("alt") || "").trim().toLowerCase().slice(0, 60);
   if (q.length < 2) return json({ models: [] });
-  const key = q + "|" + alt;
+  // Egen cache-nyckel när MakerWorld är på, så gamla "bara Printables"-svar inte fastnar
+  const key = (process.env.BRAVE_API_KEY ? "mw|" : "") + q + "|" + alt;
   if (mem.has(key)) return json({ models: mem.get(key) });
   // Delad cache i databasen (7 dagar), så samma sökning inte kostar igen
   try { const hit = await rpc("get_models", { p_key: SCAN_KEY, p_q: key }, anon()); if (Array.isArray(hit) && hit.length) { mem.set(key, hit); return json({ models: hit }); } } catch {}
