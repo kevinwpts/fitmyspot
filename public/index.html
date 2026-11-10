@@ -207,7 +207,7 @@ dialog::backdrop{background:rgba(13,14,16,.5);backdrop-filter:blur(4px)}
 @media (max-width:420px){.navr .nbtn{padding:8px 10px;font-size:12px}#signout{display:none}}
 
 .rtools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.pcard{margin-top:18px;background:var(--card);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow);display:grid;gap:12px;border:2px solid var(--lime)}
+.pcard{margin-top:28px;background:var(--card);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow);display:grid;gap:12px;border:1px solid var(--line)}
 .pcard b{display:block;font-size:17px}.pcard span{color:var(--muted);font-size:14px}
 .pchips{display:flex;flex-wrap:wrap;gap:6px}
 .votes{display:flex;gap:6px;flex:none}
@@ -355,10 +355,9 @@ nav{position:relative;gap:12px}
 </head>
 <body>
 <div class="wrap">
-  <nav><a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn navlink" id="mine" hidden>My spots</button><button class="nbtn navlink" id="listBtn" hidden>Print list</button><button class="nbtn avatar" id="acct" hidden aria-label="Account menu" aria-haspopup="menu"></button><button id="signout" hidden></button>
+  <nav><a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn navlink" id="mine" hidden>My spots</button><button class="nbtn avatar" id="acct" hidden aria-label="Account menu" aria-haspopup="menu"></button><button id="signout" hidden></button>
     <div class="menu" id="menu" hidden role="menu">
       <button role="menuitem" data-go="mine">My spots</button>
-      <button role="menuitem" data-go="listBtn">Print list</button>
       <button role="menuitem" data-go="account">Account</button>
       <button role="menuitem" data-go="buy">Get credits</button>
       <hr><button role="menuitem" data-go="out">Sign out</button>
@@ -434,7 +433,7 @@ nav{position:relative;gap:12px}
       <h2 class="display">Simple pricing</h2>
       <p class="lead2">Start free. 1 photo = 1 credit. <span class="soon">Paid plans open soon</span></p>
       <div class="tiers">
-        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>10 credits when you sign up</li><li>1 free photo every day</li><li>Saved spots &amp; print list</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
+        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>10 credits when you sign up</li><li>1 free photo every day</li><li>All your spots saved</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
         <div class="tier hot"><em>Most popular</em><span class="tn">80 credits</span><b>$6.99</b><ul><li>One-time payment</li><li>Credits never expire</li><li>All features</li></ul><button class="btn btn-ink" data-buy>Coming soon</button></div>
         <div class="tier"><span class="tn">Unlimited</span><b>$4.99<small>/mo</small></b><ul><li>Unlimited photos</li><li>Cancel any time</li><li>New features first</li></ul><button class="btn btn-soft" data-buy>Coming soon</button></div>
       </div>
@@ -468,11 +467,7 @@ nav{position:relative;gap:12px}
     <div class="rhead">
       <img id="thumb" alt="Your photo">
       <div style="min-width:0"><div class="k">Ideas for</div><h2 class="display" id="placeName"></h2>
-        <div class="rtools"><span class="pill" id="countChip" hidden></span><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="printerPill" hidden></button></div></div>
-    </div>
-    <div class="pcard" id="printerCard" hidden>
-      <div><b>Which printer do you have?</b><span>Your next ideas will fit its size and materials.</span></div>
-      <div class="pchips" id="pchips"></div>
+        <div class="rtools"><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="printerPill" hidden></button></div></div>
     </div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
@@ -481,18 +476,15 @@ nav{position:relative;gap:12px}
     </div>
     <div class="grid" id="grid"></div>
     <div class="nudge" id="nudge" hidden></div>
+    <div class="pcard" id="printerCard" hidden>
+      <div><b>Which printer do you have?</b><span>Optional. Next time, ideas will fit its size.</span></div>
+      <div class="pchips" id="pchips"></div>
+    </div>
   </section>
 
   <section id="history" hidden>
-    <div class="rhead" style="grid-template-columns:1fr auto"><div><div class="k">Saved</div><h2 class="display">My spots</h2><p class="lead2" style="margin-top:6px">Every spot gets fresh print ideas each week.</p></div><button class="nbtn" id="signout2">Sign out</button></div>
+    <div class="rhead" style="grid-template-columns:1fr auto"><div><div class="k">Saved</div><h2 class="display">My spots</h2><p class="lead2" style="margin-top:6px">Every spot gets fresh print ideas each week.</p></div></div>
     <div class="hist" id="histList"></div>
-  </section>
-
-  <section id="plist" hidden>
-    <div class="rhead" style="grid-template-columns:1fr"><div><div class="k">Your list</div><h2 class="display">Print list</h2></div></div>
-    <div class="savings" id="savings"></div>
-    <div class="tabs"><button class="nbtn ink" data-tab="todo">To print</button><button class="nbtn" data-tab="printed">Printed</button></div>
-    <div class="plrows" id="plRows"></div>
   </section>
 
   <section id="account" hidden>
@@ -503,7 +495,6 @@ nav{position:relative;gap:12px}
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
       <div class="acard"><span class="k2">Invite friends</span><b>+5 credits each</b><small id="aInvited"></small><div class="invite" id="inviteAcc"></div></div>
       <div class="acard"><span class="k2">Emails</span><label class="chk"><input type="checkbox" id="aMkt"> Send me new print ideas and offers</label></div>
-      <div class="acard"><span class="k2">Your spots &amp; list</span><button class="btn btn-soft" id="aIdeas">My spots</button><button class="btn btn-soft" id="aList">Print list</button></div>
       <div class="acard"><button class="btn btn-soft" id="aOut">Sign out</button></div>
       <details class="danger"><summary>Delete account</summary>
         <p>This deletes your account, credits and saved ideas for good. Type DELETE to confirm.</p>
@@ -624,7 +615,7 @@ async function afterSignIn(){
 let handled = false;
 function setSession(s){
   const was = !!session; session = s;
-  $("signin").hidden = !!s; $("mine").hidden = !s; $("acct").hidden = !s; $("listBtn").hidden = !s;
+  $("signin").hidden = !!s; $("mine").hidden = !s; $("acct").hidden = !s;
   if (s) $("acct").textContent = (s.user?.email || "?")[0].toUpperCase();
   if (s && !was && !handled) { handled = true; afterSignIn(); } else refreshQuota();
   if (!s) handled = false;
@@ -639,7 +630,6 @@ function openSignup(title, text){
   $("sent").hidden = true; $("dlgSignin").showModal();
 }
 $("signin").onclick = () => openSignup("Sign in or create account", "New here? You get 10 free credits.");
-$("signout2").onclick = async () => { await SB?.auth.signOut(); show("landing"); };
 $("mkt").onchange = e => store.set("mkt", e.target.checked || null);
 $("google").onclick = async () => {
   const { error } = await SB.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin } });
@@ -661,53 +651,6 @@ document.querySelectorAll("[data-buy]").forEach(b => b.onclick = () => session ?
 document.addEventListener("click", e => { if (e.target.id === "nudgeBtn") $("dlgBuy").showModal(); });
 
 
-
-/* Print list + money saved */
-const RATES = { SEK: 10.5, NOK: 10.8, DKK: 6.9, EUR: 0.92, GBP: 0.79, USD: 1 };
-const CUR = (() => { const l = navigator.language || "en-US"; if (/^sv/.test(l)) return "SEK"; if (/^(nb|no|nn)/.test(l)) return "NOK"; if (/^da/.test(l)) return "DKK"; if (/-GB$/.test(l)) return "GBP"; if (/^(de|fr|es|it|nl|pt|fi)/.test(l)) return "EUR"; return "USD"; })();
-const money = usd => new Intl.NumberFormat("en-US", { style: "currency", currency: CUR, maximumFractionDigits: 0 }).format((usd || 0) * RATES[CUR]);
-let plTab = "todo";
-$("grid").addEventListener("click", async e => {
-  const b = e.target.closest("[data-save]"); if (!b) return;
-  if (!session) { openSignup("Save your print list", "Create a free account to save ideas and track what you've printed. You get 10 free credits."); return; }
-  if (b.classList.contains("on")) return;
-  const i = +b.dataset.save, p = lastResult?.prints?.[i], m = currentModels[i];
-  if (!p) return;
-  b.classList.add("on");
-  const { error } = await SB.from("print_list").insert({ name: String(p.name).slice(0, 120), place: String(lastResult.place || "").slice(0, 80), search: String(p.search || "").slice(0, 80), model_url: m?.url?.slice(0, 300) || null, image: m?.image?.slice(0, 500) || null, buy_price: Math.max(0, Math.min(100000, Math.round(+p.buy_price || 0))) });
-  if (error) b.classList.remove("on"); else { b.innerHTML = I("check", 17); }
-});
-async function openList(){
-  show("plist"); $("dock").hidden = false;
-  $("plRows").innerHTML = `<div class="note">Loading…</div>`;
-  const { data = [] } = await SB.from("print_list").select("*").order("created_at", { ascending: false }).limit(200);
-  const printed = data.filter(x => x.status === "printed");
-  const saved = printed.reduce((a, x) => a + (x.buy_price || 0), 0);
-  $("savings").innerHTML = printed.length
-    ? `<span class="sv-ic">${I("piggy", 22)}</span><div><b>You've printed ${printed.length} thing${printed.length === 1 ? "" : "s"} and saved about ${money(saved)}</b><small>Compared to buying them in a store</small></div>`
-    : `<span class="sv-ic">${I("piggy", 22)}</span><div><b>Print something from your list</b><small>We'll count how much money you save compared to buying it.</small></div>`;
-  document.querySelectorAll("[data-tab]").forEach(t => t.className = "nbtn" + (t.dataset.tab === plTab ? " ink" : ""));
-  const rows = data.filter(x => x.status === plTab);
-  $("plRows").innerHTML = rows.length ? rows.map(x => `
-    <div class="plrow">
-      <a class="plimg" href="${safe(x.model_url) !== "#" ? safe(x.model_url) : pr(x.search || x.name)}" target="_blank" rel="noopener">${x.image ? `<img src="${esc(safe(x.image))}" alt="" referrerpolicy="no-referrer">` : I("layers", 22)}</a>
-      <div class="plbody"><b>${esc(x.name)}</b><small>${esc(x.place || "")}${x.buy_price ? ` · saves about ${money(x.buy_price)}` : ""}</small>
-        <div class="placts">
-          ${x.status === "todo" ? `<button class="nbtn ink" data-done="${x.id}">${I("check", 14)} Printed it</button>` : `<button class="nbtn" data-undo="${x.id}">Move back</button>`}
-          <a class="nbtn" href="${safe(x.model_url) !== "#" ? safe(x.model_url) : pr(x.search || x.name)}" target="_blank" rel="noopener">Open ${I("arrow", 13)}</a>
-          <button class="nbtn" data-del="${x.id}" aria-label="Remove">${I("trash", 14)}</button>
-        </div></div>
-    </div>`).join("") : `<div class="note">${plTab === "todo" ? "Nothing here yet. Tap the bookmark on any idea to save it." : "Nothing printed yet. Mark items as printed from your list."}</div>`;
-}
-$("listBtn").onclick = openList;
-document.querySelectorAll("[data-tab]").forEach(t => t.onclick = () => { plTab = t.dataset.tab; openList(); });
-$("plRows").addEventListener("click", async e => {
-  const d = e.target.closest("[data-done]"), u = e.target.closest("[data-undo]"), x = e.target.closest("[data-del]");
-  if (d) await SB.from("print_list").update({ status: "printed", printed_at: new Date().toISOString() }).eq("id", d.dataset.done);
-  if (u) await SB.from("print_list").update({ status: "todo", printed_at: null }).eq("id", u.dataset.undo);
-  if (x) await SB.from("print_list").delete().eq("id", x.dataset.del);
-  if (d || u || x) openList();
-});
 
 /* Account page */
 async function openAccount(){
@@ -736,8 +679,6 @@ $("menu").onclick = async e => {
   else $(g).click();
 };
 $("aBuy").onclick = () => $("dlgBuy").showModal();
-$("aIdeas").onclick = () => $("mine").click();
-$("aList").onclick = openList;
 $("aOut").onclick = async () => { await SB.auth.signOut(); show("landing"); };
 $("aMkt").onchange = e => SB.rpc("set_marketing", { p_ok: e.target.checked });
 $("delConfirm").oninput = e => $("delBtn").disabled = e.target.value.trim() !== "DELETE";
@@ -772,7 +713,7 @@ fetch("/api/stats").then(r => r.json()).then(d => { if (d.scans >= 100) $("sub")
 
 /* Saved ideas (history) */
 $("mine").onclick = async () => {
-  ["landing","scanning","result","account","plist"].forEach(x => $(x).hidden = true);
+  ["landing","scanning","result","account"].forEach(x => $(x).hidden = true);
   $("history").hidden = false; $("dock").hidden = false;
   $("histList").innerHTML = `<div class="note">Loading…</div>`;
   const { data, error } = await SB.from("scans").select("id,place,prints,new_ideas,ideas_seen,created_at").order("created_at", { ascending: false }).limit(50);
@@ -881,13 +822,12 @@ const EXAMPLES = [["car cup holder organizer","Car"],["desk cable organizer","De
   $("examples").hidden = false;
 })();
 
-function show(id){ ["landing","scanning","result","history","account","plist"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
+function show(id){ ["landing","scanning","result","history","account"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
 
 function render(r){
   $("placeName").textContent = (r.place || "your spot").split(/[.,:;]/)[0].slice(0, 40);
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   const prints = r.prints || [];
-  $("countChip").textContent = prints.length + " ideas"; $("countChip").hidden = !prints.length;
   $("grid").innerHTML = prints.length ? prints.map((p, i) => `
     <article class="idea" style="animation-delay:${i * 70}ms">
       <a class="media" id="media${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">
@@ -901,7 +841,6 @@ function render(r){
         <div class="credit" id="credit${i}"></div>
         <div class="actions">
           <a class="a1" id="open${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">Open model</a>
-          <button class="vote save" data-save="${i}" aria-label="Save to print list">${I("bookmark", 17)}</button>
           <span class="votes" data-i="${i}"><button class="vote" data-v="1" aria-label="Good idea">${I("up", 17)}</button><button class="vote" data-v="-1" aria-label="Bad idea">${I("down", 17)}</button></span>
         </div>
       </div>
@@ -935,12 +874,6 @@ async function loadModels(p, i){
       media.querySelectorAll(".thumbs a").forEach((a, n) => a.classList.toggle("on", n === j));
     };
     media.querySelector(".shimmer")?.remove();
-    if (models.length > 1) {
-      const t = document.createElement("div"); t.className = "thumbs";
-      t.innerHTML = models.map((m, j) => `<a href="#" data-j="${j}"><img src="${esc(safe(m.image))}" alt="" referrerpolicy="no-referrer"></a>`).join("");
-      t.addEventListener("click", e => { const a = e.target.closest("a"); if (!a) return; e.preventDefault(); pickModel(+a.dataset.j); });
-      media.appendChild(t);
-    }
     pickModel(0);
   } catch {
     // Bara specifika modeller: hittar vi ingen, visar vi inte idén.
