@@ -194,6 +194,12 @@ details p{margin:10px 0 0;color:var(--muted)}
 .body h3{margin:0;font-family:var(--display);font-size:21px;line-height:1.12;font-weight:750;letter-spacing:-.02em}
 .body p{margin:0;color:var(--muted);font-size:15px}
 .credit{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.likebtn{appearance:none;align-self:flex-start;width:fit-content;max-width:100%;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 13px/1 Geist,sans-serif;padding:9px 13px;border-radius:999px;cursor:pointer}
+.likebtn:hover{border-color:var(--ink)}.likebtn b{background:var(--soft);border-radius:999px;padding:3px 7px;font-size:12px}
+.alts{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:2px 18px 6px;scrollbar-width:none}.alts::-webkit-scrollbar{display:none}
+.alt{appearance:none;flex:none;width:120px;scroll-snap-align:start;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;display:grid;gap:4px;color:var(--ink)}
+.alt.on{border-color:var(--lime)}.alt img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;background:var(--soft)}
+.alt span{font:600 12px/1.25 Geist,sans-serif;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.alt small{font-size:11px;color:var(--muted)}
 .actions{display:flex;gap:8px;margin-top:auto;padding-top:6px;flex-wrap:wrap}
 .actions a{flex:1;min-width:130px;text-align:center;font-weight:700;font-size:14px;padding:13px 12px;border-radius:14px;text-decoration:none}
 .a1{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--ink);color:#fff}
@@ -910,6 +916,8 @@ function render(r){
         <h3>${esc(p.name)}</h3>
         <p>${esc(p.why)}</p>
         <div class="credit" id="credit${i}"></div>
+        <button type="button" class="likebtn" id="moreBtn${i}" data-more="${i}" aria-expanded="false" hidden></button>
+        <div class="alts" id="alts${i}" hidden></div>
         <div class="actions">
           <a class="a1" id="open${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">Open model</a>
           <span class="votes" data-i="${i}"><button class="vote" data-v="1" aria-label="Good idea">${I("up", 17)}</button><button class="vote" data-v="-1" aria-label="Bad idea">${I("down", 17)}</button></span>
@@ -947,10 +955,20 @@ async function loadModels(p, i){
       $("open" + i).href = safe(m.url); $("open" + i).innerHTML = "Open model " + I("arrow", 15);
       currentModels[i] = m;
       $("credit" + i).innerHTML = `${m.creator ? `by ${esc(m.creator)} · ` : ""}${m.downloads ? `${k(m.downloads)} downloads · ` : ""}${esc(m.source || "Printables")}`;
-      media.querySelectorAll(".thumbs a").forEach((a, n) => a.classList.toggle("on", n === j));
+      $("alts" + i).querySelectorAll(".alt").forEach((a, n) => { a.classList.toggle("on", n === j); a.setAttribute("aria-pressed", n === j); });
     };
     media.querySelector(".shimmer")?.remove();
     pickModel(0);
+    // "More like this": fler modeller av samma idé, gratis
+    if (models.length > 1) {
+      const alts = $("alts" + i), btn = $("moreBtn" + i);
+      alts.innerHTML = models.map((m, j) => `<button type="button" class="alt" data-j="${j}" aria-pressed="${j === 0}"><img src="${esc(safe(m.image))}" alt="" loading="lazy" referrerpolicy="no-referrer"><span>${esc(m.title)}</span><small>${esc(m.source || "Printables")}</small></button>`).join("");
+      alts.querySelectorAll("img").forEach(im => im.onerror = () => im.closest(".alt").remove());
+      alts.onclick = e => { const a = e.target.closest(".alt"); if (a) pickModel(+a.dataset.j); };
+      const label = open => btn.innerHTML = open ? "Show less" : `More like this <b>${models.length - 1}</b>`;
+      label(false); btn.hidden = false;
+      btn.onclick = () => { const open = alts.hidden; alts.hidden = !open; btn.setAttribute("aria-expanded", open); label(open); };
+    }
   } catch {
     // Bara specifika modeller: hittar vi ingen, visar vi inte idén.
     media.closest(".idea")?.remove();
