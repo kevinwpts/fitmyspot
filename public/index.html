@@ -361,6 +361,23 @@ html{scroll-behavior:smooth}
 @keyframes tin{from{opacity:0;transform:translate(-50%,-8px)}}
 .morebtn{margin-top:22px;width:100%}
 .rtools .nbtn{cursor:pointer}
+.freebar{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--accent-soft);border-radius:18px;padding:14px 16px}
+.freebar span{flex:1;min-width:200px}.freebar .btn{padding:13px 20px;font-size:15px}
+@media (min-width:1040px){
+  .wrap{max-width:1160px}
+  #landing:not([hidden]){display:grid;grid-template-columns:1fr 1fr;column-gap:56px;align-items:start}
+  #landing>*{grid-column:1/-1}
+  #landing>.hero{grid-column:1;text-align:left;justify-items:start;padding-top:56px}
+  #landing>.hero .sub{justify-self:start}.hero p{margin:0}
+  #landing>.demo{grid-column:2;margin-top:40px}
+  #landing>.demo .dm-grid{grid-template-columns:1fr}
+  #landing>.demo .dm-photo{aspect-ratio:16/10}
+  #landing>.demo .dm-photo .dm-tag{top:var(--ym);left:var(--xm)}
+  #landing>.demo .dm-head h2{font-size:30px}
+  #landing>.hero h1{font-size:64px}
+  #landing>.hero .mascot{width:76px;height:76px}
+  #landing>.hero .seeex{display:none}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -385,7 +402,7 @@ html{scroll-behavior:smooth}
         <span class="up-or">Car, desk, kitchen, sofa…</span>
         <span class="btn btn-ink up-btn">Find prints</span>
       </label>
-      <span class="sub" id="sub">Free to try · Real models from Printables &amp; MakerWorld</span>
+      <span class="sub" id="sub">First photo free, no sign-up · Real models from MakerWorld &amp; Printables</span>
       <a class="seeex" href="#example">No photo handy? See an example ↓</a>
       <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
     </div>
@@ -413,7 +430,7 @@ html{scroll-behavior:smooth}
     <section class="block" id="pricing">
       <h2 class="display">Free to start</h2>
       <div class="price">
-        <ul><li>First photo free</li><li>+3 credits when you sign up</li></ul>
+        <ul><li>First photo free, no account needed</li><li>+3 credits when you sign up</li></ul>
         <div class="price-more"><span><b>Need more?</b> Credit packs from $2.99, no subscription. Coming soon.</span><button type="button" class="btn btn-soft" data-notify>Notify me</button></div>
       </div>
     </section>
@@ -423,7 +440,7 @@ html{scroll-behavior:smooth}
       <details><summary>Do you keep my photo?</summary><p>No. It's only used to find your ideas and is never saved.</p></details>
       <details><summary>Which printers does it work with?</summary><p>All of them. Pick yours on your account page and ideas fit its size.</p></details>
       <details><summary>What if an idea doesn't fit?</summary><p>Bad photo? You get your credit back.</p></details>
-      <details><summary>What does it cost?</summary><p>First photo free, plus 3 credits when you sign up. 1 photo = 1 credit.</p></details>
+      <details><summary>What does it cost?</summary><p>Your first photo is free, no account needed. Sign up and you get 3 more credits. 1 photo = 1 credit.</p></details>
     </section>
     <section class="block igsec" aria-label="Instagram">
       <h2 class="display">Made by a maker.</h2>
@@ -460,6 +477,7 @@ html{scroll-behavior:smooth}
     </div>
     <div class="grid" id="grid"></div>
     <div class="nudge" id="nudge" hidden></div>
+    <div class="freebar" id="freeBar" hidden><span><b>This one's on us.</b> Sign up to snap more. You get 3 free credits.</span><button type="button" class="btn btn-ink" id="freeSign">Sign up free</button></div>
     <label for="file" class="btn btn-ink morebtn"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> Snap another photo</label>
   </section>
 
@@ -603,7 +621,7 @@ async function afterSignIn(){
 let handled = false;
 function setSession(s){
   const was = !!session; session = s;
-  $("signin").hidden = !!s; $("acct").hidden = !s;
+  $("signin").hidden = !!s; $("acct").hidden = !s; if (s) $("freeBar").hidden = true;
   if (s) $("acct").textContent = (s.user?.email || "?")[0].toUpperCase();
   if (s && !was && !handled) { handled = true; afterSignIn(); } else refreshQuota();
   if (!s) handled = false;
@@ -751,7 +769,7 @@ function renderLocked(d){
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   $("lockTitle").textContent = `We found ${d.count} prints for ${(d.place || "your photo").split(/[.,:;]/)[0]}`;
   $("lockSub").textContent = "Sign up free to see the models and download them. You get 3 extra credits.";
-  $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
+  $("freeBar").hidden = true; $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
   const list = d.preview?.length ? d.preview : Array.from({ length: d.count }, (_, i) => ({ name: i === 0 && d.first ? d.first : "" }));
   $("grid").innerHTML = list.map((p, i) => `
     <article class="idea locked" style="animation-delay:${i * 70}ms">
@@ -771,7 +789,7 @@ function renderGate(){
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   $("lockTitle").textContent = "Sign up to see ideas for this photo";
   $("lockSub").textContent = "You've used today's free previews. Create a free account and we'll find prints for this photo right away. You get 3 credits.";
-  $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
+  $("freeBar").hidden = true; $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
   $("grid").innerHTML = photoUrl ? Array.from({ length: 2 }, (_, i) => `
     <article class="idea locked"><div class="media"><img src="${photoUrl}" alt="" style="filter:blur(18px) saturate(1.2);transform:scale(1.2)"><span class="num">${i + 1}</span><span class="lock"><span class="lockpill">${I("lock", 16)} Sign up to see</span></span></div>
       <div class="body"><h3>████████ ████</h3><p>██████ ███ ██████████ ████</p></div></article>`).join("") : "";
@@ -779,6 +797,7 @@ function renderGate(){
   try { localStorage.setItem("gatePhoto", photoUrl); } catch {}
   show("result"); 
 }
+$("freeSign").onclick = () => openSignup("Snap more photos", "Create a free account. You get 3 free credits.");
 $("unlock").onclick = () => openSignup("See your ideas", "Sign up free. You get 3 extra credits.");
 $("grid").addEventListener("click", e => { if (e.target.closest(".idea.locked")) $("unlock").click(); });
 
@@ -898,6 +917,8 @@ function render(r){
   
   lastResult = r; currentModels = {};
   $("lockbox").hidden = true; $("shareBtn").hidden = false;
+  // Första gratisbilden utan konto: visa allt, be om konto för nästa
+  $("freeBar").hidden = !(r.free && !session);
   const left = r.quota ? (r.quota.free_left || 0) + (r.quota.credits || 0) : null;
   $("nudge").hidden = !(left != null && left <= 2);
   if (left != null && left <= 2) $("nudge").innerHTML = `<b>${left} credit${left === 1 ? "" : "s"} left.</b> Invite a friend and you both get 3 more. <button class="nbtn ink" id="nudgeBtn">Get credits</button>`;

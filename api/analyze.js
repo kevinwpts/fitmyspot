@@ -102,9 +102,12 @@ async function handler(req) {
         return json(out);
       }
       if (!signedIn) {
-        // Spara resultatet låst. Visa bara en smakbit tills besökaren skapar konto.
+        // Första bilden (per nätverk och dygn) visas helt utan konto. Därefter låst tills man skapar konto.
+        let full = false;
+        try { full = await rpc("can_full", { p_ip: ipHash(req), p_key: SCAN_KEY }, req); } catch {}
         let id = null;
-        try { id = await rpc("save_pending", { p_ip: ipHash(req), p_key: SCAN_KEY, p_result: out }, req); } catch {}
+        try { id = await rpc("save_pending", { p_ip: ipHash(req), p_key: SCAN_KEY, p_result: out, p_full: !!full }, req); } catch {}
+        if (full) return json({ ...out, free: true });
         if (!id) return json({ error: "ai_failed" }, 502);
         // Namn och varför visas direkt (så man ser att den hittat något). Modeller och länkar först efter konto.
         const preview = out.prints.map((p) => ({ name: String(p.name || "").slice(0, 80), why: String(p.why || "").slice(0, 200), material: p.material, time: p.time, level: p.level }));
