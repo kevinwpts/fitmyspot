@@ -350,14 +350,30 @@ nav{position:relative;gap:12px}
 @media (max-width:520px){.maker{flex-direction:column;align-items:flex-start}}
 .wl-ic{width:68px;height:68px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#5EEAD4,#60A5FA);color:#0B0C0F}
 .wl-steps{display:grid;gap:6px;width:100%}.wl-steps span{background:var(--soft);border-radius:12px;padding:10px;font-size:14px;color:var(--muted)}
+
+.hhead{margin-top:26px}.hhead h2{margin:0;font-size:clamp(30px,6vw,44px);line-height:1.05}.hhead p{margin-top:6px}
+.h3{margin:28px 0 12px;font-size:15px;font-weight:650;color:var(--muted);letter-spacing:-.01em}
+.mailbar{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border:1px solid rgba(94,234,212,.35);border-radius:18px;padding:14px 16px}
+.mailbar .nbtn{white-space:nowrap;flex:none}.mailbar span{display:flex;align-items:center;gap:10px}.mailbar .ic{color:var(--lime);flex:none}.mailbar b{font-weight:600}
+.wk{display:grid;gap:10px}
+.wkrow{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;background:var(--card);border-radius:18px;padding:10px 14px 10px 10px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow)}
+.wkrow img{width:72px;height:72px;border-radius:12px;object-fit:cover;background:var(--soft)}
+.wkrow b{display:block;font-size:16px;font-weight:600}.wkrow small{color:var(--muted);font-size:13px}.wkrow .ic{color:var(--muted)}
+.wkrow>div{min-width:0}
+.hrow .items{color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.addroom{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px dashed var(--line);border-radius:18px;padding:18px;color:var(--ink);font-weight:600;cursor:pointer}
+.addroom span{font-size:22px;line-height:1;color:var(--lime)}.addroom:hover{border-color:var(--lime)}
+.homeempty{background:var(--card);border-radius:20px;padding:22px;display:grid;gap:8px}
+.homeempty b{font-size:19px;font-weight:650}.homeempty p{margin:0;color:var(--muted)}
+.seenline{margin:2px 0 10px;color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <nav><a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn navlink" id="mine" hidden>My spots</button><button class="nbtn avatar" id="acct" hidden aria-label="Account menu" aria-haspopup="menu"></button><button id="signout" hidden></button>
+  <nav><a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn navlink" id="mine" hidden>My home</button><button class="nbtn avatar" id="acct" hidden aria-label="Account menu" aria-haspopup="menu"></button><button id="signout" hidden></button>
     <div class="menu" id="menu" hidden role="menu">
-      <button role="menuitem" data-go="mine">My spots</button>
+      <button role="menuitem" data-go="mine">My home</button>
       <button role="menuitem" data-go="account">Account</button>
       <button role="menuitem" data-go="buy">Get credits</button>
       <hr><button role="menuitem" data-go="out">Sign out</button>
@@ -433,7 +449,7 @@ nav{position:relative;gap:12px}
       <h2 class="display">Simple pricing</h2>
       <p class="lead2">Start free. 1 photo = 1 credit. <span class="soon">Paid plans open soon</span></p>
       <div class="tiers">
-        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>First photo free</li><li>+3 credits when you sign up</li><li>Invite a friend: +3 each</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
+        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>First photo free</li><li>+3 credits when you sign up</li><li>New prints for your home every week</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
         <div class="tier"><span class="tn">30 credits</span><b>$2.99</b><ul><li>30 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-soft" data-buy>Coming soon</button></div>
         <div class="tier hot"><em>Best value</em><span class="tn">100 credits</span><b>$6.99</b><ul><li>100 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-ink" data-buy>Coming soon</button></div>
       </div>
@@ -441,7 +457,8 @@ nav{position:relative;gap:12px}
     <section class="block" id="faq">
       <h2 class="display">Questions</h2>
       <details><summary>Are the models free?</summary><p>Most are. You download them from the creator's page.</p></details>
-      <details><summary>Do you keep my photo?</summary><p>No. It's only used for your ideas.</p></details>
+      <details><summary>What is My home?</summary><p>Photo each room once. Every week you get new prints that fit what's there.</p></details>
+      <details><summary>Do you keep my photo?</summary><p>No. We only keep a short list of what we saw, like "bed, lamp".</p></details>
       <details><summary>Which printers does it work with?</summary><p>All of them. Pick yours and ideas fit its size.</p></details>
       <details><summary>What if an idea doesn't fit?</summary><p>Bad photo? You get your credit back.</p></details>
     </section>
@@ -466,8 +483,8 @@ nav{position:relative;gap:12px}
   <section id="result" hidden>
     <div class="rhead">
       <img id="thumb" alt="Your photo">
-      <div style="min-width:0"><h2 class="display" id="placeName">Prints for your spot</h2>
-        <div class="rtools"><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="printerPill" hidden></button></div></div>
+      <div style="min-width:0"><h2 class="display" id="placeName">Prints for your spot</h2><p class="seenline" id="seenLine" hidden></p>
+        <div class="rtools"><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="printerPill" hidden></button><button class="nbtn" id="savedPill" hidden></button></div></div>
     </div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
@@ -483,8 +500,12 @@ nav{position:relative;gap:12px}
   </section>
 
   <section id="history" hidden>
-    <div class="rhead" style="grid-template-columns:1fr auto"><div><h2 class="display">My spots</h2><p class="lead2" style="margin-top:6px">New ideas every week.</p></div></div>
+    <div class="hhead"><h2 class="display">My home</h2><p class="lead2">New prints for your home every week.</p></div>
+    <div class="mailbar" id="homeMail" hidden><span><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><b>Get them by email every week</b></span><button class="nbtn ink" id="mailOn">Turn on</button></div>
+    <div id="weekBox" hidden><h3 class="h3">New this week</h3><div class="wk" id="weekList"></div></div>
+    <h3 class="h3" id="roomsH" hidden>Your rooms</h3>
     <div class="hist" id="histList"></div>
+    <label for="file" class="addroom" id="addRoom"><span>+</span> Add a room</label>
   </section>
 
   <section id="account" hidden>
@@ -493,7 +514,7 @@ nav{position:relative;gap:12px}
       <div class="acard"><span class="k2">Signed in as</span><b id="aEmail">–</b><small id="aSince"></small></div>
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
       <div class="acard"><span class="k2">Invite friends</span><b>+3 credits each</b><small id="aInvited"></small><div class="invite" id="inviteAcc"></div></div>
-      <div class="acard"><span class="k2">Emails</span><label class="chk"><input type="checkbox" id="aMkt"> Send me new print ideas and offers</label></div>
+      <div class="acard"><span class="k2">Emails</span><label class="chk"><input type="checkbox" id="aMkt"> Weekly email with new prints for my home</label></div>
       <div class="acard"><button class="btn btn-soft" id="aOut">Sign out</button></div>
       <details class="danger"><summary>Delete account</summary>
         <p>This deletes your account, credits and saved ideas for good. Type DELETE to confirm.</p>
@@ -521,7 +542,7 @@ nav{position:relative;gap:12px}
   <div class="or"><span>or</span></div>
   <input id="email" type="email" required placeholder="you@email.com" autocomplete="email">
   <button class="btn btn-soft" id="sendLink" type="submit">Email me a sign-in link</button>
-  <label class="chk"><input type="checkbox" id="mkt"> Email me new print ideas</label>
+  <label class="chk"><input type="checkbox" id="mkt"> Email me new prints for my home every week</label>
   <div class="ok" id="sent" hidden></div>
   <small class="fine">By continuing you agree to the <a href="/terms" target="_blank">terms</a> and <a href="/privacy" target="_blank">privacy policy</a>.</small>
 </form></dialog>
@@ -529,7 +550,7 @@ nav{position:relative;gap:12px}
   <div class="wl-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></div>
   <h3>Welcome to fitmyspot!</h3>
   <p>You got <b style="color:var(--ink)">3 free credits</b>.</p>
-  <div class="wl-steps"><span>1 photo = 1 credit</span><span>Invite a friend: +3 each</span></div>
+  <div class="wl-steps"><span>Photo each room once</span><span>Get new prints every week</span><span>1 photo = 1 credit</span></div>
   <button class="btn btn-ink" value="ok" style="width:100%">Let's go</button>
 </form></dialog>
 <dialog id="dlgBuy"><form class="dlg" method="dialog">
@@ -614,6 +635,7 @@ async function afterSignIn(){
     } catch {}
   }
   refreshQuota();
+  if (!$("landing").hidden) openHome();
 }
 let handled = false;
 function setSession(s){
@@ -704,6 +726,7 @@ function placeTitle(place){
 }
 function renderLocked(d){
   $("placeName").textContent = placeTitle(d.place);
+  $("seenLine").hidden = true; $("savedPill").hidden = true;
   lastResult = null;
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   $("lockTitle").textContent = `We found ${d.count} prints for ${(d.place || "your spot").split(/[.,:;]/)[0]}` + (d.first ? `, like "${d.first}"` : "");
@@ -730,28 +753,60 @@ $("grid").addEventListener("click", e => { if (e.target.closest(".idea.locked"))
 fetch("/api/stats").then(r => r.json()).then(d => { if (d.scans >= 100) $("sub").textContent = `${d.scans.toLocaleString()} spots scanned · free to try`; }).catch(() => {});
 
 /* Saved ideas (history) */
-$("mine").onclick = async () => {
-  ["landing","scanning","result","account"].forEach(x => $(x).hidden = true);
-  $("history").hidden = false; $("dock").hidden = false;
+/* My home: rum, veckans nya idéer och veckomejl */
+const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+const roomName = place => cap(String(place || "your spot").replace(/^(your|the|my)\s+/i, ""));
+async function openHome(){
+  if (!session) { show("landing"); return; }
+  show("history"); $("dock").hidden = true;
   $("histList").innerHTML = `<div class="note">Loading…</div>`;
-  const { data, error } = await SB.from("scans").select("id,place,prints,new_ideas,ideas_seen,created_at").order("created_at", { ascending: false }).limit(50);
-  if (error || !data?.length) { $("histList").innerHTML = `<div class="note">No spots yet. Snap a photo while signed in and it shows up here.</div>`; return; }
+  $("weekBox").hidden = true; $("roomsH").hidden = true; $("homeMail").hidden = true;
+  const [{ data, error }, prof] = await Promise.all([
+    SB.from("scans").select("id,place,prints,new_ideas,ideas_seen,ideas_at,seen,created_at").order("created_at", { ascending: false }).limit(50),
+    SB.rpc("my_profile").then(r => r.data, () => null),
+  ]);
+  if (error) { $("histList").innerHTML = `<div class="note">Couldn't load your home. Try again.</div>`; return; }
+  $("homeMail").hidden = !prof || !!prof.marketing_ok || !(data || []).length;
+  if (!data?.length) {
+    $("histList").innerHTML = `<div class="homeempty"><b>Add your first room</b><p>Take one photo of each room. Every week you get new prints that fit what you have.</p></div>`;
+    $("addRoom").innerHTML = `<span>+</span> Add your first room`;
+    return;
+  }
+  $("addRoom").innerHTML = `<span>+</span> Add a room`;
+  // Veckans nya idéer (bara de med en riktig modell)
+  const week = data.flatMap(r => (new Date(r.ideas_at) > Date.now() - 8 * 864e5 ? (r.new_ideas || []) : [])
+    .filter(p => p.model?.url).map(p => ({ ...p, room: roomName(r.place) }))).slice(0, 6);
+  $("weekBox").hidden = !week.length;
+  $("weekList").innerHTML = week.map(p => `<a class="wkrow" href="${safe(p.model.url)}" target="_blank" rel="noopener"><img src="${esc(safe(p.model.image))}" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>${esc(p.name)}</b><small>For your ${esc(p.room.toLowerCase())}</small></div>${I("arrow", 16)}</a>`).join("");
+  $("roomsH").hidden = false;
   $("histList").innerHTML = data.map((r, n) => {
     const fresh = !r.ideas_seen && (r.new_ideas || []).length;
     const nIdeas = (r.new_ideas || []).length + (r.prints || []).length;
-    const name = String(r.place || "your spot").replace(/^(your|the|my)\s+/i, "");
-    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(name.charAt(0).toUpperCase() + name.slice(1))}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span><small>${nIdeas} ideas · ${new Date(r.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</small><span class="hdel" data-del-spot="${n}" role="button" aria-label="Delete spot">${I("trash", 15)}</span></button>`;
+    const items = (r.seen || []).slice(0, 4).map(x => cap(String(x))).join(" · ");
+    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(roomName(r.place))}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span>${items ? `<span class="items">${esc(items)}</span>` : ""}<small>${nIdeas} ideas</small><span class="hdel" data-del-spot="${n}" role="button" aria-label="Delete room">${I("trash", 15)}</span></button>`;
   }).join("");
   $("histList").onclick = e => {
     const del = e.target.closest("[data-del-spot]");
-    if (del) { e.stopPropagation(); const r = data[+del.dataset.delSpot]; SB.from("scans").delete().eq("id", r.id).then(() => $("mine").click()); return; }
+    if (del) {
+      e.stopPropagation();
+      // Två tryck för att radera, så man inte råkar ta bort ett rum
+      if (del.dataset.sure !== "1") { del.dataset.sure = "1"; del.textContent = "Delete?"; del.style.width = "auto"; del.style.padding = "0 10px"; return; }
+      const r = data[+del.dataset.delSpot]; SB.from("scans").delete().eq("id", r.id).then(openHome); return;
+    }
     const b = e.target.closest(".hrow"); if (!b) return;
-    const r = data[+b.dataset.n]; photoUrl = ""; $("history").hidden = true;
-    render({ place: r.place, prints: [...(r.new_ideas || []).map(p => ({ ...p, isNew: true })), ...(r.prints || [])] });
+    const r = data[+b.dataset.n]; photoUrl = "";
+    render({ place: r.place, seen: r.seen, saved: true, prints: [...(r.new_ideas || []).map(p => ({ ...p, isNew: true })), ...(r.prints || [])] });
     if (!r.ideas_seen) SB.from("scans").update({ ideas_seen: true }).eq("id", r.id).then(() => {});
   };
+}
+$("mine").onclick = openHome;
+$("mailOn").onclick = async () => {
+  const { error } = await SB.rpc("set_marketing", { p_ok: true });
+  $("homeMail").innerHTML = error ? `<span><b>Couldn't turn it on. Try again.</b></span>` : `<span>${I("check", 18)}<b>Done. See you next week.</b></span>`;
 };
-
+// Inloggad och klickar på loggan: till My home
+document.querySelectorAll("nav .logo").forEach(a => a.addEventListener("click", e => { if (session) { e.preventDefault(); openHome(); } }));
+if (new URLSearchParams(location.search).has("home")) history.replaceState(null, "", "/");
 
 /* Printer: asked after the first result, remembered on this device */
 const PRINTERS = [["bambu-a1-mini","Bambu A1 mini"],["bambu-a1","Bambu A1"],["bambu-p1s","Bambu P1S"],["bambu-p2s","Bambu P2S"],["bambu-x1c","Bambu X1C"],["bambu-h2d","Bambu H2D"],["prusa-mk4","Prusa MK4"],["prusa-core-one","Prusa Core One"],["prusa-mini","Prusa Mini"],["creality-k1","Creality K1"],["creality-ender3","Ender 3"],["elegoo-centauri","Elegoo Centauri"],["other","Other"]];
@@ -812,6 +867,7 @@ async function shareImage(){
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "fitmyspot.png"; a.click();
 }
 $("shareBtn").onclick = shareImage;
+$("savedPill").onclick = () => openHome();
 
 /* QR code for desktop visitors */
 if (matchMedia("(pointer:fine) and (min-width:900px)").matches) {
@@ -846,6 +902,10 @@ function show(id){ ["landing","scanning","result","history","account"].forEach(s
 
 function render(r){
   $("placeName").textContent = placeTitle(r.place);
+  const seen = (r.seen || []).slice(0, 5).map(x => String(x)).join(" · ");
+  $("seenLine").textContent = seen ? "We saw: " + seen : ""; $("seenLine").hidden = !seen;
+  $("savedPill").hidden = !(session && (r.id || r.saved));
+  $("savedPill").innerHTML = I("check", 14) + " Saved to My home";
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   const prints = r.prints || [];
   $("grid").innerHTML = prints.length ? prints.map((p, i) => `
@@ -879,8 +939,12 @@ function render(r){
 async function loadModels(p, i){
   const media = $("media" + i);
   try {
-    const r = await fetch(`/api/models?q=${encodeURIComponent(p.search || p.name)}&alt=${encodeURIComponent(p.alt || "")}`);
-    const { models = [] } = await r.json();
+    // Veckans idéer har redan en vald modell sparad
+    let models = p.model?.url ? [p.model] : [];
+    if (!models.length) {
+      const r = await fetch(`/api/models?q=${encodeURIComponent(p.search || p.name)}&alt=${encodeURIComponent(p.alt || "")}`);
+      ({ models = [] } = await r.json());
+    }
     if (!models.length) throw 0;
     const pickModel = j => {
       const m = models[j];
