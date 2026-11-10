@@ -445,6 +445,46 @@ dialog{border-radius:18px}
 .menu{border-radius:12px;box-shadow:0 12px 32px -12px rgba(20,22,27,.25)}
 .body h3{font-weight:600;font-size:20px;letter-spacing:-.025em}
 .dm-t b{font-weight:600;font-size:16px;letter-spacing:-.01em}
+
+/* ===== Ny, enkel landningssida + modern färgskala ===== */
+:root{--bg:#FFFFFF;--card:#FFFFFF;--soft:#F5F5F6;--line:#EAEAEC;--ink:#0C0D10;--muted:#62666E}
+body{background:var(--bg);color:var(--ink)}
+#landing .hero{display:grid;gap:18px;justify-items:center;text-align:center;padding:18px 0 0;grid-template-areas:"t" "p" "v" "c"}
+.h-t{grid-area:t;margin:0}.h-p{grid-area:p;margin:0}.hv{grid-area:v}.h-c{grid-area:c;display:grid;gap:12px;justify-items:center;width:100%}
+.hv{position:relative;margin:4px 0 0;width:100%;max-width:520px;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:#14161B}
+.hv img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.hv-tag{position:absolute;background:var(--lime);color:var(--ink);font:600 13px/1 Geist,sans-serif;padding:7px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.hv-card{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:14px;padding:12px;display:grid;gap:8px;text-align:left}
+.hv-k{font:600 11.5px Geist,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.hv-card{grid-template-columns:repeat(3,1fr);gap:8px 10px;padding:10px}
+.hv-k,.hv-more{grid-column:1/-1}
+.hv-card .pf-row{display:grid;gap:6px;align-content:start}
+.hv-card .pf-row b{font-size:12.5px;font-weight:600;line-height:1.2}
+.hv-card .pf-row .pic{width:100%;height:auto;aspect-ratio:4/3;border-radius:8px}
+.hv-more{font-size:12.5px;color:var(--muted);font-weight:500}
+.h-drop{display:none;color:var(--muted);font-size:13px}
+#landing .cta-big{max-width:520px}
+.how ol{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.how li{display:grid;grid-template-columns:44px 1fr;column-gap:12px;padding:20px 0;border-bottom:1px solid var(--line)}
+.how li span{grid-row:span 2;color:var(--muted);font:500 14px/1.7 Geist,sans-serif}
+.how li b{font-size:18px;font-weight:600;letter-spacing:-.02em}.how li p{margin:2px 0 0;color:var(--muted)}
+#landing .block{margin-top:72px}
+.final{background:var(--ink);color:#fff;border-radius:20px;padding:56px 22px;gap:14px}
+.final h2{color:#fff}.final p{margin:0 0 10px;color:#A6AAB2;font-size:17px}
+.btn-light{background:#fff;color:var(--ink)}.btn-light:hover{background:#F0F0F2}
+@media (min-width:1040px){
+  #landing:not([hidden]){display:block}
+  #landing .hero{grid-template-columns:1fr 1fr;grid-template-areas:"t v" "p v" "c v";column-gap:64px;row-gap:22px;text-align:left;justify-items:start;align-content:center;padding-top:40px}
+  #landing .hero>.h-t{align-self:end;font-size:66px}
+  #landing .h-c{justify-items:start;align-self:start}
+  .hv{max-width:none;aspect-ratio:1/1.05}
+  .h-drop{display:block}
+  #landing .cta-big{display:flex;width:auto;padding:19px 30px}
+  .hv-card{left:16px;right:16px;bottom:16px}
+  .how ol{grid-template-columns:repeat(3,1fr);column-gap:32px;border-top:0}
+  .how li{border-bottom:0;border-top:1px solid var(--line)}
+  #faq{max-width:760px}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -461,61 +501,38 @@ dialog{border-radius:18px}
 
   <section id="landing">
     <div class="hero">
-      <div class="mascot" aria-hidden="true"><svg><use href="#bp"/></svg><span class="z">z</span><span class="z">z</span></div>
-      <h1 class="display">Don't know what to <span>3D print?</span></h1>
-      <p>Take a photo of any room. Get 3D prints that fit what's in it.</p>
-      <a class="proof" href="#example" aria-label="See the example: a desk photo and the prints it found">
-        <span class="pf-photo"><img src="/demo/setup-s.jpg" alt="" width="600" height="800"><span class="pf-tag" style="top:27%;left:14%">plant</span><span class="pf-tag" style="top:46%;left:4%">PC</span><span class="pf-tag" style="top:56%;left:22%">controller</span></span>
-        <span class="pf-arrow" aria-hidden="true">→</span>
-        <span class="pf-list">
+      <h1 class="display h-t">Don't know what to <span>3D print?</span></h1>
+      <p class="h-p">Take a photo of any room. Get 3D prints that fit what's in it.</p>
+      <figure class="hv" id="example" aria-label="Example: a desk photo and the prints it found">
+        <img src="/demo/setup.jpg" alt="A desk setup with an ultrawide monitor, a gaming PC, a controller, headphones and a plant" width="900" height="1200">
+        <span class="hv-tag" style="top:22%;left:20%">plant</span>
+        <span class="hv-tag" style="top:41%;left:6%">PC</span>
+        <span class="hv-tag" style="top:49%;left:27%">controller</span>
+        <span class="hv-tag" style="top:41%;left:62%">headphones</span>
+        <figcaption class="hv-card">
+          <small class="hv-k">Found for this desk · 6 prints</small>
           <span class="pf-row" data-q="controller stand"><span class="pic"></span><b>Controller stand</b></span>
           <span class="pf-row" data-q="self watering planter"><span class="pic"></span><b>Self-watering planter</b></span>
-          <span class="pf-row" data-q="under desk drawer"><span class="pic"></span><b>Under-desk drawer</b></span>
-          <small>+3 more for this desk</small>
-        </span>
-      </a>
-      <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
-      <span class="cta-note">Opens your camera or photo library</span>
-      <label class="upload" for="file">
-        <span class="up-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg></span>
-        <b>Take or upload a photo</b>
-        <span class="up-or">Click or drop a photo here · first one free</span>
-      </label>
-      <span class="sub" id="sub">No sign-up · Real models from MakerWorld &amp; Printables</span>
-      <a class="seeex" href="#example">See the full example ↓</a>
-      <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
+          <span class="pf-row" data-q="under desk headphone hook"><span class="pic"></span><b>Headphone hook</b></span>
+          
+        </figcaption>
+      </figure>
+      <div class="h-c">
+        <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
+        <span class="sub" id="sub">No sign-up · Real models from MakerWorld &amp; Printables</span>
+        <span class="h-drop">Or drop a photo anywhere on this page</span>
+        <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
+      </div>
     </div>
-    <section class="demo" id="example" aria-label="Example">
-      <div class="dm-head"><h2 class="display">I took a photo of my desk.<br>Here's what it found.</h2></div>
-      <div class="dm-grid">
-        <figure class="dm-photo">
-          <img src="/demo/setup.jpg" alt="A desk setup with an ultrawide monitor, a gaming PC, a controller, headphones and a plant on a shelf" loading="lazy" width="900" height="1200">
-          <span class="dm-tag" style="--x:24%;--xm:22%;--y:27%;--ym:18%">plant</span>
-          <span class="dm-tag" style="--x:36%;--xm:37%;--y:30%;--ym:25%">books</span>
-          <span class="dm-tag" style="--x:13%;--xm:12%;--y:45%;--ym:48%">PC</span>
-          <span class="dm-tag" style="--x:28%;--xm:28%;--y:53%;--ym:58%">controller</span>
-          <span class="dm-tag" style="--x:70%;--xm:60%;--y:44%;--ym:50%">headphones</span>
-          <figcaption><span class="cap-n">1</span> Take a photo</figcaption>
-        </figure>
-        <div class="dm-res">
-          <div class="dm-cap"><span class="cap-n">2</span> Get prints that fit</div>
-          <div class="dm-row" data-q="controller stand"><span class="pic"></span><span class="dm-t"><b>Controller stand</b><small>The controller lies on the desk</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="under desk drawer"><span class="pic"></span><span class="dm-t"><b>Under-desk drawer</b><small>Extra storage, out of sight</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="bookends"><span class="pic"></span><span class="dm-t"><b>Bookends</b><small>Keeps the books on your shelf standing</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="self watering planter"><span class="pic"></span><span class="dm-t"><b>Self-watering planter</b><small>For the plant on the shelf</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="under desk cable tray"><span class="pic"></span><span class="dm-t"><b>Under-desk cable tray</b><small>Hides the PC and monitor cables</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="under desk headphone hook"><span class="pic"></span><span class="dm-t"><b>Under-desk headphone hook</b><small>Frees up space on the desk</small><small class="dm-src"></small></span></div>
-          <small class="dm-more">6 ideas · real models to download</small>
-        </div>
-      </div>
+
+    <section class="block how" aria-label="How it works">
+      <ol>
+        <li><span>01</span><b>Take a photo</b><p>Your desk, kitchen, car or any shelf.</p></li>
+        <li><span>02</span><b>It sees what's there</b><p>The plant, the cables, the controller, what's messy.</p></li>
+        <li><span>03</span><b>Get prints that fit</b><p>Real models from MakerWorld and Printables, free to download.</p></li>
+      </ol>
     </section>
-    <section class="block" id="pricing">
-      <h2 class="display">Free to start</h2>
-      <div class="price">
-        <ul><li>First photo free, no account needed</li><li>+3 credits when you sign up</li></ul>
-        <div class="price-more"><span><b>Need more?</b> Credit packs from $2.99, no subscription. Coming soon.</span><button type="button" class="btn btn-soft" data-notify>Notify me</button></div>
-      </div>
-    </section>
+
     <section class="block" id="faq">
       <h2 class="display">Questions</h2>
       <details><summary>Are the models free?</summary><p>Most are. You download them from the creator's page.</p></details>
@@ -524,18 +541,11 @@ dialog{border-radius:18px}
       <details><summary>What if an idea doesn't fit?</summary><p>Tap “+ more” for other models of the same idea. Bad photo? You get your credit back.</p></details>
       <details><summary>What does it cost?</summary><p>Your first photo is free, no account needed. Sign up and you get 3 more credits. 1 photo = 1 credit.</p></details>
     </section>
-    <section class="block igsec" aria-label="Instagram">
-      <h2 class="display">Made by a maker.</h2>
-      <a class="igcard" href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener">
-        <span class="ig-top"><span class="ig-av"><span><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bp"/></svg></span></span>
-          <span class="ig-name"><b>@boredprinter</b><small>3D print ideas for your home</small></span>
-          <span class="btn btn-ink ig-follow"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg><span class="ft">Follow</span></span></span>
-        <span class="ig-stats"><span><b>13.6k</b><small>followers</small></span><span><b>4.9M</b><small>views on one video</small></span></span>
-      </a>
-    </section>
+
     <section class="final">
       <h2 class="display">Your printer is bored.</h2>
-      <label for="file" class="btn btn-ink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it free</label>
+      <p>Give it something useful to do.</p>
+      <label for="file" class="btn btn-light"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it free</label>
     </section>
   </section>
 
@@ -591,7 +601,7 @@ dialog{border-radius:18px}
     <a class="logo" href="/" aria-label="boredprinter"><span class="wm"><svg aria-hidden="true"><use href="#bp"/></svg>boredprinter</span></a>
     <p><b style="color:var(--ink)">Give your printer something to do.</b> Models belong to their creators. We only link to them.</p>
     <p class="rooms">Ideas for your <a href="/ideas/car">car</a> · <a href="/ideas/desk">desk</a> · <a href="/ideas/kitchen">kitchen</a> · <a href="/ideas/bathroom">bathroom</a> · <a href="/ideas/bedroom">bedroom</a> · <a href="/ideas/garage">garage</a> · <a href="/ideas/living-room">living room</a> · <a href="/ideas/hallway">hallway</a></p>
-    <div class="flinks"><a href="/ideas">Print ideas</a><a href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener">Instagram</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/removal">Contact &amp; removal</a></div>
+    <div class="flinks"><a href="/ideas">Print ideas</a><a href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener">Instagram</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/removal">Contact &amp; removal</a></div>
   </footer>
 </div>
 
@@ -1011,7 +1021,7 @@ if (matchMedia("(pointer:fine) and (min-width:900px)").matches) {
 
 /* Mätning: besök, exemplet syns, tryck på foto-knappen */
 setTimeout(() => track("visit"), 0);
-try { new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { track("see_example"); o.disconnect(); } }, { threshold: .4 }).observe($("example").querySelector(".dm-grid")); } catch {}
+try { new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { track("see_example"); o.disconnect(); } }, { threshold: .4 }).observe($("example")); } catch {}
 document.addEventListener("click", e => { if (e.target.closest('label[for="file"]')) track("tap_upload"); }, true);
 
 /* Real model photos in the hero demo */
