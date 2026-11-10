@@ -328,12 +328,22 @@ nav{position:relative;gap:12px}
 .menu hr{border:0;height:1px;background:var(--line);margin:4px 6px}
 .left{white-space:nowrap}
 .hrow{position:relative}.hdel{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--muted)}.hdel:hover{background:var(--soft);color:#ff8a8a}
+
+.wm{font-family:Geist,sans-serif;font-weight:650;letter-spacing:-.045em;font-size:26px;line-height:1;display:inline-flex;align-items:center;white-space:nowrap;color:var(--ink)}
+.wmv{position:relative;display:inline-block;padding:.12em .16em .16em;margin-left:.06em}
+.wmv u{text-decoration:none;position:absolute;width:.24em;height:.24em;border:0 solid #5EEAD4}
+.wmv .c1{left:0;top:0;border-top-width:.07em;border-left-width:.07em;border-top-left-radius:.08em}
+.wmv .c2{right:0;top:0;border-top-width:.07em;border-right-width:.07em;border-top-right-radius:.08em;border-color:#5FC8E8}
+.wmv .c3{left:0;bottom:0;border-bottom-width:.07em;border-left-width:.07em;border-bottom-left-radius:.08em;border-color:#5FC8E8}
+.wmv .c4{right:0;bottom:0;border-bottom-width:.07em;border-right-width:.07em;border-bottom-right-radius:.08em;border-color:#60A5FA}
+.foot .wm{font-size:22px}
+@media (max-width:640px){.wm{font-size:23px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <nav><a class="logo" href="/"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#lg)"/><g fill="none" stroke="#0B0C0F" stroke-width="5" stroke-linecap="round"><path d="M14 24v-6a4 4 0 0 1 4-4h6M40 14h6a4 4 0 0 1 4 4v6M50 40v6a4 4 0 0 1-4 4h-6M24 50h-6a4 4 0 0 1-4-4v-6"/></g><g fill="none" stroke="#0B0C0F" stroke-width="4" stroke-linejoin="round"><path d="M32 21 43 27v12l-11 6-11-6V27z"/><path d="M21 27l11 6 11-6M32 33v12"/></g></svg><span>fitmyspot</span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn navlink" id="mine" hidden>My spots</button><button class="nbtn navlink" id="listBtn" hidden>Print list</button><button class="nbtn avatar" id="acct" hidden aria-label="Account menu" aria-haspopup="menu"></button><button id="signout" hidden></button>
+  <nav><a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn navlink" id="mine" hidden>My spots</button><button class="nbtn navlink" id="listBtn" hidden>Print list</button><button class="nbtn avatar" id="acct" hidden aria-label="Account menu" aria-haspopup="menu"></button><button id="signout" hidden></button>
     <div class="menu" id="menu" hidden role="menu">
       <button role="menuitem" data-go="mine">My spots</button>
       <button role="menuitem" data-go="listBtn">Print list</button>
@@ -490,7 +500,7 @@ nav{position:relative;gap:12px}
   <div id="error" class="note" hidden></div>
 
   <footer class="foot">
-    <a class="logo" href="/"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#lg)"/><g fill="none" stroke="#0B0C0F" stroke-width="5" stroke-linecap="round"><path d="M14 24v-6a4 4 0 0 1 4-4h6M40 14h6a4 4 0 0 1 4 4v6M50 40v6a4 4 0 0 1-4 4h-6M24 50h-6a4 4 0 0 1-4-4v-6"/></g><g fill="none" stroke="#0B0C0F" stroke-width="4" stroke-linejoin="round"><path d="M32 21 43 27v12l-11 6-11-6V27z"/><path d="M21 27l11 6 11-6M32 33v12"/></g></svg><span>fitmyspot</span></a>
+    <a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a>
     <p>Print ideas for your home. Models and photos belong to their creators. We only link to them.</p>
     <div class="flinks"><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/removal">Contact &amp; removal</a></div>
   </footer>
