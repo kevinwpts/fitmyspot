@@ -106,7 +106,9 @@ async function handler(req) {
         let id = null;
         try { id = await rpc("save_pending", { p_ip: ipHash(req), p_key: SCAN_KEY, p_result: out }, req); } catch {}
         if (!id) return json({ error: "ai_failed" }, 502);
-        return json({ locked: true, id, place: out.place, count: out.prints.length, first: out.prints[0]?.name || null });
+        // Namn och varför visas direkt (så man ser att den hittat något). Modeller och länkar först efter konto.
+        const preview = out.prints.map((p) => ({ name: String(p.name || "").slice(0, 80), why: String(p.why || "").slice(0, 200), material: p.material, time: p.time, level: p.level }));
+        return json({ locked: true, id, place: out.place, seen: Array.isArray(out.seen) ? out.seen.slice(0, 5) : [], hot: !!out.hot, count: out.prints.length, first: out.prints[0]?.name || null, preview });
       }
       out.quota = { free_left: quota.free_left ?? null, credits: quota.credits ?? null, via: quota.via };
       try { out.id = await rpc("save_scan", { p_key: SCAN_KEY, p_place: String(out.place || ""), p_prints: out.prints, p_seen: Array.isArray(out.seen) ? out.seen.slice(0, 10) : [], p_kind: body?.room ? "room" : "snap" }, req); } catch {}

@@ -285,6 +285,9 @@ dialog::backdrop{background:rgba(26,25,24,.4);backdrop-filter:blur(3px)}
 .snapbar .up-ic{width:52px;height:52px;flex:none}.sb-t{display:grid;gap:2px;min-width:0}.sb-t b{font-size:18px;font-weight:650}.sb-t small{color:var(--muted);font-size:14px}
 .h3 small{font-weight:500}
 button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
+.lockpill{display:inline-flex;align-items:center;gap:6px;background:rgba(26,25,24,.8);color:#fff;font-size:13px;font-weight:600;padding:8px 12px;border-radius:999px}
+.a1.ghost{flex:1;background:var(--soft);color:var(--muted);font-weight:700;font-size:14px;padding:13px 12px;border-radius:14px;text-align:center}
+.idea.locked .body h3{color:var(--ink);letter-spacing:-.02em}.idea.locked .body p{letter-spacing:normal}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -410,8 +413,8 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
     </div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
-      <span>Sign up free to see them. You get 3 extra credits.</span>
-      <button class="btn btn-ink" id="unlock">Show my ideas →</button>
+      <span id="lockSub">Sign up free to see them. You get 3 extra credits.</span>
+      <button class="btn btn-ink" id="unlock">See the models →</button>
     </div>
     <div class="grid" id="grid"></div>
     <div class="nudge" id="nudge" hidden></div>
@@ -708,25 +711,38 @@ function placeTitle(place){
 }
 function renderLocked(d){
   $("placeName").textContent = placeTitle(d.place);
-  $("seenLine").hidden = true; $("savedPill").hidden = true;
+  const seen = (d.seen || []).slice(0, 5).map(String).join(" · ");
+  $("seenLine").textContent = seen ? "We saw: " + seen : ""; $("seenLine").hidden = !seen;
+  $("savedPill").hidden = true;
   lastResult = null;
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
-  $("lockTitle").textContent = `We found ${d.count} prints for ${(d.place || "your spot").split(/[.,:;]/)[0]}` + (d.first ? `, like "${d.first}"` : "");
+  $("lockTitle").textContent = `We found ${d.count} prints for ${(d.place || "your spot").split(/[.,:;]/)[0]}`;
+  $("lockSub").textContent = "Sign up free to see the models and download them. You get 3 extra credits.";
   $("lockbox").hidden = false; $("printerCard").hidden = true; $("printerPill").hidden = true; $("shareBtn").hidden = true; $("nudge").hidden = true;
-  $("grid").innerHTML = Array.from({ length: d.count }, (_, i) => `
+  const list = d.preview?.length ? d.preview : Array.from({ length: d.count }, (_, i) => ({ name: i === 0 && d.first ? d.first : "" }));
+  $("grid").innerHTML = list.map((p, i) => `
     <article class="idea locked" style="animation-delay:${i * 70}ms">
-      <div class="media"><img src="${photoUrl}" alt="" style="filter:blur(18px) saturate(1.2);transform:scale(1.2)"><span class="num">${i + 1}</span><span class="lock">${I("lock", 34)}</span></div>
-      <div class="body"><h3>${i === 0 && d.first ? esc(d.first) : "████████ ████"}</h3><p>██████ ███ ██████████ ████ ███████</p></div>
+      <div class="media"><img src="${photoUrl}" alt="" style="filter:blur(18px) saturate(1.2);transform:scale(1.2)"><span class="num">${i + 1}</span>
+        <span class="badges">${p.material ? `<span>${I("layers", 12)} ${esc(p.material)}${d.hot && p.material !== "PLA" ? " · heat-safe" : ""}</span>` : ""}${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
+        <span class="lock"><span class="lockpill">${I("lock", 16)} Model hidden</span></span></div>
+      <div class="body"><h3>${p.name ? esc(p.name) : "████████ ████"}</h3><p>${p.why ? esc(p.why) : "██████ ███ ██████████ ████"}</p>
+        <div class="actions"><span class="a1 ghost">${I("lock", 14)} Sign up to open</span></div></div>
     </article>`).join("");
   store.set("pending", { id: d.id, photo: photoUrl && photoUrl.length < 900000 ? photoUrl : "" });
   show("result"); $("dock").hidden = false;
 }
-/* Free tries used up: show blurred cards, analyze the photo right after sign-up */
+/* Gratisförsöken slut: inga låtsaskort, bara ärlig text. Bilden analyseras direkt efter registrering. */
 function renderGate(){
-  renderLocked({ count: 6, place: "", first: null });
+  $("placeName").textContent = "Almost there";
+  $("seenLine").hidden = true; $("savedPill").hidden = true; lastResult = null;
+  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
+  $("lockTitle").textContent = "Sign up to see ideas for this photo";
+  $("lockSub").textContent = "You've used today's free previews. Create a free account and we'll find prints for this photo right away. You get 3 credits.";
+  $("lockbox").hidden = false; $("printerCard").hidden = true; $("printerPill").hidden = true; $("shareBtn").hidden = true; $("nudge").hidden = true;
+  $("grid").innerHTML = "";
   store.set("pending", null);
   try { localStorage.setItem("gatePhoto", photoUrl); } catch {}
-  $("lockTitle").textContent = "Your ideas are one step away";
+  show("result"); $("dock").hidden = true;
 }
 $("unlock").onclick = () => openSignup("See your ideas", "Sign up free. You get 3 extra credits.");
 $("grid").addEventListener("click", e => { if (e.target.closest(".idea.locked")) $("unlock").click(); });
