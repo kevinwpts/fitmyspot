@@ -748,7 +748,8 @@ const track = (() => {
   let sid = null, done = new Set();
   try { sid = sessionStorage.getItem("sid") || Math.random().toString(36).slice(2, 12) + Date.now().toString(36); sessionStorage.setItem("sid", sid); } catch { sid = Math.random().toString(36).slice(2, 14); }
   const ref = (document.referrer || "") + " " + navigator.userAgent;
-  const src = /instagram/i.test(ref) ? "instagram" : /facebook|fbav/i.test(ref) ? "facebook" : /google/i.test(document.referrer) ? "google" : document.referrer ? "other" : "direct";
+  const utm = (new URLSearchParams(location.search).get("utm_source") || "").replace(/[^a-z0-9_-]/gi, "").slice(0, 20);
+  const src = utm ? utm : /instagram/i.test(ref) ? "instagram" : /facebook|fbav/i.test(ref) ? "facebook" : /google/i.test(document.referrer) ? "google" : document.referrer ? "other" : "direct";
   const mobile = matchMedia("(max-width: 820px)").matches;
   return name => {
     if (done.has(name)) return; done.add(name);
