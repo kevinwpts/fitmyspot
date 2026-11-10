@@ -303,12 +303,26 @@ details p{margin:10px 0 0;color:var(--muted)}
 .block h2,.final h2,.rhead h2,.dlg h3,.lockbox b,.acard b,.tier b,.pv-head b{font-weight:650;letter-spacing:-.035em}
 .num,.cap .n{background:var(--ink);color:#0B0C0F}
 .tag2{background:#5EEAD4}
+
+.hl{display:flex;align-items:center;gap:8px}.hl .ic{color:var(--lime)}
+.hl em{font-style:normal;font-size:12px;font-weight:700;background:var(--lime);color:#0B0C0F;padding:3px 8px;border-radius:999px}
+.vote.save.on{background:var(--lime);color:#0B0C0F;border-color:transparent}
+.savings{margin-top:18px;display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,rgba(94,234,212,.14),rgba(96,165,250,.08));border:1px solid rgba(94,234,212,.3);border-radius:20px;padding:16px 18px}
+.savings b{display:block;font-size:17px}.savings small{color:var(--muted)}
+.sv-ic{width:46px;height:46px;border-radius:14px;background:var(--soft);display:grid;place-items:center;color:var(--lime);flex:none}
+.tabs{display:flex;gap:8px;margin-top:16px}
+.plrows{margin-top:12px;display:grid;gap:10px}
+.plrow{display:grid;grid-template-columns:84px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:10px}
+.plimg{width:84px;height:84px;border-radius:14px;overflow:hidden;background:var(--soft);display:grid;place-items:center;color:var(--muted)}
+.plimg img{width:100%;height:100%;object-fit:cover}
+.plbody{min-width:0;display:grid;gap:4px;align-content:center}.plbody b{font-size:16px}.plbody small{color:var(--muted)}
+.placts{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}.placts .nbtn{text-decoration:none}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <nav><a class="logo" href="/"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#lg)"/><g fill="none" stroke="#0B0C0F" stroke-width="5" stroke-linecap="round"><path d="M14 24v-6a4 4 0 0 1 4-4h6M40 14h6a4 4 0 0 1 4 4v6M50 40v6a4 4 0 0 1-4 4h-6M24 50h-6a4 4 0 0 1-4-4v-6"/></g><g fill="none" stroke="#0B0C0F" stroke-width="4" stroke-linejoin="round"><path d="M32 21 43 27v12l-11 6-11-6V27z"/><path d="M21 27l11 6 11-6M32 33v12"/></g></svg><span>fitmyspot</span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn" id="mine" hidden>My ideas</button><button class="nbtn avatar" id="acct" hidden aria-label="Account"></button><button id="signout" hidden></button></div></nav>
+  <nav><a class="logo" href="/"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#lg)"/><g fill="none" stroke="#0B0C0F" stroke-width="5" stroke-linecap="round"><path d="M14 24v-6a4 4 0 0 1 4-4h6M40 14h6a4 4 0 0 1 4 4v6M50 40v6a4 4 0 0 1-4 4h-6M24 50h-6a4 4 0 0 1-4-4v-6"/></g><g fill="none" stroke="#0B0C0F" stroke-width="4" stroke-linejoin="round"><path d="M32 21 43 27v12l-11 6-11-6V27z"/><path d="M21 27l11 6 11-6M32 33v12"/></g></svg><span>fitmyspot</span></a><div class="navr"><button class="pill left nbtn" id="left" hidden></button><button class="nbtn ink" id="signin">Sign in</button><button class="nbtn" id="mine" hidden>My spots</button><button class="nbtn" id="listBtn" hidden>List</button><button class="nbtn avatar" id="acct" hidden aria-label="Account"></button><button id="signout" hidden></button></div></nav>
 
   <section id="landing">
     <div class="hero">
@@ -426,8 +440,15 @@ details p{margin:10px 0 0;color:var(--muted)}
   </section>
 
   <section id="history" hidden>
-    <div class="rhead" style="grid-template-columns:1fr auto"><div><div class="k">Saved</div><h2 class="display">My ideas</h2></div><button class="nbtn" id="signout2">Sign out</button></div>
+    <div class="rhead" style="grid-template-columns:1fr auto"><div><div class="k">Saved</div><h2 class="display">My spots</h2><p class="lead2" style="margin-top:6px">Every spot gets fresh print ideas each week.</p></div><button class="nbtn" id="signout2">Sign out</button></div>
     <div class="hist" id="histList"></div>
+  </section>
+
+  <section id="plist" hidden>
+    <div class="rhead" style="grid-template-columns:1fr"><div><div class="k">Your list</div><h2 class="display">Print list</h2></div></div>
+    <div class="savings" id="savings"></div>
+    <div class="tabs"><button class="nbtn ink" data-tab="todo">To print</button><button class="nbtn" data-tab="printed">Printed</button></div>
+    <div class="plrows" id="plRows"></div>
   </section>
 
   <section id="account" hidden>
@@ -438,7 +459,7 @@ details p{margin:10px 0 0;color:var(--muted)}
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
       <div class="acard"><span class="k2">Invite friends</span><b>+5 credits each</b><small id="aInvited"></small><div class="invite" id="inviteAcc"></div></div>
       <div class="acard"><span class="k2">Emails</span><label class="chk"><input type="checkbox" id="aMkt"> Send me new print ideas and offers</label></div>
-      <div class="acard"><span class="k2">Your ideas</span><button class="btn btn-soft" id="aIdeas">See saved ideas</button></div>
+      <div class="acard"><span class="k2">Your spots &amp; list</span><button class="btn btn-soft" id="aIdeas">My spots</button><button class="btn btn-soft" id="aList">Print list</button></div>
       <div class="acard"><button class="btn btn-soft" id="aOut">Sign out</button></div>
       <details class="danger"><summary>Delete account</summary>
         <p>This deletes your account, credits and saved ideas for good. Type DELETE to confirm.</p>
@@ -498,7 +519,7 @@ const safe = u => /^https:\/\//.test(u || "") ? u : "#";
 const pr = q => "https://www.printables.com/search/models?q=" + encodeURIComponent(q);
 const k = n => n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1) + "k" : String(n);
 let imageB64 = null, photoUrl = null;
-const ICONS = {"sparkles": "<path d=\"M12 3l1.8 4.9L19 10l-5.2 2.1L12 17l-1.8-4.9L5 10l5.2-2.1z\"/><path d=\"M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z\"/>", "lock": "<rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/>", "up": "<path d=\"M7 10v12\"/><path d=\"M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z\"/>", "down": "<path d=\"M17 14V2\"/><path d=\"M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z\"/>", "zap": "<path d=\"M13 2 3 14h9l-1 8 10-12h-9l1-8z\"/>", "printer": "<path d=\"M6 9V2h12v7\"/><path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\"/><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\"/>", "check": "<path d=\"M20 6 9 17l-5-5\"/>", "gift": "<rect x=\"3\" y=\"8\" width=\"18\" height=\"4\" rx=\"1\"/><path d=\"M12 8v13\"/><path d=\"M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7\"/><path d=\"M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/>", "layers": "<path d=\"m12 2 10 5-10 5L2 7z\"/><path d=\"m2 17 10 5 10-5\"/><path d=\"m2 12 10 5 10-5\"/>", "gauge": "<path d=\"m12 14 4-4\"/><path d=\"M3.34 19a10 10 0 1 1 17.32 0\"/>", "car": "<path d=\"M19 17h2v-4l-2-5H5L3 13v4h2\"/><circle cx=\"7\" cy=\"17\" r=\"2\"/><circle cx=\"17\" cy=\"17\" r=\"2\"/><path d=\"M9 17h6\"/>", "kitchen": "<path d=\"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2\"/><path d=\"M7 2v20\"/><path d=\"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"/>", "desk": "<rect x=\"2\" y=\"3\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"M8 21h8\"/><path d=\"M12 17v4\"/>", "sofa": "<path d=\"M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3\"/><path d=\"M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\"/><path d=\"M4 18v2\"/><path d=\"M20 18v2\"/>", "garage": "<path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"/>", "door": "<path d=\"M13 4h3a2 2 0 0 1 2 2v14\"/><path d=\"M2 20h3\"/><path d=\"M13 20h9\"/><path d=\"M10 12v.01\"/><path d=\"M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z\"/>", "share": "<path d=\"M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\"/><path d=\"m16 6-4-4-4 4\"/><path d=\"M12 2v13\"/>", "arrow": "<path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/>"};
+const ICONS = {"bookmark": "<path d=\"m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z\"/>", "pin": "<path d=\"M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/>", "list": "<path d=\"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01\"/>", "trash": "<path d=\"M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2\"/>", "piggy": "<path d=\"M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z\"/><path d=\"M2 9v1c0 1.1.9 2 2 2h1\"/>","sparkles": "<path d=\"M12 3l1.8 4.9L19 10l-5.2 2.1L12 17l-1.8-4.9L5 10l5.2-2.1z\"/><path d=\"M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z\"/>", "lock": "<rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/>", "up": "<path d=\"M7 10v12\"/><path d=\"M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z\"/>", "down": "<path d=\"M17 14V2\"/><path d=\"M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z\"/>", "zap": "<path d=\"M13 2 3 14h9l-1 8 10-12h-9l1-8z\"/>", "printer": "<path d=\"M6 9V2h12v7\"/><path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\"/><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\"/>", "check": "<path d=\"M20 6 9 17l-5-5\"/>", "gift": "<rect x=\"3\" y=\"8\" width=\"18\" height=\"4\" rx=\"1\"/><path d=\"M12 8v13\"/><path d=\"M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7\"/><path d=\"M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/>", "layers": "<path d=\"m12 2 10 5-10 5L2 7z\"/><path d=\"m2 17 10 5 10-5\"/><path d=\"m2 12 10 5 10-5\"/>", "gauge": "<path d=\"m12 14 4-4\"/><path d=\"M3.34 19a10 10 0 1 1 17.32 0\"/>", "car": "<path d=\"M19 17h2v-4l-2-5H5L3 13v4h2\"/><circle cx=\"7\" cy=\"17\" r=\"2\"/><circle cx=\"17\" cy=\"17\" r=\"2\"/><path d=\"M9 17h6\"/>", "kitchen": "<path d=\"M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2\"/><path d=\"M7 2v20\"/><path d=\"M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7\"/>", "desk": "<rect x=\"2\" y=\"3\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"M8 21h8\"/><path d=\"M12 17v4\"/>", "sofa": "<path d=\"M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3\"/><path d=\"M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z\"/><path d=\"M4 18v2\"/><path d=\"M20 18v2\"/>", "garage": "<path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"/>", "door": "<path d=\"M13 4h3a2 2 0 0 1 2 2v14\"/><path d=\"M2 20h3\"/><path d=\"M13 20h9\"/><path d=\"M10 12v.01\"/><path d=\"M13 4.56v16.16a1 1 0 0 1-1.24.97L5 20V5.56a2 2 0 0 1 1.52-1.94l4-1A2 2 0 0 1 13 4.56Z\"/>", "share": "<path d=\"M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8\"/><path d=\"m16 6-4-4-4 4\"/><path d=\"M12 2v13\"/>", "arrow": "<path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/>", "eye": "<path d=\"M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/>"};
 const I = (n, s = 16) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ""}</svg>`;
 
 
@@ -547,7 +568,7 @@ async function afterSignIn(){
 let handled = false;
 function setSession(s){
   const was = !!session; session = s;
-  $("signin").hidden = !!s; $("mine").hidden = !s; $("acct").hidden = !s;
+  $("signin").hidden = !!s; $("mine").hidden = !s; $("acct").hidden = !s; $("listBtn").hidden = !s;
   if (s) $("acct").textContent = (s.user?.email || "?")[0].toUpperCase();
   if (s && !was && !handled) { handled = true; afterSignIn(); } else refreshQuota();
   if (!s) handled = false;
@@ -584,6 +605,54 @@ document.querySelectorAll("[data-buy]").forEach(b => b.onclick = () => session ?
 document.addEventListener("click", e => { if (e.target.id === "nudgeBtn") $("dlgBuy").showModal(); });
 
 
+
+/* Print list + money saved */
+const RATES = { SEK: 10.5, NOK: 10.8, DKK: 6.9, EUR: 0.92, GBP: 0.79, USD: 1 };
+const CUR = (() => { const l = navigator.language || "en-US"; if (/^sv/.test(l)) return "SEK"; if (/^(nb|no|nn)/.test(l)) return "NOK"; if (/^da/.test(l)) return "DKK"; if (/-GB$/.test(l)) return "GBP"; if (/^(de|fr|es|it|nl|pt|fi)/.test(l)) return "EUR"; return "USD"; })();
+const money = usd => new Intl.NumberFormat(navigator.language || "en-US", { style: "currency", currency: CUR, maximumFractionDigits: 0 }).format((usd || 0) * RATES[CUR]);
+let plTab = "todo";
+$("grid").addEventListener("click", async e => {
+  const b = e.target.closest("[data-save]"); if (!b) return;
+  if (!session) { openSignup("Save your print list", "Create a free account to save ideas and track what you've printed. You get 10 free credits."); return; }
+  if (b.classList.contains("on")) return;
+  const i = +b.dataset.save, p = lastResult?.prints?.[i], m = currentModels[i];
+  if (!p) return;
+  b.classList.add("on");
+  const { error } = await SB.from("print_list").insert({ name: String(p.name).slice(0, 120), place: String(lastResult.place || "").slice(0, 80), search: String(p.search || "").slice(0, 80), model_url: m?.url?.slice(0, 300) || null, image: m?.image?.slice(0, 500) || null, buy_price: Math.max(0, Math.min(100000, Math.round(+p.buy_price || 0))) });
+  if (error) b.classList.remove("on"); else { b.innerHTML = I("check", 17); }
+});
+async function openList(){
+  show("plist"); $("dock").hidden = false;
+  $("plRows").innerHTML = `<div class="note">Loading…</div>`;
+  const { data = [] } = await SB.from("print_list").select("*").order("created_at", { ascending: false }).limit(200);
+  const printed = data.filter(x => x.status === "printed");
+  const saved = printed.reduce((a, x) => a + (x.buy_price || 0), 0);
+  $("savings").innerHTML = printed.length
+    ? `<span class="sv-ic">${I("piggy", 22)}</span><div><b>You've printed ${printed.length} thing${printed.length === 1 ? "" : "s"} and saved about ${money(saved)}</b><small>Compared to buying them in a store</small></div>`
+    : `<span class="sv-ic">${I("piggy", 22)}</span><div><b>Print something from your list</b><small>We'll count how much money you save compared to buying it.</small></div>`;
+  document.querySelectorAll("[data-tab]").forEach(t => t.className = "nbtn" + (t.dataset.tab === plTab ? " ink" : ""));
+  const rows = data.filter(x => x.status === plTab);
+  $("plRows").innerHTML = rows.length ? rows.map(x => `
+    <div class="plrow">
+      <a class="plimg" href="${safe(x.model_url) !== "#" ? safe(x.model_url) : pr(x.search || x.name)}" target="_blank" rel="noopener">${x.image ? `<img src="${esc(safe(x.image))}" alt="" referrerpolicy="no-referrer">` : I("layers", 22)}</a>
+      <div class="plbody"><b>${esc(x.name)}</b><small>${esc(x.place || "")}${x.buy_price ? ` · saves about ${money(x.buy_price)}` : ""}</small>
+        <div class="placts">
+          ${x.status === "todo" ? `<button class="nbtn ink" data-done="${x.id}">${I("check", 14)} Printed it</button>` : `<button class="nbtn" data-undo="${x.id}">Move back</button>`}
+          <a class="nbtn" href="${safe(x.model_url) !== "#" ? safe(x.model_url) : pr(x.search || x.name)}" target="_blank" rel="noopener">Open ${I("arrow", 13)}</a>
+          <button class="nbtn" data-del="${x.id}" aria-label="Remove">${I("trash", 14)}</button>
+        </div></div>
+    </div>`).join("") : `<div class="note">${plTab === "todo" ? "Nothing here yet. Tap the bookmark on any idea to save it." : "Nothing printed yet. Mark items as printed from your list."}</div>`;
+}
+$("listBtn").onclick = openList;
+document.querySelectorAll("[data-tab]").forEach(t => t.onclick = () => { plTab = t.dataset.tab; openList(); });
+$("plRows").addEventListener("click", async e => {
+  const d = e.target.closest("[data-done]"), u = e.target.closest("[data-undo]"), x = e.target.closest("[data-del]");
+  if (d) await SB.from("print_list").update({ status: "printed", printed_at: new Date().toISOString() }).eq("id", d.dataset.done);
+  if (u) await SB.from("print_list").update({ status: "todo", printed_at: null }).eq("id", u.dataset.undo);
+  if (x) await SB.from("print_list").delete().eq("id", x.dataset.del);
+  if (d || u || x) openList();
+});
+
 /* Account page */
 async function openAccount(){
   show("account"); $("dock").hidden = true;
@@ -602,6 +671,7 @@ async function openAccount(){
 $("acct").onclick = openAccount;
 $("aBuy").onclick = () => $("dlgBuy").showModal();
 $("aIdeas").onclick = () => $("mine").click();
+$("aList").onclick = openList;
 $("aOut").onclick = async () => { await SB.auth.signOut(); show("landing"); };
 $("aMkt").onchange = e => SB.rpc("set_marketing", { p_ok: e.target.checked });
 $("delConfirm").oninput = e => $("delBtn").disabled = e.target.value.trim() !== "DELETE";
@@ -636,13 +706,21 @@ fetch("/api/stats").then(r => r.json()).then(d => { if (d.scans >= 100) $("sub")
 
 /* Saved ideas (history) */
 $("mine").onclick = async () => {
-  ["landing","scanning","result","account"].forEach(x => $(x).hidden = true);
+  ["landing","scanning","result","account","plist"].forEach(x => $(x).hidden = true);
   $("history").hidden = false; $("dock").hidden = false;
   $("histList").innerHTML = `<div class="note">Loading…</div>`;
-  const { data, error } = await SB.from("scans").select("id,place,prints,created_at").order("created_at", { ascending: false }).limit(50);
-  if (error || !data?.length) { $("histList").innerHTML = `<div class="note">No saved ideas yet. Snap a photo while signed in and they show up here.</div>`; return; }
-  $("histList").innerHTML = data.map((r, n) => `<button class="hrow" data-n="${n}"><b>${esc(r.place || "Your spot")}</b><span>${esc((r.prints || []).map(p => p.name).slice(0, 3).join(" · "))}</span><small>${new Date(r.created_at).toLocaleDateString()}</small></button>`).join("");
-  $("histList").onclick = e => { const b = e.target.closest(".hrow"); if (!b) return; const r = data[+b.dataset.n]; photoUrl = ""; $("history").hidden = true; render({ place: r.place, prints: r.prints }); };
+  const { data, error } = await SB.from("scans").select("id,place,prints,new_ideas,ideas_seen,created_at").order("created_at", { ascending: false }).limit(50);
+  if (error || !data?.length) { $("histList").innerHTML = `<div class="note">No spots yet. Snap a photo while signed in and it shows up here.</div>`; return; }
+  $("histList").innerHTML = data.map((r, n) => {
+    const fresh = !r.ideas_seen && (r.new_ideas || []).length;
+    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(r.place || "Your spot")}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span><span>${esc([...(r.new_ideas || []), ...(r.prints || [])].map(p => p.name).slice(0, 3).join(" · "))}</span><small>Added ${new Date(r.created_at).toLocaleDateString()}</small></button>`;
+  }).join("");
+  $("histList").onclick = e => {
+    const b = e.target.closest(".hrow"); if (!b) return;
+    const r = data[+b.dataset.n]; photoUrl = ""; $("history").hidden = true;
+    render({ place: r.place, prints: [...(r.new_ideas || []).map(p => ({ ...p, isNew: true })), ...(r.prints || [])] });
+    if (!r.ideas_seen) SB.from("scans").update({ ideas_seen: true }).eq("id", r.id).then(() => {});
+  };
 };
 
 
@@ -735,7 +813,7 @@ const EXAMPLES = [["car cup holder organizer","Car"],["desk cable organizer","De
   $("examples").hidden = false;
 })();
 
-function show(id){ ["landing","scanning","result","history","account"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
+function show(id){ ["landing","scanning","result","history","account","plist"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
 
 function render(r){
   $("placeName").textContent = (r.place || "your spot").split(/[.,:;]/)[0].slice(0, 40);
@@ -746,7 +824,7 @@ function render(r){
     <article class="idea" style="animation-delay:${i * 70}ms">
       <a class="media" id="media${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">
         <div class="shimmer"></div>
-        <span class="num">${i + 1}</span>
+        <span class="num">${p.isNew ? "New" : i + 1}</span>
         <span class="badges">${p.material ? `<span>${I("layers", 12)} ${esc(p.material)}${r.hot && p.material !== "PLA" ? " · heat-safe" : ""}</span>` : ""}${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}${p.level ? `<span>${I("gauge", 12)} ${esc(p.level)}</span>` : ""}</span>
       </a>
       <div class="body">
@@ -755,6 +833,7 @@ function render(r){
         <div class="credit" id="credit${i}"></div>
         <div class="actions">
           <a class="a1" id="open${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">Open model</a>
+          <button class="vote save" data-save="${i}" aria-label="Save to print list">${I("bookmark", 17)}</button>
           <span class="votes" data-i="${i}"><button class="vote" data-v="1" aria-label="Good idea">${I("up", 17)}</button><button class="vote" data-v="-1" aria-label="Bad idea">${I("down", 17)}</button></span>
         </div>
       </div>

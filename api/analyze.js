@@ -16,8 +16,9 @@ For each print give:
 - material: PLA, PETG, TPU or ASA. If the place gets hot (car interior, near a heater, in sunlight) never use PLA.
 - time: rough print time like "45 min" or "3 h"
 - level: Easy, Medium or Hard
+- buy_price: what a similar ready-made product typically costs in a store, in US dollars (whole number)
 If the photo is too dark, too blurry, or does not show a place where prints make sense, return an empty prints list and set "photo_issue" to a short friendly tip (for example "The photo is too dark. Turn on a light and try again."). Otherwise "photo_issue" is null.
-Reply ONLY with JSON: {"place":"...","seen":["..."],"hot":true,"photo_issue":null,"prints":[{"name":"","why":"","search":"","alt":"","material":"","time":"","level":""}]}`;
+Reply ONLY with JSON: {"place":"...","seen":["..."],"hot":true,"photo_issue":null,"prints":[{"name":"","why":"","search":"","alt":"","material":"","time":"","level":"","buy_price":0}]}`;
 
 // Kända printrar: byggvolym (mm), skåp, flerfärg
 const PRINTERS = {
@@ -110,7 +111,7 @@ async function handler(req) {
         return json({ locked: true, id, place: out.place, count: out.prints.length, first: out.prints[0]?.name || null });
       }
       out.quota = { free_left: quota.free_left ?? null, credits: quota.credits ?? null, via: quota.via };
-      try { out.id = await rpc("save_scan", { p_key: SCAN_KEY, p_place: String(out.place || ""), p_prints: out.prints }, req); } catch {}
+      try { out.id = await rpc("save_scan", { p_key: SCAN_KEY, p_place: String(out.place || ""), p_prints: out.prints, p_seen: Array.isArray(out.seen) ? out.seen.slice(0, 10) : [] }, req); } catch {}
       return json(out);
     } catch { /* prova nästa modell */ }
   }
