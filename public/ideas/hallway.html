@@ -54,7 +54,7 @@ footer{margin-top:40px;color:var(--muted);font-size:13px}
 document.querySelectorAll(".pic").forEach(async el => {
   try {
     const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json();
-    const m = d.models && d.models[0]; if (!m || !/^https:\/\/media\.printables\.com\//.test(m.image)) return;
+    const m = d.models && d.models[0]; if (!m || !/^https:\/\/(media\.printables\.com|imgs\.search\.brave\.com)\//.test(m.image)) return;
     el.style.backgroundImage = 'url("' + m.image + '")'; el.href = m.url; el.setAttribute("aria-label", m.title);
   } catch (e) {}
 });

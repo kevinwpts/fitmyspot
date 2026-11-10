@@ -952,7 +952,7 @@ async function loadModels(p, i){
       media.href = safe(m.url);
       $("open" + i).href = safe(m.url); $("open" + i).innerHTML = "Open on " + esc(m.source || "Printables") + " " + I("arrow", 15);
       currentModels[i] = m;
-      $("credit" + i).innerHTML = `<b>${esc(m.title)}</b> by ${esc(m.creator || "unknown")}${m.downloads ? ` · ${k(m.downloads)} downloads` : ""}`;
+      $("credit" + i).innerHTML = `<b>${esc(m.title)}</b>${m.creator ? ` by ${esc(m.creator)}` : ""}${m.downloads ? ` · ${k(m.downloads)} downloads` : ""} · ${esc(m.source || "Printables")}`;
       media.querySelectorAll(".thumbs a").forEach((a, n) => a.classList.toggle("on", n === j));
     };
     media.querySelector(".shimmer")?.remove();
