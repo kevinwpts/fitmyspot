@@ -499,6 +499,7 @@ body{background:var(--bg);color:var(--ink)}
 .rtools2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .rtools2 .nbtn{justify-content:center;padding:14px;font-size:15px;border-radius:12px}
 @media (min-width:700px){.rtools2{grid-template-columns:auto auto;justify-content:start}.rtools2 .nbtn{padding:12px 20px}}
+.nbtn.avatar{background:var(--lime);color:var(--ink);border:0}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -590,12 +591,13 @@ body{background:var(--bg);color:var(--ink)}
 
 
 
+  <section id="photos" hidden>
+    <div class="rhead"><div><h2 class="display">Your photos</h2></div></div>
+    <div class="phbox" id="phBox"><div class="phlist" id="phList"></div></div>
+  </section>
+
   <section id="account" hidden>
     <div class="rhead"><div><h2 class="display">Your account</h2></div></div>
-    <div class="phbox" id="phBox">
-      <h3 class="h3">Your photos</h3>
-      <div class="phlist" id="phList"></div>
-    </div>
     <div class="acc">
       <div class="acard"><span class="k2">Signed in as</span><b id="aEmail">–</b><small id="aSince"></small></div>
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
@@ -846,10 +848,13 @@ async function tinyThumb(src){
   if (!src) return null;
   try {
     const im = new Image(); im.src = src; await im.decode();
-    const c = document.createElement("canvas"), sz = 200, s = Math.max(sz / im.width, sz / im.height);
-    c.width = c.height = sz;
-    c.getContext("2d").drawImage(im, (sz - im.width * s) / 2, (sz - im.height * s) / 2, im.width * s, im.height * s);
-    return c.toDataURL("image/jpeg", 0.7);
+    // 480x320 räcker för bannern och får plats i databasen (max 60 kB)
+    const c = document.createElement("canvas"), W = 480, H = 320, s = Math.max(W / im.width, H / im.height);
+    c.width = W; c.height = H;
+    c.getContext("2d").drawImage(im, (W - im.width * s) / 2, (H - im.height * s) / 2, im.width * s, im.height * s);
+    let q = 0.72, out = c.toDataURL("image/jpeg", q);
+    while (out.length > 58000 && q > 0.3) { q -= 0.1; out = c.toDataURL("image/jpeg", q); }
+    return out.length <= 58000 ? out : null;
   } catch { return null; }
 }
 async function savePhoto(r){
@@ -885,7 +890,7 @@ $("phList").addEventListener("keydown", e => { if (e.key === "Enter" && e.target
 
 /* Account page */
 async function openAccount(){
-  show("account"); loadPhotos();
+  show("account");
   const { data: p } = await SB.rpc("my_profile");
   if (!p) return;
   $("aEmail").textContent = p.email || session?.user?.email || "";
@@ -911,7 +916,7 @@ $("menu").onclick = async e => {
   $("menu").hidden = true;
   const g = b.dataset.go;
   if (g === "account") openAccount();
-  else if (g === "photos") openAccount();
+  else if (g === "photos") { show("photos"); loadPhotos(); }
   else if (g === "buy") $("dlgBuy").showModal();
   else if (g === "out") signOutNow();
   else $(g).click();
@@ -1081,7 +1086,7 @@ document.querySelectorAll("#demoCards .pic, .pv-row .pic").forEach(async el => {
 });
 
 
-function show(id){ ["landing","scanning","result","account"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
+function show(id){ ["landing","scanning","result","account","photos"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
 
 const capFirst = t => { t = String(t || "").trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
 function ideaCard(p, i, r){ p.name = capFirst(p.name); p.why = capFirst(p.why); return `
