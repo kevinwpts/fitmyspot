@@ -450,7 +450,7 @@ dialog{border-radius:18px}
 /* ===== Ny, enkel landningssida + modern färgskala ===== */
 :root{--bg:#FFFFFF;--card:#FFFFFF;--soft:#F5F5F6;--line:#EAEAEC;--ink:#0C0D10;--muted:#62666E}
 body{background:var(--bg);color:var(--ink)}
-#landing .hero{display:grid;gap:18px;justify-items:center;text-align:center;padding:18px 0 0;grid-template-areas:"t" "p" "v" "c"}
+#landing .hero{display:grid;gap:18px;justify-items:center;text-align:center;padding:18px 0 0;grid-template-areas:"t" "p" "v" "f" "c"}
 .h-t{grid-area:t;margin:0}.h-p{grid-area:p;margin:0}.hv{grid-area:v}.h-c{grid-area:c;display:grid;gap:12px;justify-items:center;width:100%}
 .hv{position:relative;margin:4px 0 0;width:100%;max-width:520px;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:#14161B}
 .hv img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
@@ -475,7 +475,7 @@ body{background:var(--bg);color:var(--ink)}
 .btn-light{background:#fff;color:var(--ink)}.btn-light:hover{background:#F0F0F2}
 @media (min-width:1040px){
   #landing:not([hidden]){display:block}
-  #landing .hero{grid-template-columns:1fr 1fr;grid-template-areas:"t v" "p v" "c v";column-gap:64px;row-gap:22px;text-align:left;justify-items:start;align-content:center;padding-top:40px}
+  #landing .hero{grid-template-columns:1fr 1fr;grid-template-areas:"t v" "p v" "c v" ". f";column-gap:64px;row-gap:22px;text-align:left;justify-items:start;align-content:center;padding-top:40px}
   #landing .hero>.h-t{align-self:end;font-size:66px}
   #landing .h-c{justify-items:start;align-self:start}
   .hv{max-width:none;aspect-ratio:1/1.05}
@@ -515,6 +515,27 @@ body{background:var(--bg);color:var(--ink)}
 .mkline b{color:var(--ink);font-weight:600;display:inline;font-size:inherit}
 .mk-av{width:28px;height:28px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#FEDA75,#FA7E1E,#D62976,#962FBF);flex:none}
 .mk-av svg{width:100%;height:100%;border-radius:50%;background:#fff;display:block}
+
+/* Före/efter-reglage i toppen */
+.ba{user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 34%}
+.ba-a{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
+.ba-h{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.4);pointer-events:none}
+.ba-h span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font:700 17px/1 Geist,sans-serif;letter-spacing:2px;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+.ba-l{position:absolute;top:12px;font:600 12px/1 Geist,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;border-radius:999px;pointer-events:none}
+.ba-l1{left:12px;background:rgba(12,13,16,.7);color:#fff}.ba-l2{right:12px;background:var(--lime);color:var(--ink)}
+.ba-r{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y;-webkit-appearance:none;appearance:none}
+.ba-found{grid-area:f;width:100%;max-width:520px;display:grid;gap:10px;text-align:left}
+.ba-k{font:600 12px Geist,sans-serif;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}.ba-k em{font-style:normal;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:500}
+.ba-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ba-row .pf-row{display:grid;gap:6px;align-content:start}.ba-row .pf-row .pic{width:100%;height:auto;aspect-ratio:1;border-radius:10px}
+.ba-row .pf-row b{font-size:12.5px;font-weight:600;line-height:1.2}
+@media (min-width:1040px){.ba-found{max-width:none}}
+.ba-row{grid-template-columns:1fr 1fr;gap:8px 12px}
+.ba-row .pf-row{display:flex;align-items:center;gap:8px}.ba-row .pf-row .pic{width:36px;height:36px;aspect-ratio:auto;flex:none;border-radius:8px}
+.ba-row .pf-row b{font-size:13px}
+#landing .hv.ba{aspect-ratio:1/1.08}
+@media (min-width:1040px){.ba-row{grid-template-columns:repeat(4,auto);justify-content:start;gap:12px 20px}#landing .hv.ba{aspect-ratio:1/1.05}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -533,20 +554,22 @@ body{background:var(--bg);color:var(--ink)}
     <div class="hero">
       <h1 class="display h-t">Don't know what to <span>3D print?</span></h1>
       <p class="h-p">Take a photo of any room. Get 3D prints that fit what's in it.</p>
-      <figure class="hv" id="example" aria-label="Example: a desk photo and the prints it found">
-        <img src="/demo/setup.jpg" alt="A desk setup with an ultrawide monitor, a gaming PC, a controller, headphones and a plant" width="900" height="1200">
-        <span class="hv-tag" style="top:22%;left:20%">plant</span>
-        <span class="hv-tag" style="top:41%;left:6%">PC</span>
-        <span class="hv-tag" style="top:49%;left:27%">controller</span>
-        <span class="hv-tag" style="top:41%;left:62%">headphones</span>
-        <figcaption class="hv-card">
-          <small class="hv-k">Found for this desk · 6 prints</small>
-          <span class="pf-row" data-q="controller stand"><span class="pic"></span><b>Controller stand</b></span>
-          <span class="pf-row" data-q="self watering planter"><span class="pic"></span><b>Self-watering planter</b></span>
-          <span class="pf-row" data-q="under desk headphone hook"><span class="pic"></span><b>Headphone hook</b></span>
-          
-        </figcaption>
+      <figure class="hv ba" id="example" style="--p:50%">
+        <img class="ba-b" src="/demo/setup.jpg" alt="A desk setup before: controller on the desk, loose cables, books lying down" width="900" height="1200">
+        <div class="ba-a" aria-hidden="true"><img src="/demo/setup-after.jpg" alt="" width="900" height="1200"></div>
+        <span class="ba-l ba-l1">Before</span><span class="ba-l ba-l2">After</span>
+        <span class="ba-h" aria-hidden="true"><span>‹ ›</span></span>
+        <input class="ba-r" type="range" min="0" max="100" value="50" aria-label="Drag to compare the desk before and after the prints">
       </figure>
+      <div class="ba-found">
+        <span class="ba-k">Found for this desk · <em>illustration</em></span>
+        <div class="ba-row">
+          <span class="pf-row" data-q="controller stand"><span class="pic"></span><b>Controller stand</b></span>
+          <span class="pf-row" data-q="self watering planter"><span class="pic"></span><b>Planter</b></span>
+          <span class="pf-row" data-q="bookends"><span class="pic"></span><b>Bookends</b></span>
+          <span class="pf-row" data-q="under desk cable tray"><span class="pic"></span><b>Cable tray</b></span>
+        </div>
+      </div>
       <div class="h-c">
         <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
         <span class="sub" id="sub">No sign-up · Real models from MakerWorld &amp; Printables</span>
@@ -1069,6 +1092,20 @@ setTimeout(() => track("visit"), 0);
 try { new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { track("see_example"); o.disconnect(); } }, { threshold: .4 }).observe($("example")); } catch {}
 document.addEventListener("click", e => { if (e.target.closest('label[for="file"]')) track("tap_upload"); }, true);
 
+/* Före/efter: dra för att jämföra, en kort rörelse första gången så man ser att det går */
+(() => {
+  const f = $("example"); if (!f?.classList.contains("ba")) return;
+  const r = f.querySelector(".ba-r"); let touched = false;
+  const set = v => f.style.setProperty("--p", v + "%");
+  r.addEventListener("input", () => { touched = true; set(r.value); }, { passive: true });
+  const sweep = () => { if (touched || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t0 = performance.now(), D = 2400;
+    const step = now => { if (touched) return; const x = Math.min(1, (now - t0) / D);
+      const v = 50 + 38 * Math.sin(x * Math.PI * 2) * (1 - x * .15) * (x < 1 ? 1 : 0); set(v.toFixed(1)); r.value = v;
+      if (x < 1) requestAnimationFrame(step); else { set(50); r.value = 50; } };
+    requestAnimationFrame(step); };
+  try { new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { setTimeout(sweep, 700); o.disconnect(); } }, { threshold: .5 }).observe(f); } catch { setTimeout(sweep, 900); }
+})();
 /* Bakgrundsbild med reserv: skarp bild först, annars den lilla */
 function setBg(el, m){
   if (!el || !m?.image) return;
