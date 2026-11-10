@@ -323,7 +323,7 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 .dm-photo{position:relative;margin:0;border-radius:var(--r);overflow:hidden;border:1.5px solid var(--ink);aspect-ratio:3/4;max-height:640px;background:var(--soft)}
 @media (max-width:819px){.dm-photo{aspect-ratio:4/3}}
 .dm-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
-.dm-tag{position:absolute;background:var(--lime);color:var(--ink);font:700 13px/1 Geist,sans-serif;padding:8px 11px;border-radius:999px;box-shadow:0 6px 14px rgba(0,0,0,.25);white-space:nowrap}
+.dm-tag{position:absolute;top:var(--y);left:var(--x);background:var(--lime);color:var(--ink);font:700 13px/1 Geist,sans-serif;padding:8px 11px;border-radius:999px;box-shadow:0 6px 14px rgba(0,0,0,.25);white-space:nowrap}
 .dm-photo figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border-radius:999px;padding:8px 14px 8px 8px;font-weight:650;display:flex;gap:8px;align-items:center}
 .cap-n{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font:800 14px/1 var(--display)}
 .dm-res{background:var(--card);border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);border-radius:var(--r);padding:16px;display:grid;gap:10px;align-content:start}
@@ -342,6 +342,7 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 .price-more b{color:var(--ink)}.price-more span{flex:1;min-width:220px}.price-more .btn{padding:14px 22px;font-size:15px}
 .seeex{font-weight:600;font-size:15px;color:var(--ink);text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:3px;text-underline-offset:4px}
 html{scroll-behavior:smooth}
+@media (max-width:819px){.dm-photo .dm-tag{top:var(--ym);left:var(--xm)}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -372,21 +373,21 @@ html{scroll-behavior:smooth}
       <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
     </div>
     <section class="demo" id="example" aria-label="Example">
-      <div class="dm-head"><h2 class="display">I snapped my kitchen.<br>Here's what it found.</h2></div>
+      <div class="dm-head"><h2 class="display">I snapped my desk.<br>Here's what it found.</h2></div>
       <div class="dm-grid">
         <figure class="dm-photo">
-          <img src="/demo/kitchen.jpg" alt="A kitchen with a stove, cutting board and knives on the wall" loading="lazy" width="900" height="1200">
-          <span class="dm-tag" style="left:66%;top:9%">knives</span>
-          <span class="dm-tag" style="left:44%;top:43%">cutting board</span>
-          <span class="dm-tag" style="left:38%;top:66%">stove knobs</span>
+          <img src="/demo/desk.jpg" alt="A desk with a curved monitor, keyboard, cables and a PC" loading="lazy" width="900" height="1200">
+          <span class="dm-tag" style="--x:50%;--xm:44%;--y:44%;--ym:28%">loose cables</span>
+          <span class="dm-tag" style="--x:64%;--xm:70%;--y:51%;--ym:47%">remote</span>
+          <span class="dm-tag" style="--x:58%;--xm:50%;--y:60%;--ym:66%">hard drive</span>
           <figcaption><span class="cap-n">1</span> Snap a photo</figcaption>
         </figure>
         <div class="dm-res">
           <div class="dm-cap"><span class="cap-n">2</span> Get things to print for it</div>
-          <div class="dm-row" data-q="magnetic knife strip"><span class="pic"></span><span class="dm-t"><b>Magnetic knife strip cover</b><small>For the knives on the wall</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="under cabinet utensil hook"><span class="pic"></span><span class="dm-t"><b>Under-cabinet utensil hooks</b><small>Frees up the counter</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="cutting board stand"><span class="pic"></span><span class="dm-t"><b>Cutting board stand</b><small>The board lies flat now</small><small class="dm-src"></small></span></div>
-          <div class="dm-row" data-q="stove knob lock"><span class="pic"></span><span class="dm-t"><b>Stove knob child locks</b><small>Knobs turn too easily</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="under desk cable tray"><span class="pic"></span><span class="dm-t"><b>Under-desk cable tray</b><small>Hides the cables on your desk</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="desk cable clip"><span class="pic"></span><span class="dm-t"><b>Desk edge cable clips</b><small>Keeps the charger cables in place</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="apple tv remote holder"><span class="pic"></span><span class="dm-t"><b>Remote holder</b><small>The remote lies loose on the desk</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="under desk hard drive mount"><span class="pic"></span><span class="dm-t"><b>Under-desk drive mount</b><small>Gets the hard drive off the desk</small><small class="dm-src"></small></span></div>
           <small class="dm-more">+ 2 more ideas · real models to download</small>
         </div>
       </div>
