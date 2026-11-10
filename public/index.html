@@ -881,6 +881,13 @@ async function openAccount(){
   const link = location.origin + "/?ref=" + p.ref_code;
   $("inviteAcc").innerHTML = `<div class="copy"><input readonly value="${esc(link)}"><button type="button" class="nbtn ink" data-copy="${esc(link)}">Copy</button></div>`;
 }
+/* Logga ut: rensa alltid lokalt, även om nätet strular (annars stannade man inloggad) */
+async function signOutNow(){
+  try { await SB?.auth.signOut({ scope: "local" }); } catch {}
+  try { Object.keys(localStorage).filter(k => k.startsWith("sb-")).forEach(k => localStorage.removeItem(k)); } catch {}
+  store.set("pending", null);
+  setSession(null); me = null; show("landing"); toast("Signed out");
+}
 $("acct").onclick = e => { e.stopPropagation(); $("menu").hidden = !$("menu").hidden; };
 document.addEventListener("click", e => { if (!e.target.closest("#menu")) $("menu").hidden = true; });
 $("menu").onclick = async e => {
@@ -890,12 +897,12 @@ $("menu").onclick = async e => {
   if (g === "account") openAccount();
   else if (g === "photos") openAccount();
   else if (g === "buy") $("dlgBuy").showModal();
-  else if (g === "out") { await SB?.auth.signOut(); show("landing"); }
+  else if (g === "out") signOutNow();
   else $(g).click();
 };
 $("aBuy").onclick = () => $("dlgBuy").showModal();
 $("aPass").onclick = openPass;
-$("aOut").onclick = async () => { await SB.auth.signOut(); show("landing"); };
+$("aOut").onclick = () => signOutNow();
 $("delConfirm").oninput = e => $("delBtn").disabled = e.target.value.trim() !== "DELETE";
 $("delBtn").onclick = async () => {
   $("delBtn").disabled = true;
