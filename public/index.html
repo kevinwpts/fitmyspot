@@ -486,6 +486,8 @@ body{background:var(--bg);color:var(--ink)}
   .how li{border-bottom:0;border-top:1px solid var(--line)}
   #faq{max-width:760px}
 }
+.moreideas{width:100%;margin-top:18px;padding:17px}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;display:inline-block;animation:sp .7s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -569,6 +571,7 @@ body{background:var(--bg);color:var(--ink)}
       <button class="btn btn-ink" id="unlock">See the models →</button>
     </div>
     <div class="grid" id="grid"></div>
+    <button type="button" class="btn btn-soft moreideas" id="moreIdeas" hidden>Show 10 more ideas</button>
     <div class="nudge" id="nudge" hidden></div>
     <div class="freebar" id="freeBar" hidden><span><b>This one's on us.</b> Sign up for 3 more photos, free.</span><button type="button" class="btn btn-ink" id="freeSign">Sign up free</button></div>
     <label for="file" class="btn btn-ink morebtn"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> Take another photo</label>
@@ -865,7 +868,7 @@ $("phList").addEventListener("click", async e => {
   }
   const row = e.target.closest(".ph"); if (!row) return;
   const r = photoRows.find(x => x.id === row.dataset.id); if (!r) return;
-  photoUrl = r.thumb || ""; render({ place: r.place, seen: r.seen, prints: r.prints });
+  photoUrl = r.thumb || ""; imageB64 = null; render({ place: r.place, seen: r.seen, prints: r.prints });
 });
 $("phList").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.classList.contains("ph")) e.target.click(); });
 
@@ -937,9 +940,9 @@ function renderLocked(d){
   $("grid").innerHTML = list.map((p, i) => `
     <article class="idea locked" style="animation-delay:${i * 70}ms">
       <div class="media"><img src="${photoUrl}" alt="" style="filter:blur(18px) saturate(1.2);transform:scale(1.2)"><span class="num">${i + 1}</span>
-        <span class="badges">${p.material ? `<span>${I("layers", 12)} ${esc(p.material)}${d.hot && p.material !== "PLA" ? " · heat-safe" : ""}</span>` : ""}${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
+        <span class="badges">${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
         <span class="lock"><span class="lockpill">${I("lock", 16)} Model hidden</span></span></div>
-      <div class="body"><h3>${p.name ? esc(p.name) : "████████ ████"}</h3><p>${p.why ? esc(p.why) : "██████ ███ ██████████ ████"}</p>
+      <div class="body"><h3>${p.name ? esc(capFirst(p.name)) : "████████ ████"}</h3><p>${p.why ? esc(capFirst(p.why)) : "██████ ███ ██████████ ████"}</p>
         <div class="actions"><span class="a1 ghost">${I("lock", 14)} Sign up to open</span></div></div>
     </article>`).join("");
   store.set("pending", { id: d.id, photo: photoUrl && photoUrl.length < 900000 ? photoUrl : "" });
@@ -1069,18 +1072,13 @@ document.querySelectorAll("#demoCards .pic, .pv-row .pic").forEach(async el => {
 
 function show(id){ ["landing","scanning","result","account"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
 
-function render(r){
-  $("placeName").textContent = placeTitle(r.place);
-  const seen = (r.seen || []).slice(0, 5).map(x => String(x)).join(" · ");
-  $("seenLine").hidden = true;
-  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
-  const prints = r.prints || [];
-  $("grid").innerHTML = prints.length ? prints.map((p, i) => `
+const capFirst = t => { t = String(t || "").trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
+function ideaCard(p, i, r){ p.name = capFirst(p.name); p.why = capFirst(p.why); return `
     <article class="idea" style="animation-delay:${i * 70}ms">
       <a class="media" id="media${i}" href="${pr(p.search || p.name)}" target="_blank" rel="noopener">
         <div class="shimmer"></div>
         <span class="num">${p.isNew ? "New" : i + 1}</span>
-        <span class="badges">${p.material ? `<span>${I("layers", 12)} ${esc(p.material)}${r.hot && p.material !== "PLA" ? " · heat-safe" : ""}</span>` : ""}${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
+        <span class="badges">${p.time ? `<span>${I("clock", 12)} ${esc(p.time)}</span>` : ""}</span>
       </a>
       <div class="body">
         <h3>${esc(p.name)}</h3>
@@ -1092,7 +1090,15 @@ function render(r){
           <span class="votes" data-i="${i}"><button class="vote" data-v="1" aria-label="Good idea">${I("up", 17)}</button><button class="vote" data-v="-1" aria-label="Bad idea">${I("down", 17)}</button></span>
         </div>
       </div>
-    </article>`).join("") : `<div class="note">No print ideas for this photo. Try your car, desk, a shelf or another place at home.</div>`;
+    </article>`; }
+
+function render(r){
+  $("placeName").textContent = placeTitle(r.place);
+  const seen = (r.seen || []).slice(0, 5).map(x => String(x)).join(" · ");
+  $("seenLine").hidden = true;
+  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
+  const prints = r.prints || [];
+  $("grid").innerHTML = prints.length ? prints.map((p, i) => ideaCard(p, i, r)).join("") : `<div class="note">No print ideas for this photo. Try your car, desk, a shelf or another place at home.</div>`;
   show("result");
   
   lastResult = r; currentModels = {};
@@ -1102,8 +1108,34 @@ function render(r){
   const left = r.quota ? (r.quota.free_left || 0) + (r.quota.credits || 0) : null;
   $("nudge").hidden = !(left != null && left <= 2);
   if (left != null && left <= 2) $("nudge").innerHTML = `<b>${left} credit${left === 1 ? "" : "s"} left.</b> Invite a friend and you both get 3 more. <button class="nbtn ink" id="nudgeBtn">Get credits</button>`;
+  moreRounds = 0; $("moreIdeas").hidden = !imageB64 || !prints.length; $("moreIdeas").disabled = false; $("moreIdeas").textContent = "Show 10 more ideas";
   prints.forEach((p, i) => loadModels(p, i));
 }
+
+/* Fler idéer för samma bild: gratis för inloggade (max 2 gånger per bild) */
+let moreRounds = 0;
+$("moreIdeas").onclick = async () => {
+  const btn = $("moreIdeas");
+  if (!session) { openSignup("See 10 more ideas", "Create a free account to see more ideas for this photo. You also get 3 free credits."); return; }
+  if (!imageB64 || !lastResult) return;
+  btn.disabled = true; btn.innerHTML = `<span class="spin"></span> Finding more ideas…`;
+  try {
+    const r = await fetch("/api/analyze", { method: "POST", headers: { "content-type": "application/json", ...(await authHeader()) }, body: JSON.stringify({ image: imageB64, mime: "image/jpeg", printer: getPrinter(), more: true, exclude: (lastResult.prints || []).map(p => p.name) }) });
+    const d = await r.json();
+    if (r.status === 429) { btn.textContent = "That's all for today. Try again tomorrow."; return; }
+    if (r.status === 401) { openSignup("See 10 more ideas", "Create a free account to see more ideas for this photo."); btn.disabled = false; btn.textContent = "Show 10 more ideas"; return; }
+    if (!r.ok || !(d.prints || []).length) throw 0;
+    const seen = new Set((lastResult.prints || []).map(p => String(p.name).toLowerCase()));
+    const add = d.prints.filter(p => !seen.has(String(p.name).toLowerCase()));
+    const start = lastResult.prints.length;
+    lastResult.prints.push(...add);
+    $("grid").insertAdjacentHTML("beforeend", add.map((p, k) => ideaCard(p, start + k, lastResult)).join(""));
+    add.forEach((p, k) => loadModels(p, start + k));
+    track("more_ideas");
+    moreRounds++;
+    btn.disabled = false; btn.textContent = "Show 10 more ideas"; btn.hidden = moreRounds >= 2 || !add.length;
+  } catch { btn.disabled = false; btn.textContent = "Couldn't find more. Try again"; }
+};
 
 async function loadModels(p, i){
   const media = $("media" + i);

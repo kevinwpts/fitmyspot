@@ -68,8 +68,15 @@ async function handler(req) {
 
   // Inloggad: förbrukar dagens gratis eller en kredit. Inte inloggad: låst förhandsvisning (max 3/dag per nätverk).
   const signedIn = (req.headers.get("authorization") || "").startsWith("Bearer ey");
+  // "Show more ideas": samma bild igen, nya idéer. Bara inloggade, kostar ingen kredit (tak per dygn).
+  const more = body.more === true;
+  const exclude = more && Array.isArray(body.exclude) ? body.exclude.slice(0, 40).map((x) => String(x).slice(0, 80)) : [];
+  if (more && !signedIn) return json({ error: "signin_required" }, 401);
   let quota;
-  try {
+  if (more) {
+    try { quota = await rpc("use_more", { p_key: SCAN_KEY }, req); } catch { return json({ error: "quota_check_failed" }, 503); }
+    if (!quota?.ok) return json({ error: quota?.reason === "signin" ? "signin_required" : "more_limit" }, quota?.reason === "signin" ? 401 : 429);
+  } else try {
     quota = signedIn
       ? await rpc("use_scan", { p_ip: ipHash(req), p_key: SCAN_KEY }, req)
       : await rpc("use_preview", { p_ip: ipHash(req), p_key: SCAN_KEY, p_test: !!SCAN_KEY && req.headers.get("x-test-key") === testKey() }, req);
@@ -85,7 +92,7 @@ async function handler(req) {
         method: "POST",
         headers: { "x-goog-api-key": key, "content-type": "application/json" },
         body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ inline_data: { mime_type: mime, data: image } }, { text: PROMPT + extras(body) }] }],
+          contents: [{ role: "user", parts: [{ inline_data: { mime_type: mime, data: image } }, { text: PROMPT + extras(body) + (exclude.length ? `\nThese prints were ALREADY suggested for this photo, so do NOT repeat them or suggest near-duplicates: ${exclude.join("; ")}. Suggest 10 NEW, different prints for other things you can see (smaller objects, corners, walls, shelves, the floor), still specific to this photo.` : "") }] }],
           generationConfig: { temperature: 0.4, maxOutputTokens: 4000, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } },
         }),
       });
@@ -94,8 +101,10 @@ async function handler(req) {
       const text = (data.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? "").join("");
       const out = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
       if (!Array.isArray(out.prints)) continue;
-      out.prints = out.prints.slice(0, 10);
+      const up = (t) => { t = String(t || "").trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
+      out.prints = out.prints.slice(0, 10).map((p) => ({ ...p, name: up(p.name), why: up(p.why) }));
       // Dåligt foto eller inget att föreslå: ge tillbaka krediten
+      if (more) return json({ ...out, more: true });
       if (!out.prints.length) {
         try { await rpc("refund_scan", { p_ip: ipHash(req), p_key: SCAN_KEY }, req); } catch {}
         out.refunded = true;
@@ -118,6 +127,7 @@ async function handler(req) {
     } catch { /* prova nästa modell */ }
   }
   // AI:n misslyckades: ge tillbaka krediten
+  if (more) return json({ error: "ai_failed" }, 502);
   try { await rpc("refund_scan", { p_ip: ipHash(req), p_key: SCAN_KEY }, req); } catch {}
   return json({ error: "ai_failed" }, 502);
 }
