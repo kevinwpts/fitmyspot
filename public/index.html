@@ -672,6 +672,7 @@ const track = (() => {
   const mobile = matchMedia("(max-width: 820px)").matches;
   return name => {
     if (done.has(name)) return; done.add(name);
+    if (navigator.webdriver || /HeadlessChrome|bot|crawl|spider|preview|vercel/i.test(navigator.userAgent)) return;
     try { if (localStorage.getItem("testKey") || localStorage.getItem("noTrack")) return; } catch {}
     try { SB?.from("events").insert({ sid, name, src, mobile }).then(() => {}, () => {}); } catch {}
   };
