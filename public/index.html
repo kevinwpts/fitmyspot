@@ -328,8 +328,8 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 .cap-n{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font:800 14px/1 var(--display)}
 .dm-res{background:var(--card);border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);border-radius:var(--r);padding:16px;display:grid;gap:10px;align-content:start}
 .dm-cap{display:flex;gap:8px;align-items:center;font-weight:650;padding:4px 2px 6px}
-.dm-row{display:grid;grid-template-columns:76px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;text-decoration:none;color:var(--ink);min-width:0}
-.dm-row:hover{border-color:var(--ink)}
+.dm-row{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;text-decoration:none;color:var(--ink);min-width:0}
+
 .dm-row .pic{width:76px;height:76px;border-radius:12px;background:var(--soft) center/cover no-repeat}
 .dm-t{display:grid;min-width:0}.dm-t b{font:750 18px/1.15 var(--display);letter-spacing:-.015em}.dm-t small{color:var(--muted);font-size:13.5px}
 .dm-t .dm-src{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -368,11 +368,11 @@ html{scroll-behavior:smooth}
         <span class="btn btn-ink up-btn">Find prints</span>
       </label>
       <span class="sub" id="sub">Free to try · Real models from Printables &amp; MakerWorld</span>
-      <a class="seeex" href="#example">No photo handy? See a real example ↓</a>
+      <a class="seeex" href="#example">No photo handy? See an example ↓</a>
       <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
     </div>
     <section class="demo" id="example" aria-label="Example">
-      <div class="dm-head"><span class="soon" style="margin:0">Real example</span><h2 class="display">I snapped my kitchen.<br>Here's what it found.</h2></div>
+      <div class="dm-head"><h2 class="display">I snapped my kitchen.<br>Here's what it found.</h2></div>
       <div class="dm-grid">
         <figure class="dm-photo">
           <img src="/demo/kitchen.jpg" alt="A kitchen with a stove, cutting board and knives on the wall" loading="lazy" width="900" height="1200">
@@ -383,10 +383,10 @@ html{scroll-behavior:smooth}
         </figure>
         <div class="dm-res">
           <div class="dm-cap"><span class="cap-n">2</span> Get things to print for it</div>
-          <a class="dm-row" data-q="magnetic knife strip" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Magnetic knife strip cover</b><small>For the knives on the wall</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
-          <a class="dm-row" data-q="under cabinet utensil hook" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Under-cabinet utensil hooks</b><small>Frees up the counter</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
-          <a class="dm-row" data-q="cutting board stand" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Cutting board stand</b><small>The board lies flat now</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
-          <a class="dm-row" data-q="stove knob lock" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Stove knob child locks</b><small>Knobs turn too easily</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
+          <div class="dm-row" data-q="magnetic knife strip"><span class="pic"></span><span class="dm-t"><b>Magnetic knife strip cover</b><small>For the knives on the wall</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="under cabinet utensil hook"><span class="pic"></span><span class="dm-t"><b>Under-cabinet utensil hooks</b><small>Frees up the counter</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="cutting board stand"><span class="pic"></span><span class="dm-t"><b>Cutting board stand</b><small>The board lies flat now</small><small class="dm-src"></small></span></div>
+          <div class="dm-row" data-q="stove knob lock"><span class="pic"></span><span class="dm-t"><b>Stove knob child locks</b><small>Knobs turn too easily</small><small class="dm-src"></small></span></div>
           <small class="dm-more">+ 2 more ideas · real models to download</small>
         </div>
       </div>
@@ -940,12 +940,10 @@ document.querySelectorAll(".dm-row").forEach(async a => {
   try {
     const d = await (await fetch("/api/models?q=" + encodeURIComponent(a.dataset.q))).json();
     const m = d.models?.[0]; if (!m) return;
-    a.href = safe(m.url);
     a.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`;
     a.querySelector(".dm-src").textContent = (m.creator ? "by " + m.creator + " · " : "") + (m.source || "Printables");
   } catch {}
 });
-document.querySelectorAll(".dm-row").forEach(a => a.addEventListener("click", e => { if (a.getAttribute("href") === "#") e.preventDefault(); }));
 document.querySelectorAll("#demoCards .pic, .pv-row .pic, .hp-demo .pic").forEach(async el => {
   try {
     const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json();
