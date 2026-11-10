@@ -278,6 +278,13 @@ dialog::backdrop{background:rgba(26,25,24,.4);backdrop-filter:blur(3px)}
 .foot p{margin:0;max-width:40em}
 .flinks{display:flex;flex-wrap:wrap;gap:16px}.flinks a{color:var(--muted);text-decoration:none}.flinks a:hover{color:var(--ink)}
 .foot .rooms a{color:var(--muted)}
+.swap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.linkbtn{appearance:none;background:none;border:0;padding:0;color:var(--muted);font:500 14px Geist,sans-serif;cursor:pointer}.linkbtn b{color:var(--ink)}
+.snapbar{margin-top:16px;display:flex;align-items:center;gap:14px;background:var(--card);border:1.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink);border-radius:22px;padding:16px 18px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.snapbar:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.snapbar .up-ic{width:52px;height:52px;flex:none}.sb-t{display:grid;gap:2px;min-width:0}.sb-t b{font-size:18px;font-weight:650}.sb-t small{color:var(--muted);font-size:14px}
+.h3 small{font-weight:500}
+button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -415,12 +422,14 @@ dialog::backdrop{background:rgba(26,25,24,.4);backdrop-filter:blur(3px)}
   </section>
 
   <section id="history" hidden>
-    <div class="hhead"><h2 class="display">My home</h2><p class="lead2">New prints for your home every week.</p></div>
+    <div class="hhead"><h2 class="display">My home</h2></div>
+    <label for="file" class="snapbar"><span class="up-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg></span><span class="sb-t"><b>Snap a photo</b><small>Get ideas for anything, like your wardrobe.</small></span></label>
     <div class="mailbar" id="homeMail" hidden><span><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><b>Get them by email every week</b></span><button class="nbtn ink" id="mailOn">Turn on</button></div>
     <div id="weekBox" hidden><h3 class="h3">New this week</h3><div class="wk" id="weekList"></div></div>
-    <h3 class="h3" id="roomsH" hidden>Your rooms</h3>
+    <h3 class="h3">My rooms <small>· new prints every week</small></h3>
     <div class="hist" id="histList"></div>
-    <label for="file" class="addroom" id="addRoom"><span>+</span> Add a room</label>
+    <button type="button" class="addroom" id="addRoom"><span>+</span> Add a room</button>
+    <div id="snapBox" hidden><h3 class="h3">Recent photos</h3><div class="hist" id="snapList"></div></div>
   </section>
 
   <section id="account" hidden>
@@ -430,7 +439,7 @@ dialog::backdrop{background:rgba(26,25,24,.4);backdrop-filter:blur(3px)}
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
       <div class="acard"><span class="k2">Invite friends</span><b>+3 credits each</b><small id="aInvited"></small><div class="invite" id="inviteAcc"></div></div>
       <div class="acard"><span class="k2">Emails</span><label class="chk"><input type="checkbox" id="aMkt"> Weekly email with new prints for my home</label></div>
-      <div class="acard"><button class="btn btn-soft" id="aOut">Sign out</button></div>
+      <div class="acard"><button class="btn btn-soft" id="aPass">Change password</button><button class="btn btn-soft" id="aOut">Sign out</button></div>
       <details class="danger"><summary>Delete account</summary>
         <p>This deletes your account, credits and saved ideas for good. Type DELETE to confirm.</p>
         <input id="delConfirm" placeholder="DELETE" autocomplete="off">
@@ -454,13 +463,23 @@ dialog::backdrop{background:rgba(26,25,24,.4);backdrop-filter:blur(3px)}
   <span class="gift"><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg> 3 free credits</span>
   <h3 id="signTitle">Create your free account</h3>
   <p id="signText">Get 3 free credits.</p>
-  <button class="btn btn-ink gbtn" id="google" type="button" value="google"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>Continue with Google</button>
+  <button class="btn btn-soft gbtn" id="google" type="button" value="google"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>Continue with Google</button>
   <div class="or"><span>or</span></div>
-  <input id="email" type="email" required placeholder="you@email.com" autocomplete="email">
-  <button class="btn btn-soft" id="sendLink" type="submit">Email me a sign-in link</button>
-  <label class="chk"><input type="checkbox" id="mkt"> Email me new prints for my home every week</label>
+  <input id="email" type="email" required placeholder="Email" autocomplete="email">
+  <input id="pass" type="password" required minlength="8" placeholder="Password (8+ characters)" autocomplete="new-password">
+  <button class="btn btn-ink" id="sendLink" type="submit">Create account</button>
+  <label class="chk" id="mktRow"><input type="checkbox" id="mkt"> Email me new prints for my home every week</label>
   <div class="ok" id="sent" hidden></div>
+  <div class="swap"><button type="button" class="linkbtn" id="authSwap">Already have an account? <b>Sign in</b></button><button type="button" class="linkbtn" id="forgot" hidden>Forgot password?</button></div>
   <small class="fine">By continuing you agree to the <a href="/terms" target="_blank">terms</a> and <a href="/privacy" target="_blank">privacy policy</a>.</small>
+</form></dialog>
+<dialog id="dlgPass"><form class="dlg" id="formPass" method="dialog">
+  <button class="x" value="cancel" formnovalidate>Close</button>
+  <h3>New password</h3>
+  <p>Pick a password with at least 8 characters.</p>
+  <input id="newPass" type="password" required minlength="8" placeholder="New password" autocomplete="new-password">
+  <button class="btn btn-ink" type="submit">Save password</button>
+  <div class="ok" id="passMsg" hidden></div>
 </form></dialog>
 <dialog id="dlgWelcome"><form class="dlg" method="dialog" style="text-align:center;justify-items:center">
   <div class="wl-ic"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bp"/></svg></div>
@@ -563,14 +582,45 @@ function setSession(s){
 }
 if (SB) {
   SB.auth.getSession().then(({ data }) => setSession(data.session));
-  SB.auth.onAuthStateChange((_e, s) => setSession(s));
+  SB.auth.onAuthStateChange((ev, s) => { setSession(s); if (ev === "PASSWORD_RECOVERY") openPass(); });
 } else { $("signin").hidden = true; }
-function openSignup(title, text){
+/* Konto: e-post + lösenord (eller Google) */
+let authMode = "up";
+function setAuthMode(m){
+  authMode = m;
+  const up = m === "up";
+  $("sendLink").textContent = up ? "Create account" : "Sign in";
+  $("pass").autocomplete = up ? "new-password" : "current-password";
+  $("pass").placeholder = up ? "Password (8+ characters)" : "Password";
+  $("mktRow").hidden = !up; $("forgot").hidden = up;
+  document.querySelector("#dlgSignin .gift").hidden = !up;
+  $("authSwap").innerHTML = up ? "Already have an account? <b>Sign in</b>" : "New here? <b>Create account</b>";
+  $("sent").hidden = true;
+}
+function openSignup(title, text, mode){
+  setAuthMode(mode || "up");
   $("signTitle").textContent = title || "Create your free account";
   $("signText").textContent = text || "Get 3 free credits.";
-  $("sent").hidden = true; $("dlgSignin").showModal();
+  $("dlgSignin").showModal();
 }
-$("signin").onclick = () => openSignup("Sign in", "New here? You get 3 free credits.");
+$("signin").onclick = () => openSignup("Welcome back", "Sign in to your account.", "in");
+$("authSwap").onclick = () => { const up = authMode !== "up"; setAuthMode(up ? "up" : "in"); $("signTitle").textContent = up ? "Create your free account" : "Welcome back"; $("signText").textContent = up ? "Get 3 free credits." : "Sign in to your account."; };
+const say = t => { $("sent").textContent = t; $("sent").hidden = false; };
+$("forgot").onclick = async () => {
+  const email = $("email").value.trim();
+  if (!email) { say("Type your email first."); $("email").focus(); return; }
+  const { error } = await SB.auth.resetPasswordForEmail(email, { redirectTo: location.origin });
+  say(error ? "Couldn't send the email. Try again in a minute." : "Check your inbox. We sent a link to pick a new password.");
+};
+function openPass(){ $("passMsg").hidden = true; $("newPass").value = ""; $("dlgPass").showModal(); }
+$("formPass").addEventListener("submit", async e => {
+  if (e.submitter?.value === "cancel") return;
+  e.preventDefault();
+  const { error } = await SB.auth.updateUser({ password: $("newPass").value });
+  $("passMsg").textContent = error ? (/least|weak|short/i.test(error.message) ? "That password is too weak. Try a longer one." : "Couldn't save it. Try again.") : "Saved. Use it next time you sign in.";
+  $("passMsg").hidden = false;
+  if (!error) setTimeout(() => $("dlgPass").close(), 1200);
+});
 $("mkt").onchange = e => store.set("mkt", e.target.checked || null);
 $("google").onclick = async () => {
   const { error } = await SB.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin } });
@@ -579,11 +629,26 @@ $("google").onclick = async () => {
 $("formSignin").addEventListener("submit", async e => {
   if (e.submitter?.value === "cancel") return;
   e.preventDefault();
+  const email = $("email").value.trim(), password = $("pass").value;
   $("sendLink").disabled = true;
-  const { error } = await SB.auth.signInWithOtp({ email: $("email").value.trim(), options: { emailRedirectTo: location.origin } });
-  $("sendLink").disabled = false;
-  $("sent").textContent = error ? "Couldn't send the link. Try again in a minute." : "Check your inbox and tap the link. Your ideas will be waiting.";
-  $("sent").hidden = false;
+  try {
+    if (authMode === "up") {
+      const { data, error } = await SB.auth.signUp({ email, password, options: { emailRedirectTo: location.origin } });
+      if (error) {
+        if (/registered|exists/i.test(error.message)) { setAuthMode("in"); $("signTitle").textContent = "Welcome back"; say("You already have an account. Sign in instead."); }
+        else if (/password/i.test(error.message)) say("That password is too weak. Use at least 8 characters.");
+        else say("Couldn't create the account. Try again in a minute.");
+        return;
+      }
+      // Kräver Supabase att e-posten bekräftas får vi ingen session än
+      if (data.session) $("dlgSignin").close();
+      else say("Almost done. Check your inbox and tap the link to confirm your email.");
+    } else {
+      const { error } = await SB.auth.signInWithPassword({ email, password });
+      if (error) { say(/confirm/i.test(error.message) ? "Confirm your email first. Check your inbox." : "Wrong email or password."); return; }
+      $("dlgSignin").close();
+    }
+  } finally { $("sendLink").disabled = false; }
 });
 function outOfPhotos(){ refreshQuota(); $("dlgLimit").showModal(); }
 $("dlgLimit").addEventListener("close", () => { if ($("dlgLimit").returnValue === "buy") $("dlgBuy").showModal(); });
@@ -620,6 +685,7 @@ $("menu").onclick = async e => {
   else $(g).click();
 };
 $("aBuy").onclick = () => $("dlgBuy").showModal();
+$("aPass").onclick = openPass;
 $("aOut").onclick = async () => { await SB.auth.signOut(); show("landing"); };
 $("aMkt").onchange = e => SB.rpc("set_marketing", { p_ok: e.target.checked });
 $("delConfirm").oninput = e => $("delBtn").disabled = e.target.value.trim() !== "DELETE";
@@ -669,52 +735,61 @@ $("grid").addEventListener("click", e => { if (e.target.closest(".idea.locked"))
 fetch("/api/stats").then(r => r.json()).then(d => { if (d.scans >= 100) $("sub").textContent = `${d.scans.toLocaleString()} spots scanned · free to try`; }).catch(() => {});
 
 /* Saved ideas (history) */
-/* My home: rum, veckans nya idéer och veckomejl */
+/* My home: rum (fotas en gång, nya idéer varje vecka) + snabba foton (sparas separat) */
 const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
 const roomName = place => cap(String(place || "your spot").replace(/^(your|the|my)\s+/i, ""));
+let scanMode = "snap", homeData = [];
+// Alla "ta foto"-knappar är snabba foton, utom "Add a room"
+document.addEventListener("click", e => { if (e.target.closest('label[for="file"]')) scanMode = "snap"; }, true);
+$("addRoom").onclick = () => { scanMode = "room"; $("file").click(); };
+function spotRow(r, isRoom){
+  const fresh = isRoom && !r.ideas_seen && (r.new_ideas || []).length;
+  const nIdeas = (r.new_ideas || []).length + (r.prints || []).length;
+  const items = (r.seen || []).slice(0, 4).map(x => cap(String(x))).join(" · ");
+  const when = new Date(r.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return `<button class="hrow" data-id="${r.id}"><span class="hl">${I(isRoom ? "pin" : "eye", 16)}<b>${esc(roomName(r.place))}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span>${items ? `<span class="items">${esc(items)}</span>` : ""}<small>${nIdeas} ideas${isRoom ? "" : " · " + when}</small><span class="hdel" data-del-spot="${r.id}" role="button" aria-label="Delete">${I("trash", 15)}</span></button>`;
+}
 async function openHome(){
   if (!session) { show("landing"); return; }
   show("history"); $("dock").hidden = true;
   $("histList").innerHTML = `<div class="note">Loading…</div>`;
-  $("weekBox").hidden = true; $("roomsH").hidden = true; $("homeMail").hidden = true;
+  $("weekBox").hidden = true; $("homeMail").hidden = true; $("snapBox").hidden = true;
   const [{ data, error }, prof] = await Promise.all([
-    SB.from("scans").select("id,place,prints,new_ideas,ideas_seen,ideas_at,seen,created_at").order("created_at", { ascending: false }).limit(50),
+    SB.from("scans").select("id,place,prints,new_ideas,ideas_seen,ideas_at,seen,created_at,kind").order("created_at", { ascending: false }).limit(60),
     SB.rpc("my_profile").then(r => r.data, () => null),
   ]);
   if (error) { $("histList").innerHTML = `<div class="note">Couldn't load your home. Try again.</div>`; return; }
-  $("homeMail").hidden = !prof || !!prof.marketing_ok || !(data || []).length;
-  if (!data?.length) {
-    $("histList").innerHTML = `<div class="homeempty"><b>Add your first room</b><p>Take one photo of each room. Every week you get new prints that fit what you have.</p></div>`;
-    $("addRoom").innerHTML = `<span>+</span> Add your first room`;
-    return;
-  }
-  $("addRoom").innerHTML = `<span>+</span> Add a room`;
-  // Veckans nya idéer (bara de med en riktig modell)
-  const week = data.flatMap(r => (new Date(r.ideas_at) > Date.now() - 8 * 864e5 ? (r.new_ideas || []) : [])
+  homeData = data || [];
+  const rooms = homeData.filter(r => r.kind === "room"), snaps = homeData.filter(r => r.kind !== "room").slice(0, 12);
+  $("homeMail").hidden = !prof || !!prof.marketing_ok || !rooms.length;
+  // Veckans nya idéer (bara rum, bara med riktig modell)
+  const week = rooms.flatMap(r => (new Date(r.ideas_at) > Date.now() - 8 * 864e5 ? (r.new_ideas || []) : [])
     .filter(p => p.model?.url).map(p => ({ ...p, room: roomName(r.place) }))).slice(0, 6);
   $("weekBox").hidden = !week.length;
   $("weekList").innerHTML = week.map(p => `<a class="wkrow" href="${safe(p.model.url)}" target="_blank" rel="noopener"><img src="${esc(safe(p.model.image))}" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>${esc(p.name)}</b><small>For your ${esc(p.room.toLowerCase())}</small></div>${I("arrow", 16)}</a>`).join("");
-  $("roomsH").hidden = false;
-  $("histList").innerHTML = data.map((r, n) => {
-    const fresh = !r.ideas_seen && (r.new_ideas || []).length;
-    const nIdeas = (r.new_ideas || []).length + (r.prints || []).length;
-    const items = (r.seen || []).slice(0, 4).map(x => cap(String(x))).join(" · ");
-    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(roomName(r.place))}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span>${items ? `<span class="items">${esc(items)}</span>` : ""}<small>${nIdeas} ideas</small><span class="hdel" data-del-spot="${n}" role="button" aria-label="Delete room">${I("trash", 15)}</span></button>`;
-  }).join("");
-  $("histList").onclick = e => {
-    const del = e.target.closest("[data-del-spot]");
-    if (del) {
-      e.stopPropagation();
-      // Två tryck för att radera, så man inte råkar ta bort ett rum
-      if (del.dataset.sure !== "1") { del.dataset.sure = "1"; del.textContent = "Delete?"; del.style.width = "auto"; del.style.padding = "0 10px"; return; }
-      const r = data[+del.dataset.delSpot]; SB.from("scans").delete().eq("id", r.id).then(openHome); return;
-    }
-    const b = e.target.closest(".hrow"); if (!b) return;
-    const r = data[+b.dataset.n]; photoUrl = "";
-    render({ place: r.place, seen: r.seen, saved: true, prints: [...(r.new_ideas || []).map(p => ({ ...p, isNew: true })), ...(r.prints || [])] });
-    if (!r.ideas_seen) SB.from("scans").update({ ideas_seen: true }).eq("id", r.id).then(() => {});
-  };
+  $("histList").innerHTML = rooms.length ? rooms.map(r => spotRow(r, true)).join("")
+    : `<div class="homeempty"><b>Add your rooms</b><p>Take one photo of each room: kitchen, bathroom, bedroom… Every week you get new prints for what's in them.</p></div>`;
+  $("addRoom").innerHTML = `<span>+</span> ${rooms.length ? "Add a room" : "Add your first room"}`;
+  $("addRoom").hidden = rooms.length >= 10;
+  $("snapBox").hidden = !snaps.length;
+  $("snapList").innerHTML = snaps.map(r => spotRow(r, false)).join("");
 }
+function openSpot(r){
+  photoUrl = "";
+  render({ id: r.id, kind: r.kind, place: r.place, seen: r.seen, prints: [...(r.new_ideas || []).map(p => ({ ...p, isNew: true })), ...(r.prints || [])] });
+  if (r.kind === "room" && !r.ideas_seen) SB.from("scans").update({ ideas_seen: true }).eq("id", r.id).then(() => {});
+}
+["histList", "snapList"].forEach(id => $(id).addEventListener("click", e => {
+  const del = e.target.closest("[data-del-spot]");
+  if (del) {
+    e.stopPropagation();
+    // Två tryck för att radera, så man inte råkar ta bort något
+    if (del.dataset.sure !== "1") { del.dataset.sure = "1"; del.textContent = "Delete?"; del.style.padding = "0 10px"; return; }
+    SB.from("scans").delete().eq("id", del.dataset.delSpot).then(openHome); return;
+  }
+  const b = e.target.closest(".hrow"); if (!b) return;
+  const r = homeData.find(x => x.id === b.dataset.id); if (r) openSpot(r);
+}));
 $("mine").onclick = openHome;
 $("mailOn").onclick = async () => {
   const { error } = await SB.rpc("set_marketing", { p_ok: true });
@@ -723,6 +798,7 @@ $("mailOn").onclick = async () => {
 // Inloggad och klickar på loggan: till My home
 document.querySelectorAll("nav .logo").forEach(a => a.addEventListener("click", e => { if (session) { e.preventDefault(); openHome(); } }));
 if (new URLSearchParams(location.search).has("home")) history.replaceState(null, "", "/");
+
 
 /* Printer: asked after the first result, remembered on this device */
 const PRINTERS = [["bambu-a1-mini","Bambu A1 mini"],["bambu-a1","Bambu A1"],["bambu-p1s","Bambu P1S"],["bambu-p2s","Bambu P2S"],["bambu-x1c","Bambu X1C"],["bambu-h2d","Bambu H2D"],["prusa-mk4","Prusa MK4"],["prusa-core-one","Prusa Core One"],["prusa-mini","Prusa Mini"],["creality-k1","Creality K1"],["creality-ender3","Ender 3"],["elegoo-centauri","Elegoo Centauri"],["other","Other"]];
@@ -782,7 +858,13 @@ async function shareImage(){
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "boredprinter.png"; a.click();
 }
 $("shareBtn").onclick = shareImage;
-$("savedPill").onclick = () => openHome();
+let lastSpot = null;
+$("savedPill").onclick = async () => {
+  if (!lastSpot) return;
+  if (lastSpot.kind === "room") { openHome(); return; }
+  const { error } = await SB.from("scans").update({ kind: "room" }).eq("id", lastSpot.id);
+  if (!error) { lastSpot.kind = "room"; $("savedPill").innerHTML = I("check", 14) + " Saved to My rooms"; }
+};
 
 /* QR code for desktop visitors */
 if (matchMedia("(pointer:fine) and (min-width:900px)").matches) {
@@ -819,8 +901,9 @@ function render(r){
   $("placeName").textContent = placeTitle(r.place);
   const seen = (r.seen || []).slice(0, 5).map(x => String(x)).join(" · ");
   $("seenLine").textContent = seen ? "We saw: " + seen : ""; $("seenLine").hidden = !seen;
-  $("savedPill").hidden = !(session && (r.id || r.saved));
-  $("savedPill").innerHTML = I("check", 14) + " Saved to My home";
+  lastSpot = session && r.id ? { id: r.id, kind: r.kind } : null;
+  $("savedPill").hidden = !lastSpot;
+  $("savedPill").innerHTML = r.kind === "room" ? I("check", 14) + " Saved to My rooms" : "+ Add to My rooms";
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   const prints = r.prints || [];
   $("grid").innerHTML = prints.length ? prints.map((p, i) => `
@@ -909,7 +992,7 @@ async function analyze(){
   const t2 = setTimeout(() => go(2), 4800);
   const t3 = setTimeout(() => go(3), 8000);
   try {
-    const r = await fetch("/api/analyze", { method: "POST", headers: {"content-type": "application/json", ...(await authHeader())}, body: JSON.stringify({ image: imageB64, mime: "image/jpeg", printer: getPrinter(), lang: navigator.language || "en" }) });
+    const r = await fetch("/api/analyze", { method: "POST", headers: {"content-type": "application/json", ...(await authHeader())}, body: JSON.stringify({ image: imageB64, mime: "image/jpeg", printer: getPrinter(), room: scanMode === "room" }) });
     const d = await r.json();
     if (r.status === 401) { renderGate(); return; }
     if (r.status === 402) { show("landing"); outOfPhotos(); return; }

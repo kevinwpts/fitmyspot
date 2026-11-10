@@ -109,7 +109,8 @@ async function handler(req) {
         return json({ locked: true, id, place: out.place, count: out.prints.length, first: out.prints[0]?.name || null });
       }
       out.quota = { free_left: quota.free_left ?? null, credits: quota.credits ?? null, via: quota.via };
-      try { out.id = await rpc("save_scan", { p_key: SCAN_KEY, p_place: String(out.place || ""), p_prints: out.prints, p_seen: Array.isArray(out.seen) ? out.seen.slice(0, 10) : [] }, req); } catch {}
+      try { out.id = await rpc("save_scan", { p_key: SCAN_KEY, p_place: String(out.place || ""), p_prints: out.prints, p_seen: Array.isArray(out.seen) ? out.seen.slice(0, 10) : [], p_kind: body?.room ? "room" : "snap" }, req); } catch {}
+      out.kind = body?.room ? "room" : "snap";
       return json(out);
     } catch { /* prova nästa modell */ }
   }
