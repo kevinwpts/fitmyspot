@@ -466,7 +466,7 @@ nav{position:relative;gap:12px}
   <section id="result" hidden>
     <div class="rhead">
       <img id="thumb" alt="Your photo">
-      <div style="min-width:0"><div class="k">Ideas for</div><h2 class="display" id="placeName"></h2>
+      <div style="min-width:0"><h2 class="display" id="placeName">Your print ideas</h2>
         <div class="rtools"><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="printerPill" hidden></button></div></div>
     </div>
     <div class="lockbox" id="lockbox" hidden>
@@ -693,7 +693,6 @@ $("delBtn").onclick = async () => {
 /* Locked result for visitors without account */
 function renderLocked(d){
   lastResult = null;
-  $("placeName").textContent = (d.place || "your spot").split(/[.,:;]/)[0].slice(0, 40);
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   $("lockTitle").textContent = `We found ${d.count} prints for ${(d.place || "your spot").split(/[.,:;]/)[0]}` + (d.first ? `, like "${d.first}"` : "");
   $("lockbox").hidden = false; $("printerCard").hidden = true; $("printerPill").hidden = true; $("shareBtn").hidden = true; $("nudge").hidden = true;
@@ -825,7 +824,6 @@ const EXAMPLES = [["car cup holder organizer","Car"],["desk cable organizer","De
 function show(id){ ["landing","scanning","result","history","account"].forEach(s => $(s).hidden = s !== id); window.scrollTo({top: 0, behavior: "smooth"}); }
 
 function render(r){
-  $("placeName").textContent = (r.place || "your spot").split(/[.,:;]/)[0].slice(0, 40);
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   const prints = r.prints || [];
   $("grid").innerHTML = prints.length ? prints.map((p, i) => `
