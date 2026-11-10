@@ -300,6 +300,20 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 .hp-demo{background:var(--soft);border-radius:28px;padding:18px;display:grid;gap:8px}
 .hp-demo .hrow{cursor:default;padding:14px 16px}.hp-demo .hrow:hover{border-color:var(--line)}
 .wkrow .pic{width:72px;height:72px;border-radius:12px;background:var(--card) center/cover no-repeat;display:block}
+.sel{font:16px Geist,sans-serif;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.igsec h2{font-size:clamp(28px,5vw,40px)}
+.igcard{display:grid;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+.igcard:hover{border-color:var(--ink)}
+.ig-top{display:flex;align-items:center;gap:14px;min-width:0}
+.ig-av{flex:none;width:68px;height:68px;border-radius:50%;padding:3px;background:conic-gradient(from 210deg,#FEDA75,#FA7E1E,#D62976,#962FBF,#4F5BD5,#FEDA75)}
+.ig-av>span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--lime);border:3px solid var(--card)}
+.ig-av svg{width:60%;height:60%}
+.ig-name{flex:1;min-width:0;display:grid}.ig-name b{font-size:18px;font-weight:700}.ig-name small{color:var(--muted);font-size:14px}
+.ig-follow{padding:12px 18px;font-size:15px}
+.ig-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-top:1px solid var(--line);padding-top:14px}
+.ig-stats>span{display:grid;text-align:center}.ig-stats b{font:800 22px/1.1 var(--display);letter-spacing:-.02em}.ig-stats small{color:var(--muted);font-size:12.5px}
+.ig-name b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:420px){.ig-av{width:56px;height:56px}.ig-follow{padding:12px}.ig-follow .ft{display:none}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -325,7 +339,7 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
         <span class="up-or">Car, desk, kitchen, sofa…</span>
         <span class="btn btn-ink up-btn">Find prints</span>
       </label>
-      <span class="sub" id="sub">Free to try · no credit card</span>
+      <span class="sub" id="sub">Free to try · Real models from Printables &amp; MakerWorld</span>
       <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
     </div>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="kitchen">
@@ -412,14 +426,18 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
       <details><summary>Are the models free?</summary><p>Most are. You download them from the creator's page.</p></details>
       <details><summary>What is My home?</summary><p>Photo each room once. Every week you get new prints that fit what's there.</p></details>
       <details><summary>Do you keep my photo?</summary><p>No. We only keep a short list of what we saw, like "bed, lamp".</p></details>
-      <details><summary>Which printers does it work with?</summary><p>All of them. Pick yours and ideas fit its size.</p></details>
+      <details><summary>Which printers does it work with?</summary><p>All of them. Pick yours on your account page and ideas fit its size.</p></details>
       <details><summary>What if an idea doesn't fit?</summary><p>Bad photo? You get your credit back.</p></details>
       <details><summary>What does it cost?</summary><p>First photo free, plus 3 credits when you sign up. 1 photo = 1 credit.</p></details>
     </section>
-    <section class="maker">
-      <div class="mk-badge">4.9M</div>
-      <div><b>Made by a maker, for makers</b><p>From the creator of a printer setup video with 4.9M views.</p>
-      <a class="nbtn" href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener"><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg> @boredprinter</a></div>
+    <section class="block igsec" aria-label="Instagram">
+      <h2 class="display">Made by a maker.</h2>
+      <a class="igcard" href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener">
+        <span class="ig-top"><span class="ig-av"><span><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bp"/></svg></span></span>
+          <span class="ig-name"><b>@boredprinter</b><small>3D print ideas for your home</small></span>
+          <span class="btn btn-ink ig-follow"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg><span class="ft">Follow</span></span></span>
+        <span class="ig-stats"><span><b>13.6k</b><small>followers</small></span><span><b>4.9M</b><small>views on one video</small></span><span><b>Weekly</b><small>new print ideas</small></span></span>
+      </a>
     </section>
     <section class="final">
       <h2 class="display">Your printer is bored.</h2>
@@ -439,7 +457,7 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
     <div class="rhead">
       <img id="thumb" alt="Your photo">
       <div style="min-width:0"><h2 class="display" id="placeName">Prints for your spot</h2><p class="seenline" id="seenLine" hidden></p>
-        <div class="rtools"><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="printerPill" hidden></button><button class="nbtn" id="savedPill" hidden></button></div></div>
+        <div class="rtools"><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="savedPill" hidden></button></div></div>
     </div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
@@ -448,10 +466,6 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
     </div>
     <div class="grid" id="grid"></div>
     <div class="nudge" id="nudge" hidden></div>
-    <div class="pcard" id="printerCard" hidden>
-      <div><b>Which printer do you have?</b><span>Optional. Next time, ideas will fit its size.</span></div>
-      <div class="pchips" id="pchips"></div>
-    </div>
   </section>
 
   <section id="history" hidden>
@@ -472,6 +486,7 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
       <div class="acard"><span class="k2">Signed in as</span><b id="aEmail">–</b><small id="aSince"></small></div>
       <div class="acard"><span class="k2">Credits</span><b id="aCredits">–</b><small id="aPlan"></small><button class="btn btn-ink" id="aBuy">Get more credits</button></div>
       <div class="acard"><span class="k2">Invite friends</span><b>+3 credits each</b><small id="aInvited"></small><div class="invite" id="inviteAcc"></div></div>
+      <div class="acard"><span class="k2">My printer</span><select id="aPrinter" class="sel" aria-label="My printer"></select><small>Ideas will fit its size. <span id="aPrinterOk" hidden>Saved ✓</span></small></div>
       <div class="acard"><span class="k2">Emails</span><label class="chk"><input type="checkbox" id="aMkt"> Weekly email with new prints for my home</label></div>
       <div class="acard"><button class="btn btn-soft" id="aPass">Change password</button><button class="btn btn-soft" id="aOut">Sign out</button></div>
       <details class="danger"><summary>Delete account</summary>
@@ -759,7 +774,7 @@ function renderLocked(d){
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   $("lockTitle").textContent = `We found ${d.count} prints for ${(d.place || "your spot").split(/[.,:;]/)[0]}`;
   $("lockSub").textContent = "Sign up free to see the models and download them. You get 3 extra credits.";
-  $("lockbox").hidden = false; $("printerCard").hidden = true; $("printerPill").hidden = true; $("shareBtn").hidden = true; $("nudge").hidden = true;
+  $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
   const list = d.preview?.length ? d.preview : Array.from({ length: d.count }, (_, i) => ({ name: i === 0 && d.first ? d.first : "" }));
   $("grid").innerHTML = list.map((p, i) => `
     <article class="idea locked" style="animation-delay:${i * 70}ms">
@@ -779,7 +794,7 @@ function renderGate(){
   $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
   $("lockTitle").textContent = "Sign up to see ideas for this photo";
   $("lockSub").textContent = "You've used today's free previews. Create a free account and we'll find prints for this photo right away. You get 3 credits.";
-  $("lockbox").hidden = false; $("printerCard").hidden = true; $("printerPill").hidden = true; $("shareBtn").hidden = true; $("nudge").hidden = true;
+  $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
   $("grid").innerHTML = "";
   store.set("pending", null);
   try { localStorage.setItem("gatePhoto", photoUrl); } catch {}
@@ -861,20 +876,10 @@ if (new URLSearchParams(location.search).has("home")) history.replaceState(null,
 const PRINTERS = [["bambu-a1-mini","Bambu A1 mini"],["bambu-a1","Bambu A1"],["bambu-p1s","Bambu P1S"],["bambu-p2s","Bambu P2S"],["bambu-x1c","Bambu X1C"],["bambu-h2d","Bambu H2D"],["prusa-mk4","Prusa MK4"],["prusa-core-one","Prusa Core One"],["prusa-mini","Prusa Mini"],["creality-k1","Creality K1"],["creality-ender3","Ender 3"],["elegoo-centauri","Elegoo Centauri"],["other","Other"]];
 let lastResult = null, currentModels = {};
 const getPrinter = () => { try { return localStorage.getItem("printer") || ""; } catch { return ""; } };
-function showPrinter(){
-  const p = getPrinter(), label = PRINTERS.find(x => x[0] === p)?.[1];
-  $("printerCard").hidden = !!p;
-  $("printerPill").hidden = !p;
-  if (p) $("printerPill").innerHTML = I("printer", 14) + " " + esc(label || "Printer") + " · change";
-}
-$("pchips").innerHTML = PRINTERS.map(([id, n]) => `<button class="nbtn" data-p="${id}">${n}</button>`).join("");
-$("pchips").onclick = e => {
-  const b = e.target.closest("[data-p]"); if (!b) return;
-  try { localStorage.setItem("printer", b.dataset.p); } catch {}
-  showPrinter();
-  $("printerPill").innerHTML = I("check", 14) + " Saved · next ideas fit your " + esc(b.textContent);
-};
-$("printerPill").onclick = () => { $("printerCard").hidden = false; $("printerPill").hidden = true; };
+// Skrivaren väljs på kontosidan och sparas på enheten
+$("aPrinter").innerHTML = `<option value="">Not set</option>` + PRINTERS.map(([id, n]) => `<option value="${id}">${n}</option>`).join("");
+$("aPrinter").value = getPrinter();
+$("aPrinter").onchange = e => { try { e.target.value ? localStorage.setItem("printer", e.target.value) : localStorage.removeItem("printer"); } catch {} $("aPrinterOk").hidden = false; };
 
 /* Thumbs up / down on each idea */
 $("grid").addEventListener("click", async e => {
@@ -985,7 +990,6 @@ function render(r){
   $("dock").hidden = false;
   lastResult = r; currentModels = {};
   $("lockbox").hidden = true; $("shareBtn").hidden = false;
-  showPrinter();
   const left = r.quota ? (r.quota.free_left || 0) + (r.quota.credits || 0) : null;
   $("nudge").hidden = !(left != null && left <= 2);
   if (left != null && left <= 2) $("nudge").innerHTML = `<b>${left} credit${left === 1 ? "" : "s"} left.</b> Invite a friend and you both get 3 more. <button class="nbtn ink" id="nudgeBtn">Get credits</button>`;
