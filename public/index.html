@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Out of ideas for your 3D printer? Snap a photo of your car, desk, kitchen or any room and get useful things to print for it, with real models to download. First photo free.">
-<meta name="theme-color" content="#F5F2EC">
+<meta name="theme-color" content="#F3F4F6">
 <title>What to 3D print? Get ideas from a photo – boredprinter</title>
 <link rel="canonical" href="https://boredprinter.com/">
 <meta property="og:url" content="https://boredprinter.com/">
@@ -26,8 +26,8 @@
 <style>
 /* boredprinter – varm "printbädd"-känsla: papper, bläck och en filament-orange */
 :root{
-  --bg:#F5F2EC; --card:#FFFFFF; --soft:#EEEAE2; --ink:#1A1918; --muted:#6F6A62; --line:#E4DFD5;
-  --lime:#FF5B1F; --lime-ink:#1A1918; --accent-soft:#FFE6DA; --heat:#C2410C;
+  --bg:#F3F4F6; --card:#FFFFFF; --soft:#ECEDF0; --ink:#14161B; --muted:#646A75; --line:#E2E4E8;
+  --lime:#FF5B1F; --lime-ink:#1A1918; --accent-soft:#FFE9DF; --heat:#C2410C;
   --shadow:0 1px 2px rgba(26,25,24,.05),0 12px 28px -18px rgba(26,25,24,.28);
   --r:24px; color-scheme:light;
   --display:"Bricolage Grotesque",Geist,system-ui,sans-serif;
@@ -185,7 +185,7 @@ details p{margin:10px 0 0;color:var(--muted)}
 .media{position:relative;aspect-ratio:4/3;background:var(--soft);display:block;overflow:hidden}
 .media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .idea:hover .media img{transform:scale(1.04)}
-.shimmer{position:absolute;inset:0;background:linear-gradient(100deg,var(--soft) 30%,#F7F4EF 50%,var(--soft) 70%);background-size:300% 100%;animation:sh 1.3s infinite}
+.shimmer{position:absolute;inset:0;background:linear-gradient(100deg,var(--soft) 30%,#F7F8FA 50%,var(--soft) 70%);background-size:300% 100%;animation:sh 1.3s infinite}
 @keyframes sh{to{background-position:-150% 0}}
 .num{position:absolute;top:12px;left:12px;background:var(--ink);color:#fff;font:800 15px/1 var(--display);padding:8px 11px;border-radius:12px}
 .badges{position:absolute;top:12px;right:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:75%}
@@ -212,7 +212,7 @@ details p{margin:10px 0 0;color:var(--muted)}
 .pcard b{display:block;font-size:17px}.pcard span{color:var(--muted);font-size:14px}
 .pchips{display:flex;flex-wrap:wrap;gap:6px}
 .note{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px 18px;color:var(--muted)}
-.dock{position:fixed;left:0;right:0;bottom:0;padding:12px max(18px,env(safe-area-inset-left,0px)) calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;background:linear-gradient(rgba(245,242,236,0),var(--bg) 45%);pointer-events:none}
+.dock{position:fixed;left:0;right:0;bottom:0;padding:12px max(18px,env(safe-area-inset-left,0px)) calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;background:linear-gradient(rgba(243,244,246,0),var(--bg) 45%);pointer-events:none}
 .dock .btn{pointer-events:auto;box-shadow:0 12px 30px -12px rgba(26,25,24,.5)}
 
 /* My home */
@@ -233,7 +233,7 @@ details p{margin:10px 0 0;color:var(--muted)}
 .hl{display:flex;align-items:center;gap:8px}.hl b{color:var(--ink);font-family:var(--display);font-size:20px;font-weight:750;letter-spacing:-.02em}.hl .ic{color:var(--lime)}
 .hl em{font-style:normal;font-size:12px;font-weight:700;background:var(--lime);color:var(--ink);padding:3px 8px;border-radius:999px}
 .hdel{position:absolute;right:12px;top:12px;min-width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--muted);font-size:13px;font-weight:600}.hdel:hover{background:var(--soft);color:#B42318}
-.addroom{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px dashed #CFC8BB;border-radius:18px;padding:18px;color:var(--ink);font-weight:600;cursor:pointer}
+.addroom{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px dashed #CDD1D8;border-radius:18px;padding:18px;color:var(--ink);font-weight:600;cursor:pointer}
 .addroom span{font-size:22px;line-height:1;color:var(--lime)}.addroom:hover{border-color:var(--ink)}
 .homeempty{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:8px}
 .homeempty b{font-family:var(--display);font-size:21px;font-weight:750}.homeempty p{margin:0;color:var(--muted)}
@@ -939,7 +939,7 @@ async function shareImage(){
   const W = 1080, H = 1920, c = document.createElement("canvas"); c.width = W; c.height = H;
   const g = c.getContext("2d");
   try { await document.fonts.load('800 80px "Bricolage Grotesque"'); await document.fonts.load('600 40px Geist'); } catch {}
-  g.fillStyle = "#F5F2EC"; g.fillRect(0, 0, W, H);
+  g.fillStyle = "#F3F4F6"; g.fillRect(0, 0, W, H);
   if (photoUrl) {
     const img = new Image(); img.src = photoUrl; await img.decode().catch(() => {});
     const bw = W - 120, bh = 760, s = Math.max(bw / img.width, bh / img.height);
@@ -956,7 +956,7 @@ async function shareImage(){
     g.fillStyle = "#FFFFFF"; g.font = '800 30px Geist, sans-serif'; g.fillText(String(i + 1), 79, 1221 + i * 90);
     g.fillStyle = "#1A1918"; g.font = '600 40px Geist, sans-serif'; g.fillText(String(p.name).slice(0, 34), 136, 1224 + i * 90);
   });
-  g.fillStyle = "#6F6A62"; g.font = '600 34px Geist, sans-serif'; g.fillText("Your printer bored too? → " + location.host, 60, 1820);
+  g.fillStyle = "#646A75"; g.font = '600 34px Geist, sans-serif'; g.fillText("Your printer bored too? → " + location.host, 60, 1820);
   const blob = await new Promise(res => c.toBlob(res, "image/png"));
   const file = new File([blob], "boredprinter.png", { type: "image/png" });
   if (navigator.canShare?.({ files: [file] })) { try { await navigator.share({ files: [file], text: "Don't know what to 3D print? " + location.origin }); return; } catch (e) { if (e.name === "AbortError") return; } }

@@ -110,14 +110,14 @@ def page(slug, room, title, intro, ideas):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;600&display=swap">
 <script type="application/ld+json">{json.dumps(ld)}</script>
 <style>
-:root{{--bg:#F5F2EC;--card:#FFFFFF;--soft:#EEEAE2;--ink:#1A1918;--muted:#6F6A62;--lime:#C2410C;--line:#E4DFD5;color-scheme:light}}
+:root{{--bg:#F3F4F6;--card:#FFFFFF;--soft:#ECEDF0;--ink:#1A1918;--muted:#646A75;--lime:#C2410C;--line:#E2E4E8;color-scheme:light}}
 body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Geist,system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-left,0px)) 60px max(16px,env(safe-area-inset-right,0px))}}
 main{{max-width:760px;margin:0 auto}}a{{color:inherit}}
 .top{{display:inline-flex;gap:8px;align-items:center;font:800 21px/1 "Bricolage Grotesque",Geist,sans-serif;letter-spacing:-.035em;text-decoration:none}}
 .crumbs{{margin-top:28px;color:var(--muted);font-size:14px}}.crumbs a{{color:var(--muted)}}
 h1{{font-family:"Bricolage Grotesque",Geist,sans-serif;font-weight:800;font-size:clamp(30px,6vw,46px);line-height:1.04;letter-spacing:-.04em;margin:8px 0 10px;text-wrap:balance}}
 .lead{{color:var(--muted);max-width:62ch;margin:0}}
-.cta{{margin:22px 0 8px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:#FFE6DA;border-radius:20px;padding:18px}}
+.cta{{margin:22px 0 8px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:#FFE9DF;border-radius:20px;padding:18px}}
 .cta b{{flex:1;min-width:200px}}.btn{{background:var(--ink);color:#fff;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:999px;white-space:nowrap}}
 ol{{list-style:none;padding:0;margin:26px 0;display:grid;gap:12px}}
 .it{{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px}}
@@ -160,7 +160,7 @@ def hub():
 <meta property="og:title" content="3D print ideas for every room"><meta property="og:image" content="{SITE}/og.png"><meta property="og:url" content="{SITE}/ideas"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;600&display=swap">
 <style>
-:root{{--bg:#F5F2EC;--card:#FFFFFF;--ink:#1A1918;--muted:#6F6A62;--lime:#FF5B1F;--line:#E4DFD5;color-scheme:light}}
+:root{{--bg:#F3F4F6;--card:#FFFFFF;--ink:#1A1918;--muted:#646A75;--lime:#FF5B1F;--line:#E2E4E8;color-scheme:light}}
 body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Geist,system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-left,0px)) 60px max(16px,env(safe-area-inset-right,0px))}}
 main{{max-width:760px;margin:0 auto}}a{{color:inherit;text-decoration:none}}.top{{display:inline-flex;gap:8px;align-items:center;font:800 21px/1 "Bricolage Grotesque",Geist,sans-serif;letter-spacing:-.035em}}
 h1{{font-family:"Bricolage Grotesque",Geist,sans-serif;font-weight:800;font-size:clamp(30px,6vw,46px);line-height:1.04;letter-spacing:-.04em;margin:36px 0 10px}}p{{color:var(--muted);margin:0}}

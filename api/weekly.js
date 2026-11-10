@@ -78,7 +78,7 @@ function digestHtml(user) {
       </a></td></tr>`).join("");
   return {
     count: ideas.length,
-    html: `<!doctype html><html><body style="margin:0;background:#F5F2EC;padding:24px 12px">
+    html: `<!doctype html><html><body style="margin:0;background:#F3F4F6;padding:24px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
 <table role="presentation" width="100%" style="max-width:560px;background:#fff;border-radius:20px;padding:24px" cellpadding="0" cellspacing="0">
 <tr><td style="font:800 15px Arial,sans-serif;color:#1A1918;padding-bottom:14px">boredprinter</td></tr>

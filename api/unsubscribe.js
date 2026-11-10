@@ -9,8 +9,8 @@ async function handler(req) {
   if (ok) await rpc("unsubscribe", { p_key: SCAN_KEY, p_uid: u }, new Request(req.url)).catch(() => {});
   const msg = ok ? "You're unsubscribed. You won't get weekly emails anymore." : "This link doesn't work. Turn off emails on your account page instead.";
   return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Emails – boredprinter</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F5F2EC;color:#1A1918;font:16px/1.5 system-ui,sans-serif;text-align:center;padding:24px}a{color:#fff;background:#1A1918;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;display:inline-block;margin-top:16px}</style></head>
-<body><main><h1 style="font-size:24px;margin:0 0 8px">${ok ? "Done" : "Hmm"}</h1><p style="color:#6F6A62;margin:0">${msg}</p><a href="/">Back to boredprinter</a></main></body></html>`, { status: ok ? 200 : 400, headers: { "content-type": "text/html; charset=utf-8" } });
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F3F4F6;color:#1A1918;font:16px/1.5 system-ui,sans-serif;text-align:center;padding:24px}a{color:#fff;background:#1A1918;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;display:inline-block;margin-top:16px}</style></head>
+<body><main><h1 style="font-size:24px;margin:0 0 8px">${ok ? "Done" : "Hmm"}</h1><p style="color:#646A75;margin:0">${msg}</p><a href="/">Back to boredprinter</a></main></body></html>`, { status: ok ? 200 : 400, headers: { "content-type": "text/html; charset=utf-8" } });
 }
 export const GET = handler;
 export const POST = handler;
