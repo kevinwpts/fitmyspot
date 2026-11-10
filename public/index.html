@@ -405,6 +405,46 @@ html{scroll-behavior:smooth}
   #landing>.hero .mascot{width:76px;height:76px}
   #landing>.hero .seeex{display:none}
 }
+
+/* ===== Refine: lättare, renare (inspirerat av Runway). Loggan behåller sin stil. ===== */
+:root{--bg:#FFFFFF;--card:#FFFFFF;--soft:#F4F5F7;--line:#E9EBEE;--muted:#5F6570;--r:16px;
+  --shadow:0 1px 2px rgba(20,22,27,.04);--display:Geist,system-ui,sans-serif}
+body{font-size:16px;line-height:1.55}
+.display,.hero h1,.block h2,.final h2,.rhead h2,.dm-head h2{font-family:Geist,system-ui,sans-serif;font-weight:600;letter-spacing:-.045em}
+.hero h1{font-size:clamp(40px,10.5vw,76px);line-height:1.02;font-weight:600}
+.hero h1 span{background:linear-gradient(transparent 70%,var(--lime) 70%,var(--lime) 88%,transparent 88%)}
+.hero p{font-size:clamp(17px,2.3vw,19px);line-height:1.5;color:var(--muted)}
+.block h2,.final h2{font-size:clamp(30px,5.4vw,46px);line-height:1.05}
+.dm-head h2{font-size:clamp(28px,5vw,40px);line-height:1.08}
+.rhead h2{font-weight:600}
+.acard b{font-family:Geist,sans-serif;font-weight:600;letter-spacing:-.02em}
+/* knappar: rektanglar med mjuka hörn, inte piller */
+.btn{border-radius:12px;font-weight:600;font-size:16px;padding:17px 24px}
+.cta-big{border-radius:12px;font-weight:600;font-size:17px;padding:19px;box-shadow:none}
+.nbtn{border-radius:10px;font-weight:500;padding:9px 13px;border-color:var(--line);background:var(--soft)}
+.nbtn:hover{border-color:var(--line);background:#ECEEF1}
+.nbtn.ink{background:var(--ink)}
+.btn-soft{background:var(--soft);border-color:transparent}.btn-soft:hover{border-color:transparent;background:#ECEEF1}
+/* kort: tunn kant, ingen tung skugga */
+.upload,.proof,.idea,.dm-res,.price,.igcard,.acard,.snapbar,.hp-tile,.pcard,.step,.ex,.ph{box-shadow:none;border-color:var(--line)}
+.upload{border-radius:18px}.upload:hover{transform:none;box-shadow:none;border-color:#CDD1D7}
+.proof{border-radius:18px}.idea{border-radius:16px}.dm-photo{border-radius:16px}
+.pf-row .pic,.dm-row .pic{border-radius:8px}
+.dm-row{border-radius:12px}
+.dm-tag,.pf-tag{box-shadow:0 2px 8px rgba(0,0,0,.22);font-weight:600}
+/* frågor: rader med tunna linjer istället för kort */
+#faq{gap:0}#faq h2{margin-bottom:18px}
+#faq details{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:20px 0}
+#faq details:last-of-type{border-bottom:1px solid var(--line)}
+#faq summary{font-size:17px;font-weight:500}
+.final{border-radius:20px;padding:56px 22px}
+.final .btn{border-radius:12px}
+.block{margin-top:88px}
+.foot{border-top-color:var(--line)}
+dialog{border-radius:18px}
+.menu{border-radius:12px;box-shadow:0 12px 32px -12px rgba(20,22,27,.25)}
+.body h3{font-weight:600;font-size:20px;letter-spacing:-.025em}
+.dm-t b{font-weight:600;font-size:16px;letter-spacing:-.01em}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
