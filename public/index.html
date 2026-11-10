@@ -92,6 +92,20 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:12px;paddi
 .upload b{font-size:19px;font-weight:650;letter-spacing:-.01em}
 .up-or{color:var(--muted);font-size:15px}
 .up-btn{width:100%;margin-top:14px;padding:17px}
+.proof{width:100%;max-width:520px;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:10px;text-decoration:none;color:var(--ink);box-shadow:0 18px 40px -26px rgba(26,25,24,.4);text-align:left}
+.pf-photo{position:relative;width:42%;flex:none;aspect-ratio:3/4;border-radius:16px;overflow:hidden;background:var(--soft)}
+.pf-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.pf-tag{position:absolute;background:var(--lime);color:var(--ink);font:700 11px/1 Geist,sans-serif;padding:5px 8px;border-radius:999px;box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.pf-arrow{font:800 20px var(--display);flex:none}
+.pf-list{display:grid;gap:8px;flex:1;min-width:0}
+.pf-row{display:flex;align-items:center;gap:9px;min-width:0}.pf-row .pic{width:46px;height:46px;flex:none;border-radius:10px;background:var(--soft) center/cover no-repeat}
+.pf-row b{font-size:14px;line-height:1.15;font-weight:700}
+.pf-list small{color:var(--muted);font-size:12px;font-weight:600}
+.cta-big{width:100%;max-width:520px;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#fff;font:700 18px/1 Geist,sans-serif;padding:20px;border-radius:999px;cursor:pointer;box-shadow:0 16px 30px -14px rgba(20,22,27,.6)}
+.cta-big:active{transform:scale(.98)}
+.cta-note{margin-top:-12px;color:var(--muted);font-size:13px}
+@media (max-width:1039px){.hero .upload,.hero .mascot{display:none}.hero{gap:16px;padding-top:14px}}
+@media (min-width:1040px){.proof,.cta-big,.cta-note{display:none}}
 .qr{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px;width:max-content;max-width:100%;text-align:left}
 .qr svg{display:block;width:84px;height:84px}
 .qr span{font-size:13px;color:var(--muted)}.qr b{color:var(--ink)}
@@ -409,15 +423,26 @@ html{scroll-behavior:smooth}
     <div class="hero">
       <div class="mascot" aria-hidden="true"><svg><use href="#bp"/></svg><span class="z">z</span><span class="z">z</span></div>
       <h1 class="display">Don't know what to <span>3D print?</span></h1>
-      <p>Show it any spot at home. Get 3D prints that fit it.</p>
+      <p>Take a photo of any room. Get 3D prints that fit what's in it.</p>
+      <a class="proof" href="#example" aria-label="See the example: a desk photo and the prints it found">
+        <span class="pf-photo"><img src="/demo/desk-s.jpg" alt="" width="600" height="800"><span class="pf-tag" style="top:42%;left:36%">cables</span><span class="pf-tag" style="top:60%;left:46%">remote</span><span class="pf-tag" style="top:8%;left:12%">posters</span></span>
+        <span class="pf-arrow" aria-hidden="true">→</span>
+        <span class="pf-list">
+          <span class="pf-row" data-q="under desk cable tray"><span class="pic"></span><b>Cable tray</b></span>
+          <span class="pf-row" data-q="apple tv remote holder"><span class="pic"></span><b>Remote holder</b></span>
+          <span class="pf-row" data-q="poster hanger"><span class="pic"></span><b>Poster hanger</b></span>
+          <small>+3 more for this desk</small>
+        </span>
+      </a>
+      <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
+      <span class="cta-note">Opens your camera or photo library</span>
       <label class="upload" for="file">
         <span class="up-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg></span>
         <b>Take or upload a photo</b>
-        <span class="up-or">Car, desk, kitchen, sofa…</span>
-        <span class="btn btn-ink up-btn">Find prints</span>
+        <span class="up-or">Click or drop a photo here · first one free</span>
       </label>
-      <span class="sub" id="sub">First photo free, no sign-up · Real models from MakerWorld &amp; Printables</span>
-      <a class="seeex" href="#example">No photo handy? See an example ↓</a>
+      <span class="sub" id="sub">No sign-up · Real models from MakerWorld &amp; Printables</span>
+      <a class="seeex" href="#example">See the full example ↓</a>
       <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
     </div>
     <section class="demo" id="example" aria-label="Example">
@@ -587,6 +612,20 @@ const I = (n, s = 16) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 
 /* Accounts, credits, locked results, referrals */
 const SB = window.supabase ? window.supabase.createClient("https://rcntkzrbanwigypkumvd.supabase.co", "sb_publishable_Eoce1JVPaM-SgVSllLbi4g_ZiTaGejr") : null;
 let session = null, me = null;
+if (new URLSearchParams(location.search).has("notrack")) { try { localStorage.setItem("noTrack", "1"); } catch {} history.replaceState(null, "", "/"); }
+/* Mätning: anonyma steg (ingen IP, inga bilder), en gång per steg och besök */
+const track = (() => {
+  let sid = null, done = new Set();
+  try { sid = sessionStorage.getItem("sid") || Math.random().toString(36).slice(2, 12) + Date.now().toString(36); sessionStorage.setItem("sid", sid); } catch { sid = Math.random().toString(36).slice(2, 14); }
+  const ref = (document.referrer || "") + " " + navigator.userAgent;
+  const src = /instagram/i.test(ref) ? "instagram" : /facebook|fbav/i.test(ref) ? "facebook" : /google/i.test(document.referrer) ? "google" : document.referrer ? "other" : "direct";
+  const mobile = matchMedia("(max-width: 820px)").matches;
+  return name => {
+    if (done.has(name)) return; done.add(name);
+    try { if (localStorage.getItem("testKey") || localStorage.getItem("noTrack")) return; } catch {}
+    try { SB?.from("events").insert({ sid, name, src, mobile }).then(() => {}, () => {}); } catch {}
+  };
+})();
 const store = { get: k => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 const ref = new URLSearchParams(location.search).get("ref"); if (ref) store.set("ref", ref.slice(0, 12));
 // Bekräftelselänk från mejlet kan öppnas i en annan webbläsare: ta med det låsta resultatet i länken
@@ -622,7 +661,7 @@ async function afterSignIn(){
   // Välkomstruta för nya konton (en gång)
   try {
     const created = new Date(session?.user?.created_at || 0).getTime();
-    if (Date.now() - created < 30 * 60 * 1000 && !store.get("welcomed:" + session.user.id)) { store.set("welcomed:" + session.user.id, 1); setTimeout(() => toast("Welcome! You got 3 free credits."), 600); }
+    if (Date.now() - created < 30 * 60 * 1000 && !store.get("welcomed:" + session.user.id)) { track("signup_done"); store.set("welcomed:" + session.user.id, 1); setTimeout(() => toast("Welcome! You got 3 free credits."), 600); }
   } catch {}
   // Foto som väntar på konto? Analysera det nu.
   let gp = null; try { gp = localStorage.getItem("gatePhoto"); localStorage.removeItem("gatePhoto"); } catch {}
@@ -667,6 +706,7 @@ function setAuthMode(m){
   $("sent").hidden = true;
 }
 function openSignup(title, text, mode){
+  track("signup_open");
   setAuthMode(mode || "up");
   $("signTitle").textContent = title || "Create your free account";
   $("signText").textContent = text || "See the models and download them.";
@@ -929,6 +969,11 @@ if (matchMedia("(pointer:fine) and (min-width:900px)").matches) {
   document.head.appendChild(sc);
 }
 
+/* Mätning: besök, exemplet syns, tryck på foto-knappen */
+setTimeout(() => track("visit"), 0);
+try { new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { track("see_example"); o.disconnect(); } }, { threshold: .4 }).observe($("example").querySelector(".dm-grid")); } catch {}
+document.addEventListener("click", e => { if (e.target.closest('label[for="file"]')) track("tap_upload"); }, true);
+
 /* Real model photos in the hero demo */
 document.querySelectorAll(".dm-row").forEach(async a => {
   try {
@@ -937,6 +982,9 @@ document.querySelectorAll(".dm-row").forEach(async a => {
     a.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`;
     a.querySelector(".dm-src").textContent = (m.creator ? "by " + m.creator + " · " : "") + (m.source || "Printables");
   } catch {}
+});
+document.querySelectorAll(".pf-row").forEach(async el => {
+  try { const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json(); const m = d.models?.[0]; if (m) el.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`; } catch {}
 });
 document.querySelectorAll(".hp-idea").forEach(async el => {
   try { const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json(); const m = d.models?.[0]; if (m) el.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`; } catch {}
@@ -1041,6 +1089,7 @@ async function shrink(file){
 
 async function pick(file){
   if (!file || !file.type.startsWith("image/")) return;
+  track("file_picked");
   $("error").hidden = true;
   try { photoUrl = await shrink(file); } catch { $("error").textContent = "That photo couldn't be read. Try another one."; $("error").hidden = false; return; }
   imageB64 = photoUrl.split(",")[1];
@@ -1060,17 +1109,17 @@ async function analyze(){
   try {
     const r = await fetch("/api/analyze", { method: "POST", headers: {"content-type": "application/json", ...(await authHeader()), ...(store.get("testKey") ? { "x-test-key": store.get("testKey") } : {})}, body: JSON.stringify({ image: imageB64, mime: "image/jpeg", printer: getPrinter() }) });
     const d = await r.json();
-    if (r.status === 401) { renderGate(); return; }
+    if (r.status === 401) { track("gate"); renderGate(); return; }
     if (r.status === 402) { show("landing"); outOfPhotos(); return; }
     if (r.status === 503 && d.error === "busy") { show("landing"); $("error").textContent = "We're very busy right now. Try again in a little while."; $("error").hidden = false; return; }
     if (!r.ok || d.error) throw new Error(d.error);
-    if (d.locked) { renderLocked(d); return; }
+    if (d.locked) { track("result_locked"); renderLocked(d); return; }
     if (!(d.prints || []).length) {
       show("landing");
       $("error").textContent = (d.photo_issue || "We couldn't find print ideas for this photo. Try another photo.") + " Your credit was given back.";
       $("error").hidden = false; refreshQuota(); return;
     }
-    render(d); savePhoto(d);
+    track(d.free ? "result_full" : "result_signed"); render(d); savePhoto(d);
     refreshQuota();
   } catch {
     show("landing");
