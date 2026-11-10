@@ -80,8 +80,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0
 @keyframes pulse{50%{opacity:.3}}
 
 /* result head */
-.rhead{margin-top:26px;display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center}
-.rhead img{width:96px;height:96px;object-fit:cover;border-radius:20px}
+.rhead{margin-top:26px;display:flex;gap:16px;align-items:center}.rhead>div{flex:1;min-width:0}
+.rhead img{flex:none;width:96px;height:96px;object-fit:cover;border-radius:20px}
 .rhead .k{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .rhead h2{margin:2px 0 8px;font-size:clamp(26px,5vw,38px);line-height:1;font-weight:800}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -201,9 +201,9 @@ dialog::backdrop{background:rgba(13,14,16,.5);backdrop-filter:blur(4px)}
 .pack.best{border-color:var(--ink)}
 .pack em{position:absolute;top:-9px;right:12px;font-style:normal;font-size:11px;font-weight:700;background:var(--lime);color:var(--lime-ink);padding:3px 8px;border-radius:999px}
 .hist{margin-top:18px;display:grid;gap:10px}
-.hrow{appearance:none;text-align:left;border:0;cursor:pointer;background:var(--card);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);display:grid;gap:4px;color:var(--ink);font:inherit}
+.hrow{appearance:none;text-align:left;border:0;cursor:pointer;background:var(--card);border-radius:18px;padding:18px 56px 18px 18px;box-shadow:var(--shadow);display:grid;gap:4px;color:var(--ink);font:inherit}
 .hrow span{color:var(--muted);font-size:14px}
-.hrow small{color:var(--muted);font-size:12px}
+.hrow small{color:var(--muted);font-size:14px}
 @media (max-width:420px){.navr .nbtn{padding:8px 10px;font-size:12px}#signout{display:none}}
 
 .rtools{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
@@ -307,7 +307,7 @@ details p{margin:10px 0 0;color:var(--muted)}
 .num,.cap .n{background:var(--ink);color:#0B0C0F}
 .tag2{background:#5EEAD4}
 
-.hl{display:flex;align-items:center;gap:8px}.hl .ic{color:var(--lime)}
+.hl{display:flex;align-items:center;gap:8px}.hl b{color:var(--ink);font-size:19px;font-weight:650;letter-spacing:-.02em}.hl .ic{color:var(--lime)}
 .hl em{font-style:normal;font-size:12px;font-weight:700;background:var(--lime);color:#0B0C0F;padding:3px 8px;border-radius:999px}
 .vote.save.on{background:var(--lime);color:#0B0C0F;border-color:transparent}
 .savings{margin-top:18px;display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,rgba(94,234,212,.14),rgba(96,165,250,.08));border:1px solid rgba(94,234,212,.3);border-radius:20px;padding:16px 18px}
@@ -483,7 +483,7 @@ nav{position:relative;gap:12px}
   </section>
 
   <section id="history" hidden>
-    <div class="rhead" style="grid-template-columns:1fr auto"><div><div class="k">Saved</div><h2 class="display">My spots</h2><p class="lead2" style="margin-top:6px">New ideas every week.</p></div></div>
+    <div class="rhead" style="grid-template-columns:1fr auto"><div><h2 class="display">My spots</h2><p class="lead2" style="margin-top:6px">New ideas every week.</p></div></div>
     <div class="hist" id="histList"></div>
   </section>
 
@@ -738,7 +738,9 @@ $("mine").onclick = async () => {
   if (error || !data?.length) { $("histList").innerHTML = `<div class="note">No spots yet. Snap a photo while signed in and it shows up here.</div>`; return; }
   $("histList").innerHTML = data.map((r, n) => {
     const fresh = !r.ideas_seen && (r.new_ideas || []).length;
-    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(r.place || "Your spot")}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span><span>${esc([...(r.new_ideas || []), ...(r.prints || [])].map(p => p.name).slice(0, 3).join(" · "))}</span><small>Added ${new Date(r.created_at).toLocaleDateString()}</small><span class="hdel" data-del-spot="${n}" role="button" aria-label="Delete spot">${I("trash", 15)}</span></button>`;
+    const nIdeas = (r.new_ideas || []).length + (r.prints || []).length;
+    const name = String(r.place || "your spot").replace(/^(your|the|my)\s+/i, "");
+    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(name.charAt(0).toUpperCase() + name.slice(1))}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span><small>${nIdeas} ideas · ${new Date(r.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</small><span class="hdel" data-del-spot="${n}" role="button" aria-label="Delete spot">${I("trash", 15)}</span></button>`;
   }).join("");
   $("histList").onclick = e => {
     const del = e.target.closest("[data-del-spot]");
