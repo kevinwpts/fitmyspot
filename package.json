@@ -1,0 +1,6 @@
+{
+  "name": "fitmyspot",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" }
+}
