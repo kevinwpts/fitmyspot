@@ -488,6 +488,17 @@ body{background:var(--bg);color:var(--ink)}
 }
 .moreideas{width:100%;margin-top:18px;padding:17px}
 .spin{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;display:inline-block;animation:sp .7s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.rhero{position:relative;margin-top:18px;border-radius:18px;overflow:hidden;height:min(56vw,280px);background:var(--soft)}
+.rhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rhero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.7))}
+.rh-txt{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;color:#fff;min-width:0}
+.rh-k{font:600 12px/1 Geist,sans-serif;letter-spacing:.07em;text-transform:uppercase;opacity:.85}
+#placeName{margin:6px 0 0;font:600 clamp(26px,6.4vw,40px)/1.05 Geist,sans-serif;letter-spacing:-.04em;color:#fff;overflow-wrap:anywhere}
+.rhero.nophoto{height:auto;background:none;overflow:visible}.rhero.nophoto:after{display:none}
+.rhero.nophoto .rh-txt{position:static;color:var(--ink)}.rhero.nophoto #placeName{color:var(--ink)}.rhero.nophoto .rh-k{color:var(--muted);opacity:1}
+.rtools2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.rtools2 .nbtn{justify-content:center;padding:14px;font-size:15px;border-radius:12px}
+@media (min-width:700px){.rtools2{grid-template-columns:auto auto;justify-content:start}.rtools2 .nbtn{padding:12px 20px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -560,11 +571,11 @@ body{background:var(--bg);color:var(--ink)}
   </section>
 
   <section id="result" hidden>
-    <div class="rhead">
-      <img id="thumb" alt="Your photo">
-      <div style="min-width:0"><h2 class="display" id="placeName">Your print ideas</h2><p class="seenline" id="seenLine" hidden></p>
-        <div class="rtools"><label for="file" class="nbtn ink"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> New photo</label><button class="nbtn" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button></div></div>
+    <div class="rhero" id="rhero">
+      <img id="thumb" alt="">
+      <div class="rh-txt"><span class="rh-k" id="rhK">Your photo</span><h2 id="placeName">Your print ideas</h2><p class="seenline" id="seenLine" hidden></p></div>
     </div>
+    <div class="rtools rtools2"><label for="file" class="nbtn ink"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> New photo</label><button class="nbtn" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button></div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
       <span id="lockSub">Sign up free to see them. You get 3 extra credits.</span>
@@ -928,11 +939,11 @@ function placeTitle(place){
   return "Prints for " + t;
 }
 function renderLocked(d){
-  $("placeName").textContent = placeTitle(d.place);
+  $("placeName").textContent = placeTitle(d.place); $("rhK").textContent = d.count ? `${d.count} ideas found` : "Your photo";
   const seen = (d.seen || []).slice(0, 5).map(String).join(" · ");
   $("seenLine").hidden = true;
   lastResult = null;
-  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
+  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl; $("rhero").classList.toggle("nophoto", !photoUrl);
   $("lockTitle").textContent = `We found ${d.count} prints for ${(d.place || "your photo").split(/[.,:;]/)[0]}`;
   $("lockSub").textContent = "Sign up free to see the models and download them. You get 3 extra credits.";
   $("freeBar").hidden = true; $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
@@ -950,9 +961,9 @@ function renderLocked(d){
 }
 /* Gratisförsöken slut: inga låtsaskort, bara ärlig text. Bilden analyseras direkt efter registrering. */
 function renderGate(){
-  $("placeName").textContent = "Almost there";
+  $("placeName").textContent = "Almost there"; $("rhK").textContent = "Your photo";
   $("seenLine").hidden = true; lastResult = null;
-  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
+  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl; $("rhero").classList.toggle("nophoto", !photoUrl);
   $("lockTitle").textContent = "Sign up to see ideas for this photo";
   $("lockSub").textContent = "You've used today's free previews. Create a free account and we'll find prints for this photo right away. You get 3 credits.";
   $("freeBar").hidden = true; $("lockbox").hidden = false; $("shareBtn").hidden = true; $("nudge").hidden = true;
@@ -1093,10 +1104,10 @@ function ideaCard(p, i, r){ p.name = capFirst(p.name); p.why = capFirst(p.why); 
     </article>`; }
 
 function render(r){
-  $("placeName").textContent = placeTitle(r.place);
+  $("placeName").textContent = placeTitle(r.place); $("rhK").textContent = (r.prints || []).length ? `${r.prints.length} ideas found` : "Your photo";
   const seen = (r.seen || []).slice(0, 5).map(x => String(x)).join(" · ");
   $("seenLine").hidden = true;
-  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl;
+  $("thumb").hidden = !photoUrl; if (photoUrl) $("thumb").src = photoUrl; $("rhero").classList.toggle("nophoto", !photoUrl);
   const prints = r.prints || [];
   $("grid").innerHTML = prints.length ? prints.map((p, i) => ideaCard(p, i, r)).join("") : `<div class="note">No print ideas for this photo. Try your car, desk, a shelf or another place at home.</div>`;
   show("result");
