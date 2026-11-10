@@ -2,7 +2,7 @@
 # Texten finns i HTML (för Google och AI). Bilder på riktiga modeller laddas i webbläsaren.
 import html, json, os
 
-SITE = "https://fitmyspot.com"
+SITE = "https://boredprinter.com"
 OUT = os.path.join(os.path.dirname(__file__), "..", "public", "ideas")
 
 ROOMS = {
@@ -96,37 +96,37 @@ def page(slug, room, title, intro, ideas):
         {"@type": "ItemList", "name": f"3D print ideas for your {room}", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "name": n, "description": w} for i, (n, w, q, m) in enumerate(ideas)]},
         {"@type": "BreadcrumbList", "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "fitmyspot", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 1, "name": "boredprinter", "item": SITE + "/"},
             {"@type": "ListItem", "position": 2, "name": "Print ideas", "item": SITE + "/ideas"},
             {"@type": "ListItem", "position": 3, "name": title, "item": url}]}]}
     items = "\n".join(f'''      <li class="it"><a class="pic" data-q="{e(q)}" href="https://www.printables.com/search/models?q={e(q.replace(' ', '+'))}" target="_blank" rel="noopener"></a>
         <div><h2>{i + 1}. {e(n)}</h2><p>{e(w)}</p><small>Material: {e(m)}</small></div></li>''' for i, (n, w, q, m) in enumerate(ideas))
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>3D print ideas for your {e(room)} – fitmyspot</title>
+<title>3D print ideas for your {e(room)} – boredprinter</title>
 <meta name="description" content="{len(ideas)} useful 3D prints for your {e(room)}, with real models to download. Out of ideas? Snap a photo of your {e(room)} and get ideas for it.">
 <link rel="canonical" href="{url}">
 <meta property="og:title" content="3D print ideas for your {e(room)}"><meta property="og:description" content="Useful prints for your {e(room)}, with real models to download."><meta property="og:image" content="{SITE}/og.png"><meta property="og:url" content="{url}"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;600&display=swap">
 <script type="application/ld+json">{json.dumps(ld)}</script>
 <style>
-:root{{--bg:#0B0C0F;--card:#131418;--soft:#1B1D22;--ink:#F5F6F7;--muted:#9AA0A8;--lime:#5EEAD4;color-scheme:dark}}
+:root{{--bg:#F5F2EC;--card:#FFFFFF;--soft:#EEEAE2;--ink:#1A1918;--muted:#6F6A62;--lime:#C2410C;--line:#E4DFD5;color-scheme:light}}
 body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Geist,system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-left,0px)) 60px max(16px,env(safe-area-inset-right,0px))}}
 main{{max-width:760px;margin:0 auto}}a{{color:inherit}}
-.top{{display:flex;justify-content:space-between;align-items:center;font-weight:700;text-decoration:none}}
+.top{{display:inline-flex;gap:8px;align-items:center;font:800 21px/1 "Bricolage Grotesque",Geist,sans-serif;letter-spacing:-.035em;text-decoration:none}}
 .crumbs{{margin-top:28px;color:var(--muted);font-size:14px}}.crumbs a{{color:var(--muted)}}
-h1{{font-size:clamp(30px,6vw,46px);line-height:1.08;letter-spacing:-.035em;margin:8px 0 10px;text-wrap:balance}}
+h1{{font-family:"Bricolage Grotesque",Geist,sans-serif;font-weight:800;font-size:clamp(30px,6vw,46px);line-height:1.04;letter-spacing:-.04em;margin:8px 0 10px;text-wrap:balance}}
 .lead{{color:var(--muted);max-width:62ch;margin:0}}
-.cta{{margin:22px 0 8px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid rgba(94,234,212,.35);border-radius:20px;padding:18px}}
-.cta b{{flex:1;min-width:200px}}.btn{{background:var(--ink);color:#0B0C0F;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:999px;white-space:nowrap}}
+.cta{{margin:22px 0 8px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:#FFE6DA;border-radius:20px;padding:18px}}
+.cta b{{flex:1;min-width:200px}}.btn{{background:var(--ink);color:#fff;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:999px;white-space:nowrap}}
 ol{{list-style:none;padding:0;margin:26px 0;display:grid;gap:12px}}
-.it{{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;background:var(--card);border-radius:18px;padding:12px}}
+.it{{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px}}
 .it>div{{min-width:0}}.pic{{display:block;width:110px;height:110px;border-radius:12px;background:var(--soft) center/cover no-repeat}}
 .it h2{{font-size:18px;margin:0 0 4px;letter-spacing:-.02em}}.it p{{margin:0 0 4px;color:var(--muted)}}.it small{{color:var(--lime);font-size:13px}}
 .more{{color:var(--muted);font-size:15px;line-height:2}}
 footer{{margin-top:40px;color:var(--muted);font-size:13px}}
 </style></head><body><main>
-<a class="top" href="/">fitmyspot</a>
+<a class="top" href="/"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a>
 <nav class="crumbs"><a href="/ideas">Print ideas</a> / {e(title)}</nav>
 <h1>3D print ideas for your {e(room)}</h1>
 <p class="lead">{e(intro)}</p>
@@ -154,21 +154,21 @@ def hub():
     e = html.escape
     cards = "\n".join(f'<li><a href="/ideas/{s}"><b>{e(v[1])}</b><span>{len(v[3])} ideas</span></a></li>' for s, v in ROOMS.items())
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>3D print ideas for every room – fitmyspot</title>
+<title>3D print ideas for every room – boredprinter</title>
 <meta name="description" content="Useful 3D print ideas for your car, desk, kitchen, bathroom, bedroom, garage, living room and hallway. With real models to download.">
 <link rel="canonical" href="{SITE}/ideas">
 <meta property="og:title" content="3D print ideas for every room"><meta property="og:image" content="{SITE}/og.png"><meta property="og:url" content="{SITE}/ideas"><meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&display=swap">
+<link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;600&display=swap">
 <style>
-:root{{--bg:#0B0C0F;--card:#131418;--ink:#F5F6F7;--muted:#9AA0A8;--lime:#5EEAD4;color-scheme:dark}}
+:root{{--bg:#F5F2EC;--card:#FFFFFF;--ink:#1A1918;--muted:#6F6A62;--lime:#FF5B1F;--line:#E4DFD5;color-scheme:light}}
 body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Geist,system-ui,sans-serif;padding:24px max(16px,env(safe-area-inset-left,0px)) 60px max(16px,env(safe-area-inset-right,0px))}}
-main{{max-width:760px;margin:0 auto}}a{{color:inherit;text-decoration:none}}.top{{font-weight:700}}
-h1{{font-size:clamp(30px,6vw,46px);line-height:1.08;letter-spacing:-.035em;margin:36px 0 10px}}p{{color:var(--muted);margin:0}}
+main{{max-width:760px;margin:0 auto}}a{{color:inherit;text-decoration:none}}.top{{display:inline-flex;gap:8px;align-items:center;font:800 21px/1 "Bricolage Grotesque",Geist,sans-serif;letter-spacing:-.035em}}
+h1{{font-family:"Bricolage Grotesque",Geist,sans-serif;font-weight:800;font-size:clamp(30px,6vw,46px);line-height:1.04;letter-spacing:-.04em;margin:36px 0 10px}}p{{color:var(--muted);margin:0}}
 ul{{list-style:none;padding:0;margin:26px 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}}
-li a{{display:grid;gap:2px;background:var(--card);border-radius:18px;padding:18px}}li b{{font-size:18px}}li span{{color:var(--muted);font-size:14px}}li a:hover{{outline:1px solid var(--lime)}}
-.btn{{display:inline-block;margin-top:8px;background:var(--ink);color:#0B0C0F;font-weight:600;padding:13px 22px;border-radius:999px}}
+li a{{display:grid;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}}li b{{font-size:18px}}li span{{color:var(--muted);font-size:14px}}li a:hover{{border-color:var(--ink)}}
+.btn{{display:inline-block;margin-top:8px;background:var(--ink);color:#fff;font-weight:600;padding:13px 22px;border-radius:999px}}
 </style></head><body><main>
-<a class="top" href="/">fitmyspot</a>
+<a class="top" href="/"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a>
 <h1>3D print ideas for every room</h1>
 <p>Pick a room to see useful prints. Or snap a photo of your own space and get ideas made for it.</p>
 <ul>

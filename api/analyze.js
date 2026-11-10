@@ -1,9 +1,9 @@
-// FitMySpot – tittar på bilden med Gemini och föreslår prints.
+// boredprinter – tittar på bilden med Gemini och föreslår prints.
 import { rpc, ipHash, SCAN_KEY } from "../lib/supa.js";
 // Nyckeln ligger i Netlify: Environment variables -> GEMINI_API_KEY
 const MODELS = ["gemini-3.1-flash-lite", "gemini-3.8-flash"];
 
-const PROMPT = `You are FitMySpot, an assistant for 3D printing hobbyists.
+const PROMPT = `You are boredprinter, an assistant for 3D printing hobbyists.
 Look at the attached photo of a place (for example a car interior, a desk, a sofa, a kitchen, a garage or a hallway).
 1. Name the ONE main spot in the photo in 2-3 plain lowercase words starting with "your", like "your bathroom", "your curtains", "your car", "your desk". Never list two things. No description.
 2. List up to 8 concrete things you can see that matter for 3D prints (objects, surfaces, gaps, mess, cables, missing storage).

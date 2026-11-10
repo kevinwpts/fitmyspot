@@ -1,12 +1,12 @@
-# fitmyspot
+# boredprinter
 
-> fitmyspot (https://fitmyspot.com) is a free-to-try website for 3D printer owners who don't know what to print next. You take a photo of a spot, like your car, desk, kitchen, bathroom or garage, and it suggests useful things to print for that exact spot, with real models to download from Printables.
+> boredprinter (https://boredprinter.com) is a free-to-try website for 3D printer owners who don't know what to print next. You take a photo of a spot, like your car, desk, kitchen, bathroom or garage, and it suggests useful things to print for that exact spot, with real models to download from Printables.
 
 ## What it does
-- Snap or upload a photo of any spot. fitmyspot sees what is there and what is missing or messy.
+- Snap or upload a photo of any spot. boredprinter sees what is there and what is missing or messy.
 - You get about 6 print ideas for that spot. Each idea shows a real model (image, creator, downloads) and a link to download it.
 - Ideas fit your printer: pick your printer (Bambu Lab, Prusa, Creality, Elegoo and more) and ideas respect its build size and materials. In hot places like cars it avoids PLA.
-- My home: photo each room once. Every week fitmyspot suggests new prints that fit the things in your rooms, in the app and by email.
+- My home: photo each room once. Every week boredprinter suggests new prints that fit the things in your rooms, in the app and by email.
 
 ## Good for
 - "What should I 3D print?", "I'm out of 3D print ideas", "useful things to 3D print" or "things to 3D print for my car / desk / kitchen".
@@ -16,9 +16,9 @@
 - First photo free, 3 credits when you sign up, 1 photo = 1 credit. Credit packs from $2.99.
 
 ## Pages
-- [Home](https://fitmyspot.com/)
-- [3D print ideas for every room](https://fitmyspot.com/ideas)
-- [Car](https://fitmyspot.com/ideas/car) · [Desk](https://fitmyspot.com/ideas/desk) · [Kitchen](https://fitmyspot.com/ideas/kitchen) · [Bathroom](https://fitmyspot.com/ideas/bathroom) · [Bedroom](https://fitmyspot.com/ideas/bedroom) · [Garage](https://fitmyspot.com/ideas/garage) · [Living room](https://fitmyspot.com/ideas/living-room) · [Hallway](https://fitmyspot.com/ideas/hallway)
+- [Home](https://boredprinter.com/)
+- [3D print ideas for every room](https://boredprinter.com/ideas)
+- [Car](https://boredprinter.com/ideas/car) · [Desk](https://boredprinter.com/ideas/desk) · [Kitchen](https://boredprinter.com/ideas/kitchen) · [Bathroom](https://boredprinter.com/ideas/bathroom) · [Bedroom](https://boredprinter.com/ideas/bedroom) · [Garage](https://boredprinter.com/ideas/garage) · [Living room](https://boredprinter.com/ideas/living-room) · [Hallway](https://boredprinter.com/ideas/hallway)
 
 ## Made by
-The creator of a 3D printer setup video with 4.9 million views. Instagram: https://www.instagram.com/fitmyspot/
+The creator of a 3D printer setup video with 4.9 million views. Instagram: https://www.instagram.com/boredprinter/

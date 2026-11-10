@@ -1,6 +1,6 @@
-// FitMySpot – hittar riktiga modeller (bild, namn, skapare, länk) för ett sökord.
+// boredprinter – hittar riktiga modeller (bild, namn, skapare, länk) för ett sökord.
 // Källa: Printables. Vi lagrar inga filer: bara en liten bild + namn på skaparen + länk tillbaka.
-const UA = "FitMySpot/0.1 (+https://fitmyspot.com/removal)";
+const UA = "boredprinter/0.1 (+https://boredprinter.com/removal)";
 const cache = new Map();
 
 const json = (body, status = 200) => new Response(JSON.stringify(body), {

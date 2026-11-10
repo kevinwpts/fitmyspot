@@ -16,4 +16,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://fitmyspot.com/sitemap.xml
+Sitemap: https://boredprinter.com/sitemap.xml

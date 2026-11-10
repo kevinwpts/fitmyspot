@@ -1,16 +1,16 @@
 // My home: nya idéer varje vecka för varje sparad plats, och ett veckomejl.
 // Körs av Vercel Cron en gång per dag. Kräver CRON_SECRET och GEMINI_API_KEY.
-// Mejl skickas bara om RESEND_API_KEY och MAIL_FROM finns (t.ex. "fitmyspot <hello@fitmyspot.com>").
+// Mejl skickas bara om RESEND_API_KEY och MAIL_FROM finns (t.ex. "boredprinter <hello@boredprinter.com>").
 import { rpc, SCAN_KEY, unsubToken } from "../lib/supa.js";
 
 const MODELS = ["gemini-3.1-flash-lite", "gemini-3.8-flash"];
-const SITE = process.env.SITE_URL || "https://fitmyspot.vercel.app";
-const UA = "FitMySpot/0.1 (+https://fitmyspot.com/removal)";
+const SITE = process.env.SITE_URL || "https://boredprinter.com";
+const UA = "boredprinter/0.1 (+https://boredprinter.com/removal)";
 const anonReq = (url) => new Request(url);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 async function ideasFor(spot, key) {
-  const prompt = `You are FitMySpot, an assistant for 3D printing hobbyists.
+  const prompt = `You are boredprinter, an assistant for 3D printing hobbyists.
 A user saved this spot in their home: "${String(spot.place).slice(0, 80)}".
 Things in that spot: ${JSON.stringify(spot.seen || []).slice(0, 600)}.
 They already got these ideas. Do NOT repeat them or near-duplicates: ${JSON.stringify(spot.known || []).slice(0, 1500)}.
@@ -70,22 +70,23 @@ function digestHtml(user) {
   const unsub = `${SITE}/api/unsubscribe?u=${user.id}&t=${unsubToken(user.id)}`;
   const rows = ideas.map((i) => `
     <tr><td style="padding:0 0 14px">
-      <a href="${esc(i.model?.url)}" style="text-decoration:none;color:#0B0C0F;display:block;border:1px solid #e6e8eb;border-radius:16px;overflow:hidden">
+      <a href="${esc(i.model?.url)}" style="text-decoration:none;color:#1A1918;display:block;border:1px solid #e6e8eb;border-radius:16px;overflow:hidden">
         <img src="${esc(i.model?.image)}" width="520" alt="" style="display:block;width:100%;max-width:520px;height:auto">
-        <div style="padding:14px 16px"><div style="font:600 12px Arial,sans-serif;color:#0f766e;text-transform:uppercase;letter-spacing:.06em">For your ${esc(i.place)}</div>
+        <div style="padding:14px 16px"><div style="font:600 12px Arial,sans-serif;color:#C2410C;text-transform:uppercase;letter-spacing:.06em">For your ${esc(i.place)}</div>
         <div style="font:700 18px Arial,sans-serif;margin:4px 0">${esc(i.name)}</div>
         <div style="font:400 14px Arial,sans-serif;color:#555">${esc(i.why)}</div></div>
       </a></td></tr>`).join("");
   return {
     count: ideas.length,
-    html: `<!doctype html><html><body style="margin:0;background:#f4f5f6;padding:24px 12px">
+    html: `<!doctype html><html><body style="margin:0;background:#F5F2EC;padding:24px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
 <table role="presentation" width="100%" style="max-width:560px;background:#fff;border-radius:20px;padding:24px" cellpadding="0" cellspacing="0">
-<tr><td style="font:700 22px Arial,sans-serif;color:#0B0C0F;padding-bottom:4px">New prints for your home</td></tr>
+<tr><td style="font:800 15px Arial,sans-serif;color:#1A1918;padding-bottom:14px">boredprinter</td></tr>
+<tr><td style="font:700 24px Arial,sans-serif;color:#1A1918;padding-bottom:4px">Your printer is bored. Here's what to print.</td></tr>
 <tr><td style="font:400 15px Arial,sans-serif;color:#555;padding-bottom:18px">${ideas.length} new ideas that fit what you have.</td></tr>
 ${rows}
-<tr><td align="center" style="padding:6px 0 18px"><a href="${SITE}/?home" style="background:#0B0C0F;color:#fff;text-decoration:none;font:700 15px Arial,sans-serif;padding:14px 26px;border-radius:999px;display:inline-block">Open my home</a></td></tr>
-<tr><td style="font:400 12px Arial,sans-serif;color:#888;text-align:center">You get this because you turned on weekly emails on fitmyspot. <a href="${unsub}" style="color:#888">Unsubscribe</a></td></tr>
+<tr><td align="center" style="padding:6px 0 18px"><a href="${SITE}/?home" style="background:#1A1918;color:#fff;text-decoration:none;font:700 15px Arial,sans-serif;padding:14px 26px;border-radius:999px;display:inline-block">Open my home</a></td></tr>
+<tr><td style="font:400 12px Arial,sans-serif;color:#888;text-align:center">You get this because you turned on weekly emails on boredprinter. <a href="${unsub}" style="color:#888">Unsubscribe</a></td></tr>
 </table></td></tr></table></body></html>`,
     unsub,
   };
