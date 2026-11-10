@@ -314,6 +314,32 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
 .ig-stats>span{display:grid;text-align:center}.ig-stats b{font:800 22px/1.1 var(--display);letter-spacing:-.02em}.ig-stats small{color:var(--muted);font-size:12.5px}
 .ig-name b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (max-width:420px){.ig-av{width:56px;height:56px}.ig-follow{padding:12px}.ig-follow .ft{display:none}}
+
+.demo{margin-top:56px;display:grid;gap:18px}
+.dm-head{display:grid;gap:10px;justify-items:start}
+.dm-head h2{margin:0;font-size:clamp(30px,5.4vw,46px);line-height:1.02;font-weight:800;letter-spacing:-.04em;text-wrap:balance}
+.dm-grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:820px){.dm-grid{grid-template-columns:.9fr 1.1fr;align-items:stretch}}
+.dm-photo{position:relative;margin:0;border-radius:var(--r);overflow:hidden;border:1.5px solid var(--ink);aspect-ratio:3/4;max-height:640px;background:var(--soft)}
+@media (max-width:819px){.dm-photo{aspect-ratio:4/3}}
+.dm-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.dm-tag{position:absolute;background:var(--lime);color:var(--ink);font:700 13px/1 Geist,sans-serif;padding:8px 11px;border-radius:999px;box-shadow:0 6px 14px rgba(0,0,0,.25);white-space:nowrap}
+.dm-photo figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border-radius:999px;padding:8px 14px 8px 8px;font-weight:650;display:flex;gap:8px;align-items:center}
+.cap-n{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;font:800 14px/1 var(--display)}
+.dm-res{background:var(--card);border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);border-radius:var(--r);padding:16px;display:grid;gap:10px;align-content:start}
+.dm-cap{display:flex;gap:8px;align-items:center;font-weight:650;padding:4px 2px 6px}
+.dm-row{display:grid;grid-template-columns:76px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 8px;text-decoration:none;color:var(--ink);min-width:0}
+.dm-row:hover{border-color:var(--ink)}
+.dm-row .pic{width:76px;height:76px;border-radius:12px;background:var(--soft) center/cover no-repeat}
+.dm-t{display:grid;min-width:0}.dm-t b{font:750 18px/1.15 var(--display);letter-spacing:-.015em}.dm-t small{color:var(--muted);font-size:13.5px}
+.dm-t .dm-src{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dm-go{color:var(--muted)}
+.dm-more{color:var(--muted);text-align:center;font-size:13.5px;padding-top:4px}
+.price{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:18px}
+.price ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:17px}
+.price li{display:flex;gap:10px;align-items:center}.price li:before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%231A1918%27 stroke-width=%273.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M20 6 9 17l-5-5%27/%3E%3C/svg%3E") center/12px no-repeat}
+.price-more{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;color:var(--muted)}
+.price-more b{color:var(--ink)}.price-more span{flex:1;min-width:220px}.price-more .btn{padding:14px 22px;font-size:15px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -342,56 +368,24 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
       <span class="sub" id="sub">Free to try · Real models from Printables &amp; MakerWorld</span>
       <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
     </div>
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="kitchen">
-          <rect width="210" height="392" fill="#EFE6D8"/>
-          <!-- upper cabinets -->
-          <rect x="0" y="0" width="210" height="118" fill="#F7F3EC"/>
-          <rect x="8" y="10" width="92" height="98" rx="4" fill="#FFFFFF" stroke="#E3DBCD"/>
-          <rect x="110" y="10" width="92" height="98" rx="4" fill="#FFFFFF" stroke="#E3DBCD"/>
-          <rect x="88" y="52" width="4" height="22" rx="2" fill="#B9AE9C"/><rect x="118" y="52" width="4" height="22" rx="2" fill="#B9AE9C"/>
-          <!-- backsplash tiles -->
-          <g fill="#E4EEF0" stroke="#D3E0E3"><rect x="0" y="118" width="210" height="112"/></g>
-          <g stroke="#D3E0E3" stroke-width="1"><path d="M0 146H210M0 174H210M0 202H210"/><path d="M35 118V230M70 118V230M105 118V230M140 118V230M175 118V230"/></g>
-          <!-- spice jars messy -->
-          <g><rect x="16" y="196" width="14" height="26" rx="3" fill="#C2410C"/><rect x="16" y="192" width="14" height="6" rx="2" fill="#3F3A33"/>
-             <rect x="33" y="200" width="12" height="22" rx="3" fill="#D9A441"/><rect x="33" y="196" width="12" height="6" rx="2" fill="#3F3A33"/>
-             <rect x="47" y="203" width="12" height="19" rx="3" fill="#6B8E4E" transform="rotate(12 53 212)"/>
-             <rect x="62" y="198" width="13" height="24" rx="3" fill="#8C5A3C"/><rect x="62" y="194" width="13" height="6" rx="2" fill="#3F3A33"/></g>
-          <!-- cutting board + utensils -->
-          <rect x="150" y="150" width="34" height="70" rx="10" fill="#C8A27A"/><circle cx="167" cy="160" r="4" fill="#EFE6D8"/>
-          <rect x="110" y="168" width="4" height="54" rx="2" fill="#9AA0A6" transform="rotate(-8 112 195)"/>
-          <rect x="120" y="172" width="4" height="50" rx="2" fill="#6B6F75" transform="rotate(10 122 197)"/>
-          <!-- counter -->
-          <rect x="0" y="222" width="210" height="12" fill="#3B3A38"/>
-          <!-- lower cabinets/drawer open -->
-          <rect x="0" y="234" width="210" height="158" fill="#F7F3EC"/>
-          <rect x="8" y="244" width="194" height="40" rx="4" fill="#FFFFFF" stroke="#E3DBCD"/>
-          <rect x="8" y="292" width="92" height="92" rx="4" fill="#FFFFFF" stroke="#E3DBCD"/>
-          <rect x="110" y="292" width="92" height="92" rx="4" fill="#FFFFFF" stroke="#E3DBCD"/>
-          <rect x="90" y="260" width="30" height="4" rx="2" fill="#B9AE9C"/>
-          <!-- cable -->
-          <path d="M98 222 C 96 236, 120 238, 112 250" stroke="#141518" stroke-width="2" fill="none"/>
-        </g></defs></svg>
-    <section class="steps" aria-label="How it works">
-      <div class="step">
-        <div class="frame"><svg class="sc" viewBox="0 108 210 158" preserveAspectRatio="xMidYMid slice"><use href="#kitchen"/></svg>
-          <div class="vf2"><i></i><i></i><i></i><i></i></div><span class="snap"></span></div>
-        <div class="cap"><span class="n">1</span><div><b>Snap a photo</b></div></div>
-      </div>
-      <div class="step">
-        <div class="frame"><svg class="sc" viewBox="0 108 210 158" preserveAspectRatio="xMidYMid slice"><use href="#kitchen"/></svg>
-          <span class="tag2" style="left:4%;top:44%">spice jars</span>
-          <span class="tag2" style="left:52%;top:18%">cutting board</span>
-          <span class="tag2" style="left:30%;top:84%">messy drawer</span></div>
-        <div class="cap"><span class="n">2</span><div><b>We see what's missing</b></div></div>
-      </div>
-      <div class="step">
-        <div class="frame res" id="demoCards">
-          <div class="mini2"><span class="pic" data-q="spice rack"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span><b>Spice jar rack</b></div>
-          <div class="mini2"><span class="pic" data-q="drawer organizer"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span><b>Drawer organizer</b></div>
-          <div class="mini2"><span class="pic" data-q="cutting board holder"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span><b>Cutting board stand</b></div>
+    <section class="demo" aria-label="Example">
+      <div class="dm-head"><span class="soon" style="margin:0">Real example</span><h2 class="display">I snapped my kitchen.<br>Here's what it found.</h2></div>
+      <div class="dm-grid">
+        <figure class="dm-photo">
+          <img src="/demo/kitchen.jpg" alt="A kitchen with a stove, cutting board and knives on the wall" loading="lazy" width="900" height="1200">
+          <span class="dm-tag" style="left:66%;top:9%">knives</span>
+          <span class="dm-tag" style="left:44%;top:43%">cutting board</span>
+          <span class="dm-tag" style="left:38%;top:66%">stove knobs</span>
+          <figcaption><span class="cap-n">1</span> Snap a photo</figcaption>
+        </figure>
+        <div class="dm-res">
+          <div class="dm-cap"><span class="cap-n">2</span> Get things to print for it</div>
+          <a class="dm-row" data-q="magnetic knife strip" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Magnetic knife strip cover</b><small>For the knives on the wall</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
+          <a class="dm-row" data-q="under cabinet utensil hook" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Under-cabinet utensil hooks</b><small>Frees up the counter</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
+          <a class="dm-row" data-q="cutting board stand" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Cutting board stand</b><small>The board lies flat now</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
+          <a class="dm-row" data-q="stove knob lock" href="#" target="_blank" rel="noopener"><span class="pic"></span><span class="dm-t"><b>Stove knob child locks</b><small>Knobs turn too easily</small><small class="dm-src"></small></span><span class="dm-go"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
+          <small class="dm-more">+ 2 more ideas · real models to download</small>
         </div>
-        <div class="cap"><span class="n">3</span><div><b>Get models that fit</b></div></div>
       </div>
     </section>
     <div class="examples" id="examples" hidden><div class="track" id="track"></div></div>
@@ -413,12 +407,10 @@ button.addroom{width:100%;background:none;font:600 16px Geist,sans-serif}
       </div>
     </section>
     <section class="block" id="pricing">
-      <h2 class="display">Simple pricing</h2>
-      <p class="lead2">Start free. 1 photo = 1 credit. <span class="soon">Paid plans open soon</span></p>
-      <div class="tiers">
-        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>First photo free</li><li>+3 credits when you sign up</li><li>New prints for your home every week</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
-        <div class="tier"><span class="tn">30 credits</span><b>$2.99</b><ul><li>30 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-soft" data-notify>Notify me</button></div>
-        <div class="tier hot"><em>Best value</em><span class="tn">100 credits</span><b>$6.99</b><ul><li>100 photos</li><li>One-time payment</li><li>Never expire</li></ul><button class="btn btn-ink" data-notify>Notify me</button></div>
+      <h2 class="display">Free to start</h2>
+      <div class="price">
+        <ul><li>First photo free</li><li>+3 credits when you sign up</li><li>New prints for your home every week</li></ul>
+        <div class="price-more"><span><b>Need more?</b> Credit packs from $2.99, no subscription. Coming soon.</span><button type="button" class="btn btn-soft" data-notify>Notify me</button></div>
       </div>
     </section>
     <section class="block" id="faq">
@@ -937,6 +929,16 @@ if (matchMedia("(pointer:fine) and (min-width:900px)").matches) {
 }
 
 /* Real model photos in the hero demo */
+document.querySelectorAll(".dm-row").forEach(async a => {
+  try {
+    const d = await (await fetch("/api/models?q=" + encodeURIComponent(a.dataset.q))).json();
+    const m = d.models?.[0]; if (!m) return;
+    a.href = safe(m.url);
+    a.querySelector(".pic").style.backgroundImage = `url("${safe(m.image)}")`;
+    a.querySelector(".dm-src").textContent = (m.creator ? "by " + m.creator + " · " : "") + (m.source || "Printables");
+  } catch {}
+});
+document.querySelectorAll(".dm-row").forEach(a => a.addEventListener("click", e => { if (a.getAttribute("href") === "#") e.preventDefault(); }));
 document.querySelectorAll("#demoCards .pic, .pv-row .pic, .hp-demo .pic").forEach(async el => {
   try {
     const d = await (await fetch("/api/models?q=" + encodeURIComponent(el.dataset.q))).json();
