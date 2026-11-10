@@ -584,6 +584,8 @@ const SB = window.supabase ? window.supabase.createClient("https://rcntkzrbanwig
 let session = null, me = null;
 const store = { get: k => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 const ref = new URLSearchParams(location.search).get("ref"); if (ref) store.set("ref", ref.slice(0, 12));
+// Bekräftelselänk från mejlet kan öppnas i en annan webbläsare: ta med det låsta resultatet i länken
+{ const c = new URLSearchParams(location.search).get("claim"); if (c && /^[0-9a-f-]{36}$/.test(c)) { if (!store.get("pending")?.id) store.set("pending", { id: c, photo: "" }); history.replaceState(null, "", "/"); } }
 // Ägarens testläge: boredprinter.com/?test=NYCKEL sparas på enheten
 { const t = new URLSearchParams(location.search).get("test"); if (t) { store.set("testKey", t.slice(0, 40)); history.replaceState(null, "", "/"); } }
 async function authHeader(){ return session?.access_token ? { authorization: "Bearer " + session.access_token } : {}; }
@@ -695,7 +697,8 @@ $("formSignin").addEventListener("submit", async e => {
   $("sendLink").disabled = true;
   try {
     if (authMode === "up") {
-      const { data, error } = await SB.auth.signUp({ email, password, options: { emailRedirectTo: location.origin } });
+      const pid = store.get("pending")?.id;
+      const { data, error } = await SB.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + (pid ? "/?claim=" + pid : "") } });
       if (error) {
         if (/registered|exists/i.test(error.message)) { setAuthMode("in"); $("signTitle").textContent = "Welcome back"; say("You already have an account. Sign in instead."); }
         else if (/password/i.test(error.message)) say("That password is too weak. Use at least 8 characters.");
