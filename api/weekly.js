@@ -10,7 +10,7 @@ async function ideasFor(spot, key) {
 A user saved this spot: "${String(spot.place).slice(0, 80)}".
 Things seen there: ${JSON.stringify(spot.seen || []).slice(0, 600)}.
 They already got these ideas, do NOT repeat them or near-duplicates: ${JSON.stringify(spot.known || []).slice(0, 1500)}.
-Suggest 3 NEW useful 3D prints for this exact spot. Write in the same language as the spot name.
+Suggest 3 NEW useful 3D prints for this exact spot. Write in English.
 For each: name, why (one sentence), search (2-4 English words for Printables), alt (simpler 2-3 English words), material (PLA/PETG/TPU/ASA, no PLA for hot places like cars), time, level (Easy/Medium/Hard), buy_price (typical store price of a similar product in US dollars, whole number).
 Reply ONLY with JSON: {"prints":[{"name":"","why":"","search":"","alt":"","material":"","time":"","level":"","buy_price":0}]}`;
   for (const model of MODELS) {

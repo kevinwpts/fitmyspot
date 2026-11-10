@@ -36,7 +36,6 @@ const PRINTERS = {
   "elegoo-centauri": ["Elegoo Centauri Carbon", 256, true, false],
 };
 
-const LANGS = { sv: "Swedish", de: "German", es: "Spanish", it: "Italian", fr: "French", nl: "Dutch", da: "Danish", no: "Norwegian", nb: "Norwegian", fi: "Finnish", pt: "Portuguese", pl: "Polish" };
 
 function extras(body) {
   const lines = [];
@@ -46,8 +45,7 @@ function extras(body) {
     lines.push(`Only suggest prints that fit within ${p[1]} mm or can be printed in parts.`);
     if (!p[2]) lines.push("It has no enclosure, so prefer PETG over ASA/ABS.");
   }
-  const lang = LANGS[String(body?.lang || "").slice(0, 2).toLowerCase()];
-  if (lang) lines.push(`Write "place", "name", "why" and "photo_issue" in ${lang}. Keep "search" and "alt" in English.`);
+  lines.push('Write everything in English.');
   return lines.length ? "\n\nExtra context:\n" + lines.join("\n") : "";
 }
 

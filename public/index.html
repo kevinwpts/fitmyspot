@@ -10,6 +10,9 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="fitmyspot">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap">
@@ -338,6 +341,15 @@ nav{position:relative;gap:12px}
 .wmv .c4{right:0;bottom:0;border-bottom-width:.07em;border-right-width:.07em;border-bottom-right-radius:.08em;border-color:#60A5FA}
 .foot .wm{font-size:22px}
 @media (max-width:640px){.wm{font-size:23px}}
+
+.soon{display:inline-block;margin-left:6px;font-size:12px;font-weight:600;color:var(--lime);border:1px solid rgba(94,234,212,.35);padding:3px 9px;border-radius:999px;vertical-align:2px}
+.maker{margin-top:72px;display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.maker b{display:block;font-size:19px;font-weight:650;letter-spacing:-.02em}.maker p{margin:4px 0 12px;color:var(--muted)}
+.maker .nbtn{text-decoration:none}
+.mk-badge{flex:none;width:84px;height:84px;border-radius:22px;display:grid;place-items:center;font-weight:700;font-size:24px;letter-spacing:-.04em;background:linear-gradient(135deg,rgba(94,234,212,.18),rgba(96,165,250,.18));border:1px solid rgba(94,234,212,.35);color:var(--ink)}
+@media (max-width:520px){.maker{flex-direction:column;align-items:flex-start}}
+.wl-ic{width:68px;height:68px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#5EEAD4,#60A5FA);color:#0B0C0F}
+.wl-steps{display:grid;gap:6px;width:100%}.wl-steps span{background:var(--soft);border-radius:12px;padding:10px;font-size:14px;color:var(--muted)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -420,11 +432,11 @@ nav{position:relative;gap:12px}
     <div class="examples" id="examples" hidden><div class="track" id="track"></div></div>
     <section class="block" id="pricing">
       <h2 class="display">Simple pricing</h2>
-      <p class="lead2">Start free. 1 photo = 1 credit.</p>
+      <p class="lead2">Start free. 1 photo = 1 credit. <span class="soon">Paid plans open soon</span></p>
       <div class="tiers">
-        <div class="tier"><span class="tn">Free</span><b>0 kr</b><ul><li>10 credits when you sign up</li><li>1 free photo every day</li><li>Saved ideas</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
-        <div class="tier hot"><em>Most popular</em><span class="tn">80 credits</span><b>69 kr</b><ul><li>One-time payment</li><li>Credits never expire</li><li>All features</li></ul><button class="btn btn-ink" data-buy>Get credits</button></div>
-        <div class="tier"><span class="tn">Unlimited</span><b>49 kr<small>/mo</small></b><ul><li>Unlimited photos</li><li>Cancel any time</li><li>New features first</li></ul><button class="btn btn-soft" data-buy>Go unlimited</button></div>
+        <div class="tier"><span class="tn">Free</span><b>$0</b><ul><li>10 credits when you sign up</li><li>1 free photo every day</li><li>Saved spots &amp; print list</li></ul><label for="file" class="btn btn-soft">Try it free</label></div>
+        <div class="tier hot"><em>Most popular</em><span class="tn">80 credits</span><b>$6.99</b><ul><li>One-time payment</li><li>Credits never expire</li><li>All features</li></ul><button class="btn btn-ink" data-buy>Coming soon</button></div>
+        <div class="tier"><span class="tn">Unlimited</span><b>$4.99<small>/mo</small></b><ul><li>Unlimited photos</li><li>Cancel any time</li><li>New features first</li></ul><button class="btn btn-soft" data-buy>Coming soon</button></div>
       </div>
     </section>
     <section class="block" id="faq">
@@ -433,6 +445,11 @@ nav{position:relative;gap:12px}
       <details><summary>Do you keep my photo?</summary><p>No. Your photo is only used to make the suggestions and is never saved.</p></details>
       <details><summary>Which printers does it work with?</summary><p>All of them. Tell us your printer and the ideas will fit its size and materials.</p></details>
       <details><summary>What if an idea doesn't fit?</summary><p>If the photo can't be used, you get your credit back. Rate ideas with a thumbs up or down to help us get better.</p></details>
+    </section>
+    <section class="maker">
+      <div class="mk-badge">4.9M</div>
+      <div><b>Made by a maker, for makers</b><p>Built by the creator behind a 3D printer setup video that got 4.9 million views. Follow along for new print ideas.</p>
+      <a class="nbtn" href="https://www.instagram.com/fitmyspot/" target="_blank" rel="noopener"><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg> @fitmyspot</a></div>
     </section>
     <section class="final">
       <h2 class="display">Your printer is waiting.</h2>
@@ -501,7 +518,7 @@ nav{position:relative;gap:12px}
   <footer class="foot">
     <a class="logo" href="/" aria-label="fitmyspot"><span class="wm">fitmy<span class="wmv"><u class="c1"></u><u class="c2"></u><u class="c3"></u><u class="c4"></u>spot</span></span></a>
     <p>Print ideas for your home. Models and photos belong to their creators. We only link to them.</p>
-    <div class="flinks"><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/removal">Contact &amp; removal</a></div>
+    <div class="flinks"><a href="https://www.instagram.com/fitmyspot/" target="_blank" rel="noopener">Instagram</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/removal">Contact &amp; removal</a></div>
   </footer>
 </div>
 
@@ -518,16 +535,23 @@ nav{position:relative;gap:12px}
   <div class="ok" id="sent" hidden></div>
   <small class="fine">By continuing you agree to the <a href="/terms" target="_blank">terms</a> and <a href="/privacy" target="_blank">privacy policy</a>.</small>
 </form></dialog>
+<dialog id="dlgWelcome"><form class="dlg" method="dialog" style="text-align:center;justify-items:center">
+  <div class="wl-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg></div>
+  <h3>Welcome to fitmyspot!</h3>
+  <p>You got <b style="color:var(--ink)">10 free credits</b>. Every photo you take is saved as a spot and gets new ideas each week.</p>
+  <div class="wl-steps"><span>1 photo = 1 credit</span><span>+1 free photo every day</span><span>Invite a friend: +5 each</span></div>
+  <button class="btn btn-ink" value="ok" style="width:100%">Let's go</button>
+</form></dialog>
 <dialog id="dlgBuy"><form class="dlg" method="dialog">
   <button class="x" value="cancel">Close</button>
   <h3>Get more credits</h3>
   <p>1 photo = 1 credit. You also get 1 free photo every day.</p>
   <div class="packs">
-    <div class="pack"><b>25 credits</b><span>29 kr</span></div>
-    <div class="pack best"><b>80 credits</b><span>69 kr</span><em>Most popular</em></div>
-    <div class="pack"><b>Unlimited</b><span>49 kr / month</span></div>
+    <div class="pack"><b>25 credits</b><span>$2.99</span></div>
+    <div class="pack best"><b>80 credits</b><span>$6.99</span><em>Most popular</em></div>
+    <div class="pack"><b>Unlimited</b><span>$4.99 / month</span></div>
   </div>
-  <div class="ok">Payments open very soon.</div>
+  <div class="ok">Payments open very soon. Until then, invite friends to get more credits.</div>
   <div class="invite" id="inviteBuy"></div>
 </form></dialog>
 <dialog id="dlgLimit"><form class="dlg" method="dialog">
@@ -581,6 +605,11 @@ async function afterSignIn(){
   // Inbjudningskod och mejl-samtycke sparas en gång
   const r = store.get("ref"); if (r) { try { await SB.rpc("apply_referral", { p_code: r }); } catch {} store.set("ref", null); }
   if (store.get("mkt")) { try { await SB.rpc("set_marketing", { p_ok: true }); } catch {} store.set("mkt", null); }
+  // Välkomstruta för nya konton (en gång)
+  try {
+    const created = new Date(session?.user?.created_at || 0).getTime();
+    if (Date.now() - created < 30 * 60 * 1000 && !store.get("welcomed:" + session.user.id)) { store.set("welcomed:" + session.user.id, 1); setTimeout(() => $("dlgWelcome").showModal(), 600); }
+  } catch {}
   // Låst resultat? Visa det nu.
   const pend = store.get("pending");
   if (pend?.id) {
@@ -636,7 +665,7 @@ document.addEventListener("click", e => { if (e.target.id === "nudgeBtn") $("dlg
 /* Print list + money saved */
 const RATES = { SEK: 10.5, NOK: 10.8, DKK: 6.9, EUR: 0.92, GBP: 0.79, USD: 1 };
 const CUR = (() => { const l = navigator.language || "en-US"; if (/^sv/.test(l)) return "SEK"; if (/^(nb|no|nn)/.test(l)) return "NOK"; if (/^da/.test(l)) return "DKK"; if (/-GB$/.test(l)) return "GBP"; if (/^(de|fr|es|it|nl|pt|fi)/.test(l)) return "EUR"; return "USD"; })();
-const money = usd => new Intl.NumberFormat(navigator.language || "en-US", { style: "currency", currency: CUR, maximumFractionDigits: 0 }).format((usd || 0) * RATES[CUR]);
+const money = usd => new Intl.NumberFormat("en-US", { style: "currency", currency: CUR, maximumFractionDigits: 0 }).format((usd || 0) * RATES[CUR]);
 let plTab = "todo";
 $("grid").addEventListener("click", async e => {
   const b = e.target.closest("[data-save]"); if (!b) return;
@@ -973,4 +1002,5 @@ $("file").addEventListener("change", e => pick(e.target.files[0]));
 document.addEventListener("dragover", e => e.preventDefault());
 document.addEventListener("drop", e => { e.preventDefault(); pick(e.dataTransfer.files[0]); });
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body></html>
