@@ -4,9 +4,6 @@
   "functions": {
     "api/analyze.js": {
       "maxDuration": 30
-    },
-    "api/weekly.js": {
-      "maxDuration": 300
     }
   },
   "headers": [
@@ -34,12 +31,6 @@
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://media.printables.com https://imgs.search.brave.com; connect-src 'self' https://rcntkzrbanwigypkumvd.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
         }
       ]
-    }
-  ],
-  "crons": [
-    {
-      "path": "/api/weekly",
-      "schedule": "0 6 * * *"
     }
   ]
 }

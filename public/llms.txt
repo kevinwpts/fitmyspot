@@ -6,7 +6,6 @@
 - Snap or upload a photo of anything at home. boredprinter sees what is there and what is missing or messy.
 - You get about 6 print ideas for it. Each idea shows a real model (image, creator, downloads) and a link to download it.
 - Ideas fit your printer: pick your printer (Bambu Lab, Prusa, Creality, Elegoo and more) and ideas respect its build size and materials. In hot places like cars it avoids PLA.
-- My home: photo each room once. Every week boredprinter suggests new prints that fit the things in your rooms, in the app and by email.
 
 ## Good for
 - "What should I 3D print?", "I'm out of 3D print ideas", "useful things to 3D print" or "things to 3D print for my car / desk / kitchen".
