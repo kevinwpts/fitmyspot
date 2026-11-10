@@ -357,6 +357,10 @@ html{scroll-behavior:smooth}
 .hp-top .wtog{cursor:default}
 .hp-idea{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px}
 .hp-idea .pic{width:48px;height:48px;border-radius:10px;background:var(--soft) center/cover no-repeat;flex:none}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:80;background:var(--ink);color:#fff;font-weight:600;font-size:15px;padding:12px 18px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(26,25,24,.5);max-width:calc(100vw - 32px);text-align:center;animation:tin .25s ease}
+@keyframes tin{from{opacity:0;transform:translate(-50%,-8px)}}
+.morebtn{margin-top:22px;width:100%}
+.rtools .nbtn{cursor:pointer}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -407,7 +411,6 @@ html{scroll-behavior:smooth}
         </div>
       </div>
     </section>
-    <div class="examples" id="examples" hidden><div class="track" id="track"></div></div>
     <section class="block homepromo" aria-label="Weekly ideas">
       <div class="hp-copy">
         <h2 class="display">New prints for your kitchen, desk or car. Every week.</h2>
@@ -468,7 +471,7 @@ html{scroll-behavior:smooth}
     <div class="rhead">
       <img id="thumb" alt="Your photo">
       <div style="min-width:0"><h2 class="display" id="placeName">Your print ideas</h2><p class="seenline" id="seenLine" hidden></p>
-        <div class="rtools"><button class="nbtn ink" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="savedPill" hidden></button></div></div>
+        <div class="rtools"><label for="file" class="nbtn ink"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> New photo</label><button class="nbtn" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button><button class="nbtn" id="savedPill" hidden></button></div></div>
     </div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
@@ -477,6 +480,7 @@ html{scroll-behavior:smooth}
     </div>
     <div class="grid" id="grid"></div>
     <div class="nudge" id="nudge" hidden></div>
+    <label for="file" class="btn btn-ink morebtn"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> Snap another photo</label>
   </section>
 
   <section id="history" hidden>
@@ -517,6 +521,7 @@ html{scroll-behavior:smooth}
   </footer>
 </div>
 
+<div class="toast" id="toast" role="status" hidden></div>
 <dialog id="dlgSignin"><form class="dlg" id="formSignin" method="dialog">
   <button class="x" value="cancel" formnovalidate>Close</button>
   <span class="gift"><svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg> 3 free credits</span>
@@ -565,7 +570,6 @@ html{scroll-behavior:smooth}
   <div class="invite" id="inviteLimit"></div>
   <button class="btn btn-ink" value="buy">See credit packs</button>
 </form></dialog>
-<div class="dock" id="dock" hidden><label for="file" class="btn btn-ink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>New photo</label></div>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -618,11 +622,11 @@ async function afterSignIn(){
   // Välkomstruta för nya konton (en gång)
   try {
     const created = new Date(session?.user?.created_at || 0).getTime();
-    if (Date.now() - created < 30 * 60 * 1000 && !store.get("welcomed:" + session.user.id)) { store.set("welcomed:" + session.user.id, 1); setTimeout(() => $("dlgWelcome").showModal(), 600); }
+    if (Date.now() - created < 30 * 60 * 1000 && !store.get("welcomed:" + session.user.id)) { store.set("welcomed:" + session.user.id, 1); setTimeout(() => toast("Welcome! You got 3 free credits."), 600); }
   } catch {}
   // Foto som väntar på konto? Analysera det nu.
   let gp = null; try { gp = localStorage.getItem("gatePhoto"); localStorage.removeItem("gatePhoto"); } catch {}
-  if (gp) { photoUrl = gp; imageB64 = gp.split(",")[1]; $("scanImg").src = gp; $("dock").hidden = true; show("scanning"); await analyze(); }
+  if (gp) { photoUrl = gp; imageB64 = gp.split(",")[1]; $("scanImg").src = gp;  show("scanning"); await analyze(); }
   // Låst resultat? Visa det nu.
   const pend = store.get("pending");
   if (pend?.id) {
@@ -648,6 +652,8 @@ if (SB) {
   SB.auth.getSession().then(({ data }) => setSession(data.session));
   SB.auth.onAuthStateChange((ev, s) => { setSession(s); if (ev === "PASSWORD_RECOVERY") openPass(); });
 } else { $("signin").hidden = true; }
+/* Liten notis högst upp, försvinner själv */
+function toast(t){ const el = $("toast"); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { el.hidden = true; }, 4500); }
 /* Konto: e-post + lösenord (eller Google) */
 let authMode = "up";
 function setAuthMode(m){
@@ -733,7 +739,7 @@ document.addEventListener("click", e => { if (e.target.id === "nudgeBtn") $("dlg
 
 /* Account page */
 async function openAccount(){
-  show("account"); $("dock").hidden = true;
+  show("account"); 
   const { data: p } = await SB.rpc("my_profile");
   if (!p) return;
   $("aEmail").textContent = p.email || session?.user?.email || "";
@@ -800,7 +806,7 @@ function renderLocked(d){
         <div class="actions"><span class="a1 ghost">${I("lock", 14)} Sign up to open</span></div></div>
     </article>`).join("");
   store.set("pending", { id: d.id, photo: photoUrl && photoUrl.length < 900000 ? photoUrl : "" });
-  show("result"); $("dock").hidden = false;
+  show("result"); 
 }
 /* Gratisförsöken slut: inga låtsaskort, bara ärlig text. Bilden analyseras direkt efter registrering. */
 function renderGate(){
@@ -815,7 +821,7 @@ function renderGate(){
       <div class="body"><h3>████████ ████</h3><p>██████ ███ ██████████ ████</p></div></article>`).join("") : "";
   store.set("pending", null);
   try { localStorage.setItem("gatePhoto", photoUrl); } catch {}
-  show("result"); $("dock").hidden = true;
+  show("result"); 
 }
 $("unlock").onclick = () => openSignup("See your ideas", "Sign up free. You get 3 extra credits.");
 $("grid").addEventListener("click", e => { if (e.target.closest(".idea.locked")) $("unlock").click(); });
@@ -842,7 +848,7 @@ function spotRow(r){
 }
 async function openHome(){
   if (!session) { show("landing"); return; }
-  show("history"); $("dock").hidden = true;
+  show("history"); 
   $("histList").innerHTML = `<div class="note">Loading…</div>`;
   $("weekBox").hidden = true; $("homeMail").hidden = true; $("spotsHint").hidden = true;
   const [{ data, error }, prof] = await Promise.all([
@@ -998,16 +1004,7 @@ document.querySelectorAll("#demoCards .pic, .pv-row .pic").forEach(async el => {
     img.src = safe(m.image);
   } catch {}
 });
-/* Examples on the landing page: real models, so people see what they get */
-const EXAMPLES = [["car cup holder organizer","Car"],["desk cable organizer","Desk"],["sofa armrest tray","Sofa"],["headphone stand","Desk"],["car vent phone mount","Car"],["wall key holder","Hallway"],["drawer organizer gridfinity","Kitchen"],["garage tool holder","Garage"]];
-(async () => {
-  const lists = await Promise.all(EXAMPLES.map(([q]) => fetch("/api/models?q=" + encodeURIComponent(q)).then(r => r.json()).catch(() => ({models: []}))));
-  const items = lists.map((l, i) => l.models?.[0] && { ...l.models[0], spot: EXAMPLES[i][1] }).filter(Boolean);
-  if (items.length < 3) return;
-  const html = items.map(m => `<a class="ex" href="${safe(m.url)}" target="_blank" rel="noopener"><img src="${esc(safe(m.image))}" alt="" loading="lazy" referrerpolicy="no-referrer"><div><b>${esc(m.title)}</b><small>For the ${esc(m.spot.toLowerCase())}</small></div></a>`).join("");
-  $("track").innerHTML = html + html;
-  $("examples").hidden = false;
-})();
+
 
 function show(id){ ["landing","scanning","result","history","account"].forEach(s => $(s).hidden = s !== id); document.querySelectorAll("[data-back]").forEach(b => b.hidden = !session); window.scrollTo({top: 0, behavior: "smooth"}); }
 document.addEventListener("click", e => { if (e.target.closest("[data-back]")) openHome(); });
@@ -1039,7 +1036,7 @@ function render(r){
       </div>
     </article>`).join("") : `<div class="note">No print ideas for this photo. Try your car, desk, a shelf or another place at home.</div>`;
   show("result");
-  $("dock").hidden = false;
+  
   lastResult = r; currentModels = {};
   $("lockbox").hidden = true; $("shareBtn").hidden = false;
   const left = r.quota ? (r.quota.free_left || 0) + (r.quota.credits || 0) : null;
@@ -1093,7 +1090,7 @@ async function pick(file){
   try { photoUrl = await shrink(file); } catch { $("error").textContent = "That photo couldn't be read. Try another one."; $("error").hidden = false; return; }
   imageB64 = photoUrl.split(",")[1];
   $("scanImg").src = photoUrl;
-  $("dock").hidden = true;
+  
   show("scanning");
   analyze();
 }
