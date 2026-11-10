@@ -327,6 +327,7 @@ nav{position:relative;gap:12px}
 .menu button:hover{background:var(--soft)}
 .menu hr{border:0;height:1px;background:var(--line);margin:4px 6px}
 .left{white-space:nowrap}
+.hrow{position:relative}.hdel{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--muted)}.hdel:hover{background:var(--soft);color:#ff8a8a}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -740,9 +741,11 @@ $("mine").onclick = async () => {
   if (error || !data?.length) { $("histList").innerHTML = `<div class="note">No spots yet. Snap a photo while signed in and it shows up here.</div>`; return; }
   $("histList").innerHTML = data.map((r, n) => {
     const fresh = !r.ideas_seen && (r.new_ideas || []).length;
-    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(r.place || "Your spot")}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span><span>${esc([...(r.new_ideas || []), ...(r.prints || [])].map(p => p.name).slice(0, 3).join(" · "))}</span><small>Added ${new Date(r.created_at).toLocaleDateString()}</small></button>`;
+    return `<button class="hrow" data-n="${n}"><span class="hl">${I("pin", 16)}<b>${esc(r.place || "Your spot")}</b>${fresh ? `<em>${r.new_ideas.length} new</em>` : ""}</span><span>${esc([...(r.new_ideas || []), ...(r.prints || [])].map(p => p.name).slice(0, 3).join(" · "))}</span><small>Added ${new Date(r.created_at).toLocaleDateString()}</small><span class="hdel" data-del-spot="${n}" role="button" aria-label="Delete spot">${I("trash", 15)}</span></button>`;
   }).join("");
   $("histList").onclick = e => {
+    const del = e.target.closest("[data-del-spot]");
+    if (del) { e.stopPropagation(); const r = data[+del.dataset.delSpot]; SB.from("scans").delete().eq("id", r.id).then(() => $("mine").click()); return; }
     const b = e.target.closest(".hrow"); if (!b) return;
     const r = data[+b.dataset.n]; photoUrl = ""; $("history").hidden = true;
     render({ place: r.place, prints: [...(r.new_ideas || []).map(p => ({ ...p, isNew: true })), ...(r.prints || [])] });
