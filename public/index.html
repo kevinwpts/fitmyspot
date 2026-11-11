@@ -601,6 +601,7 @@ body{background:var(--bg);color:var(--ink)}
 .i3d canvas{display:block;width:100%;height:min(92vw,440px);touch-action:none;cursor:grab}
 @media(min-width:760px){.i3d canvas{height:560px}}
 .icolor{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.icolor>b{font-size:15px;margin-right:4px}.icolor button{appearance:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0;box-shadow:inset 0 0 0 2px var(--card)}.icolor button.on{border-color:var(--ink)}
+.iphoto{background:var(--soft);border-radius:14px;padding:10px}.iphoto canvas{display:block;width:100%;height:auto;border-radius:10px}
 .isvg .ic{cursor:pointer}.isvg .ic:hover{fill:#FFD6C4}.isvgtip{margin:8px 2px 0;font-size:13px;color:var(--muted)}
 .irows{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;color:var(--muted)}.irows button{appearance:none;width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--card);font:600 17px/1 Geist,sans-serif;color:var(--ink);cursor:pointer}.irows b{color:var(--ink);min-width:16px;text-align:center}
 .i3dhint{position:absolute;right:10px;bottom:10px;font:600 12px Geist,sans-serif;color:var(--muted);background:rgba(255,255,255,.8);padding:5px 9px;border-radius:999px;pointer-events:none}
@@ -773,9 +774,9 @@ body{background:var(--bg);color:var(--ink)}
         <button type="button" data-istyle="boxes" role="radio" aria-checked="false"><b>Separate boxes</b><small>Lift out each one</small></button>
         <button type="button" data-istyle="dividers" role="radio" aria-checked="false"><b>Dividers only</b><small>No floor, less filament</small></button>
       </div>
-      <div class="itabs" role="tablist"><button type="button" class="on" data-iview="3d" role="tab" aria-selected="true">3D</button><button type="button" data-iview="top" role="tab" aria-selected="false">From above</button></div>
+      <div class="itabs" role="tablist"><button type="button" data-iview="photo" role="tab" aria-selected="false" id="iTabPhoto" hidden>In your drawer</button><button type="button" class="on" data-iview="3d" role="tab" aria-selected="true">3D</button><button type="button" data-iview="top" role="tab" aria-selected="false">From above</button></div>
       <div class="i3d" id="i3d"><canvas id="i3dc" aria-label="3D preview of the insert"></canvas><span class="i3dhint" id="i3dHint">Drag to turn · right-drag to move · scroll to zoom</span><div class="i3dz"><button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Reset view">⟲</button></div></div>
-      <div class="isvgw" id="iSvgW" hidden><div id="iSvg"></div><p class="isvgtip">Tap a compartment to split it in two.</p></div>
+      <div class="iphoto" id="iPhoto" hidden><canvas id="iPhotoC" aria-label="The insert drawn into your photo"></canvas><p class="isvgtip">A preview on your photo. Check the size with a ruler before you print.</p></div><div class="isvgw" id="iSvgW" hidden><div id="iSvg"></div><p class="isvgtip">Tap a compartment to split it in two.</p></div>
       <div class="iq"><b>Are these measurements right?</b><small id="iEst">Our estimate from the photo · check with a ruler</small></div>
       <div class="idims">
         <label>Width<span><input id="iW" type="number" inputmode="numeric" min="60" max="1200" step="1"> mm</span></label>
@@ -1767,9 +1768,51 @@ function focus3D(what){
 }
 function setIView(v){
   document.querySelectorAll("[data-iview]").forEach(b => { const on = b.dataset.iview === v; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
-  $("i3d").hidden = v !== "3d"; $("iSvgW").hidden = v !== "top";
+  $("i3d").hidden = v !== "3d"; $("iSvgW").hidden = v !== "top"; $("iPhoto").hidden = v !== "photo";
+  if (v === "photo") drawPhotoView();
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-iview]"); if (b) setIView(b.dataset.iview); });
+
+// "In your drawer": insatsen ritad på användarens eget foto (perspektiv via lådans fyra hörn)
+function homog(q){ // enhetskvadrat (u,v) -> fyrhörning q = [bak-v, bak-h, fram-h, fram-v]
+  const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = q;
+  const dx1 = x1 - x2, dx2 = x3 - x2, dy1 = y1 - y2, dy2 = y3 - y2, sx = x0 - x1 + x2 - x3, sy = y0 - y1 + y2 - y3;
+  const den = dx1 * dy2 - dx2 * dy1 || 1e-9, g = (sx * dy2 - dx2 * sy) / den, h = (dx1 * sy - sx * dy1) / den;
+  const a = x1 - x0 + g * x1, b = x3 - x0 + h * x3, d = y1 - y0 + g * y1, e = y3 - y0 + h * y3;
+  return (u, v) => { const w = g * u + h * v + 1; return [(a * u + b * v + x0) / w, (d * u + e * v + y0) / w]; };
+}
+const photoImg = { src: "", im: null };
+async function drawPhotoView(){
+  const c = curInsert, cv = $("iPhotoC"); if (!c || !photoUrl || $("iPhoto").hidden) return;
+  if (photoImg.src !== photoUrl) { const im = new Image(); im.src = photoUrl; try { await im.decode(); } catch { return; } photoImg.src = photoUrl; photoImg.im = im; }
+  const im = photoImg.im, [sx, sy, sw, sh] = c.crop || [0, 0, 1, 1];
+  // visa markeringen med lite luft runt
+  const pad = 0.12, vx = Math.max(0, sx - sw * pad), vy = Math.max(0, sy - sh * pad), vw = Math.min(1, sx + sw * (1 + pad)) - vx, vh = Math.min(1, sy + sh * (1 + pad)) - vy;
+  const pw = im.naturalWidth * vw, ph = im.naturalHeight * vh, k = Math.min(1, 1100 / Math.max(pw, ph));
+  cv.width = Math.round(pw * k); cv.height = Math.round(ph * k);
+  const x = cv.getContext("2d"); x.drawImage(im, im.naturalWidth * vx, im.naturalHeight * vy, pw, ph, 0, 0, cv.width, cv.height);
+  const toC = ([u, v]) => [((sx + u * sw) - vx) / vw * cv.width, ((sy + v * sh) - vy) / vh * cv.height];
+  const quad = (c.corners || [[.06, .06], [.94, .06], [.94, .94], [.06, .94]]).map(toC), H = homog(quad);
+  const W = c.w_mm, D = c.d_mm, col = c.color || "#FF5B1F", P = (mx, my) => H(mx / W, 1 - my / D); // my: 0 = fram, D = bak
+  const poly = (pts, fill, stroke, lw) => { x.beginPath(); pts.forEach((p, i) => i ? x.lineTo(...p) : x.moveTo(...p)); x.closePath(); if (fill) { x.fillStyle = fill; x.fill(); } if (stroke) { x.strokeStyle = stroke; x.lineWidth = lw; x.lineJoin = "round"; x.stroke(); } };
+  const rect = (x0, y0, x1, y1) => [P(x0, y0), P(x1, y0), P(x1, y1), P(x0, y1)];
+  const sc = Math.hypot(quad[2][0] - quad[3][0], quad[2][1] - quad[3][1]) / W; // px per mm vid framkanten
+  const g = drawInsert.last || insertGeometry(c);
+  // golv
+  if (g.style !== "dividers") poly(rect(0, 0, W, D), col + "55");
+  // väggar: ytterkant + mellanväggar (lite tjockare än i verkligheten så att de syns)
+  const t = Math.max(5, 3 / Math.max(.2, sc));
+  const walls = [[0, 0, W, t], [0, D - t, W, D], [0, 0, t, D], [W - t, 0, W, D]];
+  let yTop = D; c.rows.forEach((r, ri) => { const y0 = yTop - r.size * D; if (ri < c.rows.length - 1) walls.push([0, y0 - t / 2, W, y0 + t / 2]); let xx = 0;
+    r.cells.forEach((cl, ci) => { xx += cl.size * W; if (ci < r.cells.length - 1) walls.push([xx - t / 2, y0, xx + t / 2, yTop]); }); yTop = y0; });
+  if (g.style === "boxes") { // lösa lådor: en kontur per fack
+    yTop = D; c.rows.forEach(r => { const y0 = yTop - r.size * D; let xx = 0; r.cells.forEach(cl => { poly(rect(xx + t, y0 + t, xx + cl.size * W - t, yTop - t), col + "33", col, Math.max(2, t * sc * .9)); xx += cl.size * W; }); yTop = y0; });
+  } else walls.forEach(w => poly(rect(...w), col, "rgba(0,0,0,.18)", 1));
+  // etiketter
+  const fs = Math.max(12, Math.round(cv.width / 45)); x.font = `600 ${fs}px Geist, sans-serif`; x.textAlign = "center"; x.textBaseline = "middle";
+  yTop = D; c.rows.forEach(r => { const y0 = yTop - r.size * D; let xx = 0; r.cells.forEach(cl => { if (cl.label) { const [lx, ly] = P(xx + cl.size * W / 2, (y0 + yTop) / 2);
+    x.fillStyle = "rgba(255,255,255,.9)"; const tw = x.measureText(cl.label).width + 12, th = fs + 10; x.beginPath(); x.roundRect?.(lx - tw / 2, ly - th / 2, tw, th, 6); x.fill(); x.fillStyle = "#16161A"; x.fillText(cl.label, lx, ly); } xx += cl.size * W; }); yTop = y0; });
+}
 
 // Ritning ovanifrån (SVG)
 function insertSVG(ins, g){
@@ -1798,6 +1841,7 @@ function drawInsert(){
   $("iSvg").innerHTML = insertSVG(ins, g);
   { const pr = $("iPrinter").value; $("iDl").textContent = !pr || /^bambu-/.test(pr) ? "Download file (.3mf)" : "Download file (.stl)"; }
   drawInsert.last = g;
+  if (!$("iPhoto").hidden) drawPhotoView();
   clearTimeout(drawInsert.t); drawInsert.t = setTimeout(() => view3D(g), 120);
   const n = g.pieces.length;
   $("iInfo").innerHTML = `${g.style === "boxes" ? `${n} separate boxes` : n === 1 ? "1 piece" : `${n} pieces that fit your printer`} · ~${g.grams} g · ~${g.hours} h · ${Math.round(g.H)} mm high${n > 1 && g.style !== "boxes" ? `<small>Dashed lines show where it's split into pieces.</small>` : ""}`;
@@ -1874,6 +1918,9 @@ function showInsert(ins){
   $("iTitle").textContent = `Custom insert for your ${curInsert.what || "drawer"}`;
   $("iItems").textContent = curInsert.items?.length ? `For: ${curInsert.items.join(", ")}` : "";
   $("iW").value = curInsert.w_mm; $("iD").value = curInsert.d_mm; $("iH").value = curInsert.h_mm;
+  const hasPhoto = !!(photoUrl && curInsert.crop);
+  $("iTabPhoto").hidden = !hasPhoto;
+  setIView(hasPhoto ? "photo" : "3d");
   $("iEst").textContent = curInsert.confirmed ? "Your measurements" : `Our estimate from the photo${curInsert.confidence === "high" ? "" : " · check with a ruler"}`;
   drawInsert();
   track("insert_shown");
@@ -1967,6 +2014,7 @@ $("mkGo").onclick = async () => {
     if (r.status === 429) { toast("That's all for today. Try again tomorrow."); return; }
     if (!r.ok || !d.insert) throw 0;
     $("dlgMark").close();
+    d.insert.crop = mkSel;
     if (lastResult) lastResult.insert = d.insert;
     showInsert(d.insert); $("mkOffer").hidden = true;
     $("insertBox").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -2104,6 +2152,7 @@ $("chGo").onclick = async () => {
     if (r.status === 401) { show("choose"); openSignup("Make a custom insert", "You've used your free photo. Create a free account to make inserts that fit your drawers. You get 3 free credits."); return; }
     if (r.status === 402) { show("landing"); outOfPhotos(); return; }
     if (!r.ok || !d.insert) throw 0;
+    d.insert.crop = chSel || [0, 0, 1, 1];
     track(d.free ? "result_full" : "result_signed");
     render({ ...d, insertOnly: true }); savePhoto(d); refreshQuota();
   } catch { show("choose"); toast("Couldn't measure that. Try marking it again."); }

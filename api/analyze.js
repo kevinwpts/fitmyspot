@@ -34,6 +34,13 @@ function cleanInsert(x) {
   const norm = (arr) => { const t = arr.reduce((a, c) => a + (c.size > 0 ? c.size : 0), 0) || 1; return arr.map((c) => ({ ...c, size: (c.size > 0 ? c.size : 0) / t })); };
   let rows = Array.isArray(x.rows) ? x.rows.slice(0, 4) : [];
   rows = rows.map((r) => ({ size: +r?.size || 0, cells: norm((Array.isArray(r?.cells) ? r.cells.slice(0, 5) : []).map((c) => ({ size: +c?.size || 0, label: String(c?.label || "").slice(0, 24) }))) })).filter((r) => r.cells.length);
+  // golvets fyra hörn i bilden (bak-vänster, bak-höger, fram-höger, fram-vänster), 0-1
+  let corners = Array.isArray(x.corners) && x.corners.length === 4 && x.corners.every((c) => Array.isArray(c) && c.length === 2 && c.every((v) => Number.isFinite(+v) && +v >= -0.05 && +v <= 1.05))
+    ? x.corners.map((c) => c.map((v) => Math.round(Math.min(1, Math.max(0, +v)) * 1000) / 1000)) : null;
+  if (corners) { // rimlighetskoll: bak ovanför fram, vänster till vänster om höger, inte för litet
+    const [bl, br, fr, fl] = corners, area = Math.abs((br[0] - bl[0]) * (fl[1] - bl[1]) - (br[1] - bl[1]) * (fl[0] - bl[0]));
+    if (!(bl[0] < br[0] && fl[0] < fr[0] && bl[1] < fl[1] && br[1] < fr[1] && area > 0.08)) corners = null;
+  }
   if (!rows.length) rows = [{ size: 1, cells: [{ size: 0.5, label: "" }, { size: 0.5, label: "" }] }];
   rows = norm(rows).map((r) => ({ ...r, cells: r.cells.some((c) => c.size <= 0) ? r.cells.map((c) => ({ ...c, size: 1 / r.cells.length })) : r.cells }));
   return {
@@ -42,6 +49,7 @@ function cleanInsert(x) {
     confidence: ["low", "medium", "high"].includes(x.confidence) ? x.confidence : "low",
     items: (Array.isArray(x.items) ? x.items : []).slice(0, 8).map((i) => String(i).slice(0, 30)),
     rows,
+    ...(corners ? { corners } : {}),
   };
 }
 
@@ -53,7 +61,8 @@ Estimate its INSIDE size and design an insert for it.
 - confidence: "low", "medium" or "high" (high only if a bank card, A4 paper or ruler is visible)
 - items: up to 8 short names of the things inside
 - rows: layout seen from above, back row first. 1-4 rows, each with "size" (fraction of the depth) and 1-5 "cells" with "size" (fraction of the width) and a short "label". Sizes in each list add up to 1. Fit the compartments to the items.
-Reply ONLY with JSON: {"insert":{"what":"","w_mm":0,"d_mm":0,"h_mm":0,"confidence":"","items":[],"rows":[{"size":1,"cells":[{"size":1,"label":""}]}]}}`;
+- corners: where the inside FLOOR of the drawer/compartment is in this photo, as [x,y] fractions of the image width and height (0-1), in this order: back-left, back-right, front-right, front-left. "Back" is the side furthest from the camera.
+Reply ONLY with JSON: {"insert":{"what":"","w_mm":0,"d_mm":0,"h_mm":0,"confidence":"","items":[],"rows":[{"size":1,"cells":[{"size":1,"label":""}]}],"corners":[[0,0],[1,0],[1,1],[0,1]]}}`;
 
 // Kända printrar: byggvolym (mm), skåp, flerfärg
 const PRINTERS = {
