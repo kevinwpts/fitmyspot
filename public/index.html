@@ -581,7 +581,7 @@ body{background:var(--bg);color:var(--ink)}
 .isvgw{background:var(--soft);border-radius:14px;padding:12px}
 .isvg{width:100%;height:auto;max-height:340px;display:block}
 .isvg .io{fill:#fff;stroke:var(--ink);stroke-width:3}.isvg .ic{fill:#FFE9DF;stroke:#E24A12;stroke-width:2}
-.isvg .il{fill:var(--ink);font-family:Geist,sans-serif;font-weight:600;text-anchor:middle;dominant-baseline:middle}
+.isvg .il{pointer-events:none;fill:var(--ink);font-family:Geist,sans-serif;font-weight:600;text-anchor:middle;dominant-baseline:middle}
 .isvg .icut{stroke:var(--ink);stroke-width:2;stroke-dasharray:8 6}
 .iq{display:grid;gap:2px}.iq b{font-size:16px}.iq small{color:var(--muted);font-size:13px}
 .idims{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -598,7 +598,11 @@ body{background:var(--bg);color:var(--ink)}
 .itabs button{appearance:none;border:0;background:none;font:600 14px Geist,sans-serif;color:var(--muted);padding:8px 14px;border-radius:9px;cursor:pointer}
 .itabs button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .i3d{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(#F7F7F8,#ECEDF0)}
-.i3d canvas{display:block;width:100%;height:min(72vw,340px);touch-action:none;cursor:grab}
+.i3d canvas{display:block;width:100%;height:min(92vw,440px);touch-action:none;cursor:grab}
+@media(min-width:760px){.i3d canvas{height:560px}}
+.icolor{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.icolor>b{font-size:15px;margin-right:4px}.icolor button{appearance:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0;box-shadow:inset 0 0 0 2px var(--card)}.icolor button.on{border-color:var(--ink)}
+.isvg .ic{cursor:pointer}.isvg .ic:hover{fill:#FFD6C4}.isvgtip{margin:8px 2px 0;font-size:13px;color:var(--muted)}
+.irows{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;color:var(--muted)}.irows button{appearance:none;width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--card);font:600 17px/1 Geist,sans-serif;color:var(--ink);cursor:pointer}.irows b{color:var(--ink);min-width:16px;text-align:center}
 .i3dhint{position:absolute;right:10px;bottom:10px;font:600 12px Geist,sans-serif;color:var(--muted);background:rgba(255,255,255,.8);padding:5px 9px;border-radius:999px;pointer-events:none}
 
 .imark{appearance:none;border:0;background:none;padding:0;margin-top:8px;font:500 13.5px Geist,sans-serif;color:var(--muted);cursor:pointer;text-align:left}.imark b{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
@@ -747,9 +751,11 @@ body{background:var(--bg);color:var(--ink)}
         <button type="button" class="imark" id="iMark" hidden>Wrong drawer or shelf? <b>Mark the right one</b></button></div>
       <div class="icount">
         <div class="icl"><b>Compartments</b><span id="iCountV">6</span></div>
-        <input type="range" id="iCount" min="1" max="16" step="1" value="6" aria-label="Number of compartments">
-        <div class="icchips"><button type="button" class="on" id="iAi">Our suggestion</button><button type="button" id="iEven">Same size</button></div>
+        <input type="range" id="iCount" min="1" max="30" step="1" value="6" aria-label="Number of compartments">
+        <div class="icchips"><button type="button" class="on" id="iAi">Our suggestion</button><button type="button" id="iEven">Same size</button><button type="button" id="iUndo" hidden>Undo</button></div>
+        <div class="irows">Rows <button type="button" id="iRowM" aria-label="Fewer rows">−</button><b id="iRowV">2</b><button type="button" id="iRowP" aria-label="More rows">+</button><span>· Tap a compartment in "From above" to split it</span></div>
       </div>
+      <div class="icolor" role="radiogroup" aria-label="Color"><b>Color</b><button type="button" data-icol="#FF5B1F" style="background:#FF5B1F" aria-label="Orange" class="on"></button><button type="button" data-icol="#F4F4F0" style="background:#F4F4F0" aria-label="White"></button><button type="button" data-icol="#2B2B2E" style="background:#2B2B2E" aria-label="Black"></button><button type="button" data-icol="#9EA3A8" style="background:#9EA3A8" aria-label="Grey"></button><button type="button" data-icol="#3D7BE0" style="background:#3D7BE0" aria-label="Blue"></button><button type="button" data-icol="#43B37A" style="background:#43B37A" aria-label="Green"></button><button type="button" data-icol="#F2B8C6" style="background:#F2B8C6" aria-label="Pink"></button></div>
       <div class="icust">
         <label class="itog"><input type="checkbox" id="oRound"><span><b>Rounded corners</b><small>Easy to grab small things</small></span></label>
         <label class="itog"><input type="checkbox" id="oNotch"><span><b>Finger notch</b><small>A dip in the front to lift things out</small></span></label>
@@ -768,8 +774,8 @@ body{background:var(--bg);color:var(--ink)}
         <button type="button" data-istyle="dividers" role="radio" aria-checked="false"><b>Dividers only</b><small>No floor, less filament</small></button>
       </div>
       <div class="itabs" role="tablist"><button type="button" class="on" data-iview="3d" role="tab" aria-selected="true">3D</button><button type="button" data-iview="top" role="tab" aria-selected="false">From above</button></div>
-      <div class="i3d" id="i3d"><canvas id="i3dc" aria-label="3D preview of the insert"></canvas><span class="i3dhint">Drag to turn · pinch to zoom</span><div class="i3dz"><button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Reset view">⟲</button></div></div>
-      <div class="isvgw" id="iSvg" hidden></div>
+      <div class="i3d" id="i3d"><canvas id="i3dc" aria-label="3D preview of the insert"></canvas><span class="i3dhint" id="i3dHint">Drag to turn · right-drag to move · scroll to zoom</span><div class="i3dz"><button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Reset view">⟲</button></div></div>
+      <div class="isvgw" id="iSvgW" hidden><div id="iSvg"></div><p class="isvgtip">Tap a compartment to split it in two.</p></div>
       <div class="iq"><b>Are these measurements right?</b><small id="iEst">Our estimate from the photo · check with a ruler</small></div>
       <div class="idims">
         <label>Width<span><input id="iW" type="number" inputmode="numeric" min="60" max="1200" step="1"> mm</span></label>
@@ -1419,7 +1425,13 @@ function insertGeometry(ins){
   };
   if (style === "boxes") {
     // Varje fack blir en egen låda med golv och väggar (0,5 mm luft mellan lådorna)
-    const g = 0.5, t = 1.2, pieces = cells.map(([x0, y0, x1, y1]) => {
+    // fack som är större än skrivarbädden blir flera lådor bredvid varandra
+    const bcells = [];
+    for (const [x0, y0, x1, y1] of cells) {
+      const kx = Math.ceil((x1 - x0) / bed), ky = Math.ceil((y1 - y0) / bed);
+      for (let i = 0; i < kx; i++) for (let j = 0; j < ky; j++) bcells.push([x0 + (x1 - x0) * i / kx, y0 + (y1 - y0) * j / ky, x0 + (x1 - x0) * (i + 1) / kx, y0 + (y1 - y0) * (j + 1) / ky]);
+    }
+    const g = 0.5, t = 1.2, pieces = bcells.map(([x0, y0, x1, y1]) => {
       const w = Math.min(x1 - x0 - g, bed), d = Math.min(y1 - y0 - g, bed);
       const front = ins.notch ? notchWall(0, 0, w, t, [w / 2]) : [[0, 0, 0, w, t, H]];
       const fil = R && w > 4 * R && d > 4 * R ? [[t, t, 1, 1], [w - t, t, -1, 1], [t, d - t, 1, -1], [w - t, d - t, -1, -1]].map(([x, y, sx, sy]) => ({ x, y, sx, sy, r: R })) : [];
@@ -1617,7 +1629,8 @@ async function zipFiles(files){
 }
 async function insert3MF(g){
   const pid = bambuId(), [W, D] = BAMBU_BED[pid] || [256, 256];
-  const proj = await (await fetch(`/bambu/${pid}.json`)).text();
+  let proj = await (await fetch(`/bambu/${pid}.json`)).text();
+  if (curInsert?.color) { try { const j = JSON.parse(proj); j.filament_colour = [curInsert.color.toUpperCase()]; proj = JSON.stringify(j); } catch {} }
   const plates = packPlates(g.pieces, Math.min(W, bedSize()), Math.min(D, bedSize()));
   const cols = (n => { const v = Math.sqrt(n), r = Math.floor(v + .5); return v > r ? r + 1 : Math.max(1, r); })(plates.length);
   const uid = () => crypto.randomUUID ? crypto.randomUUID() : "xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx".replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
@@ -1665,22 +1678,33 @@ async function view3D(g){
     r.setPixelRatio(Math.min(2, devicePixelRatio || 1)); r.shadowMap.enabled = true; r.shadowMap.type = T.PCFSoftShadowMap;
     const scene = new T.Scene(), cam = new T.PerspectiveCamera(32, 1, 1, 10000);
     scene.add(new T.HemisphereLight(0xffffff, 0xc9ccd2, 1.6));
-    const sun = new T.DirectionalLight(0xffffff, 2.2); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); scene.add(sun);
+    const sun = new T.DirectionalLight(0xffffff, 2.2); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 1.5; scene.add(sun);
     const ground = new T.Mesh(new T.PlaneGeometry(1, 1), new T.ShadowMaterial({ opacity: .1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
     v3 = { r, scene, cam, sun, ground, group: null, yaw: -0.6, pitch: 0.62, auto: true, drag: null, raf: 0, zoom: 1, look: [0, 0, 0], tw: null };
-    // Dra = vrid. Nyp med två fingrar eller scrolla = zooma.
-    const pts = new Map(); let pinch = null;
-    const setZoom = z => { v3.zoom = Math.min(2.5, Math.max(0.35, z)); };
+    // Som i en slicer: dra = vrid (även underifrån), högerklick/shift-dra eller två fingrar = flytta, scrolla/nyp = zooma
+    const pts = new Map(); let two = null;
+    const setZoom = z => { v3.zoom = Math.min(3, Math.max(0.12, z)); };
+    const pan = (dx, dy) => {
+      const k = (v3.R || 800) * v3.zoom * 0.57 / Math.max(200, cv.clientHeight);
+      const rx = Math.cos(v3.yaw), rz = -Math.sin(v3.yaw);                       // kamerans höger
+      const ux = -Math.sin(v3.pitch) * Math.sin(v3.yaw), uy = Math.cos(v3.pitch), uz = -Math.sin(v3.pitch) * Math.cos(v3.yaw); // kamerans upp
+      v3.look = [v3.look[0] - (dx * rx - dy * ux) * k, v3.look[1] + dy * uy * k, v3.look[2] - (dx * rz - dy * uz) * k];
+    };
     const down = e => { v3.auto = false; v3.tw = null; pts.set(e.pointerId, [e.clientX, e.clientY]); cv.setPointerCapture?.(e.pointerId);
-      if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), z: v3.zoom }; v3.drag = null; }
-      else v3.drag = { x: e.clientX, y: e.clientY, yaw: v3.yaw, pitch: v3.pitch }; };
+      if (pts.size === 2) { const [a, b] = [...pts.values()]; two = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), z: v3.zoom, m: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2] }; v3.drag = null; }
+      else v3.drag = { x: e.clientX, y: e.clientY, yaw: v3.yaw, pitch: v3.pitch, pan: e.button === 2 || e.button === 1 || e.shiftKey || e.ctrlKey || e.metaKey }; };
     const move = e => { if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, [e.clientX, e.clientY]);
-      if (pinch && pts.size === 2) { const [a, b] = [...pts.values()]; setZoom(pinch.z * pinch.d / Math.max(20, Math.hypot(a[0] - b[0], a[1] - b[1]))); return; }
-      if (!v3.drag) return; v3.yaw = v3.drag.yaw - (e.clientX - v3.drag.x) / 160; v3.pitch = Math.min(1.45, Math.max(0.15, v3.drag.pitch + (e.clientY - v3.drag.y) / 220)); };
-    const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) v3.drag = null; };
+      if (two && pts.size === 2) { const [a, b] = [...pts.values()], m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+        setZoom(two.z * two.d / Math.max(20, Math.hypot(a[0] - b[0], a[1] - b[1]))); pan(m[0] - two.m[0], m[1] - two.m[1]); two.m = m; return; }
+      const d = v3.drag; if (!d) return;
+      if (d.pan) { pan(e.clientX - d.x, e.clientY - d.y); d.x = e.clientX; d.y = e.clientY; return; }
+      v3.yaw = d.yaw - (e.clientX - d.x) / 160; v3.pitch = Math.min(1.5, Math.max(-1.5, d.pitch + (e.clientY - d.y) / 200)); };
+    const up = e => { pts.delete(e.pointerId); if (pts.size < 2) two = null; if (!pts.size) v3.drag = null; };
     cv.addEventListener("pointerdown", down); cv.addEventListener("pointermove", move); cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
-    cv.addEventListener("wheel", e => { e.preventDefault(); v3.auto = false; setZoom(v3.zoom * Math.exp(e.deltaY * 0.0015)); }, { passive: false });
-    document.querySelectorAll("[data-zoom]").forEach(b => b.onclick = () => { v3.auto = false; b.dataset.zoom === "in" ? setZoom(v3.zoom / 1.3) : b.dataset.zoom === "out" ? setZoom(v3.zoom * 1.3) : (setZoom(1), v3.yaw = -0.6, v3.pitch = 0.62, v3.look = [0, 0, 0], v3.tw = null); });
+    cv.addEventListener("contextmenu", e => e.preventDefault());
+    cv.addEventListener("wheel", e => { e.preventDefault(); v3.auto = false; v3.tw = null; setZoom(v3.zoom * Math.exp(e.deltaY * 0.0015)); }, { passive: false });
+    if (!matchMedia("(pointer: fine)").matches) $("i3dHint").textContent = "Drag to turn · two fingers to move and zoom";
+    document.querySelectorAll("[data-zoom]").forEach(b => b.onclick = () => { v3.auto = false; v3.tw = null; b.dataset.zoom === "in" ? setZoom(v3.zoom / 1.3) : b.dataset.zoom === "out" ? setZoom(v3.zoom * 1.3) : (setZoom(1), v3.yaw = -0.6, v3.pitch = 0.62, v3.look = [0, 0, 0]); });
     const loop = () => {
       v3.raf = requestAnimationFrame(loop);
       if ($("insertBox").hidden || $("i3d").hidden) return;
@@ -1699,28 +1723,39 @@ async function view3D(g){
     };
     loop();
   }
-  if (v3.group) { v3.scene.remove(v3.group); v3.group.traverse(o => { o.geometry?.dispose?.(); }); }
-  const grp = new T.Group(), mat = new T.MeshStandardMaterial({ color: 0xFF5B1F, roughness: .78, metalness: 0 }), edgeMat = new T.LineBasicMaterial({ color: 0xB8380C, transparent: true, opacity: .45 });
+  if (v3.group) { v3.scene.remove(v3.group); v3.group.traverse(o => { o.geometry?.dispose?.(); o.material?.dispose?.(); }); v3.group = null; }
+  const grp = new T.Group(), base = new T.Color(curInsert?.color || "#FF5B1F");
+  // Separata lådor: dra isär dem i förhandsvisningen så att man ser att de är lösa
+  const boxes = g.style === "boxes" && g.pieces.length > 1, pcs = previewPieces(g);
   const gap = g.pieces.length > 1 ? 8 : 0;
-  const ext = g.pieces.reduce((e, p) => [Math.max(e[0], p.pos[0] + p.w), Math.max(e[1], p.pos[1] + p.d)], [0, 0]);
-  const tris = await insertTriangles(g, curInsert?.pattern || "plain");
+  const ext = pcs.reduce((e, p) => [Math.max(e[0], p.pos[0] + p.w), Math.max(e[1], p.pos[1] + p.d)], [0, 0]);
+  const parts = [];
+  for (const p of pcs) parts.push(await insertTriangles({ ...g, pieces: [p] }, curInsert?.pattern || "plain"));
   if (g !== drawInsert.last) return; // användaren hann ändra något
-  const arr = new Float32Array(tris.length * 9); let o = 0;
-  for (const t of tris) for (const [x, y, z] of t) { arr[o++] = x - ext[0] / 2; arr[o++] = z; arr[o++] = -(y - ext[1] / 2); }
-  const geo = new T.BufferGeometry(); geo.setAttribute("position", new T.BufferAttribute(arr, 3)); geo.computeVertexNormals();
-  const mesh = new T.Mesh(geo, mat); mesh.castShadow = true; mesh.receiveShadow = true; grp.add(mesh);
-  grp.add(new T.LineSegments(new T.EdgesGeometry(geo, 25), edgeMat));
+  const lum = base.getHSL({}).l;
+  parts.forEach((tris, i) => {
+    const arr = new Float32Array(tris.length * 9); let o = 0;
+    for (const t of tris) for (const [x, y, z] of t) { arr[o++] = x - ext[0] / 2; arr[o++] = z; arr[o++] = -(y - ext[1] / 2); }
+    const geo = new T.BufferGeometry(); geo.setAttribute("position", new T.BufferAttribute(arr, 3)); geo.computeVertexNormals();
+    const c = base.clone(); if (boxes && i % 2) c.offsetHSL(0, 0, lum > .6 ? -0.07 : 0.07);
+    const mesh = new T.Mesh(geo, new T.MeshStandardMaterial({ color: c, roughness: .78, metalness: 0, side: T.DoubleSide })); mesh.castShadow = true; mesh.receiveShadow = true; grp.add(mesh);
+    const ec = base.clone(); ec.offsetHSL(0, 0, lum > .5 ? -0.35 : 0.3);
+    grp.add(new T.LineSegments(new T.EdgesGeometry(geo, 25), new T.LineBasicMaterial({ color: ec, transparent: true, opacity: .45 })));
+  });
   v3.group = grp; v3.scene.add(grp);
-  const span = Math.max(g.W, g.D) + gap * 2;
+  const span = Math.max(ext[0], ext[1]) + gap * 2;
   v3.R = span * 1.95; v3.H = g.H;
   v3.ground.scale.set(span * 3, span * 3, 1);
   v3.sun.position.set(span * .6, span * 1.4, span * .9); v3.sun.target.position.set(0, 0, 0);
   const sc = v3.sun.shadow.camera; sc.left = sc.bottom = -span; sc.right = sc.top = span; sc.near = 1; sc.far = span * 5; sc.updateProjectionMatrix();
 }
+function previewPieces(g){
+  return g.style === "boxes" && g.pieces.length > 1 ? g.pieces.map(p => { const cx = p.x0 + p.w / 2, cy = p.y0 + p.d / 2; return { ...p, pos: [cx * 1.1 - p.w / 2, cy * 1.1 - p.d / 2] }; }) : g.pieces;
+}
 function focus3D(what){
   if (!v3 || !drawInsert.last) return;
   setIView("3d"); v3.auto = false;
-  const g = drawInsert.last, p0 = g.pieces[0], ext = g.pieces.reduce((e, p) => [Math.max(e[0], p.pos[0] + p.w), Math.max(e[1], p.pos[1] + p.d)], [0, 0]);
+  const g = { ...drawInsert.last, pieces: previewPieces(drawInsert.last) }, p0 = g.pieces[0], ext = g.pieces.reduce((e, p) => [Math.max(e[0], p.pos[0] + p.w), Math.max(e[1], p.pos[1] + p.d)], [0, 0]);
   const to3 = (x, y, z) => [x - ext[0] / 2, z, -(y - ext[1] / 2)], H = g.H;
   if (what === "corner") { // titta ner i ett hörn från fackets insida
     const f = (p0.fillets || [])[0]; const c = f ? to3(p0.pos[0] + f.x, p0.pos[1] + f.y, H * 0.3) : to3(10, 10, H / 2);
@@ -1732,7 +1767,7 @@ function focus3D(what){
 }
 function setIView(v){
   document.querySelectorAll("[data-iview]").forEach(b => { const on = b.dataset.iview === v; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
-  $("i3d").hidden = v !== "3d"; $("iSvg").hidden = v !== "top";
+  $("i3d").hidden = v !== "3d"; $("iSvgW").hidden = v !== "top";
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-iview]"); if (b) setIView(b.dataset.iview); });
 
@@ -1740,11 +1775,11 @@ document.addEventListener("click", e => { const b = e.target.closest("[data-ivie
 function insertSVG(ins, g){
   const W = g.W, D = g.D, s = 1, lab = [];
   let rects = "", yTop = D;
-  ins.rows.forEach(r => {
+  ins.rows.forEach((r, ri) => {
     const rh = r.size * D, y0 = yTop - rh; let x = 0;
-    r.cells.forEach(c => {
+    r.cells.forEach((c, ci) => {
       const cw = c.size * W;
-      const gp = Math.max(4, W / 90); rects += `<rect x="${x + gp / 2}" y="${D - yTop + gp / 2}" width="${Math.max(1, cw - gp)}" height="${Math.max(1, rh - gp)}" rx="${gp}" class="ic"/>`;
+      const gp = Math.max(4, W / 90); rects += `<rect data-r="${ri}" data-c="${ci}" x="${x + gp / 2}" y="${D - yTop + gp / 2}" width="${Math.max(1, cw - gp)}" height="${Math.max(1, rh - gp)}" rx="${gp}" class="ic"/>`;
       if (c.label) lab.push(`<text x="${x + cw / 2}" y="${D - yTop + rh / 2}" class="il" font-size="${Math.max(10, Math.min(W, D) / 16)}">${esc(c.label)}</text>`);
       x += cw;
     });
@@ -1761,6 +1796,7 @@ function drawInsert(){
   ins.w_mm = +$("iW").value || ins.w_mm; ins.d_mm = +$("iD").value || ins.d_mm; ins.h_mm = +$("iH").value || ins.h_mm;
   const g = insertGeometry(ins);
   $("iSvg").innerHTML = insertSVG(ins, g);
+  { const pr = $("iPrinter").value; $("iDl").textContent = !pr || /^bambu-/.test(pr) ? "Download file (.3mf)" : "Download file (.stl)"; }
   drawInsert.last = g;
   clearTimeout(drawInsert.t); drawInsert.t = setTimeout(() => view3D(g), 120);
   const n = g.pieces.length;
@@ -1769,8 +1805,8 @@ function drawInsert(){
 
 let aiRows = null;
 // Jämn layout: n fack fördelade på rader efter lådans form (t.ex. 7 = 4 + 3)
-function evenRows(n, W, D){
-  const rows = Math.min(4, Math.max(1, Math.round(Math.sqrt(n * D / W))));
+function evenRows(n, W, D, nr){
+  const rows = Math.min(n, nr || Math.min(6, Math.max(1, Math.round(Math.sqrt(n * D / W)))));
   const base = Math.floor(n / rows), extra = n % rows;
   return Array.from({ length: rows }, (_, i) => { const k = base + (i < extra ? 1 : 0); return { size: 1 / rows, cells: Array.from({ length: k }, () => ({ size: 1 / k, label: "" })) }; });
 }
@@ -1792,18 +1828,42 @@ document.addEventListener("click", e => { const b = e.target.closest("[data-ipat
 function setIStyle(st){ document.querySelectorAll("[data-istyle]").forEach(b => { const on = b.dataset.istyle === st; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); }); }
 document.addEventListener("click", e => { const b = e.target.closest("[data-istyle]"); if (!b || !curInsert) return; curInsert.style = b.dataset.istyle; setIStyle(curInsert.style); drawInsert(); });
 function setLayoutMode(ai){ $("iAi").classList.toggle("on", ai); $("iEven").classList.toggle("on", !ai); }
+// Ångra-historik för layoutändringar
+const iHist = [];
+function pushHist(){ if (!curInsert) return; iHist.push(JSON.stringify(curInsert.rows)); if (iHist.length > 30) iHist.shift(); $("iUndo").hidden = false; }
+function syncCount(){ const n = countCells(curInsert.rows); $("iCount").value = Math.min(30, n); $("iCountV").textContent = n; $("iRowV").textContent = curInsert.rows.length; }
+$("iUndo").onclick = () => { if (!iHist.length || !curInsert) return; curInsert.rows = JSON.parse(iHist.pop()); $("iUndo").hidden = !iHist.length; syncCount(); drawInsert(); };
+$("iCount").addEventListener("pointerdown", pushHist, true); $("iCount").addEventListener("keydown", pushHist, true);
 $("iCount").addEventListener("input", () => {
   if (!curInsert) return;
   const n = +$("iCount").value; $("iCountV").textContent = n;
-  curInsert.rows = evenRows(n, curInsert.w_mm, curInsert.d_mm); setLayoutMode(false); drawInsert();
+  curInsert.rows = evenRows(n, curInsert.w_mm, curInsert.d_mm); $("iRowV").textContent = curInsert.rows.length; setLayoutMode(false); drawInsert();
 });
-$("iAi").onclick = () => { if (!curInsert || !aiRows) return; curInsert.rows = JSON.parse(JSON.stringify(aiRows)); const n = countCells(curInsert.rows); $("iCount").value = n; $("iCountV").textContent = n; setLayoutMode(true); drawInsert(); };
-$("iEven").onclick = () => { if (!curInsert) return; const n = +$("iCount").value; curInsert.rows = evenRows(n, curInsert.w_mm, curInsert.d_mm); setLayoutMode(false); drawInsert(); };
+const setRows = k => { if (!curInsert) return; const n = Math.max(countCells(curInsert.rows), k); const nr = Math.max(1, Math.min(8, k));
+  if (nr === curInsert.rows.length) return; pushHist(); curInsert.rows = evenRows(Math.max(n, nr), curInsert.w_mm, curInsert.d_mm, nr); syncCount(); setLayoutMode(false); drawInsert(); };
+$("iRowM").onclick = () => curInsert && setRows(curInsert.rows.length - 1);
+$("iRowP").onclick = () => curInsert && setRows(curInsert.rows.length + 1);
+// Klicka på ett fack ovanifrån = dela det i två (på längden)
+$("iSvg").addEventListener("click", e => {
+  const r = e.target.closest("rect[data-r]"); if (!r || !curInsert) return;
+  const ri = +r.dataset.r, ci = +r.dataset.c, row = curInsert.rows[ri], cell = row?.cells[ci]; if (!cell) return;
+  const cw = cell.size * curInsert.w_mm, ch = row.size * curInsert.d_mm;
+  pushHist();
+  if (ch > cw && row.cells.length === 1) curInsert.rows.splice(ri, 1, { size: row.size / 2, cells: [{ ...cell }] }, { size: row.size / 2, cells: [{ size: 1, label: "" }] });
+  else if (cw >= 30) row.cells.splice(ci, 1, { size: cell.size / 2, label: cell.label }, { size: cell.size / 2, label: "" });
+  else { iHist.pop(); $("iUndo").hidden = !iHist.length; toast("Too narrow to split. Use Rows + instead."); return; }
+  syncCount(); setLayoutMode(false); drawInsert();
+});
+$("iAi").onclick = () => { if (!curInsert || !aiRows) return; pushHist(); curInsert.rows = JSON.parse(JSON.stringify(aiRows)); const n = countCells(curInsert.rows); $("iCount").value = n; $("iCountV").textContent = n; setLayoutMode(true); drawInsert(); };
+$("iEven").onclick = () => { if (!curInsert) return; pushHist(); const n = +$("iCount").value; curInsert.rows = evenRows(n, curInsert.w_mm, curInsert.d_mm); syncCount(); setLayoutMode(false); drawInsert(); };
+// Färg: syns i 3D och följer med till Bambu Studio
+function setICol(c){ document.querySelectorAll("[data-icol]").forEach(b => { const on = b.dataset.icol === c; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); }); }
+document.addEventListener("click", e => { const b = e.target.closest("[data-icol]"); if (!b || !curInsert) return; curInsert.color = b.dataset.icol; setICol(curInsert.color); drawInsert(); });
 
 function showInsert(ins){
   curInsert = ins ? JSON.parse(JSON.stringify(ins)) : null;
   aiRows = curInsert ? JSON.parse(JSON.stringify(curInsert.rows)) : null;
-  if (curInsert) { const n = countCells(curInsert.rows); $("iCount").value = Math.min(16, n); $("iCountV").textContent = n; setLayoutMode(true); setIStyle(curInsert.style || "tray"); setIPat(curInsert.pattern || "plain"); syncOpts(); }
+  if (curInsert) { iHist.length = 0; $("iUndo").hidden = true; syncCount(); setICol(curInsert.color || "#FF5B1F"); setLayoutMode(true); setIStyle(curInsert.style || "tray"); setIPat(curInsert.pattern || "plain"); syncOpts(); }
   $("iMark").hidden = !photoUrl || !curInsert;
   // Mobil: knappen syns ändå, men skickar en länk till datorn (Bambu Studio finns bara där)
   $("iBambu").hidden = false;
@@ -1876,7 +1936,7 @@ $("iLink").onclick = async () => {
   try {
     const d = JSON.parse(unb64u(q));
     const ins = { what: String(d.w || "drawer").slice(0, 40), w_mm: +d.a, d_mm: +d.b, h_mm: +d.c, items: (d.i || []).slice(0, 8), confirmed: true,
-      rows: (d.r || []).slice(0, 4).map(r => ({ size: +r[0], cells: (r[1] || []).slice(0, 5).map(c => ({ size: +c[0], label: String(c[1] || "").slice(0, 24) })) })) };
+      rows: (d.r || []).slice(0, 8).map(r => ({ size: +r[0], cells: (r[1] || []).slice(0, 12).map(c => ({ size: +c[0], label: String(c[1] || "").slice(0, 24) })) })) };
     if (!ins.w_mm || !ins.rows.length) return;
     history.replaceState(null, "", "/");
     track("insert_open");
