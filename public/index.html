@@ -616,6 +616,7 @@ body{background:var(--bg);color:var(--ink)}
 .mk-tip{color:var(--muted);font-size:13px}
 .mk-act{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}
 .ibambu{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#00AE42;padding:16px}.ibambu:hover{background:#009639}
+.iact:has(> [hidden]){grid-template-columns:1fr}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -1508,7 +1509,10 @@ function showInsert(ins){
   aiRows = curInsert ? JSON.parse(JSON.stringify(curInsert.rows)) : null;
   if (curInsert) { const n = countCells(curInsert.rows); $("iCount").value = Math.min(16, n); $("iCountV").textContent = n; setLayoutMode(true); }
   $("iMark").hidden = !photoUrl || !curInsert;
-  $("iBambu").hidden = !isDesktop();
+  // Mobil: knappen syns ändå, men skickar en länk till datorn (Bambu Studio finns bara där)
+  $("iBambu").hidden = false;
+  $("iBambu").lastChild.textContent = isDesktop() ? "Open in Bambu Studio" : "Open in Bambu Studio on my computer";
+  $("iLink").hidden = true; // samma sak som Bambu-knappen på mobil, och onödig på datorn
   $("insertBox").hidden = !curInsert;
   if (!curInsert) return;
   $("iTitle").textContent = `Custom insert for your ${curInsert.what || "drawer"}`;
@@ -1524,6 +1528,7 @@ function showInsert(ins){
 const isDesktop = () => matchMedia("(pointer: fine)").matches && !/Android|iPhone|iPad/i.test(navigator.userAgent);
 $("iBambu").onclick = async () => {
   if (!curInsert) return;
+  if (!isDesktop()) { $("iLink").click(); return; }
   if (!session) { openSignup("Open in Bambu Studio", "Create a free account to send the file to Bambu Studio. It takes 20 seconds."); return; }
   const btn = $("iBambu"), old = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spin"></span> Preparing file…`;
   try {
