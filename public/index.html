@@ -633,6 +633,11 @@ body{background:var(--bg);color:var(--ink)}
 .istyle button{appearance:none;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:10px 8px;text-align:left;cursor:pointer;color:var(--ink);display:grid;gap:2px}
 .istyle button b{font:600 13.5px/1.2 Geist,sans-serif}.istyle button small{font-size:11.5px;color:var(--muted);line-height:1.25}
 .istyle button.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.ipat{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ipat>span{font:600 13px Geist,sans-serif;color:var(--muted);margin-right:4px}
+.ipat button{appearance:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px 5px 6px;font:600 13px Geist,sans-serif;color:var(--ink);cursor:pointer}
+.ipat button.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.ipat svg{width:30px;height:18px}.ipat svg rect{fill:#FFE9DF;stroke:var(--lime);stroke-width:2}.ipat svg .h{fill:#fff;stroke:var(--lime);stroke-width:1.5}.ipat svg .s{stroke:#fff;stroke-width:3;stroke-linecap:round}
+.iprn{display:flex;align-items:center;justify-content:space-between;gap:10px;font:600 14px Geist,sans-serif}.iprn .sel{max-width:62%}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -739,6 +744,12 @@ body{background:var(--bg);color:var(--ink)}
         <input type="range" id="iCount" min="1" max="16" step="1" value="6" aria-label="Number of compartments">
         <div class="icchips"><button type="button" class="on" id="iAi">Our suggestion</button><button type="button" id="iEven">Same size</button></div>
       </div>
+      <div class="ipat" role="radiogroup" aria-label="Wall design">
+        <span>Walls</span>
+        <button type="button" class="on" data-ipat="plain" role="radio" aria-checked="true"><svg viewBox="0 0 40 24" aria-hidden="true"><rect x="2" y="2" width="36" height="20" rx="3"/></svg>Plain</button>
+        <button type="button" data-ipat="hex" role="radio" aria-checked="false"><svg viewBox="0 0 40 24" aria-hidden="true"><rect x="2" y="2" width="36" height="20" rx="3"/><path d="M9 9l3-2 3 2v4l-3 2-3-2zM18 9l3-2 3 2v4l-3 2-3-2zM27 9l3-2 3 2v4l-3 2-3-2z" class="h"/></svg>Hexagon</button>
+        <button type="button" data-ipat="slots" role="radio" aria-checked="false"><svg viewBox="0 0 40 24" aria-hidden="true"><rect x="2" y="2" width="36" height="20" rx="3"/><path d="M10 7v10M16 7v10M22 7v10M28 7v10" class="s"/></svg>Slots</button>
+      </div>
       <div class="istyle" role="radiogroup" aria-label="Style">
         <button type="button" class="on" data-istyle="tray" role="radio" aria-checked="true"><b>One tray</b><small>Dividers on a floor</small></button>
         <button type="button" data-istyle="boxes" role="radio" aria-checked="false"><b>Separate boxes</b><small>Lift out each one</small></button>
@@ -754,6 +765,7 @@ body{background:var(--bg);color:var(--ink)}
         <label>Height<span><input id="iH" type="number" inputmode="numeric" min="20" max="300" step="1"> mm</span></label>
       </div>
       <small class="ihint">Measure the inside of the drawer. We make it 1 mm smaller on each side so it slides in.</small>
+      <label class="iprn">Your printer <select id="iPrinter" class="sel" aria-label="Your printer"></select></label>
       <p class="iinfo" id="iInfo"></p>
       <button type="button" class="btn btn-ink ibambu" id="iBambu" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>Open in Bambu Studio</button>
       <div class="iact"><button type="button" class="btn btn-ink" id="iDl">Download file (.stl)</button><button type="button" class="btn btn-soft" id="iLink">Send to my computer</button></div>
@@ -1182,12 +1194,17 @@ fetch("/api/stats").then(r => r.json()).then(d => { if (d.scans >= 100) $("sub")
 
 /* Printer: asked after the first result, remembered on this device */
 const PRINTERS = [["bambu-a1-mini","Bambu A1 mini"],["bambu-a1","Bambu A1"],["bambu-p1s","Bambu P1S"],["bambu-p2s","Bambu P2S"],["bambu-x1c","Bambu X1C"],["bambu-h2d","Bambu H2D"],["prusa-mk4","Prusa MK4"],["prusa-core-one","Prusa Core One"],["prusa-mini","Prusa Mini"],["creality-k1","Creality K1"],["creality-ender3","Ender 3"],["elegoo-centauri","Elegoo Centauri"],["other","Other"]];
+const BED = { "bambu-a1-mini": 180, "prusa-mini": 180, "creality-k1": 220, "creality-ender3": 220, "prusa-mk4": 250, "prusa-core-one": 250, "bambu-h2d": 325 };
 let lastResult = null, currentModels = {};
 const getPrinter = () => { try { return localStorage.getItem("printer") || ""; } catch { return ""; } };
 // Skrivaren väljs på kontosidan och sparas på enheten
 $("aPrinter").innerHTML = `<option value="">Not set</option>` + PRINTERS.map(([id, n]) => `<option value="${id}">${n}</option>`).join("");
 $("aPrinter").value = getPrinter();
-$("aPrinter").onchange = e => { try { e.target.value ? localStorage.setItem("printer", e.target.value) : localStorage.removeItem("printer"); } catch {} $("aPrinterOk").hidden = false; };
+// Samma printerval i insatskortet: styr hur stora bitarna får bli
+$("iPrinter").innerHTML = `<option value="">Not sure (256 mm, most common)</option>` + PRINTERS.filter(([id]) => id !== "other").map(([id, n]) => `<option value="${id}">${n} · ${BED[id] || 256} mm</option>`).join("") + `<option value="other">Other (256 mm)</option>`;
+$("iPrinter").value = getPrinter();
+$("iPrinter").onchange = e => { try { e.target.value ? localStorage.setItem("printer", e.target.value) : localStorage.removeItem("printer"); } catch {} $("aPrinter").value = e.target.value; drawInsert(); };
+$("aPrinter").onchange = e => { $("iPrinter").value = e.target.value; try { e.target.value ? localStorage.setItem("printer", e.target.value) : localStorage.removeItem("printer"); } catch {} $("aPrinterOk").hidden = false; };
 
 /* Thumbs up / down on each idea */
 $("grid").addEventListener("click", async e => {
@@ -1360,7 +1377,6 @@ document.addEventListener("click", e => {
 });
 
 /* ===== Lådinsats: måttanpassad fil för lådor, lådor och hyllor ===== */
-const BED = { "bambu-a1-mini": 180, "prusa-mini": 180, "creality-k1": 220, "creality-ender3": 220, "prusa-mk4": 250, "prusa-core-one": 250, "bambu-h2d": 325 };
 const bedSize = () => BED[getPrinter()] || 256;
 let curInsert = null;
 
@@ -1375,7 +1391,7 @@ function insertGeometry(ins){
   ins.rows.forEach(r => { const y0 = yTop - r.size * D; let x = 0; r.cells.forEach(c => { cells.push([x, y0, x + c.size * W, yTop]); x += c.size * W; }); yTop = y0; });
   const finish = (pieces, extra = {}) => {
     const vol = pieces.reduce((a, p) => a + p.boxes.reduce((s, b) => s + (b[3] - b[0]) * (b[4] - b[1]) * (b[5] - b[2]), 0), 0);
-    const grams = Math.round(vol / 1000 * 1.24 * 0.92);
+    const grams = Math.round(vol / 1000 * 1.24 * 0.92 * (ins.pattern && ins.pattern !== "plain" ? 0.82 : 1));
     return { W, D, H, pieces, nx: 1, ny: 1, ys: [0, D], style, grams, hours: Math.max(0.5, Math.round(grams / 22 * 2) / 2), ...extra };
   };
   if (style === "boxes") {
@@ -1430,17 +1446,71 @@ function insertGeometry(ins){
   return finish(pieces, { nx, ny, ys });
 }
 
-// Binär STL: alla bitar i en fil, placerade som i lådan (med lite luft emellan)
-function insertSTL(g){
-  const tris = [];
+// Mönster i väggarna: hexagoner eller avlånga hål (snyggare och mindre filament)
+const loadThree = async () => (THREE_ = THREE_ || await import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"));
+function wallHoles(len, h, pattern, blocked){
+  const m = 5, holes = [], free = (a, b) => a >= m && b <= len - m && !blocked.some(([p, q]) => b > p && a < q);
+  if (pattern === "hex") {
+    const r = 4.2, g = 2.2, hh = Math.sqrt(3) * r, sx = 1.5 * r + g * 0.866, sy = hh + g;
+    for (let i = 0, cx = m + r; cx + r <= len - m + 0.01; i++, cx += sx)
+      for (let cy = m + hh / 2 + (i % 2 ? sy / 2 : 0); cy + hh / 2 <= h - m + 0.01; cy += sy) {
+        if (!free(cx - r, cx + r)) continue;
+        holes.push(Array.from({ length: 6 }, (_, k) => [cx + r * Math.cos(k * Math.PI / 3), cy + r * Math.sin(k * Math.PI / 3)]));
+      }
+  } else if (pattern === "slots") {
+    const w = 4.5, sp = 9, top = h - 6, bot = 6;
+    if (top - bot < w * 2) return holes;
+    for (let cx = m + w / 2; cx + w / 2 <= len - m + 0.01; cx += sp) {
+      if (!free(cx - w / 2, cx + w / 2)) continue;
+      const pts = [], rr = w / 2;
+      for (let k = 0; k <= 8; k++) { const a = Math.PI + k * Math.PI / 8; pts.push([cx + rr * Math.cos(a), bot + rr + rr * Math.sin(a)]); }
+      for (let k = 0; k <= 8; k++) { const a = k * Math.PI / 8; pts.push([cx + rr * Math.cos(a), top - rr + rr * Math.sin(a)]); }
+      holes.push(pts);
+    }
+  }
+  return holes;
+}
+async function insertTriangles(g, pattern){
+  const tris = [], T = pattern && pattern !== "plain" ? await loadThree() : null;
+  const boxTris = (x0, y0, z0, x1, y1, z1) => {
+    const v = [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]];
+    [[0, 2, 1], [0, 3, 2], [4, 5, 6], [4, 6, 7], [0, 1, 5], [0, 5, 4], [1, 2, 6], [1, 6, 5], [2, 3, 7], [2, 7, 6], [3, 0, 4], [3, 4, 7]].forEach(t => tris.push(t.map(k => v[k])));
+  };
   g.pieces.forEach(p => {
     const [ox, oy] = p.pos;
     for (const b of p.boxes) {
-      const x0 = b[0] + ox, x1 = b[3] + ox, y0 = b[1] + oy, y1 = b[4] + oy, z0 = b[2], z1 = b[5];
-      const v = [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]];
-      [[0, 2, 1], [0, 3, 2], [4, 5, 6], [4, 6, 7], [0, 1, 5], [0, 5, 4], [1, 2, 6], [1, 6, 5], [2, 3, 7], [2, 7, 6], [3, 0, 4], [3, 4, 7]].forEach(t => tris.push(t.map(k => v[k])));
+      const dx = b[3] - b[0], dy = b[4] - b[1], dz = b[5] - b[2];
+      const wall = T && dz >= 20 && Math.min(dx, dy) <= 2.2 && Math.max(dx, dy) >= 25;
+      if (!wall) { boxTris(b[0] + ox, b[1] + oy, b[2], b[3] + ox, b[4] + oy, b[5]); continue; }
+      const alongX = dx >= dy, len = alongX ? dx : dy, t = alongX ? dy : dx, u0 = alongX ? b[0] : b[1], t0 = alongX ? b[1] : b[0];
+      // ställen där en annan vägg möter den här: inga hål där
+      const blocked = [];
+      for (const c of p.boxes) {
+        if (c === b || c[5] - c[2] < 20) continue;
+        const cAlongX = (c[3] - c[0]) >= (c[4] - c[1]); if (cAlongX === alongX) continue;
+        const touch = alongX ? (c[1] <= b[4] + 0.5 && c[4] >= b[1] - 0.5) : (c[0] <= b[3] + 0.5 && c[3] >= b[0] - 0.5);
+        if (touch) blocked.push(alongX ? [c[0] - u0 - 2, c[3] - u0 + 2] : [c[1] - u0 - 2, c[4] - u0 + 2]);
+      }
+      const holes = wallHoles(len, dz, pattern, blocked);
+      if (!holes.length) { boxTris(b[0] + ox, b[1] + oy, b[2], b[3] + ox, b[4] + oy, b[5]); continue; }
+      const sh = new T.Shape([new T.Vector2(0, 0), new T.Vector2(len, 0), new T.Vector2(len, dz), new T.Vector2(0, dz)]);
+      holes.forEach(hp => sh.holes.push(new T.Path(hp.map(([x, y]) => new T.Vector2(x, y)))));
+      const geo = new T.ExtrudeGeometry(sh, { depth: t, bevelEnabled: false, curveSegments: 4 }).toNonIndexed();
+      const pos = geo.attributes.position.array;
+      for (let i = 0; i < pos.length; i += 9) {
+        const tri = [0, 1, 2].map(k => { const u = pos[i + k * 3], v = pos[i + k * 3 + 1], w = pos[i + k * 3 + 2];
+          return alongX ? [u0 + u + ox, t0 + w + oy, b[2] + v] : [t0 + w + ox, u0 + u + oy, b[2] + v]; });
+        tris.push(alongX ? [tri[0], tri[2], tri[1]] : tri); // byte av axlar spegelvänder: vänd trianglarna
+      }
+      geo.dispose();
     }
   });
+  return tris;
+}
+
+// Binär STL: alla bitar i en fil, placerade som i lådan (med lite luft emellan)
+async function insertSTL(g){
+  const tris = await insertTriangles(g, curInsert?.pattern || "plain");
   const buf = new ArrayBuffer(84 + tris.length * 50), dv = new DataView(buf);
   const head = "boredprinter custom insert"; for (let i = 0; i < head.length; i++) dv.setUint8(i, head.charCodeAt(i));
   dv.setUint32(80, tris.length, true);
@@ -1489,14 +1559,13 @@ async function view3D(g){
   const grp = new T.Group(), mat = new T.MeshStandardMaterial({ color: 0xFF5B1F, roughness: .78, metalness: 0 }), edgeMat = new T.LineBasicMaterial({ color: 0xB8380C, transparent: true, opacity: .45 });
   const gap = g.pieces.length > 1 ? 8 : 0;
   const ext = g.pieces.reduce((e, p) => [Math.max(e[0], p.pos[0] + p.w), Math.max(e[1], p.pos[1] + p.d)], [0, 0]);
-  g.pieces.forEach(p => {
-    for (const b of p.boxes) {
-      const m = new T.Mesh(new T.BoxGeometry(b[3] - b[0], b[5] - b[2], b[4] - b[1]), mat);
-      m.position.set((b[0] + b[3]) / 2 + p.pos[0] - ext[0] / 2, (b[2] + b[5]) / 2, -((b[1] + b[4]) / 2 + p.pos[1] - ext[1] / 2));
-      m.castShadow = true; m.receiveShadow = true; grp.add(m);
-      const ln = new T.LineSegments(new T.EdgesGeometry(m.geometry), edgeMat); ln.position.copy(m.position); grp.add(ln);
-    }
-  });
+  const tris = await insertTriangles(g, curInsert?.pattern || "plain");
+  if (g !== drawInsert.last) return; // användaren hann ändra något
+  const arr = new Float32Array(tris.length * 9); let o = 0;
+  for (const t of tris) for (const [x, y, z] of t) { arr[o++] = x - ext[0] / 2; arr[o++] = z; arr[o++] = -(y - ext[1] / 2); }
+  const geo = new T.BufferGeometry(); geo.setAttribute("position", new T.BufferAttribute(arr, 3)); geo.computeVertexNormals();
+  const mesh = new T.Mesh(geo, mat); mesh.castShadow = true; mesh.receiveShadow = true; grp.add(mesh);
+  grp.add(new T.LineSegments(new T.EdgesGeometry(geo, 25), edgeMat));
   v3.group = grp; v3.scene.add(grp);
   const span = Math.max(g.W, g.D) + gap * 2;
   v3.R = span * 1.95; v3.H = g.H;
@@ -1535,6 +1604,7 @@ function drawInsert(){
   ins.w_mm = +$("iW").value || ins.w_mm; ins.d_mm = +$("iD").value || ins.d_mm; ins.h_mm = +$("iH").value || ins.h_mm;
   const g = insertGeometry(ins);
   $("iSvg").innerHTML = insertSVG(ins, g);
+  drawInsert.last = g;
   clearTimeout(drawInsert.t); drawInsert.t = setTimeout(() => view3D(g), 120);
   const n = g.pieces.length;
   $("iInfo").innerHTML = `${g.style === "boxes" ? `${n} separate boxes` : n === 1 ? "1 piece" : `${n} pieces that fit your printer`} · ~${g.grams} g · ~${g.hours} h · ${Math.round(g.H)} mm high${n > 1 && g.style !== "boxes" ? `<small>Dashed lines show where it's split into pieces.</small>` : ""}`;
@@ -1548,6 +1618,8 @@ function evenRows(n, W, D){
   return Array.from({ length: rows }, (_, i) => { const k = base + (i < extra ? 1 : 0); return { size: 1 / rows, cells: Array.from({ length: k }, () => ({ size: 1 / k, label: "" })) }; });
 }
 const countCells = rows => rows.reduce((a, r) => a + r.cells.length, 0);
+function setIPat(pt){ document.querySelectorAll("[data-ipat]").forEach(b => { const on = b.dataset.ipat === pt; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); }); }
+document.addEventListener("click", e => { const b = e.target.closest("[data-ipat]"); if (!b || !curInsert) return; curInsert.pattern = b.dataset.ipat; setIPat(curInsert.pattern); drawInsert(); });
 function setIStyle(st){ document.querySelectorAll("[data-istyle]").forEach(b => { const on = b.dataset.istyle === st; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); }); }
 document.addEventListener("click", e => { const b = e.target.closest("[data-istyle]"); if (!b || !curInsert) return; curInsert.style = b.dataset.istyle; setIStyle(curInsert.style); drawInsert(); });
 function setLayoutMode(ai){ $("iAi").classList.toggle("on", ai); $("iEven").classList.toggle("on", !ai); }
@@ -1562,7 +1634,7 @@ $("iEven").onclick = () => { if (!curInsert) return; const n = +$("iCount").valu
 function showInsert(ins){
   curInsert = ins ? JSON.parse(JSON.stringify(ins)) : null;
   aiRows = curInsert ? JSON.parse(JSON.stringify(curInsert.rows)) : null;
-  if (curInsert) { const n = countCells(curInsert.rows); $("iCount").value = Math.min(16, n); $("iCountV").textContent = n; setLayoutMode(true); setIStyle(curInsert.style || "tray"); }
+  if (curInsert) { const n = countCells(curInsert.rows); $("iCount").value = Math.min(16, n); $("iCountV").textContent = n; setLayoutMode(true); setIStyle(curInsert.style || "tray"); setIPat(curInsert.pattern || "plain"); }
   $("iMark").hidden = !photoUrl || !curInsert;
   // Mobil: knappen syns ändå, men skickar en länk till datorn (Bambu Studio finns bara där)
   $("iBambu").hidden = false;
@@ -1587,7 +1659,7 @@ $("iBambu").onclick = async () => {
   if (!session) { openSignup("Open in Bambu Studio", "Create a free account to send the file to Bambu Studio. It takes 20 seconds."); return; }
   const btn = $("iBambu"), old = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spin"></span> Preparing file…`;
   try {
-    const g = insertGeometry(curInsert), blob = insertSTL(g);
+    const g = insertGeometry(curInsert), blob = await insertSTL(g);
     const path = `${session.user.id}/insert.stl`;
     const { error } = await SB.storage.from("inserts").upload(path, blob, { contentType: "model/stl", upsert: true, cacheControl: "0" });
     if (error) throw error;
@@ -1600,10 +1672,10 @@ $("iBambu").onclick = async () => {
   finally { btn.disabled = false; btn.innerHTML = old; }
 };
 
-$("iDl").onclick = () => {
+$("iDl").onclick = async () => {
   if (!curInsert) return;
   if (!session) { openSignup("Download your insert", "Create a free account to download the file. It takes 20 seconds."); return; }
-  const g = insertGeometry(curInsert), blob = insertSTL(g);
+  const g = insertGeometry(curInsert), blob = await insertSTL(g);
   const a = document.createElement("a"), name = `boredprinter-${(curInsert.what || "insert").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-${Math.round(curInsert.w_mm)}x${Math.round(curInsert.d_mm)}.stl`;
   a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
