@@ -563,6 +563,16 @@ body{background:var(--bg);color:var(--ink)}
 .stick.on{transform:none;pointer-events:auto}
 .stick label{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#fff;font:600 17px/1 Geist,sans-serif;padding:18px;border-radius:12px;cursor:pointer;box-shadow:0 10px 30px -10px rgba(12,13,16,.5)}
 @media (min-width:1040px){.stick{display:none}}
+
+/* Exempel under knappen */
+.samples{display:grid;gap:8px;justify-items:center;margin-top:2px}
+.samples>span{font-size:13px;color:var(--muted)}
+.smp-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.smp{appearance:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 14px/1 Geist,sans-serif;padding:5px 12px 5px 5px;border-radius:999px;cursor:pointer}
+.smp:hover{border-color:var(--ink)}.smp img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+@media (min-width:1040px){.samples{justify-items:start}.smp-row{justify-content:start}}
+.sampbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--soft)}
+.sampbar span{font-size:15px}.sampbar .btn{padding:12px 18px;font-size:15px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -596,6 +606,7 @@ body{background:var(--bg);color:var(--ink)}
       <div class="h-c">
         <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
         <span class="sub" id="sub">No sign-up · Real models from MakerWorld &amp; Printables</span>
+        <div class="samples"><span>No photo? Try a sample:</span><div class="smp-row"><button type="button" class="smp" data-sample="desk"><img src="/demo/desk2.jpg" alt="" width="40" height="40" loading="lazy">Desk</button><button type="button" class="smp" data-sample="kitchen"><img src="/demo/kitchen.jpg" alt="" width="40" height="40" loading="lazy">Kitchen</button><button type="button" class="smp" data-sample="setup"><img src="/demo/setup.jpg" alt="" width="40" height="40" loading="lazy">Gaming setup</button></div></div>
         <span class="h-drop">Or drop a photo anywhere on this page</span>
         <a class="mkline" href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener"><span class="mk-av"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bp"/></svg></span><span>Made by <b>@boredprinter</b> · 13.6k on Instagram</span></a>
         <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
@@ -641,6 +652,7 @@ body{background:var(--bg);color:var(--ink)}
       <div class="rh-txt"><span class="rh-k" id="rhK">Your photo</span><h2 id="placeName">Your print ideas</h2><p class="seenline" id="seenLine" hidden></p></div>
     </div>
     <div class="rtools rtools2"><label for="file" class="nbtn ink"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> New photo</label><button class="nbtn" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button></div>
+    <div class="sampbar" id="sampBar" hidden><span><b>This is a sample.</b> Want ideas for your own room?</span><label for="file" class="btn btn-ink">Try your room · free</label></div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
       <span id="lockSub">Sign up free to see them. You get 3 extra credits.</span>
@@ -1215,9 +1227,21 @@ function render(r){
   const left = r.quota ? (r.quota.free_left || 0) + (r.quota.credits || 0) : null;
   $("nudge").hidden = !(left != null && left <= 2);
   if (left != null && left <= 2) $("nudge").innerHTML = `<b>${left} credit${left === 1 ? "" : "s"} left.</b> Invite a friend and you both get 3 more. <button class="nbtn ink" id="nudgeBtn">Get credits</button>`;
-  moreRounds = 0; $("moreIdeas").hidden = !imageB64 || !prints.length; $("moreIdeas").disabled = false; $("moreIdeas").textContent = "Show 10 more ideas";
+  $("sampBar").hidden = !r.sample; if (r.sample) $("freeBar").hidden = true;
+  moreRounds = 0; $("moreIdeas").hidden = !imageB64 || !prints.length || !!r.sample; $("moreIdeas").disabled = false; $("moreIdeas").textContent = "Show 10 more ideas";
   prints.forEach((p, i) => loadModels(p, i));
 }
+
+/* Exempelbilder: visa ett färdigt resultat direkt, utan att fota (ingen AI körs) */
+const SAMPLES = {"desk": {"img": "/demo/desk2.jpg", "place": "your desk", "seen": ["monitor", "cables", "pen", "hard drive", "guitar"], "prints": [{"name": "Cable clips", "why": "Keeps the loose monitor and mouse cables in place on the desk.", "search": "desk cable clip", "time": "20 min", "grams": 8}, {"name": "Pen holder", "why": "Gives the pen and notebook a home next to the keyboard.", "search": "pen holder", "time": "1 h", "grams": 35}, {"name": "Hard drive stand", "why": "Stands the external drive upright and frees up desk space.", "search": "external hard drive stand", "time": "1 h", "grams": 30}, {"name": "Under-desk cable tray", "why": "Hides the power strip and cable mess under the desk.", "search": "under desk cable tray", "time": "3 h", "grams": 120}, {"name": "Under-desk headphone hook", "why": "Hangs your headphones under the desk edge.", "search": "under desk headphone hook", "time": "45 min", "grams": 20}, {"name": "Mouse cable bungee", "why": "Stops the mouse cable from dragging on the desk.", "search": "mouse bungee", "time": "1 h", "grams": 30}, {"name": "Charger organizer", "why": "Holds the charger cube and its cables in one spot.", "search": "charger organizer desk", "time": "1 h", "grams": 40}, {"name": "Guitar pick holder", "why": "A small wall holder for picks next to the guitar.", "search": "guitar pick holder wall", "time": "30 min", "grams": 10}, {"name": "Monitor shelf riser", "why": "Lifts the screen and adds storage underneath.", "search": "monitor riser shelf", "time": "4 h", "grams": 180}, {"name": "Desk organizer tray", "why": "Collects the small things lying around on the desk.", "search": "desk organizer tray", "time": "2 h", "grams": 70}]}, "kitchen": {"img": "/demo/kitchen.jpg", "place": "your kitchen", "seen": ["sink", "cutting board", "stove", "spice jars", "cabinets"], "prints": [{"name": "Sink sponge holder", "why": "Keeps the sponge dry and off the sink edge.", "search": "sink sponge holder", "time": "45 min", "grams": 20}, {"name": "Cutting board stand", "why": "Stores the cutting board upright so it dries.", "search": "cutting board stand", "time": "1 h", "grams": 45}, {"name": "Spice rack", "why": "Organizes the jars standing next to the stove.", "search": "spice rack", "time": "3 h", "grams": 110}, {"name": "Utensil holder", "why": "A neat home for spatulas and spoons by the stove.", "search": "kitchen utensil holder", "time": "2 h", "grams": 80}, {"name": "Under-cabinet hooks", "why": "Hang mugs or towels under the wall cabinets.", "search": "under cabinet hooks", "time": "30 min", "grams": 12}, {"name": "Paper towel holder", "why": "Mounts the paper towel under a cabinet.", "search": "paper towel holder under cabinet", "time": "2 h", "grams": 60}, {"name": "Dish brush holder", "why": "Keeps the dish brush clean next to the sink.", "search": "dish brush holder", "time": "40 min", "grams": 18}, {"name": "Drawer organizer", "why": "Sorts cutlery and tools in the drawers.", "search": "kitchen drawer organizer", "time": "3 h", "grams": 120}, {"name": "Bag clips", "why": "Keep open bags of food fresh.", "search": "bag clip", "time": "10 min", "grams": 4}, {"name": "Cabinet handle hook", "why": "Hang a towel on the cabinet door.", "search": "cabinet door towel hook", "time": "20 min", "grams": 8}]}, "setup": {"img": "/demo/setup.jpg", "place": "your gaming setup", "seen": ["controller", "plant", "books", "PC", "headphones"], "prints": [{"name": "Controller stand", "why": "Gives the controller a proper spot on the desk.", "search": "controller stand", "time": "1 h", "grams": 40}, {"name": "Self-watering planter", "why": "Keeps the plant on the shelf watered for longer.", "search": "self watering planter", "time": "3 h", "grams": 90}, {"name": "Bookends", "why": "Holds the books on the shelf upright.", "search": "bookends", "time": "1 h", "grams": 50}, {"name": "Under-desk cable tray", "why": "Hides the PC and monitor cables under the desk.", "search": "under desk cable tray", "time": "3 h", "grams": 120}, {"name": "Under-desk drawer", "why": "Extra storage you don't see.", "search": "under desk drawer", "time": "5 h", "grams": 200}, {"name": "GPU support bracket", "why": "Stops the graphics card from sagging in the PC.", "search": "gpu support bracket", "time": "30 min", "grams": 10}, {"name": "Phone stand", "why": "Keeps your phone visible next to the monitor.", "search": "phone stand", "time": "45 min", "grams": 25}, {"name": "Headset hook", "why": "A second spot for headphones under the desk.", "search": "under desk headphone hook", "time": "45 min", "grams": 20}, {"name": "Cable comb", "why": "Neat cable runs behind the desk.", "search": "cable comb", "time": "20 min", "grams": 6}, {"name": "Desk edge cable clips", "why": "Holds charging cables at the desk edge.", "search": "desk edge cable clip", "time": "20 min", "grams": 8}]}};
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-sample]"); if (!b) return;
+  const d = SAMPLES[b.dataset.sample]; if (!d) return;
+  track("sample_open");
+  photoUrl = d.img; imageB64 = null;
+  render({ place: d.place, seen: d.seen, prints: d.prints.map(p => ({ ...p })), sample: true });
+  window.scrollTo(0, 0);
+});
 
 /* Fler idéer för samma bild: gratis för inloggade (max 2 gånger per bild) */
 let moreRounds = 0;
