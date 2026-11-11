@@ -573,6 +573,27 @@ body{background:var(--bg);color:var(--ink)}
 @media (min-width:1040px){.samples{justify-items:start}.smp-row{justify-content:start}}
 .sampbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--soft)}
 .sampbar span{font-size:15px}.sampbar .btn{padding:12px 18px;font-size:15px}
+
+/* Lådinsats */
+.ibox{margin-top:16px;border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;background:var(--card)}
+.ik{display:inline-block;font:600 11.5px/1 Geist,sans-serif;letter-spacing:.07em;text-transform:uppercase;background:var(--lime);color:var(--ink);padding:6px 9px;border-radius:999px}
+.ih h3{margin:10px 0 4px;font:700 24px/1.1 var(--display);letter-spacing:-.03em}.ih p{margin:0;color:var(--muted);font-size:14px}
+.isvgw{background:var(--soft);border-radius:14px;padding:12px}
+.isvg{width:100%;height:auto;max-height:340px;display:block}
+.isvg .io{fill:#fff;stroke:var(--ink);stroke-width:3}.isvg .ic{fill:#FFE9DF;stroke:var(--lime);stroke-width:1.5}
+.isvg .il{fill:var(--ink);font-family:Geist,sans-serif;font-weight:600;text-anchor:middle;dominant-baseline:middle}
+.isvg .icut{stroke:var(--ink);stroke-width:2;stroke-dasharray:8 6}
+.iq{display:grid;gap:2px}.iq b{font-size:16px}.iq small{color:var(--muted);font-size:13px}
+.idims{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.idims label{display:grid;gap:4px;font:600 12px Geist,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.idims span{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:0 10px;background:var(--card);color:var(--muted);font:500 14px Geist,sans-serif;text-transform:none;letter-spacing:0}
+.idims input{width:100%;min-width:0;border:0;outline:0;background:none;font:600 17px Geist,sans-serif;color:var(--ink);padding:11px 0}
+.idims span:focus-within{border-color:var(--ink)}
+.ihint{color:var(--muted);font-size:12.5px;margin-top:-4px}
+.iinfo{margin:0;font-size:14px;font-weight:600}
+.iact{display:grid;grid-template-columns:1fr 1fr;gap:8px}.iact .btn{padding:15px 12px;font-size:15px}
+@media (max-width:420px){.iact{grid-template-columns:1fr}}
+.iinfo small{display:block;font-weight:500;color:var(--muted);font-size:12.5px;margin-top:3px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -652,6 +673,19 @@ body{background:var(--bg);color:var(--ink)}
       <div class="rh-txt"><span class="rh-k" id="rhK">Your photo</span><h2 id="placeName">Your print ideas</h2><p class="seenline" id="seenLine" hidden></p></div>
     </div>
     <div class="rtools rtools2"><label for="file" class="nbtn ink"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> New photo</label><button class="nbtn" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button></div>
+    <section class="ibox" id="insertBox" hidden aria-label="Custom insert">
+      <div class="ih"><span class="ik">Made to fit</span><h3 id="iTitle">Custom insert for your drawer</h3><p id="iItems"></p></div>
+      <div class="isvgw" id="iSvg"></div>
+      <div class="iq"><b>Are these measurements right?</b><small id="iEst">Our estimate from the photo · check with a ruler</small></div>
+      <div class="idims">
+        <label>Width<span><input id="iW" type="number" inputmode="numeric" min="60" max="1200" step="1"> mm</span></label>
+        <label>Depth<span><input id="iD" type="number" inputmode="numeric" min="60" max="1000" step="1"> mm</span></label>
+        <label>Height<span><input id="iH" type="number" inputmode="numeric" min="20" max="300" step="1"> mm</span></label>
+      </div>
+      <small class="ihint">Measure the inside of the drawer. We make it 1 mm smaller on each side so it slides in.</small>
+      <p class="iinfo" id="iInfo"></p>
+      <div class="iact"><button type="button" class="btn btn-ink" id="iDl">Download file (.stl)</button><button type="button" class="btn btn-soft" id="iLink">Send to my computer</button></div>
+    </section>
     <div class="sampbar" id="sampBar" hidden><span><b>This is a sample.</b> Want ideas for your own room?</span><label for="file" class="btn btn-ink">Try your room · free</label></div>
     <div class="lockbox" id="lockbox" hidden>
       <b id="lockTitle"></b>
@@ -937,13 +971,13 @@ async function tinyThumb(src){
 async function savePhoto(r){
   if (!session || !SB || !(r?.prints || []).length) return;
   const prints = r.prints.slice(0, 10).map(p => ({ name: p.name, why: p.why, search: p.search, alt: p.alt, material: p.material, time: p.time, grams: p.grams }));
-  try { const { error } = await SB.from("photos").insert({ place: String(r.place || "").slice(0, 80), seen: (r.seen || []).slice(0, 6), prints, thumb: await tinyThumb(photoUrl) }); if (!error) toast("Saved to Your photos"); } catch {}
+  try { const { error } = await SB.from("photos").insert({ place: String(r.place || "").slice(0, 80), seen: (r.seen || []).slice(0, 6), prints, insert: r.insert || null, thumb: await tinyThumb(photoUrl) }); if (!error) toast("Saved to Your photos"); } catch {}
 }
 let photoRows = [];
 async function loadPhotos(){
   const list = $("phList");
   list.innerHTML = `<div class="note">Loading…</div>`;
-  const { data, error } = await SB.from("photos").select("id,place,seen,prints,thumb,created_at").order("created_at", { ascending: false }).limit(50);
+  const { data, error } = await SB.from("photos").select("id,place,seen,prints,insert,thumb,created_at").order("created_at", { ascending: false }).limit(50);
   if (error) { list.innerHTML = `<div class="note">Couldn't load your photos. Try again.</div>`; return; }
   photoRows = data || [];
   list.innerHTML = photoRows.length ? photoRows.map(r => `<div class="ph" data-id="${r.id}" role="button" tabindex="0">
@@ -961,7 +995,7 @@ $("phList").addEventListener("click", async e => {
   }
   const row = e.target.closest(".ph"); if (!row) return;
   const r = photoRows.find(x => x.id === row.dataset.id); if (!r) return;
-  photoUrl = r.thumb || ""; imageB64 = null; render({ place: r.place, seen: r.seen, prints: r.prints });
+  photoUrl = r.thumb || ""; imageB64 = null; render({ place: r.place, seen: r.seen, prints: r.prints, insert: r.insert });
 });
 $("phList").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.classList.contains("ph")) e.target.click(); });
 
@@ -1228,6 +1262,8 @@ function render(r){
   $("nudge").hidden = !(left != null && left <= 2);
   if (left != null && left <= 2) $("nudge").innerHTML = `<b>${left} credit${left === 1 ? "" : "s"} left.</b> Invite a friend and you both get 3 more. <button class="nbtn ink" id="nudgeBtn">Get credits</button>`;
   $("sampBar").hidden = !r.sample; if (r.sample) $("freeBar").hidden = true;
+  showInsert(r.insert || null);
+  if (r.insertOnly) { $("grid").innerHTML = ""; $("rhK").textContent = "Custom insert"; $("shareBtn").hidden = true; }
   moreRounds = 0; $("moreIdeas").hidden = !imageB64 || !prints.length || !!r.sample; $("moreIdeas").disabled = false; $("moreIdeas").textContent = "Show 10 more ideas";
   prints.forEach((p, i) => loadModels(p, i));
 }
@@ -1242,6 +1278,150 @@ document.addEventListener("click", e => {
   render({ place: d.place, seen: d.seen, prints: d.prints.map(p => ({ ...p })), sample: true });
   window.scrollTo(0, 0);
 });
+
+/* ===== Lådinsats: måttanpassad fil för lådor, lådor och hyllor ===== */
+const BED = { "bambu-a1-mini": 180, "prusa-mini": 180, "creality-k1": 220, "creality-ender3": 220, "prusa-mk4": 250, "prusa-core-one": 250, "bambu-h2d": 325 };
+const bedSize = () => BED[getPrinter()] || 256;
+let curInsert = null;
+
+// Bygger lådor (x0,y0,z0,x1,y1,z1) för insatsen. Fack enligt AI:ns layout, delas i bitar som får plats på printern.
+function insertGeometry(ins){
+  // Höjd: max 45 mm (sparar filament), golv 0,8 mm
+  const W = Math.max(40, ins.w_mm - 2), D = Math.max(40, ins.d_mm - 2), H = Math.max(15, Math.min(ins.h_mm - 3, 45));
+  const T = 1.6, ti = 1.2, F = 0.8, bed = bedSize() - 6;
+  const boxes = [[0, 0, 0, W, D, F], [0, 0, 0, T, D, H], [W - T, 0, 0, W, D, H], [0, 0, 0, W, T, H], [0, D - T, 0, W, D, H]];
+  // rader från bak (y=D) till fram (y=0)
+  let yTop = D;
+  ins.rows.forEach((r, ri) => {
+    const rh = r.size * D, y0 = yTop - rh;
+    if (ri < ins.rows.length - 1) boxes.push([0, y0 - ti / 2, 0, W, y0 + ti / 2, H]);
+    let x = 0;
+    r.cells.forEach((c, ci) => { x += c.size * W; if (ci < r.cells.length - 1) boxes.push([x - ti / 2, y0, 0, x + ti / 2, yTop, H]); });
+    yTop = y0;
+  });
+  const nx = Math.ceil(W / bed), ny = Math.ceil(D / bed);
+  const pieces = [];
+  for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++) {
+    const X0 = W * i / nx, X1 = W * (i + 1) / nx, Y0 = D * j / ny, Y1 = D * (j + 1) / ny, out = [];
+    for (const b of boxes) {
+      const c = [Math.max(b[0], X0), Math.max(b[1], Y0), b[2], Math.min(b[3], X1), Math.min(b[4], Y1), b[5]];
+      if (c[3] - c[0] > 0.01 && c[4] - c[1] > 0.01) out.push(c);
+    }
+    // väggar där biten är kapad, så att varje bit är en egen bricka
+    const C = 1.0; // två bitar bredvid varandra blir en vägg på 2 mm
+    if (i > 0) out.push([X0, Y0, 0, X0 + C, Y1, H]);
+    if (i < nx - 1) out.push([X1 - C, Y0, 0, X1, Y1, H]);
+    if (j > 0) out.push([X0, Y0, 0, X1, Y0 + C, H]);
+    if (j < ny - 1) out.push([X0, Y1 - C, 0, X1, Y1, H]);
+    pieces.push({ x0: X0, y0: Y0, w: X1 - X0, d: Y1 - Y0, boxes: out });
+  }
+  const vol = pieces.reduce((a, p) => a + p.boxes.reduce((s, b) => s + (b[3] - b[0]) * (b[4] - b[1]) * (b[5] - b[2]), 0), 0);
+  const grams = Math.round(vol / 1000 * 1.24 * 0.92);
+  return { W, D, H, pieces, nx, ny, grams, hours: Math.max(0.5, Math.round(grams / 22 * 2) / 2) };
+}
+
+// Binär STL: alla bitar i en fil, bredvid varandra med 10 mm mellanrum
+function insertSTL(g){
+  const tris = [];
+  let ox = 0;
+  g.pieces.forEach(p => {
+    for (const b of p.boxes) {
+      const x0 = b[0] - p.x0 + ox, x1 = b[3] - p.x0 + ox, y0 = b[1] - p.y0, y1 = b[4] - p.y0, z0 = b[2], z1 = b[5];
+      const v = [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]];
+      [[0, 2, 1], [0, 3, 2], [4, 5, 6], [4, 6, 7], [0, 1, 5], [0, 5, 4], [1, 2, 6], [1, 6, 5], [2, 3, 7], [2, 7, 6], [3, 0, 4], [3, 4, 7]].forEach(t => tris.push(t.map(k => v[k])));
+    }
+    ox += p.w + 10;
+  });
+  const buf = new ArrayBuffer(84 + tris.length * 50), dv = new DataView(buf);
+  const head = "boredprinter custom insert"; for (let i = 0; i < head.length; i++) dv.setUint8(i, head.charCodeAt(i));
+  dv.setUint32(80, tris.length, true);
+  let o = 84;
+  for (const t of tris) {
+    const [a, b, c] = t, u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
+    const n = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]], l = Math.hypot(...n) || 1;
+    [n[0] / l, n[1] / l, n[2] / l, ...a, ...b, ...c].forEach(f => { dv.setFloat32(o, f, true); o += 4; });
+    o += 2;
+  }
+  return new Blob([buf], { type: "model/stl" });
+}
+
+// Ritning ovanifrån (SVG)
+function insertSVG(ins, g){
+  const W = g.W, D = g.D, s = 1, lab = [];
+  let rects = "", yTop = D;
+  ins.rows.forEach(r => {
+    const rh = r.size * D, y0 = yTop - rh; let x = 0;
+    r.cells.forEach(c => {
+      const cw = c.size * W;
+      rects += `<rect x="${x + 1.5}" y="${D - yTop + 1.5}" width="${Math.max(1, cw - 3)}" height="${Math.max(1, rh - 3)}" rx="3" class="ic"/>`;
+      if (c.label) lab.push(`<text x="${x + cw / 2}" y="${D - yTop + rh / 2}" class="il" font-size="${Math.max(10, Math.min(W, D) / 16)}">${esc(c.label)}</text>`);
+      x += cw;
+    });
+    yTop = y0;
+  });
+  let cuts = "";
+  for (let i = 1; i < g.nx; i++) cuts += `<line x1="${W * i / g.nx}" y1="-4" x2="${W * i / g.nx}" y2="${D + 4}" class="icut"/>`;
+  for (let j = 1; j < g.ny; j++) cuts += `<line x1="-4" y1="${D - D * j / g.ny}" x2="${W + 4}" y2="${D - D * j / g.ny}" class="icut"/>`;
+  return `<svg viewBox="-6 -6 ${W + 12} ${D + 12}" class="isvg" role="img" aria-label="Insert seen from above"><rect x="0" y="0" width="${W}" height="${D}" rx="5" class="io"/>${rects}${lab.join("")}${cuts}</svg>`;
+}
+
+function drawInsert(){
+  const ins = curInsert; if (!ins) return;
+  ins.w_mm = +$("iW").value || ins.w_mm; ins.d_mm = +$("iD").value || ins.d_mm; ins.h_mm = +$("iH").value || ins.h_mm;
+  const g = insertGeometry(ins);
+  $("iSvg").innerHTML = insertSVG(ins, g);
+  const n = g.pieces.length;
+  $("iInfo").innerHTML = `${n === 1 ? "1 piece" : `${n} pieces that fit your printer`} · ~${g.grams} g · ~${g.hours} h · ${Math.round(g.H)} mm high${n > 1 ? `<small>Dashed lines show where it's split into pieces.</small>` : ""}`;
+}
+
+function showInsert(ins){
+  curInsert = ins ? JSON.parse(JSON.stringify(ins)) : null;
+  $("insertBox").hidden = !curInsert;
+  if (!curInsert) return;
+  $("iTitle").textContent = `Custom insert for your ${curInsert.what || "drawer"}`;
+  $("iItems").textContent = curInsert.items?.length ? `For: ${curInsert.items.join(", ")}` : "";
+  $("iW").value = curInsert.w_mm; $("iD").value = curInsert.d_mm; $("iH").value = curInsert.h_mm;
+  $("iEst").textContent = curInsert.confirmed ? "Your measurements" : `Our estimate from the photo${curInsert.confidence === "high" ? "" : " · check with a ruler"}`;
+  drawInsert();
+  track("insert_shown");
+}
+["iW", "iD", "iH"].forEach(id => $(id).addEventListener("input", () => { if (curInsert) curInsert.confirmed = true; drawInsert(); }));
+
+$("iDl").onclick = () => {
+  if (!curInsert) return;
+  if (!session) { openSignup("Download your insert", "Create a free account to download the file. It takes 20 seconds."); return; }
+  const g = insertGeometry(curInsert), blob = insertSTL(g);
+  const a = document.createElement("a"), name = `boredprinter-${(curInsert.what || "insert").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-${Math.round(curInsert.w_mm)}x${Math.round(curInsert.d_mm)}.stl`;
+  a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+  track("insert_download");
+  toast(g.pieces.length > 1 ? `Downloaded. ${g.pieces.length} pieces in one file: in your slicer, split it to objects.` : "Downloaded. Open it in your slicer.");
+};
+
+// Öppna på datorn: länk med måtten och layouten i adressen
+const b64u = s => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+const unb64u = s => decodeURIComponent(escape(atob(s.replace(/-/g, "+").replace(/_/g, "/"))));
+$("iLink").onclick = async () => {
+  if (!curInsert) return;
+  const c = curInsert, data = { w: c.what, a: c.w_mm, b: c.d_mm, c: c.h_mm, i: c.items, r: c.rows.map(r => [Math.round(r.size * 1000) / 1000, r.cells.map(x => [Math.round(x.size * 1000) / 1000, x.label])]) };
+  const url = `${location.origin}/?insert=${b64u(JSON.stringify(data))}`;
+  track("insert_link");
+  try { if (navigator.share) { await navigator.share({ title: "My custom insert", url }); return; } } catch { return; }
+  try { await navigator.clipboard.writeText(url); toast("Link copied. Open it on your computer."); } catch { prompt("Copy this link:", url); }
+};
+(() => {
+  const q = new URLSearchParams(location.search).get("insert"); if (!q) return;
+  try {
+    const d = JSON.parse(unb64u(q));
+    const ins = { what: String(d.w || "drawer").slice(0, 40), w_mm: +d.a, d_mm: +d.b, h_mm: +d.c, items: (d.i || []).slice(0, 8), confirmed: true,
+      rows: (d.r || []).slice(0, 4).map(r => ({ size: +r[0], cells: (r[1] || []).slice(0, 5).map(c => ({ size: +c[0], label: String(c[1] || "").slice(0, 24) })) })) };
+    if (!ins.w_mm || !ins.rows.length) return;
+    history.replaceState(null, "", "/");
+    track("insert_open");
+    photoUrl = ""; imageB64 = null;
+    render({ place: `your ${ins.what}`, seen: [], prints: [], insert: ins, insertOnly: true });
+  } catch {}
+})();
 
 /* Fler idéer för samma bild: gratis för inloggade (max 2 gånger per bild) */
 let moreRounds = 0;

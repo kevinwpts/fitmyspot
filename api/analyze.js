@@ -18,8 +18,32 @@ For each print give:
 - grams: rough filament use in grams for one print (whole number, typical settings)
 - level: Easy, Medium or Hard
 - buy_price: what a similar ready-made product typically costs in a store, in US dollars (whole number)
+4. CUSTOM INSERT: if the photo mainly shows an open drawer, box, tray, bin, cabinet shelf or similar container that could use a custom 3D printed organizer insert, fill "insert". Otherwise "insert" is null.
+- what: 2-3 words, like "desk drawer" or "kitchen drawer"
+- w_mm, d_mm, h_mm: your best estimate of the INSIDE width (left-right), depth (front-back) and height in millimeters. Use objects for scale (A4 paper 210x297, pen 140 mm long, AA battery 50 mm, credit card 86x54, fork 190 mm). Typical drawers are 300-800 wide, 350-550 deep, 60-150 high.
+- confidence: "low", "medium" or "high"
+- items: up to 8 short names of the things inside (like "pens", "batteries", "cables")
+- rows: a layout for the insert seen from above, from the back row to the front row. 1-4 rows. Each row has "size" (fraction of the depth) and 1-5 "cells", each with "size" (fraction of the width) and a short "label" for what goes there. Sizes in each list add up to 1. Make compartments that fit the items you see (long narrow ones for pens and utensils, small square ones for small parts).
 If the photo is too dark, too blurry, or does not show a place where prints make sense, return an empty prints list and set "photo_issue" to a short friendly tip (for example "The photo is too dark. Turn on a light and try again."). Otherwise "photo_issue" is null.
-Reply ONLY with JSON: {"place":"...","seen":["..."],"hot":true,"photo_issue":null,"prints":[{"name":"","why":"","search":"","alt":"","material":"","time":"","grams":0,"level":"","buy_price":0}]}`;
+Reply ONLY with JSON: {"place":"...","seen":["..."],"hot":true,"photo_issue":null,"prints":[{"name":"","why":"","search":"","alt":"","material":"","time":"","grams":0,"level":"","buy_price":0}],"insert":null}`;
+
+// Lådinsats: tvätta AI:ns svar så att mått och layout alltid är rimliga
+function cleanInsert(x) {
+  if (!x || typeof x !== "object") return null;
+  const n = (v, lo, hi, d) => { v = Math.round(+v); return Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : d; };
+  const norm = (arr) => { const t = arr.reduce((a, c) => a + (c.size > 0 ? c.size : 0), 0) || 1; return arr.map((c) => ({ ...c, size: (c.size > 0 ? c.size : 0) / t })); };
+  let rows = Array.isArray(x.rows) ? x.rows.slice(0, 4) : [];
+  rows = rows.map((r) => ({ size: +r?.size || 0, cells: norm((Array.isArray(r?.cells) ? r.cells.slice(0, 5) : []).map((c) => ({ size: +c?.size || 0, label: String(c?.label || "").slice(0, 24) }))) })).filter((r) => r.cells.length);
+  if (!rows.length) rows = [{ size: 1, cells: [{ size: 0.5, label: "" }, { size: 0.5, label: "" }] }];
+  rows = norm(rows).map((r) => ({ ...r, cells: r.cells.some((c) => c.size <= 0) ? r.cells.map((c) => ({ ...c, size: 1 / r.cells.length })) : r.cells }));
+  return {
+    what: String(x.what || "drawer").slice(0, 40),
+    w_mm: n(x.w_mm, 60, 1200, 400), d_mm: n(x.d_mm, 60, 1000, 450), h_mm: n(x.h_mm, 20, 300, 80),
+    confidence: ["low", "medium", "high"].includes(x.confidence) ? x.confidence : "low",
+    items: (Array.isArray(x.items) ? x.items : []).slice(0, 8).map((i) => String(i).slice(0, 30)),
+    rows,
+  };
+}
 
 // Kända printrar: byggvolym (mm), skåp, flerfärg
 const PRINTERS = {
@@ -104,6 +128,7 @@ async function handler(req) {
       if (!Array.isArray(out.prints)) continue;
       const up = (t) => { t = String(t || "").trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
       out.prints = out.prints.slice(0, 10).map((p) => ({ ...p, name: up(p.name), why: up(p.why) }));
+      out.insert = cleanInsert(out.insert);
       // Dåligt foto eller inget att föreslå: ge tillbaka krediten
       if (more) return json({ ...out, more: true });
       if (!out.prints.length) {
