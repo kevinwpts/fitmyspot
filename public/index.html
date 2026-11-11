@@ -1670,10 +1670,15 @@ $("iBambu").onclick = async () => {
   const btn = $("iBambu"), old = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spin"></span> Preparing file…`;
   try {
     const g = insertGeometry(curInsert), blob = await insertSTL(g);
-    const path = `${session.user.id}/insert.stl`;
-    const { error } = await SB.storage.from("inserts").upload(path, blob, { contentType: "model/stl", upsert: true, cacheControl: "0" });
+    // Bambu Studio läser filtypen från slutet av adressen, så den måste sluta på ".stl" (inget ?t= efter)
+    const name = `boredprinter-${(curInsert.what || "insert").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-${Date.now().toString(36)}.stl`;
+    const path = `${session.user.id}/${name}`;
+    const { error } = await SB.storage.from("inserts").upload(path, blob, { contentType: "model/stl", upsert: true, cacheControl: "60" });
     if (error) throw error;
-    const url = SB.storage.from("inserts").getPublicUrl(path).data.publicUrl + "?t=" + Date.now();
+    // städa bort äldre filer så att det bara ligger några få kvar
+    try { const { data } = await SB.storage.from("inserts").list(session.user.id, { limit: 50, sortBy: { column: "created_at", order: "desc" } });
+      const old = (data || []).slice(3).map(f => `${session.user.id}/${f.name}`); if (old.length) SB.storage.from("inserts").remove(old); } catch {}
+    const url = SB.storage.from("inserts").getPublicUrl(path).data.publicUrl;
     const mac = /Mac/i.test(navigator.platform || navigator.userAgent);
     track("insert_bambu");
     location.href = mac ? `bambustudioopen://${encodeURIComponent(url)}` : `bambustudio://open?file=${encodeURIComponent(url)}`;
