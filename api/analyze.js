@@ -45,6 +45,16 @@ function cleanInsert(x) {
   };
 }
 
+// Bara lådinsats: användaren har markerat exakt vilken låda/fack det gäller
+const INSERT_PROMPT = `You design custom 3D printed organizer inserts. The attached photo is cropped to ONE drawer, box, tray, bin or shelf compartment chosen by the user.
+Estimate its INSIDE size and design an insert for it.
+- what: 2-3 words, like "desk drawer", "kitchen drawer", "shelf"
+- w_mm, d_mm, h_mm: best estimate of the inside width (left-right), depth (front-back) and height in millimeters. Use objects for scale (A4 paper 210x297, bank card 86x54, pen 140 mm, AA battery 50 mm, fork 190 mm, smartphone 150x72). Typical drawers are 300-800 wide, 350-550 deep, 60-150 high.
+- confidence: "low", "medium" or "high" (high only if a bank card, A4 paper or ruler is visible)
+- items: up to 8 short names of the things inside
+- rows: layout seen from above, back row first. 1-4 rows, each with "size" (fraction of the depth) and 1-5 "cells" with "size" (fraction of the width) and a short "label". Sizes in each list add up to 1. Fit the compartments to the items.
+Reply ONLY with JSON: {"insert":{"what":"","w_mm":0,"d_mm":0,"h_mm":0,"confidence":"","items":[],"rows":[{"size":1,"cells":[{"size":1,"label":""}]}]}}`;
+
 // Kända printrar: byggvolym (mm), skåp, flerfärg
 const PRINTERS = {
   "bambu-a1-mini": ["Bambu Lab A1 mini", 180, false, true],
@@ -94,7 +104,8 @@ async function handler(req) {
   // Inloggad: förbrukar dagens gratis eller en kredit. Inte inloggad: låst förhandsvisning (max 3/dag per nätverk).
   const signedIn = (req.headers.get("authorization") || "").startsWith("Bearer ey");
   // "Show more ideas": samma bild igen, nya idéer. Bara inloggade, kostar ingen kredit (tak per dygn).
-  const more = body.more === true;
+  const insertMode = body.mode === "insert";
+  const more = body.more === true || insertMode;
   const exclude = more && Array.isArray(body.exclude) ? body.exclude.slice(0, 40).map((x) => String(x).slice(0, 80)) : [];
   if (more && !signedIn) return json({ error: "signin_required" }, 401);
   let quota;
@@ -117,7 +128,7 @@ async function handler(req) {
         method: "POST",
         headers: { "x-goog-api-key": key, "content-type": "application/json" },
         body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ inline_data: { mime_type: mime, data: image } }, { text: PROMPT + extras(body) + (exclude.length ? `\nThese prints were ALREADY suggested for this photo, so do NOT repeat them or suggest near-duplicates: ${exclude.join("; ")}. Suggest 10 NEW, different prints for other things you can see (smaller objects, corners, walls, shelves, the floor), still specific to this photo.` : "") }] }],
+          contents: [{ role: "user", parts: [{ inline_data: { mime_type: mime, data: image } }, { text: insertMode ? INSERT_PROMPT : PROMPT + extras(body) + (exclude.length ? `\nThese prints were ALREADY suggested for this photo, so do NOT repeat them or suggest near-duplicates: ${exclude.join("; ")}. Suggest 10 NEW, different prints for other things you can see (smaller objects, corners, walls, shelves, the floor), still specific to this photo.` : "") }] }],
           generationConfig: { temperature: 0.4, maxOutputTokens: 4000, responseMimeType: "application/json", thinkingConfig: { thinkingBudget: 0 } },
         }),
       });
@@ -125,6 +136,7 @@ async function handler(req) {
       const data = await r.json();
       const text = (data.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? "").join("");
       const out = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
+      if (insertMode) { const ins = cleanInsert(out.insert); if (!ins) continue; return json({ insert: ins }); }
       if (!Array.isArray(out.prints)) continue;
       const up = (t) => { t = String(t || "").trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
       out.prints = out.prints.slice(0, 10).map((p) => ({ ...p, name: up(p.name), why: up(p.why) }));
