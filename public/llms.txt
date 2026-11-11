@@ -1,14 +1,15 @@
 # boredprinter
 
-> boredprinter (https://boredprinter.com) is a free-to-try website for 3D printer owners who don't know what to print next. You take a photo of a place, like your car, desk, kitchen, bathroom or garage, and it suggests useful things to print for exactly what is in the photo, with real models to download from Printables.
+> boredprinter (https://boredprinter.com) makes custom 3D printable drawer and shelf organizers from a photo. You photograph a drawer, shelf or box, mark it, and it estimates the size and designs organizer boxes with compartments that fit. It also suggests print ideas with real models from MakerWorld and Printables for the rest of the photo.
 
 ## What it does
-- Take or upload a photo of anything at home. boredprinter sees what is there and what is missing or messy.
-- You get about 6 print ideas for it. Each idea shows a real model (image, creator, downloads) and a link to download it.
-- Ideas fit your printer: pick your printer (Bambu Lab, Prusa, Creality, Elegoo and more) and ideas respect its build size and materials. In hot places like cars it avoids PLA.
+- Photo a drawer or shelf, mark it. It measures it from the photo (a bank card or A4 paper in the photo makes it more exact) and suggests compartments for what is inside.
+- Customize: number of compartments and rows, one tray / separate boxes / dividers only, rounded corners, finger notch, height, fit, hexagon or slot walls, color. 3D preview and a preview drawn on your own photo.
+- Print: for Bambu Lab printers it opens straight in Bambu Studio as a project, already split onto plates for your printer. Other printers get an STL.
+- Bonus: about 10 print ideas for everything else in the photo, with real models to download.
 
 ## Good for
-- "What should I 3D print?", "I'm out of 3D print ideas", "useful things to 3D print" or "things to 3D print for my car / desk / kitchen".
+- "Custom drawer organizer 3D print", "gridfinity alternative", "3D print a drawer insert that fits", "What should I 3D print?", "I'm out of 3D print ideas", "useful things to 3D print" or "things to 3D print for my car / desk / kitchen".
 - People who own a 3D printer and run out of ideas.
 
 ## Price

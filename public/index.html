@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Out of ideas for your 3D printer? Take a photo of your car, desk, kitchen or any room and get 3D prints that fit it, with real models to download. First photo free.">
+<meta name="description" content="Take a photo of a drawer or shelf and get 3D printable organizer boxes made to fit it. Tweak the compartments, open it in Bambu Studio, print. First photo free.">
 <meta name="theme-color" content="#FFFFFF">
-<title>What to 3D print? Get ideas from a photo – boredprinter</title>
+<title>Custom drawer organizers from a photo, ready to 3D print – boredprinter</title>
 <link rel="canonical" href="https://boredprinter.com/">
 <meta property="og:url" content="https://boredprinter.com/">
 <meta property="og:site_name" content="boredprinter">
@@ -11,8 +11,8 @@
 <meta name="twitter:description" content="Out of 3D print ideas? Take a photo of your kitchen, desk, car or any room and get 3D prints that fit it.">
 <meta name="twitter:image" content="https://boredprinter.com/og.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://boredprinter.com/#site", "name": "boredprinter", "url": "https://boredprinter.com/", "description": "Out of 3D print ideas? Take a photo of your kitchen, desk, car or any room and get 3D prints that fit it."}, {"@type": "Organization", "@id": "https://boredprinter.com/#org", "name": "boredprinter", "url": "https://boredprinter.com/", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}, {"@type": "WebApplication", "name": "boredprinter", "url": "https://boredprinter.com/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Any (web browser)", "description": "Out of ideas for your 3D printer? Take a photo of your car, desk, kitchen or any room and get 3D prints that fit exactly what is in the photo, with real models from MakerWorld and Printables.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "First photo free, 3 credits on sign-up"}, "publisher": {"@id": "https://boredprinter.com/#org"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are the models free?", "acceptedAnswer": {"@type": "Answer", "text": "Most are. You download them from the creator's page."}}, {"@type": "Question", "name": "Do you keep my photo?", "acceptedAnswer": {"@type": "Answer", "text": "Not unless you're signed in. Then a small copy is kept in Your photos so you can see your ideas again. Delete it any time."}}, {"@type": "Question", "name": "Which printers does it work with?", "acceptedAnswer": {"@type": "Answer", "text": "All of them. Pick yours on your account page and ideas fit its size."}}, {"@type": "Question", "name": "What if an idea doesn't fit?", "acceptedAnswer": {"@type": "Answer", "text": "Tap “+ more” for other models of the same idea. Bad photo? You get your credit back."}}, {"@type": "Question", "name": "What does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "First photo free, plus 3 credits when you sign up. 1 photo = 1 credit."}}]}]}</script>
-<meta property="og:title" content="Don't know what to 3D print? Take a photo.">
-<meta property="og:description" content="Out of 3D print ideas? Take a photo of your kitchen, desk, car or any room and get 3D prints that fit it.">
+<meta property="og:title" content="Photo your drawer. Print boxes that fit.">
+<meta property="og:description" content="Take a photo of a messy drawer or shelf. Get organizer boxes made to its size, ready to 3D print.">
 <meta property="og:image" content="https://boredprinter.com/og.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -540,6 +540,10 @@ body{background:var(--bg);color:var(--ink)}
 
 /* Topp: foto med siffror + 3 riktiga modeller */
 #landing .hv.hx{aspect-ratio:1/1;background:var(--soft)}
+#landing .hv.hins{aspect-ratio:5/4;background:linear-gradient(#F7F7F8,#ECEDF0)}#landing .hv.hins img{object-fit:contain;object-position:50% 50%}
+.hi-tag{position:absolute;background:#fff;color:var(--ink);font:600 13px/1 Geist,sans-serif;padding:8px 11px;border-radius:999px;box-shadow:0 3px 12px rgba(0,0,0,.14);animation:tagin .5s cubic-bezier(.3,1.5,.5,1) both}.hi-tag:nth-of-type(2){animation-delay:.15s}.hi-tag:nth-of-type(3){animation-delay:.3s}.hi-tag.g{background:#0BAA5A;color:#fff}
+@keyframes tagin{from{opacity:0;transform:translateY(6px) scale(.9)}to{opacity:1;transform:none}}
+.hx-c .pic.hs-ic{display:grid;place-items:center;color:var(--ink);aspect-ratio:auto;height:64px}
 .hx img{width:100%;height:100%;object-fit:cover}
 .hx-n{position:absolute;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:var(--lime);color:var(--ink);border:3px solid #fff;display:grid;place-items:center;font:800 18px/1 var(--display);box-shadow:0 4px 14px rgba(0,0,0,.35);animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
 .hx-n:nth-of-type(2){animation-delay:.15s}.hx-n:nth-of-type(3){animation-delay:.3s}
@@ -552,6 +556,7 @@ body{background:var(--bg);color:var(--ink)}
 .hx-c b{font:700 15px/1.15 var(--display);letter-spacing:-.02em;padding:0 4px}
 .hx-c small{font-size:12px;color:var(--muted);line-height:1.3;padding:0 4px}
 .hx-more{grid-column:1/-1;font-size:12.5px;color:var(--muted);text-align:center}
+.how-bonus{margin:14px auto 0;max-width:620px;text-align:center;color:var(--muted);font-size:15px}
 @media (min-width:1040px){.hx-cards{max-width:none}#landing .hv.hx{aspect-ratio:1/1}}
 #landing .hv.hx{aspect-ratio:1/.85}
 @media (min-width:1040px){#landing .hv.hx{aspect-ratio:1/.85}}
@@ -665,24 +670,24 @@ body{background:var(--bg);color:var(--ink)}
 
   <section id="landing">
     <div class="hero">
-      <h1 class="display h-t">Don't know what to <span>3D print?</span></h1>
-      <p class="h-p">Take a photo of any room. Get 3D prints that fit what's in it.</p>
-      <figure class="hv hx" id="example" aria-label="Example: a photo of a desk with 3 things marked">
-        <img src="/demo/desk2.jpg" alt="A white desk with a curved monitor, a notebook and pen, loose cables and an external hard drive" width="1000" height="1000">
-        <span class="hx-n" style="left:79%;top:53.5%">1</span>
-        <span class="hx-n" style="left:24%;top:32%">2</span>
-        <span class="hx-n" style="left:72%;top:85.3%">3</span>
+      <h1 class="display h-t">Photo your drawer. <span>Print boxes that fit.</span></h1>
+      <p class="h-p">Snap a messy drawer or shelf. Get organizer boxes made to its exact size, ready to 3D print.</p>
+      <figure class="hv hins" id="example" aria-label="Example: a custom organizer insert with 6 compartments">
+        <img src="/demo/insert.jpg" alt="An orange 3D printed drawer organizer with six compartments and rounded corners" width="1000" height="800">
+        <span class="hi-tag" style="left:6%;top:9%">Made to 240 × 215 mm</span>
+        <span class="hi-tag" style="right:6%;top:24%">6 compartments</span>
+        <span class="hi-tag g" style="right:6%;bottom:8%">Ready for Bambu Studio</span>
       </figure>
-      <div class="hx-cards" aria-label="What it found">
-        <div class="hx-c pf-row" data-q="desk cable clip"><span class="pic"></span><span class="hx-cn">1</span><b>Cable clips</b><small>For the loose cables</small></div>
-        <div class="hx-c pf-row" data-q="pen holder"><span class="pic"></span><span class="hx-cn">2</span><b>Pen holder</b><small>For the pen and notebook</small></div>
-        <div class="hx-c pf-row" data-q="external hard drive stand"><span class="pic"></span><span class="hx-cn">3</span><b>Drive stand</b><small>For the hard drive</small></div>
-        <span class="hx-more">+7 more ideas for this desk · real models to download</span>
+      <div class="hx-cards" aria-label="How it works">
+        <div class="hx-c"><span class="pic hs-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg></span><span class="hx-cn">1</span><b>Photo your drawer</b></div>
+        <div class="hx-c"><span class="pic hs-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 11h18M10 4v7M15 11v9"/></svg></span><span class="hx-cn">2</span><b>Tweak the boxes</b></div>
+        <div class="hx-c"><span class="pic hs-ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg></span><span class="hx-cn">3</span><b>Print it</b></div>
+        <span class="hx-more">We measure it from the photo and split it to fit your printer</span>
       </div>
       <div class="h-c">
-        <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label>
-        <span class="sub" id="sub">No sign-up · Real models from MakerWorld &amp; Printables</span>
-        <div class="samples"><span>No photo? Try a sample:</span><div class="smp-row"><button type="button" class="smp" data-sample="desk"><img src="/demo/desk2.jpg" alt="" width="40" height="40" loading="lazy">Desk</button><button type="button" class="smp" data-sample="kitchen"><img src="/demo/kitchen.jpg" alt="" width="40" height="40" loading="lazy">Kitchen</button><button type="button" class="smp" data-sample="setup"><img src="/demo/setup.jpg" alt="" width="40" height="40" loading="lazy">Gaming setup</button></div></div>
+        <label class="cta-big" for="file"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Photo your drawer · free</label>
+        <span class="sub" id="sub">No sign-up · Works with any printer · Bambu Studio in one click</span>
+        <div class="samples"><span>Just want print ideas for a room? Try one:</span><div class="smp-row"><button type="button" class="smp" data-sample="desk"><img src="/demo/desk2.jpg" alt="" width="40" height="40" loading="lazy">Desk</button><button type="button" class="smp" data-sample="kitchen"><img src="/demo/kitchen.jpg" alt="" width="40" height="40" loading="lazy">Kitchen</button><button type="button" class="smp" data-sample="setup"><img src="/demo/setup.jpg" alt="" width="40" height="40" loading="lazy">Gaming setup</button></div></div>
         <span class="h-drop">Or drop a photo anywhere on this page</span>
         <a class="mkline" href="https://www.instagram.com/boredprinter/" target="_blank" rel="noopener"><span class="mk-av"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bp"/></svg></span><span>Made by <b>@boredprinter</b> · 13.6k on Instagram</span></a>
         <div class="qr" id="qrBox" hidden><div id="qr"></div><span><b>On a computer?</b><br>Scan to use your phone camera.</span></div>
@@ -691,30 +696,32 @@ body{background:var(--bg);color:var(--ink)}
 
     <section class="block how" aria-label="How it works">
       <ol>
-        <li><span>01</span><b>Take a photo</b><p>Your desk, kitchen, car or any shelf.</p></li>
-        <li><span>02</span><b>It sees what's there</b><p>The loose cables, the pen, the hard drive, what's messy.</p></li>
-        <li><span>03</span><b>Get prints that fit</b><p>Real models from MakerWorld and Printables, free to download.</p></li>
+        <li><span>01</span><b>Take a photo</b><p>A drawer, a shelf, a box. Mark the one you mean. A bank card in the photo makes the size more exact.</p></li>
+        <li><span>02</span><b>Get boxes that fit</b><p>We measure it and suggest compartments for what's inside. Change the number of boxes, rounded corners, hexagon walls, color.</p></li>
+        <li><span>03</span><b>Print it</b><p>Opens in Bambu Studio, already split onto plates for your printer. Or download the file for any slicer.</p></li>
       </ol>
+      <p class="how-bonus">Bonus: you also get 10 print ideas for everything else in the photo, with real models from MakerWorld and Printables.</p>
     </section>
 
     <section class="block" id="faq">
       <h2 class="display">Questions</h2>
-      <details><summary>Are the models free?</summary><p>Most are. You download them from the creator's page.</p></details>
-      <details><summary>Do you keep my photo?</summary><p>Not unless you're signed in. Then a small copy is kept in Your photos so you can see your ideas again. Delete it any time.</p></details>
-      <details><summary>Which printers does it work with?</summary><p>All of them. Pick yours on your account page and ideas fit its size.</p></details>
-      <details><summary>What if an idea doesn't fit?</summary><p>Tap “+ more” for other models of the same idea. Bad photo? You get your credit back.</p></details>
+      <details><summary>How exact are the measurements?</summary><p>Close, but check them with a ruler before you print. Put a bank card or an A4 paper in the photo and it gets much more exact. You can type your own measurements too.</p></details>
+      <details><summary>What if my drawer is bigger than my printer?</summary><p>Pick your printer and the insert is split into pieces that fit. In Bambu Studio they're already placed on plates.</p></details>
+      <details><summary>Which printers does it work with?</summary><p>All of them. Bambu printers open the file straight in Bambu Studio. For other printers you download an STL for your slicer.</p></details>
+      <details><summary>Do you keep my photo?</summary><p>Not unless you're signed in. Then a small copy is kept in Your photos so you can open it again. Delete it any time.</p></details>
       <details><summary>What does it cost?</summary><p>Your first photo is free, no account needed. Sign up and you get 3 more credits. 1 photo = 1 credit.</p></details>
+      <details><summary>Are the print ideas free?</summary><p>Most are. You download them from the creator's page on MakerWorld or Printables.</p></details>
     </section>
 
     <section class="final">
       <div class="mascot fm" aria-hidden="true"><svg><use href="#bp"/></svg><span class="z">z</span><span class="z">z</span></div>
       <h2 class="display">Your printer is bored.</h2>
-      <p>Give it something useful to do.</p>
-      <label for="file" class="btn btn-light"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it free</label>
+      <p>Give it a messy drawer to fix.</p>
+      <label for="file" class="btn btn-light"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Photo your drawer · free</label>
     </section>
   </section>
 
-  <div class="stick" id="stick" aria-hidden="true"><label for="file" tabindex="-1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Try it on your room · free</label></div>
+  <div class="stick" id="stick" aria-hidden="true"><label for="file" tabindex="-1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>Photo your drawer · free</label></div>
   <input id="file" type="file" accept="image/*" hidden>
 
   <section id="choose" hidden>
@@ -722,8 +729,8 @@ body{background:var(--bg);color:var(--ink)}
       <div class="mk ch-mk" id="chWrap"><img id="chImg" alt="Your photo"><span class="mk-r" id="chRect" hidden></span></div>
       <div class="ch-pick" id="chPick">
         <h2 class="display">What do you want?</h2>
+        <button type="button" class="ch-opt" id="chInsert"><span class="ch-ic">▦</span><span><b>Boxes for a drawer or shelf</b><small>Made to fit, ready to print</small></span></button>
         <button type="button" class="ch-opt" id="chIdeas"><span class="ch-ic">💡</span><span><b>Print ideas for this photo</b><small>10 things to print for what's in it</small></span></button>
-        <button type="button" class="ch-opt" id="chInsert"><span class="ch-ic">▦</span><span><b>Custom insert for a drawer or shelf</b><small>A file made to fit, with compartments</small></span></button>
       </div>
       <div class="ch-mark" id="chMark" hidden>
         <h2 class="display">Mark the drawer</h2>
@@ -746,9 +753,9 @@ body{background:var(--bg);color:var(--ink)}
       <div class="rh-txt"><span class="rh-k" id="rhK">Your photo</span><h2 id="placeName">Your print ideas</h2><p class="seenline" id="seenLine" hidden></p></div>
     </div>
     <div class="rtools rtools2"><label for="file" class="nbtn ink"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> New photo</label><button class="nbtn" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button></div>
-    <button type="button" class="mkoffer" id="mkOffer" hidden><span class="ik">New</span><span><b>Got a drawer or shelf in this photo?</b> Mark it and get a custom insert made to fit.</span></button>
+    <button type="button" class="mkoffer" id="mkOffer" hidden><span class="ik">New</span><span><b>Got a drawer or shelf in this photo?</b> Mark it and get boxes made to fit.</span></button>
     <section class="ibox" id="insertBox" hidden aria-label="Custom insert">
-      <div class="ih"><span class="ik">Made to fit</span><h3 id="iTitle">Custom insert for your drawer</h3><p id="iItems"></p>
+      <div class="ih"><span class="ik">Made to fit</span><h3 id="iTitle">Boxes for your drawer</h3><p id="iItems"></p>
         <button type="button" class="imark" id="iMark" hidden>Wrong drawer or shelf? <b>Mark the right one</b></button></div>
       <div class="icount">
         <div class="icl"><b>Compartments</b><span id="iCountV">6</span></div>
@@ -1379,7 +1386,7 @@ function render(r){
   $("sampBar").hidden = !r.sample; if (r.sample) $("freeBar").hidden = true;
   showInsert(r.insert || null);
   $("mkOffer").hidden = !!r.insert || !photoUrl || !!r.sample;
-  if (r.insertOnly) { $("grid").innerHTML = ""; $("rhK").textContent = "Custom insert"; $("shareBtn").hidden = true; }
+  if (r.insertOnly) { $("grid").innerHTML = ""; $("rhK").textContent = "Made to fit"; $("placeName").textContent = `Boxes for ${/^(your|the|my)\b/i.test(r.place || "") ? r.place.replace(/^(the|my)\b/i, "your") : "your " + (r.place || "drawer")}`; $("shareBtn").hidden = true; }
   moreRounds = 0; $("moreIdeas").hidden = !imageB64 || !prints.length || !!r.sample; $("moreIdeas").disabled = false; $("moreIdeas").textContent = "Show 10 more ideas";
   prints.forEach((p, i) => loadModels(p, i));
 }
@@ -1915,7 +1922,7 @@ function showInsert(ins){
   $("iLink").hidden = true; // samma sak som Bambu-knappen på mobil, och onödig på datorn
   $("insertBox").hidden = !curInsert;
   if (!curInsert) return;
-  $("iTitle").textContent = `Custom insert for your ${curInsert.what || "drawer"}`;
+  $("iTitle").textContent = `Boxes for your ${curInsert.what || "drawer"}`;
   $("iItems").textContent = curInsert.items?.length ? `For: ${curInsert.items.join(", ")}` : "";
   $("iW").value = curInsert.w_mm; $("iD").value = curInsert.d_mm; $("iH").value = curInsert.h_mm;
   const hasPhoto = !!(photoUrl && curInsert.crop);
