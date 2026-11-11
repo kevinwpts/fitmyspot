@@ -1570,6 +1570,90 @@ async function insertSTL(g){
   return new Blob([buf], { type: "model/stl" });
 }
 
+// Bambu Studio-projekt (.3mf): varje bit som eget objekt, packade på plattor efter vald skrivare
+const BAMBU_BED = { "bambu-a1-mini": [180, 180], "bambu-h2d": [350, 320] };
+const bambuId = () => { const p = $("iPrinter").value; return /^bambu-/.test(p) ? p : "bambu-a1"; };
+function packPlates(pieces, W, D){
+  const M = 3, G = 5, plates = [];
+  const order = pieces.map((p, i) => ({ p, i })).sort((a, b) => b.p.d - a.p.d || b.p.w - a.p.w);
+  let cur = null;
+  for (const it of order) {
+    const { w, d } = it.p;
+    let placed = false;
+    for (const pl of plates) {            // försök få plats på en befintlig platta
+      if (pl.x + w <= W - M) { if (pl.y + d <= D - M) { pl.items.push({ ...it, x: pl.x, y: pl.y }); pl.x += w + G; pl.rowD = Math.max(pl.rowD, d); placed = true; break; } }
+      if (pl.y + pl.rowD + G + d <= D - M && M + w <= W - M) { pl.y += pl.rowD + G; pl.x = M; pl.rowD = d; pl.items.push({ ...it, x: pl.x, y: pl.y }); pl.x += w + G; placed = true; break; }
+    }
+    if (!placed) { cur = { x: M, y: M, rowD: d, items: [] }; cur.items.push({ ...it, x: M, y: M }); cur.x += w + G; plates.push(cur); }
+  }
+  // centrera innehållet på varje platta
+  plates.forEach(pl => {
+    const mx = Math.max(...pl.items.map(t => t.x + t.p.w)), my = Math.max(...pl.items.map(t => t.y + t.p.d));
+    const dx = (W - mx - M) / 2, dy = (D - my - M) / 2; pl.items.forEach(t => { t.x += dx; t.y += dy; });
+  });
+  return plates;
+}
+const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+const crc32 = u => { let c = 0xFFFFFFFF; for (let i = 0; i < u.length; i++) c = CRC[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+async function zipFiles(files){
+  const enc = new TextEncoder(), parts = [], cen = []; let off = 0;
+  for (const [name, text] of files) {
+    const raw = enc.encode(text), nm = enc.encode(name), crc = crc32(raw);
+    let data = raw, method = 0;
+    if (typeof CompressionStream !== "undefined") { try { data = new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream("deflate-raw"))).arrayBuffer()); method = 8; } catch { data = raw; method = 0; } }
+    const h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, method, true);
+    h.setUint32(14, crc, true); h.setUint32(18, data.length, true); h.setUint32(22, raw.length, true); h.setUint16(26, nm.length, true);
+    parts.push(new Uint8Array(h.buffer), nm, data);
+    const c = new DataView(new ArrayBuffer(46));
+    c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, method, true);
+    c.setUint32(16, crc, true); c.setUint32(20, data.length, true); c.setUint32(24, raw.length, true); c.setUint16(28, nm.length, true); c.setUint32(42, off, true);
+    cen.push(new Uint8Array(c.buffer), nm);
+    off += 30 + nm.length + data.length;
+  }
+  const csize = cen.reduce((s, u) => s + u.length, 0), e = new DataView(new ArrayBuffer(22));
+  e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, csize, true); e.setUint32(16, off, true);
+  return new Blob([...parts, ...cen, new Uint8Array(e.buffer)], { type: "model/3mf" });
+}
+async function insert3MF(g){
+  const pid = bambuId(), [W, D] = BAMBU_BED[pid] || [256, 256];
+  const proj = await (await fetch(`/bambu/${pid}.json`)).text();
+  const plates = packPlates(g.pieces, Math.min(W, bedSize()), Math.min(D, bedSize()));
+  const cols = (n => { const v = Math.sqrt(n), r = Math.floor(v + .5); return v > r ? r + 1 : Math.max(1, r); })(plates.length);
+  const uid = () => crypto.randomUUID ? crypto.randomUUID() : "xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx".replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
+  const pat = curInsert?.pattern || "plain", objs = [], builds = [], ms = [], pls = [];
+  let oid = 2, n = 0;
+  for (let pi = 0; pi < plates.length; pi++) {
+    const row = Math.floor(pi / cols), col = pi % cols, ox = col * W * 1.2, oy = -row * D * 1.2, inst = [];
+    for (const t of plates[pi].items) {
+      const tris = await insertTriangles({ ...g, pieces: [{ ...t.p, pos: [0, 0] }] }, pat);
+      let x0 = Infinity, y0 = Infinity, z0 = Infinity;
+      tris.forEach(tr => tr.forEach(v => { x0 = Math.min(x0, v[0]); y0 = Math.min(y0, v[1]); z0 = Math.min(z0, v[2]); }));
+      const vmap = new Map(), vs = [], ts = [];
+      const vi = v => { const x = (v[0] - x0 + ox + t.x).toFixed(3), y = (v[1] - y0 + oy + t.y).toFixed(3), z = (v[2] - z0).toFixed(3), k = x + " " + y + " " + z;
+        let i = vmap.get(k); if (i === undefined) { i = vs.length; vmap.set(k, i); vs.push(`<vertex x="${x}" y="${y}" z="${z}"/>`); } return i; };
+      for (const tr of tris) { const a = vi(tr[0]), b = vi(tr[1]), c = vi(tr[2]); if (a !== b && b !== c && a !== c) ts.push(`<triangle v1="${a}" v2="${b}" v3="${c}"/>`); }
+      objs.push(`<object id="${oid}" p:UUID="${uid()}" type="model"><mesh><vertices>${vs.join("")}</vertices><triangles>${ts.join("")}</triangles></mesh></object>`);
+      builds.push(`<item objectid="${oid}" p:UUID="${uid()}" transform="1 0 0 0 1 0 0 0 1 0 0 0" printable="1"/>`);
+      ms.push(`<object id="${oid}"><metadata key="name" value="Piece ${++n}"/><metadata key="extruder" value="1"/></object>`);
+      inst.push(`<model_instance><metadata key="object_id" value="${oid}"/><metadata key="instance_id" value="0"/></model_instance>`);
+      oid++;
+    }
+    pls.push(`<plate><metadata key="plater_id" value="${pi + 1}"/><metadata key="plater_name" value="${plates.length > 1 ? `Part ${pi + 1} of ${plates.length}` : "Insert"}"/><metadata key="locked" value="false"/>${inst.join("")}</plate>`);
+  }
+  const model = `<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" xmlns:BambuStudio="http://schemas.bambulab.com/package/2021" xmlns:p="http://schemas.microsoft.com/3dmanufacturing/production/2015/06" requiredextensions="p">\n<metadata name="Application">BambuStudio-02.06.00.51</metadata>\n<metadata name="BambuStudio:3mfVersion">1</metadata>\n<metadata name="Title">boredprinter custom insert</metadata>\n<resources>${objs.join("\n")}</resources>\n<build p:UUID="${uid()}">${builds.join("")}</build>\n</model>\n`;
+  const blob = await zipFiles([
+    ["[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/><Default Extension="png" ContentType="image/png"/></Types>\n`],
+    ["_rels/.rels", `<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel-1" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>\n`],
+    ["3D/3dmodel.model", model],
+    ["Metadata/project_settings.config", proj],
+    ["Metadata/model_settings.config", `<?xml version="1.0" encoding="UTF-8"?>\n<config>\n${ms.join("\n")}\n${pls.join("\n")}\n</config>\n`],
+    ["Metadata/slice_info.config", `<?xml version="1.0" encoding="UTF-8"?>\n<config><header><header_item key="X-BBL-Client-Type" value="slicer"/><header_item key="X-BBL-Client-Version" value="02.06.00.51"/></header></config>\n`],
+  ]);
+  blob.plates = plates.length;
+  return blob;
+}
+
 // 3D-förhandsvisning med three.js (laddas först när en insats visas)
 let THREE_ = null, v3 = null;
 async function view3D(g){
@@ -1744,11 +1828,11 @@ $("iBambu").onclick = async () => {
   if (!session) { openSignup("Open in Bambu Studio", "Create a free account to send the file to Bambu Studio. It takes 20 seconds."); return; }
   const btn = $("iBambu"), old = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spin"></span> Preparing file…`;
   try {
-    const g = insertGeometry(curInsert), blob = await insertSTL(g);
-    // Bambu Studio läser filtypen från slutet av adressen, så den måste sluta på ".stl" (inget ?t= efter)
-    const name = `boredprinter-${(curInsert.what || "insert").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-${Date.now().toString(36)}.stl`;
+    const g = insertGeometry(curInsert), blob = await insert3MF(g);
+    // Bambu Studio läser filtypen från slutet av adressen, så den måste sluta på ".3mf" (inget ?t= efter)
+    const name = `boredprinter-${(curInsert.what || "insert").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-${Date.now().toString(36)}.3mf`;
     const path = `${session.user.id}/${name}`;
-    const { error } = await SB.storage.from("inserts").upload(path, blob, { contentType: "model/stl", upsert: true, cacheControl: "60" });
+    const { error } = await SB.storage.from("inserts").upload(path, blob, { contentType: "model/3mf", upsert: true, cacheControl: "60" });
     if (error) throw error;
     // städa bort äldre filer så att det bara ligger några få kvar
     try { const { data } = await SB.storage.from("inserts").list(session.user.id, { limit: 50, sortBy: { column: "created_at", order: "desc" } });
@@ -1765,12 +1849,15 @@ $("iBambu").onclick = async () => {
 $("iDl").onclick = async () => {
   if (!curInsert) return;
   if (!session) { openSignup("Download your insert", "Create a free account to download the file. It takes 20 seconds."); return; }
-  const g = insertGeometry(curInsert), blob = await insertSTL(g);
-  const a = document.createElement("a"), name = `boredprinter-${(curInsert.what || "insert").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-${Math.round(curInsert.w_mm)}x${Math.round(curInsert.d_mm)}.stl`;
+  const g = insertGeometry(curInsert), pr = $("iPrinter").value, bb = !pr || /^bambu-/.test(pr);
+  let blob; try { blob = bb ? await insert3MF(g) : await insertSTL(g); } catch { blob = await insertSTL(g); }
+  const ext = blob.type === "model/3mf" ? "3mf" : "stl";
+  const a = document.createElement("a"), name = `boredprinter-${(curInsert.what || "insert").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-${Math.round(curInsert.w_mm)}x${Math.round(curInsert.d_mm)}.${ext}`;
   a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
   track("insert_download");
-  toast(g.pieces.length > 1 ? `Downloaded. ${g.pieces.length} pieces in one file: in your slicer, split it to objects.` : "Downloaded. Open it in your slicer.");
+  toast(ext === "3mf" ? (blob.plates > 1 ? `Downloaded. Open it in Bambu Studio: ${blob.plates} plates, ready to print.` : "Downloaded. Open it in Bambu Studio, ready to print.")
+    : g.pieces.length > 1 ? `Downloaded. ${g.pieces.length} pieces in one file: in your slicer, split it to objects.` : "Downloaded. Open it in your slicer.");
 };
 
 // Öppna på datorn: länk med måtten och layouten i adressen
