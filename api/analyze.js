@@ -105,7 +105,9 @@ async function handler(req) {
   const signedIn = (req.headers.get("authorization") || "").startsWith("Bearer ey");
   // "Show more ideas": samma bild igen, nya idéer. Bara inloggade, kostar ingen kredit (tak per dygn).
   const insertMode = body.mode === "insert";
-  const more = body.more === true || insertMode;
+  // fresh = valt direkt efter fotot (kostar som en vanlig bild). Annars = "markera rätt låda" i ett resultat (gratis, tak per dygn).
+  const freshInsert = insertMode && body.fresh === true;
+  const more = body.more === true || (insertMode && !freshInsert);
   const exclude = more && Array.isArray(body.exclude) ? body.exclude.slice(0, 40).map((x) => String(x).slice(0, 80)) : [];
   if (more && !signedIn) return json({ error: "signin_required" }, 401);
   let quota;
@@ -121,6 +123,12 @@ async function handler(req) {
   if (!quota.ok && quota.reason === "preview_limit") return json({ error: "signin_required" }, 401);
   if (!quota.ok && quota.reason === "signin") return json({ error: "signin_required" }, 401);
   if (!quota.ok) return json({ error: "no_credits", signed_in: signedIn }, 402);
+  // Utan konto: lådinsats direkt efter fotot räknas som gratisbilden. Är den redan använd: skapa konto.
+  if (freshInsert && !signedIn) {
+    let full = false;
+    try { full = await rpc("can_full", { p_ip: ipHash(req), p_key: SCAN_KEY }, req); } catch {}
+    if (!full) return json({ error: "signin_required" }, 401);
+  }
 
   for (const model of MODELS) {
     try {
@@ -136,7 +144,13 @@ async function handler(req) {
       const data = await r.json();
       const text = (data.candidates?.[0]?.content?.parts ?? []).map((p) => p.text ?? "").join("");
       const out = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
-      if (insertMode) { const ins = cleanInsert(out.insert); if (!ins) continue; return json({ insert: ins }); }
+      if (insertMode) {
+        const ins = cleanInsert(out.insert); if (!ins) continue;
+        const res = { place: `your ${ins.what}`, seen: ins.items || [], prints: [], insert: ins };
+        if (freshInsert && !signedIn) { try { await rpc("save_pending", { p_ip: ipHash(req), p_key: SCAN_KEY, p_result: res, p_full: true }, req); } catch {} return json({ ...res, free: true }); }
+        if (freshInsert) return json({ ...res, quota: { free_left: quota.free_left ?? null, credits: quota.credits ?? null, via: quota.via } });
+        return json({ insert: ins });
+      }
       if (!Array.isArray(out.prints)) continue;
       const up = (t) => { t = String(t || "").trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
       out.prints = out.prints.slice(0, 10).map((p) => ({ ...p, name: up(p.name), why: up(p.why) }));
