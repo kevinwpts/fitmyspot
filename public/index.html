@@ -615,6 +615,7 @@ body{background:var(--bg);color:var(--ink)}
 .mk-r{position:absolute;border:3px solid var(--lime);background:rgba(255,91,31,.15);border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.35)}
 .mk-tip{color:var(--muted);font-size:13px}
 .mk-act{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}
+.ibambu{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#00AE42;padding:16px}.ibambu:hover{background:#009639}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -714,6 +715,7 @@ body{background:var(--bg);color:var(--ink)}
       </div>
       <small class="ihint">Measure the inside of the drawer. We make it 1 mm smaller on each side so it slides in.</small>
       <p class="iinfo" id="iInfo"></p>
+      <button type="button" class="btn btn-ink ibambu" id="iBambu" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>Open in Bambu Studio</button>
       <div class="iact"><button type="button" class="btn btn-ink" id="iDl">Download file (.stl)</button><button type="button" class="btn btn-soft" id="iLink">Send to my computer</button></div>
     </section>
     <div class="sampbar" id="sampBar" hidden><span><b>This is a sample.</b> Want ideas for your own room?</span><label for="file" class="btn btn-ink">Try your room · free</label></div>
@@ -1506,6 +1508,7 @@ function showInsert(ins){
   aiRows = curInsert ? JSON.parse(JSON.stringify(curInsert.rows)) : null;
   if (curInsert) { const n = countCells(curInsert.rows); $("iCount").value = Math.min(16, n); $("iCountV").textContent = n; setLayoutMode(true); }
   $("iMark").hidden = !photoUrl || !curInsert;
+  $("iBambu").hidden = !isDesktop();
   $("insertBox").hidden = !curInsert;
   if (!curInsert) return;
   $("iTitle").textContent = `Custom insert for your ${curInsert.what || "drawer"}`;
@@ -1516,6 +1519,26 @@ function showInsert(ins){
   track("insert_shown");
 }
 ["iW", "iD", "iH"].forEach(id => $(id).addEventListener("input", () => { if (curInsert) curInsert.confirmed = true; drawInsert(); }));
+
+// Öppna direkt i Bambu Studio (dator): filen läggs upp en stund, sedan öppnas den via Bambu Studios egen länk
+const isDesktop = () => matchMedia("(pointer: fine)").matches && !/Android|iPhone|iPad/i.test(navigator.userAgent);
+$("iBambu").onclick = async () => {
+  if (!curInsert) return;
+  if (!session) { openSignup("Open in Bambu Studio", "Create a free account to send the file to Bambu Studio. It takes 20 seconds."); return; }
+  const btn = $("iBambu"), old = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spin"></span> Preparing file…`;
+  try {
+    const g = insertGeometry(curInsert), blob = insertSTL(g);
+    const path = `${session.user.id}/insert.stl`;
+    const { error } = await SB.storage.from("inserts").upload(path, blob, { contentType: "model/stl", upsert: true, cacheControl: "0" });
+    if (error) throw error;
+    const url = SB.storage.from("inserts").getPublicUrl(path).data.publicUrl + "?t=" + Date.now();
+    const mac = /Mac/i.test(navigator.platform || navigator.userAgent);
+    track("insert_bambu");
+    location.href = mac ? `bambustudioopen://${encodeURIComponent(url)}` : `bambustudio://open?file=${encodeURIComponent(url)}`;
+    setTimeout(() => toast("Nothing happened? Install Bambu Studio, or use Download instead."), 2500);
+  } catch { toast("Couldn't send it to Bambu Studio. Use Download instead."); }
+  finally { btn.disabled = false; btn.innerHTML = old; }
+};
 
 $("iDl").onclick = () => {
   if (!curInsert) return;
@@ -1561,7 +1584,7 @@ function openMark(){
   $("mkImg").src = photoUrl; $("mkRect").hidden = true; $("mkGo").disabled = true; mkSel = null;
   $("dlgMark").showModal();
 }
-$("iMark").onclick = openMark; $("mkOffer").onclick = openMark;
+$("iMark").onclick = () => { track("insert_mark"); openMark(); }; $("mkOffer").onclick = () => { track("insert_mark"); openMark(); };
 $("mkCancel").onclick = () => $("dlgMark").close();
 (() => {
   const wrap = $("mkWrap"), rect = $("mkRect"); let st = null;
