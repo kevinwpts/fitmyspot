@@ -594,6 +594,12 @@ body{background:var(--bg);color:var(--ink)}
 .iact{display:grid;grid-template-columns:1fr 1fr;gap:8px}.iact .btn{padding:15px 12px;font-size:15px}
 @media (max-width:420px){.iact{grid-template-columns:1fr}}
 .iinfo small{display:block;font-weight:500;color:var(--muted);font-size:12.5px;margin-top:3px}
+.itabs{display:inline-flex;gap:4px;background:var(--soft);padding:4px;border-radius:12px;justify-self:start}
+.itabs button{appearance:none;border:0;background:none;font:600 14px Geist,sans-serif;color:var(--muted);padding:8px 14px;border-radius:9px;cursor:pointer}
+.itabs button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.i3d{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(#F7F7F8,#ECEDF0)}
+.i3d canvas{display:block;width:100%;height:min(72vw,340px);touch-action:none;cursor:grab}
+.i3dhint{position:absolute;right:10px;bottom:10px;font:600 12px Geist,sans-serif;color:var(--muted);background:rgba(255,255,255,.8);padding:5px 9px;border-radius:999px;pointer-events:none}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -675,7 +681,9 @@ body{background:var(--bg);color:var(--ink)}
     <div class="rtools rtools2"><label for="file" class="nbtn ink"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg> New photo</label><button class="nbtn" id="shareBtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></svg> Share</button></div>
     <section class="ibox" id="insertBox" hidden aria-label="Custom insert">
       <div class="ih"><span class="ik">Made to fit</span><h3 id="iTitle">Custom insert for your drawer</h3><p id="iItems"></p></div>
-      <div class="isvgw" id="iSvg"></div>
+      <div class="itabs" role="tablist"><button type="button" class="on" data-iview="3d" role="tab" aria-selected="true">3D</button><button type="button" data-iview="top" role="tab" aria-selected="false">From above</button></div>
+      <div class="i3d" id="i3d"><canvas id="i3dc" aria-label="3D preview of the insert"></canvas><span class="i3dhint">Drag to turn</span></div>
+      <div class="isvgw" id="iSvg" hidden></div>
       <div class="iq"><b>Are these measurements right?</b><small id="iEst">Our estimate from the photo · check with a ruler</small></div>
       <div class="idims">
         <label>Width<span><input id="iW" type="number" inputmode="numeric" min="60" max="1200" step="1"> mm</span></label>
@@ -1299,10 +1307,25 @@ function insertGeometry(ins){
     r.cells.forEach((c, ci) => { x += c.size * W; if (ci < r.cells.length - 1) boxes.push([x - ti / 2, y0, 0, x + ti / 2, yTop, H]); });
     yTop = y0;
   });
-  const nx = Math.ceil(W / bed), ny = Math.ceil(D / bed);
+  const nx = Math.ceil(W / bed);
+  // Djupled: kapa helst vid en befintlig radvägg, så att det inte blir extra fack
+  let ys = null;
+  if (D > bed) {
+    const bounds = []; let y = D; ins.rows.forEach((r, ri) => { y -= r.size * D; if (ri < ins.rows.length - 1) bounds.push(y); });
+    const cuts = [0]; let last = 0, ok = true;
+    while (D - last > bed) {
+      const cand = bounds.filter(c => c > last + 20 && c <= last + bed);
+      if (!cand.length) { ok = false; break; }
+      last = Math.max(...cand); cuts.push(last);
+    }
+    cuts.push(D);
+    if (ok && cuts.length - 1 <= Math.ceil(D / bed)) ys = cuts;
+  }
+  if (!ys) { const n = Math.ceil(D / bed); ys = Array.from({ length: n + 1 }, (_, k) => D * k / n); }
+  const ny = ys.length - 1;
   const pieces = [];
   for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++) {
-    const X0 = W * i / nx, X1 = W * (i + 1) / nx, Y0 = D * j / ny, Y1 = D * (j + 1) / ny, out = [];
+    const X0 = W * i / nx, X1 = W * (i + 1) / nx, Y0 = ys[j], Y1 = ys[j + 1], out = [];
     for (const b of boxes) {
       const c = [Math.max(b[0], X0), Math.max(b[1], Y0), b[2], Math.min(b[3], X1), Math.min(b[4], Y1), b[5]];
       if (c[3] - c[0] > 0.01 && c[4] - c[1] > 0.01) out.push(c);
@@ -1317,8 +1340,64 @@ function insertGeometry(ins){
   }
   const vol = pieces.reduce((a, p) => a + p.boxes.reduce((s, b) => s + (b[3] - b[0]) * (b[4] - b[1]) * (b[5] - b[2]), 0), 0);
   const grams = Math.round(vol / 1000 * 1.24 * 0.92);
-  return { W, D, H, pieces, nx, ny, grams, hours: Math.max(0.5, Math.round(grams / 22 * 2) / 2) };
+  return { W, D, H, pieces, nx, ny, ys, grams, hours: Math.max(0.5, Math.round(grams / 22 * 2) / 2) };
 }
+
+// 3D-förhandsvisning med three.js (laddas först när en insats visas)
+let THREE_ = null, v3 = null;
+async function view3D(g){
+  const cv = $("i3dc"); if (!cv || $("insertBox").hidden) return;
+  try { THREE_ = THREE_ || await import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"); } catch { $("i3d").hidden = true; setIView("top"); return; }
+  const T = THREE_;
+  if (!v3) {
+    const r = new T.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, preserveDrawingBuffer: true });
+    r.setPixelRatio(Math.min(2, devicePixelRatio || 1)); r.shadowMap.enabled = true; r.shadowMap.type = T.PCFSoftShadowMap;
+    const scene = new T.Scene(), cam = new T.PerspectiveCamera(32, 1, 1, 10000);
+    scene.add(new T.HemisphereLight(0xffffff, 0xc9ccd2, 1.6));
+    const sun = new T.DirectionalLight(0xffffff, 2.2); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); scene.add(sun);
+    const ground = new T.Mesh(new T.PlaneGeometry(1, 1), new T.ShadowMaterial({ opacity: .1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+    v3 = { r, scene, cam, sun, ground, group: null, yaw: -0.6, pitch: 0.62, auto: true, drag: null, raf: 0 };
+    const down = e => { v3.auto = false; v3.drag = { x: e.clientX, y: e.clientY, yaw: v3.yaw, pitch: v3.pitch }; cv.setPointerCapture?.(e.pointerId); };
+    const move = e => { if (!v3.drag) return; v3.yaw = v3.drag.yaw - (e.clientX - v3.drag.x) / 160; v3.pitch = Math.min(1.45, Math.max(0.15, v3.drag.pitch + (e.clientY - v3.drag.y) / 220)); };
+    const up = () => { v3.drag = null; };
+    cv.addEventListener("pointerdown", down); cv.addEventListener("pointermove", move); cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+    const loop = () => {
+      v3.raf = requestAnimationFrame(loop);
+      if ($("insertBox").hidden || $("i3d").hidden) return;
+      const w = cv.clientWidth, h = cv.clientHeight; if (!w) return;
+      if (cv.width !== Math.round(w * r.getPixelRatio())) { r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+      if (v3.auto) v3.yaw += 0.0035;
+      const R = v3.R || 800;
+      cam.position.set(Math.sin(v3.yaw) * Math.cos(v3.pitch) * R, Math.sin(v3.pitch) * R, Math.cos(v3.yaw) * Math.cos(v3.pitch) * R);
+      cam.lookAt(0, 0, 0);
+      r.render(scene, cam);
+    };
+    loop();
+  }
+  if (v3.group) { v3.scene.remove(v3.group); v3.group.traverse(o => { o.geometry?.dispose?.(); }); }
+  const grp = new T.Group(), mat = new T.MeshStandardMaterial({ color: 0xFF5B1F, roughness: .78, metalness: 0 }), edgeMat = new T.LineBasicMaterial({ color: 0xB8380C, transparent: true, opacity: .45 });
+  const gap = g.pieces.length > 1 ? 8 : 0;
+  g.pieces.forEach(p => {
+    const ix = Math.round(p.x0 / (g.W / g.nx)), iy = g.ys.indexOf(p.y0);
+    for (const b of p.boxes) {
+      const m = new T.Mesh(new T.BoxGeometry(b[3] - b[0], b[5] - b[2], b[4] - b[1]), mat);
+      m.position.set((b[0] + b[3]) / 2 + ix * gap - (g.W + gap * (g.nx - 1)) / 2, (b[2] + b[5]) / 2, -((b[1] + b[4]) / 2 + iy * gap - (g.D + gap * (g.ny - 1)) / 2));
+      m.castShadow = true; m.receiveShadow = true; grp.add(m);
+      const ln = new T.LineSegments(new T.EdgesGeometry(m.geometry), edgeMat); ln.position.copy(m.position); grp.add(ln);
+    }
+  });
+  v3.group = grp; v3.scene.add(grp);
+  const span = Math.max(g.W, g.D) + gap * 2;
+  v3.R = span * 1.95; v3.H = g.H;
+  v3.ground.scale.set(span * 3, span * 3, 1);
+  v3.sun.position.set(span * .6, span * 1.4, span * .9); v3.sun.target.position.set(0, 0, 0);
+  const sc = v3.sun.shadow.camera; sc.left = sc.bottom = -span; sc.right = sc.top = span; sc.near = 1; sc.far = span * 5; sc.updateProjectionMatrix();
+}
+function setIView(v){
+  document.querySelectorAll("[data-iview]").forEach(b => { const on = b.dataset.iview === v; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+  $("i3d").hidden = v !== "3d"; $("iSvg").hidden = v !== "top";
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-iview]"); if (b) setIView(b.dataset.iview); });
 
 // Binär STL: alla bitar i en fil, bredvid varandra med 10 mm mellanrum
 function insertSTL(g){
@@ -1361,7 +1440,7 @@ function insertSVG(ins, g){
   });
   let cuts = "";
   for (let i = 1; i < g.nx; i++) cuts += `<line x1="${W * i / g.nx}" y1="-4" x2="${W * i / g.nx}" y2="${D + 4}" class="icut"/>`;
-  for (let j = 1; j < g.ny; j++) cuts += `<line x1="-4" y1="${D - D * j / g.ny}" x2="${W + 4}" y2="${D - D * j / g.ny}" class="icut"/>`;
+  for (let j = 1; j < g.ny; j++) cuts += `<line x1="-4" y1="${D - g.ys[j]}" x2="${W + 4}" y2="${D - g.ys[j]}" class="icut"/>`;
   return `<svg viewBox="-6 -6 ${W + 12} ${D + 12}" class="isvg" role="img" aria-label="Insert seen from above"><rect x="0" y="0" width="${W}" height="${D}" rx="5" class="io"/>${rects}${lab.join("")}${cuts}</svg>`;
 }
 
@@ -1370,6 +1449,7 @@ function drawInsert(){
   ins.w_mm = +$("iW").value || ins.w_mm; ins.d_mm = +$("iD").value || ins.d_mm; ins.h_mm = +$("iH").value || ins.h_mm;
   const g = insertGeometry(ins);
   $("iSvg").innerHTML = insertSVG(ins, g);
+  clearTimeout(drawInsert.t); drawInsert.t = setTimeout(() => view3D(g), 120);
   const n = g.pieces.length;
   $("iInfo").innerHTML = `${n === 1 ? "1 piece" : `${n} pieces that fit your printer`} · ~${g.grams} g · ~${g.hours} h · ${Math.round(g.H)} mm high${n > 1 ? `<small>Dashed lines show where it's split into pieces.</small>` : ""}`;
 }
