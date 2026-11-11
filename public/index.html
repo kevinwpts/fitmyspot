@@ -639,6 +639,11 @@ body{background:var(--bg);color:var(--ink)}
 .ipat svg{width:30px;height:18px}.ipat svg rect{fill:#FFE9DF;stroke:var(--lime);stroke-width:2}.ipat svg .h{fill:#fff;stroke:var(--lime);stroke-width:1.5}.ipat svg .s{stroke:#fff;stroke-width:3;stroke-linecap:round}
 .iprn{display:flex;align-items:center;justify-content:space-between;gap:10px;font:600 14px Geist,sans-serif}.iprn .sel{max-width:62%}
 .i3dz{position:absolute;right:10px;top:10px;display:grid;gap:6px}.i3dz button{appearance:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.92);font:600 18px/1 Geist,sans-serif;color:var(--ink);cursor:pointer}
+.icust{display:grid;gap:8px;background:var(--soft);border-radius:14px;padding:12px 14px}
+.itog{display:flex;align-items:center;gap:12px;cursor:pointer}.itog input{width:22px;height:22px;accent-color:var(--lime);flex:none}
+.itog b{display:block;font-size:14.5px}.itog small{color:var(--muted);font-size:12.5px}
+.irow{display:flex;align-items:center;gap:10px}.irow>b{font-size:14.5px;min-width:52px}.irow input[type=range]{flex:1;accent-color:var(--lime)}.irow>span{font:600 14px Geist,sans-serif;min-width:52px;text-align:right}
+.iseg{display:flex;gap:4px;background:var(--card);padding:3px;border-radius:10px;flex:1}.iseg button{appearance:none;flex:1;border:0;background:none;font:600 13px Geist,sans-serif;color:var(--muted);padding:7px 4px;border-radius:8px;cursor:pointer}.iseg button.on{background:var(--ink);color:#fff}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 </head>
@@ -745,6 +750,12 @@ body{background:var(--bg);color:var(--ink)}
         <input type="range" id="iCount" min="1" max="16" step="1" value="6" aria-label="Number of compartments">
         <div class="icchips"><button type="button" class="on" id="iAi">Our suggestion</button><button type="button" id="iEven">Same size</button></div>
       </div>
+      <div class="icust">
+        <label class="itog"><input type="checkbox" id="oRound"><span><b>Rounded corners</b><small>Easy to grab small things</small></span></label>
+        <label class="itog"><input type="checkbox" id="oNotch"><span><b>Finger notch</b><small>A dip in the front to lift things out</small></span></label>
+        <div class="irow"><b>Height</b><input type="range" id="oH" min="10" max="80" step="1" aria-label="Insert height"><span id="oHv">45 mm</span></div>
+        <div class="irow"><b>Fit</b><div class="iseg"><button type="button" data-ofit="tight">Tight</button><button type="button" data-ofit="normal" class="on">Normal</button><button type="button" data-ofit="loose">Loose</button></div></div>
+      </div>
       <div class="ipat" role="radiogroup" aria-label="Wall design">
         <span>Walls</span>
         <button type="button" class="on" data-ipat="plain" role="radio" aria-checked="true"><svg viewBox="0 0 40 24" aria-hidden="true"><rect x="2" y="2" width="36" height="20" rx="3"/></svg>Plain</button>
@@ -765,7 +776,7 @@ body{background:var(--bg);color:var(--ink)}
         <label>Depth<span><input id="iD" type="number" inputmode="numeric" min="60" max="1000" step="1"> mm</span></label>
         <label>Height<span><input id="iH" type="number" inputmode="numeric" min="20" max="300" step="1"> mm</span></label>
       </div>
-      <small class="ihint">Measure the inside of the drawer. We make it 1 mm smaller on each side so it slides in.</small>
+      <small class="ihint">Measure the inside of the drawer. We leave a small gap so it slides in (change it with Fit).</small>
       <label class="iprn">Your printer <select id="iPrinter" class="sel" aria-label="Your printer"></select></label>
       <p class="iinfo" id="iInfo"></p>
       <button type="button" class="btn btn-ink ibambu" id="iBambu" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>Open in Bambu Studio</button>
@@ -1385,7 +1396,18 @@ let curInsert = null;
 function insertGeometry(ins){
   // Höjd: max 45 mm (sparar filament), golv 0,8 mm. Stil: tray (en bricka), boxes (lösa lådor), dividers (utan golv)
   const style = ins.style || "tray";
-  const W = Math.max(40, ins.w_mm - 2), D = Math.max(40, ins.d_mm - 2), H = Math.max(15, Math.min(ins.h_mm - 3, 45));
+  // Passform: luft per sida. Höjd: egen höjd eller max 45 mm.
+  const clr = { tight: 0.5, normal: 1, loose: 1.5 }[ins.fit || "normal"] || 1;
+  const W = Math.max(40, ins.w_mm - 2 * clr), D = Math.max(40, ins.d_mm - 2 * clr);
+  const H = Math.max(10, Math.min(ins.h_mm - 2, ins.hmax || Math.min(ins.h_mm - 3, 45)));
+  const R = ins.round ? 5 : 0, NW = 22, ND = () => Math.min(14, H * 0.4);
+  // Greppurtag: dela en framvägg i bitar med en lägre del i mitten av varje fack
+  const notchWall = (x0, y0, x1, y1, centers) => {
+    const segs = [], nd = ND(); let x = x0;
+    centers.filter(c => c - NW / 2 > x0 + 2 && c + NW / 2 < x1 - 2).sort((a, b) => a - b).forEach(c => {
+      segs.push([x, y0, 0, c - NW / 2, y1, H], [c - NW / 2, y0, 0, c + NW / 2, y1, H - nd]); x = c + NW / 2; });
+    segs.push([x, y0, 0, x1, y1, H]); return segs;
+  };
   const T = 1.6, ti = 1.2, F = 0.8, bed = bedSize() - 6;
   // cellernas rutor (x0,y0,x1,y1), rader från bak (y=D) till fram (y=0)
   const cells = []; let yTop = D;
@@ -1399,11 +1421,14 @@ function insertGeometry(ins){
     // Varje fack blir en egen låda med golv och väggar (0,5 mm luft mellan lådorna)
     const g = 0.5, t = 1.2, pieces = cells.map(([x0, y0, x1, y1]) => {
       const w = Math.min(x1 - x0 - g, bed), d = Math.min(y1 - y0 - g, bed);
-      return { x0: x0 + g / 2, y0: y0 + g / 2, w, d, pos: [x0 + g / 2, y0 + g / 2], boxes: [[0, 0, 0, w, d, F], [0, 0, 0, t, d, H], [w - t, 0, 0, w, d, H], [0, 0, 0, w, t, H], [0, d - t, 0, w, d, H]] };
+      const front = ins.notch ? notchWall(0, 0, w, t, [w / 2]) : [[0, 0, 0, w, t, H]];
+      const fil = R && w > 4 * R && d > 4 * R ? [[t, t, 1, 1], [w - t, t, -1, 1], [t, d - t, 1, -1], [w - t, d - t, -1, -1]].map(([x, y, sx, sy]) => ({ x, y, sx, sy, r: R })) : [];
+      return { x0: x0 + g / 2, y0: y0 + g / 2, w, d, pos: [x0 + g / 2, y0 + g / 2], boxes: [[0, 0, 0, w, d, F], [0, 0, 0, t, d, H], [w - t, 0, 0, w, d, H], ...front, [0, d - t, 0, w, d, H]], fillets: fil, F, H };
     });
     return finish(pieces, { local: true });
   }
-  const boxes = [[0, 0, 0, T, D, H], [W - T, 0, 0, W, D, H], [0, 0, 0, W, T, H], [0, D - T, 0, W, D, H]];
+  const frontCenters = cells.filter(c => c[1] < 1).map(c => (c[0] + c[2]) / 2);
+  const boxes = [[0, 0, 0, T, D, H], [W - T, 0, 0, W, D, H], ...(ins.notch ? notchWall(0, 0, W, T, frontCenters) : [[0, 0, 0, W, T, H]]), [0, D - T, 0, W, D, H]];
   if (style !== "dividers") boxes.unshift([0, 0, 0, W, D, F]);
   yTop = D;
   ins.rows.forEach((r, ri) => {
@@ -1442,7 +1467,17 @@ function insertGeometry(ins){
     if (i < nx - 1) out.push([w - C, 0, 0, w, d, H]);
     if (j > 0) out.push([0, 0, 0, w, C, H]);
     if (j < ny - 1) out.push([0, d - C, 0, w, d, H]);
-    pieces.push({ x0: X0, y0: Y0, w, d, pos: [X0 + i * 8, Y0 + j * 8], boxes: out });
+    // rundade hörn inuti varje fack (de som ligger i den här biten)
+    const fil = [];
+    if (R) for (const [cx0, cy0, cx1, cy1] of cells) {
+      if (cx1 - cx0 < 4 * R || cy1 - cy0 < 4 * R) continue;
+      const ix = x => x < 1 || x > W - 1 ? T : ti / 2;
+      for (const [x, y, sx, sy] of [[cx0, cy0, 1, 1], [cx1, cy0, -1, 1], [cx0, cy1, 1, -1], [cx1, cy1, -1, -1]]) {
+        const px = x + sx * ix(x), py = y + sy * (y < 1 || y > D - 1 ? T : ti / 2);
+        if (px >= X0 - 0.01 && px <= X1 + 0.01 && py >= Y0 - 0.01 && py <= Y1 + 0.01) fil.push({ x: px - X0, y: py - Y0, sx, sy, r: R });
+      }
+    }
+    pieces.push({ x0: X0, y0: Y0, w, d, pos: [X0 + i * 8, Y0 + j * 8], boxes: out, fillets: fil, F: style === "dividers" ? 0 : F, H });
   }
   return finish(pieces, { nx, ny, ys });
 }
@@ -1479,6 +1514,16 @@ async function insertTriangles(g, pattern){
   };
   g.pieces.forEach(p => {
     const [ox, oy] = p.pos;
+    // rundade hörn: ett "kvartsrör" i varje hörn (hörnet minus en kvartscirkel), från golvet upp
+    for (const f of p.fillets || []) {
+      const poly = [[0, 0], [f.r, 0]];
+      for (let k = 1; k < 8; k++) { const a = -Math.PI / 2 - k * Math.PI / 16; poly.push([f.r + f.r * Math.cos(a), f.r + f.r * Math.sin(a)]); }
+      poly.push([0, f.r]);
+      const P = poly.map(([u, v]) => [f.x + f.sx * u + ox, f.y + f.sy * v + oy]), z0 = p.F || 0, z1 = p.H, flip = f.sx * f.sy < 0;
+      const add = (a, b, c) => tris.push(flip ? [a, c, b] : [a, b, c]);
+      for (let k = 1; k < P.length - 1; k++) { add([P[0][0], P[0][1], z0], [P[k + 1][0], P[k + 1][1], z0], [P[k][0], P[k][1], z0]); add([P[0][0], P[0][1], z1], [P[k][0], P[k][1], z1], [P[k + 1][0], P[k + 1][1], z1]); }
+      for (let k = 0; k < P.length; k++) { const a = P[k], b = P[(k + 1) % P.length]; add([a[0], a[1], z0], [b[0], b[1], z0], [b[0], b[1], z1]); add([a[0], a[1], z0], [b[0], b[1], z1], [a[0], a[1], z1]); }
+    }
     for (const b of p.boxes) {
       const dx = b[3] - b[0], dy = b[4] - b[1], dz = b[5] - b[2];
       const wall = T && dz >= 20 && Math.min(dx, dy) <= 2.2 && Math.max(dx, dy) >= 25;
@@ -1538,11 +1583,11 @@ async function view3D(g){
     scene.add(new T.HemisphereLight(0xffffff, 0xc9ccd2, 1.6));
     const sun = new T.DirectionalLight(0xffffff, 2.2); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); scene.add(sun);
     const ground = new T.Mesh(new T.PlaneGeometry(1, 1), new T.ShadowMaterial({ opacity: .1 })); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
-    v3 = { r, scene, cam, sun, ground, group: null, yaw: -0.6, pitch: 0.62, auto: true, drag: null, raf: 0, zoom: 1 };
+    v3 = { r, scene, cam, sun, ground, group: null, yaw: -0.6, pitch: 0.62, auto: true, drag: null, raf: 0, zoom: 1, look: [0, 0, 0], tw: null };
     // Dra = vrid. Nyp med två fingrar eller scrolla = zooma.
     const pts = new Map(); let pinch = null;
     const setZoom = z => { v3.zoom = Math.min(2.5, Math.max(0.35, z)); };
-    const down = e => { v3.auto = false; pts.set(e.pointerId, [e.clientX, e.clientY]); cv.setPointerCapture?.(e.pointerId);
+    const down = e => { v3.auto = false; v3.tw = null; pts.set(e.pointerId, [e.clientX, e.clientY]); cv.setPointerCapture?.(e.pointerId);
       if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), z: v3.zoom }; v3.drag = null; }
       else v3.drag = { x: e.clientX, y: e.clientY, yaw: v3.yaw, pitch: v3.pitch }; };
     const move = e => { if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, [e.clientX, e.clientY]);
@@ -1551,16 +1596,21 @@ async function view3D(g){
     const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) v3.drag = null; };
     cv.addEventListener("pointerdown", down); cv.addEventListener("pointermove", move); cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
     cv.addEventListener("wheel", e => { e.preventDefault(); v3.auto = false; setZoom(v3.zoom * Math.exp(e.deltaY * 0.0015)); }, { passive: false });
-    document.querySelectorAll("[data-zoom]").forEach(b => b.onclick = () => { v3.auto = false; b.dataset.zoom === "in" ? setZoom(v3.zoom / 1.3) : b.dataset.zoom === "out" ? setZoom(v3.zoom * 1.3) : (setZoom(1), v3.yaw = -0.6, v3.pitch = 0.62); });
+    document.querySelectorAll("[data-zoom]").forEach(b => b.onclick = () => { v3.auto = false; b.dataset.zoom === "in" ? setZoom(v3.zoom / 1.3) : b.dataset.zoom === "out" ? setZoom(v3.zoom * 1.3) : (setZoom(1), v3.yaw = -0.6, v3.pitch = 0.62, v3.look = [0, 0, 0], v3.tw = null); });
     const loop = () => {
       v3.raf = requestAnimationFrame(loop);
       if ($("insertBox").hidden || $("i3d").hidden) return;
       const w = cv.clientWidth, h = cv.clientHeight; if (!w) return;
       if (cv.width !== Math.round(w * r.getPixelRatio())) { r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+      if (v3.tw) { // mjuk kameraåkning till det som ändrades
+        const k = 0.12, t = v3.tw; v3.yaw += (t.yaw - v3.yaw) * k; v3.pitch += (t.pitch - v3.pitch) * k; v3.zoom += (t.zoom - v3.zoom) * k;
+        v3.look = v3.look.map((x, i) => x + (t.look[i] - x) * k);
+        if (Math.abs(t.zoom - v3.zoom) < 0.002 && Math.abs(t.yaw - v3.yaw) < 0.002) v3.tw = null;
+      }
       if (v3.auto) v3.yaw += 0.0035;
-      const R = (v3.R || 800) * v3.zoom;
-      cam.position.set(Math.sin(v3.yaw) * Math.cos(v3.pitch) * R, Math.sin(v3.pitch) * R, Math.cos(v3.yaw) * Math.cos(v3.pitch) * R);
-      cam.lookAt(0, 0, 0);
+      const R = (v3.R || 800) * v3.zoom, L = v3.look;
+      cam.position.set(L[0] + Math.sin(v3.yaw) * Math.cos(v3.pitch) * R, L[1] + Math.sin(v3.pitch) * R, L[2] + Math.cos(v3.yaw) * Math.cos(v3.pitch) * R);
+      cam.lookAt(L[0], L[1], L[2]);
       r.render(scene, cam);
     };
     loop();
@@ -1582,6 +1632,19 @@ async function view3D(g){
   v3.ground.scale.set(span * 3, span * 3, 1);
   v3.sun.position.set(span * .6, span * 1.4, span * .9); v3.sun.target.position.set(0, 0, 0);
   const sc = v3.sun.shadow.camera; sc.left = sc.bottom = -span; sc.right = sc.top = span; sc.near = 1; sc.far = span * 5; sc.updateProjectionMatrix();
+}
+function focus3D(what){
+  if (!v3 || !drawInsert.last) return;
+  setIView("3d"); v3.auto = false;
+  const g = drawInsert.last, p0 = g.pieces[0], ext = g.pieces.reduce((e, p) => [Math.max(e[0], p.pos[0] + p.w), Math.max(e[1], p.pos[1] + p.d)], [0, 0]);
+  const to3 = (x, y, z) => [x - ext[0] / 2, z, -(y - ext[1] / 2)], H = g.H;
+  if (what === "corner") { // titta ner i ett hörn från fackets insida
+    const f = (p0.fillets || [])[0]; const c = f ? to3(p0.pos[0] + f.x, p0.pos[1] + f.y, H * 0.3) : to3(10, 10, H / 2);
+    const yaw = f ? Math.atan2(f.sx, -f.sy) : 2.35; v3.tw = { yaw, pitch: 0.95, zoom: 0.32, look: c }; }
+  else if (what === "front") v3.tw = { yaw: 0.05, pitch: 0.32, zoom: 0.55, look: to3(ext[0] / 2, 0, H * 0.6) };
+  else if (what === "side") v3.tw = { yaw: -1.25, pitch: 0.18, zoom: 0.75, look: to3(ext[0] / 2, ext[1] / 2, H / 2) };
+  else if (what === "wall") v3.tw = { yaw: 0.1, pitch: 0.25, zoom: 0.42, look: to3(ext[0] / 2, 0, H / 2) };
+  else v3.tw = { yaw: -0.6, pitch: 0.62, zoom: 1, look: [0, 0, 0] };
 }
 function setIView(v){
   document.querySelectorAll("[data-iview]").forEach(b => { const on = b.dataset.iview === v; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
@@ -1628,8 +1691,20 @@ function evenRows(n, W, D){
   return Array.from({ length: rows }, (_, i) => { const k = base + (i < extra ? 1 : 0); return { size: 1 / rows, cells: Array.from({ length: k }, () => ({ size: 1 / k, label: "" })) }; });
 }
 const countCells = rows => rows.reduce((a, r) => a + r.cells.length, 0);
+// Anpassningar: varje ändring zoomar 3D-vyn till det som ändras
+function syncOpts(){
+  const c = curInsert; if (!c) return;
+  $("oRound").checked = !!c.round; $("oNotch").checked = !!c.notch;
+  const maxH = Math.max(10, c.h_mm - 2), h = Math.min(maxH, c.hmax || Math.min(c.h_mm - 3, 45));
+  $("oH").max = maxH; $("oH").value = h; $("oHv").textContent = Math.round(h) + " mm";
+  document.querySelectorAll("[data-ofit]").forEach(b => b.classList.toggle("on", b.dataset.ofit === (c.fit || "normal")));
+}
+$("oRound").onchange = e => { if (!curInsert) return; curInsert.round = e.target.checked; drawInsert(); focus3D("corner"); };
+$("oNotch").onchange = e => { if (!curInsert) return; curInsert.notch = e.target.checked; drawInsert(); focus3D("front"); };
+$("oH").oninput = e => { if (!curInsert) return; curInsert.hmax = +e.target.value; $("oHv").textContent = e.target.value + " mm"; drawInsert(); focus3D("side"); };
+document.addEventListener("click", e => { const b = e.target.closest("[data-ofit]"); if (!b || !curInsert) return; curInsert.fit = b.dataset.ofit; syncOpts(); drawInsert(); });
 function setIPat(pt){ document.querySelectorAll("[data-ipat]").forEach(b => { const on = b.dataset.ipat === pt; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); }); }
-document.addEventListener("click", e => { const b = e.target.closest("[data-ipat]"); if (!b || !curInsert) return; curInsert.pattern = b.dataset.ipat; setIPat(curInsert.pattern); drawInsert(); });
+document.addEventListener("click", e => { const b = e.target.closest("[data-ipat]"); if (!b || !curInsert) return; curInsert.pattern = b.dataset.ipat; setIPat(curInsert.pattern); drawInsert(); focus3D(b.dataset.ipat === "plain" ? "all" : "wall"); });
 function setIStyle(st){ document.querySelectorAll("[data-istyle]").forEach(b => { const on = b.dataset.istyle === st; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); }); }
 document.addEventListener("click", e => { const b = e.target.closest("[data-istyle]"); if (!b || !curInsert) return; curInsert.style = b.dataset.istyle; setIStyle(curInsert.style); drawInsert(); });
 function setLayoutMode(ai){ $("iAi").classList.toggle("on", ai); $("iEven").classList.toggle("on", !ai); }
@@ -1644,7 +1719,7 @@ $("iEven").onclick = () => { if (!curInsert) return; const n = +$("iCount").valu
 function showInsert(ins){
   curInsert = ins ? JSON.parse(JSON.stringify(ins)) : null;
   aiRows = curInsert ? JSON.parse(JSON.stringify(curInsert.rows)) : null;
-  if (curInsert) { const n = countCells(curInsert.rows); $("iCount").value = Math.min(16, n); $("iCountV").textContent = n; setLayoutMode(true); setIStyle(curInsert.style || "tray"); setIPat(curInsert.pattern || "plain"); }
+  if (curInsert) { const n = countCells(curInsert.rows); $("iCount").value = Math.min(16, n); $("iCountV").textContent = n; setLayoutMode(true); setIStyle(curInsert.style || "tray"); setIPat(curInsert.pattern || "plain"); syncOpts(); }
   $("iMark").hidden = !photoUrl || !curInsert;
   // Mobil: knappen syns ändå, men skickar en länk till datorn (Bambu Studio finns bara där)
   $("iBambu").hidden = false;
