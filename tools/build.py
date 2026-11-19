@@ -97,7 +97,7 @@ def cover(prod_key, cls=""):
     p = PROD[prod_key]; g = next(x for x in PREM if x["product"] == prod_key)
     color = " green" if prod_key == "design" else ""
     cells = "<i></i>" * 18
-    return f"""<div class="cover{color} {cls}" aria-hidden="true"><span class="ck">boredprinter guide</span><span class="ct">{e(g['h1'])}</span><span class="cs">{e(g['summary'])}</span><span class="grid">{cells}</span><span class="cb">{LOGO_W}@boredprinter</span></div>"""
+    return f"""<div class="cover{color} {cls}" aria-hidden="true"><span class="ck">boredprinter</span><span class="ct">{e(g['h1'])}</span><span class="cs">{e(g['summary'])}</span><span class="grid">{cells}</span><span class="cb">{LOGO_W}@boredprinter</span></div>"""
 
 def buy_btn(key, cls="btn or big wide"):
     p = PROD[key]
@@ -165,34 +165,33 @@ home += header() + f"""
 <main id="main">
 <section class="hero"><div class="wrap">
 <div>
-<span class="kick">For 3D printer owners</span>
-<h1 style="margin-top:14px">Make money with your <em>3D printer.</em></h1>
+<h1>Make money with your <em>3D printer.</em></h1>
 <p class="lead">Honest, practical guides on what to print, how to price it and where to sell it. Start free. Go deeper when you're ready.</p>
 <div class="ctas"><a class="btn or big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a><a class="btn ghost big" href="/guides/side-hustle-playbook">See the Playbook</a></div>
-<p class="proof"><span>By <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a> · <b>{SITE['followers']}</b> followers on Instagram · updated for 2026's rules</span></p>
+<p class="proof"><span>By <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a> · <b>{SITE['followers']}</b> followers on Instagram</span></p>
 </div>
 {cover('playbook')}
 </div></section>
 
 <section class="sec alt"><div class="wrap">
-<div class="sech"><div><span class="kick">Free guides</span><h2 style="margin-top:10px">Start here</h2><p>Everything a beginner needs to know before selling a single print.</p></div><a class="more" href="/guides">All guides →</a></div>
+<div class="sech"><div><h2>Free guides</h2><p>Everything a beginner needs to know before selling a single print.</p></div><a class="more" href="/guides">All guides →</a></div>
 <div class="cards">{"".join(card(g) for g in FREE)}{CALC_CARD}</div>
 </div></section>
 
 <section class="sec"><div class="wrap">
-<div class="sech"><div><span class="kick">Premium guides</span><h2 style="margin-top:10px">Go from hobby to side income</h2><p>The full step-by-step plans, with worksheets and templates.</p></div></div>
+<div class="sech"><div><h2>Premium guides</h2><p>The full step-by-step plans, with worksheets and templates.</p></div></div>
 {prod_cards()}
 </div></section>
 
 <section class="sec"><div class="wrap">{signup('home', anchor='waitlist')}</div></section>
 
 <section class="sec"><div class="wrap">
-<div class="sech"><div><span class="kick">How we write</span><h2 style="margin-top:10px">No hype. Just what works.</h2></div></div>
+<div class="sech"><div><h2>How the guides are written</h2></div></div>
 <div class="prin">
-<div><i>1</i><b>Honest numbers</b><p>Real costs and realistic earnings. No "$10k a month" screenshots.</p></div>
-<div><i>2</i><b>Legal first</b><p>Licenses and marketplace rules explained, so your shop doesn't get shut down.</p></div>
-<div><i>3</i><b>Up to date</b><p>Rewritten for 2026, including Etsy's new 3D printing rules.</p></div>
-<div><i>4</i><b>Do it today</b><p>Every guide ends with steps you can take right now.</p></div>
+<div><b>Honest numbers</b><p>Real costs and realistic earnings. No "$10k a month" screenshots.</p></div>
+<div><b>Legal first</b><p>Licenses and marketplace rules explained, so your shop doesn't get shut down.</p></div>
+<div><b>Sources included</b><p>Each guide shows when it was last updated and links to where the facts come from.</p></div>
+<div><b>Do it today</b><p>Every guide ends with steps you can take right now.</p></div>
 </div>
 </div></section>
 
@@ -207,7 +206,7 @@ gi = head("3D Printing Business Guides: Free & Premium | boredprinter",
 gi += header("guides") + f"""
 <main id="main" class="art"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Guides</span></nav>
-<div class="ahead"><span class="kick">All guides</span><h1>Guides to making money with 3D printing</h1><p class="lead">Start with the free guides. When you want the complete plan, the premium guides go deeper.</p></div>
+<div class="ahead"><h1>Guides to making money with 3D printing</h1><p class="lead">Start with the free guides. When you want the complete plan, the premium guides go deeper.</p></div>
 <h2 style="font-size:26px;margin:10px 0 16px">Free</h2>
 <div class="cards">{"".join(card(g) for g in FREE)}{CALC_CARD}</div>
 <h2 style="font-size:26px;margin:44px 0 16px">Premium</h2>
@@ -238,8 +237,8 @@ for g in FREE:
     page = head(g["title"], g["description"], path, ld, "article") + header("guides") + f"""
 <main id="main" class="art"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>{e(g['kicker'])}</span></nav>
-<header class="ahead"><span class="kick">{e(g['kicker'])} · Free guide</span><h1>{e(g['h1'])}</h1><p class="lead">{e(g['summary'])}</p>
-<div class="ameta"><span class="by">{LOGO}boredprinter</span><span>Updated <time datetime="{g['updated']}">{upd}</time></span><span>{g['read']} min read</span></div></header>
+<header class="ahead"><h1>{e(g['h1'])}</h1><p class="lead">{e(g['summary'])}</p>
+<div class="ameta"><span class="tag free">Free</span><span class="by">{LOGO}boredprinter</span><span>Updated <time datetime="{g['updated']}">{upd}</time></span><span>{g['read']} min read</span></div></header>
 <div class="agrid"><article class="prose">{body}
 {('<h2 id="faq">Frequently asked questions</h2>' + faq_html(g['faq'])) if g.get('faq') else ''}
 </article>
@@ -275,10 +274,9 @@ for g in PREM:
 {cover(k)}
 <div>
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Premium</span></nav>
-<span class="kick" style="margin-top:18px">Premium guide · PDF · {g['pages']} pages</span>
-<h1 style="margin-top:12px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
+<h1 style="margin-top:18px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
 <p class="lead" style="margin-top:16px">{e(g['summary'])}</p>
-<div class="buy"><div class="price">${p['price']}</div>{buy_btn(k)}{soon}<p class="note">Secure checkout by Stripe · 14-day refund · Free updates</p></div>
+<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· PDF · {g['pages']} pages</span></div>{buy_btn(k)}{soon}<p class="note">Secure checkout by Stripe · 14-day refund · Free updates</p></div>
 </div></div></section>
 <section class="sec alt"><div class="wrap cols">
 <div class="prose" style="font-size:17px">{intro}</div>
@@ -307,7 +305,7 @@ page = head("3D Print Price Calculator (Free): What to Charge for 3D Prints", "F
              {"@context": "https://schema.org", "@type": "WebApplication", "name": "3D Print Price Calculator", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": URL + path}]) + header("calc") + f"""
 <main id="main" class="art"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Price calculator</span></nav>
-<div class="ahead"><span class="kick">Free tool</span><h1>3D print price calculator</h1><p class="lead">Fill in your numbers and see what a print really costs you, and what to charge. Everything stays in your browser.</p></div>
+<div class="ahead"><h1>3D print price calculator</h1><p class="lead">Fill in your numbers and see what a print really costs you, and what to charge. Everything stays in your browser.</p></div>
 {calc_html}
 <div class="agrid" style="margin-top:56px"><div class="prose"><h2>How the calculator works</h2><p>It adds up every cost of one item: filament (with a buffer for failed prints), electricity, machine wear, your hands-on time and packaging. Then it applies your markup and adds marketplace fees on top, so the profit you see is what you actually keep.</p><p>Not sure about the numbers? Read <a href="/guides/how-to-price-3d-prints">how to price 3D prints</a> for a full walkthrough.</p><h2>Frequently asked questions</h2>{faq_html(CALC_FAQ)}</div></div>
 <div style="margin-top:56px">{signup('calc', light=True, anchor='waitlist')}</div>
@@ -318,7 +316,7 @@ write(path, page); PAGES.append((path, TODAY, "0.9"))
 lib_html = (ROOT / "site/library.html").read_text()
 page = head("My guides | boredprinter", "Download the boredprinter guides you've bought.", "/library", noindex=True) + header("lib") + f"""
 <main id="main" class="art"><div class="wrap lib">
-<div class="ahead"><span class="kick">My guides</span><h1 style="font-size:clamp(34px,5vw,48px)">Your guides</h1><p class="lead">Log in with the email you used at checkout. We'll email you a link, no password needed.</p></div>
+<div class="ahead"><h1 style="font-size:clamp(34px,5vw,48px)">Your guides</h1><p class="lead">Log in with the email you used at checkout. We'll email you a link, no password needed.</p></div>
 {lib_html}
 </div></main>""" + footer()
 write("/library", page)
@@ -340,7 +338,7 @@ for name in ("about", "privacy", "terms"):
     simple("/" + name, m["title"], m["description"], m["h1"], m["body"])
 
 page = head("Page not found | boredprinter", "This page doesn't exist.", "/404", noindex=True) + header() + f"""
-<main id="main" class="art"><div class="wrap"><div class="ahead"><span class="kick">404</span><h1>This page doesn't exist</h1><p class="lead">It may have moved. Try one of these instead.</p></div><div class="cards">{"".join(card(g) for g in FREE[:3])}{CALC_CARD}</div></div></main>""" + footer()
+<main id="main" class="art"><div class="wrap"><div class="ahead"><h1>This page doesn't exist</h1><p class="lead">It may have moved. Try one of these instead.</p></div><div class="cards">{"".join(card(g) for g in FREE[:3])}{CALC_CARD}</div></div></main>""" + footer()
 (OUT / "404.html").write_text(page)
 
 # ---------- sitemap / robots / llms ----------
