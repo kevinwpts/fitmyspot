@@ -5,7 +5,7 @@ description: Which 3D models you can legally sell prints of, what CC, MakerWorld
 type: free
 order: 2
 updated: 2026-11-19
-read: 7
+read: 5
 kicker: Legal basics
 summary: What you're allowed to sell, what you're not, and how to check any model in 30 seconds.
 faq:
@@ -18,53 +18,90 @@ faq:
   - q: Is it safe to sell prints of characters from films or games?
     a: No. Characters, logos and brand names belong to their owners, whatever license the uploader put on the file. Selling them risks takedowns and legal claims.
 ---
+::: answer
+**Your own designs:** yes, sell them anywhere.
+**Other people's models:** only if the license says so. "Free to download" does **not** mean "free to sell".
+:::
 
-> **Not legal advice.** This is a plain-English overview. Licenses change and every model can have its own terms, so always read the license on the model's page before selling.
+::: note | Not legal advice
+This is a plain-English overview. Every model can have its own terms, and they can change. Always read the license on the model's page.
+:::
 
-The short answer: **you can sell prints of your own designs, and of other designs only when the license or the designer allows it.** "Free to download" does not mean "free to sell".
+## Check any model in 5 steps
 
-## Check any model in 30 seconds
+::: step search | Find the license
+Open the model's page. The license is usually under the description or next to the download button.
+:::
 
-1. Open the model's page and find the **license** (usually under the description or the download button).
-2. If it says **NC**, **non-commercial**, **personal use** or **Standard Digital File License**: don't sell prints without written permission.
-3. If it's **CC BY**, **CC BY-SA**, **CC BY-ND** or **public domain (CC0)**: selling prints is generally allowed. Credit the designer as the license asks.
-4. Does it show a character, logo or brand? Then **don't sell it**, whatever the license says.
-5. Screenshot the license and keep it with your listing notes. Licenses can change later.
+::: step x | Look for "NC" or "personal use"
+If you see any of these, **don't sell prints** without written permission:
 
-## Creative Commons licenses in one table
+- **NC** (non-commercial), like CC BY-NC
+- **Personal use only**
+- MakerWorld's **Standard Digital File License**
+:::
 
-| License | Can you sell prints? | What you must do |
-|---|---|---|
-| CC0 / Public domain | Yes | Nothing, but crediting is polite |
-| CC BY | Yes | Credit the designer |
-| CC BY-SA | Yes | Credit, and share remixes under the same license |
-| CC BY-ND | Yes | Credit, and don't modify the design |
-| CC BY-NC (and any "NC") | **No** | Personal use only |
+::: step check | Look for a license that allows selling
+These generally allow selling prints:
+
+- **CC0** / public domain
+- **CC BY** (credit the designer)
+- **CC BY-SA** (credit + share remixes the same way)
+- **CC BY-ND** (credit + don't change the design)
+:::
+
+::: step alert | Check for characters and brands
+A character, logo or brand name? **Don't sell it.** Whatever license the uploader picked, the character still belongs to its owner.
+:::
+
+::: step file | Save proof
+Screenshot the license and keep it with your notes. Licenses can change later, and the screenshot shows what it said when you started.
+:::
+
+## Licenses at a glance
+
+::: yesno | You can sell prints | You can't sell prints
++ **CC0** / public domain
++ **CC BY**, with credit
++ **CC BY-SA**, with credit
++ **CC BY-ND**, with credit, unchanged
++ A **commercial license** you bought, within its terms
+- Anything with **NC**
+- **Personal use** only
+- MakerWorld **Standard Digital File License** (without permission)
+- Characters, logos and brands
+:::
 
 ## MakerWorld
 
-Most MakerWorld models use the **Standard Digital File License**. It says the files and prints may not be used to make money without the creator's permission, and may not be redistributed. In practice: **print for yourself, don't sell**.
+Most MakerWorld models use the **Standard Digital File License**. It says you may not use the files or prints to make money without the creator's permission.
 
-There are two ways to sell legally:
+Two legal ways to sell:
 
-- **Models with a Creative Commons license** that allows commercial use (check the license badge on the page).
-- **Commercial license memberships.** Some creators sell a monthly membership that lets you sell prints of their models. Prices are set by each creator, from a few dollars to a few hundred dollars a month, and the terms differ. Read them carefully and note the renewal date.
+::: icons
+check | A CC license that allows selling | Some models use one. Check the badge on the page.
+coins | Commercial license membership | Some creators sell a monthly membership that lets you sell their prints. Prices and terms vary per creator.
+:::
 
 ## Printables and Thingiverse
 
-Both let the uploader choose a license per model, very often a Creative Commons one. Use the table above. Printables also has paid models in its store; buying a file does not automatically give you the right to sell prints of it, so check that model's terms.
+The uploader picks a license per model, often Creative Commons. Use the table above. Buying a paid model doesn't automatically let you sell prints of it. Check that model's terms.
 
-## Paid models and Patreon designers
+::: warn | Etsy is stricter than any license
+Since June 2025, Etsy only allows 3D prints of **your own designs** (or items personalized for the buyer). Even with a commercial license, someone else's model can get your listing removed. [Read the Etsy guide](/guides/selling-3d-prints-on-etsy).
+:::
 
-Many designers sell a **commercial tier** on Patreon, Gumroad or their own site. These often come with rules: a maximum number of prints, credit in your listing, or a ban on selling on certain platforms. Keep the receipt and the terms.
+## The easy way out: design your own
 
-> **Etsy has its own rule on top of licenses.** Since June 2025, Etsy only allows 3D printed items based on the seller's original design (or personalized for the buyer). So even with a commercial license, selling someone else's model on Etsy can get your listing removed. [Read the Etsy guide](/guides/selling-3d-prints-on-etsy).
+Your own design = no license worries, sell anywhere, nobody can claim it. Most bestsellers are simple shapes made in free tools like Tinkercad or Onshape.
 
-## The safest path: your own designs
+::: do | Do this today
+- Open the last model you printed and find its license
+- Is it NC or "personal use"? Then it's for you, not for sale
+- Write down one simple product you could design yourself instead
+:::
 
-Selling your own designs avoids all of this. You can sell anywhere, nobody can claim it, and it's what buyers on Etsy are now looking for. You don't need to be an engineer: many bestsellers are simple shapes made in Tinkercad or Onshape.
-
-Next: [what 3D prints sell best](/guides/best-3d-prints-to-sell), or the full plan in [Print to Profit](/guides/print-to-profit).
+Learn to design your own products in [Design Your Own Bestseller](/guides/design-your-own-bestseller).
 
 ## Sources
 

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=9684d87e">
+<link rel="stylesheet" href="/assets/site.css?v=f7701d00">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://boredprinter.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://boredprinter.com/guides"}, {"@type": "ListItem", "position": 3, "name": "How to price 3D prints", "item": "https://boredprinter.com/guides/how-to-price-3d-prints"}]}, {"@context": "https://schema.org", "@type": "Article", "headline": "How to price 3D prints", "description": "A simple formula to price 3D prints so every sale is worth it: filament, electricity, machine wear, your time, packaging and fees. Includes a free calculator.", "datePublished": "2026-11-19", "dateModified": "2026-11-19", "author": {"@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com"}, "publisher": {"@type": "Organization", "name": "boredprinter", "logo": {"@type": "ImageObject", "url": "https://boredprinter.com/icon-512.png"}}, "mainEntityOfPage": "https://boredprinter.com/guides/how-to-price-3d-prints", "image": "https://boredprinter.com/og.png"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much should I charge for a 3D print?", "acceptedAnswer": {"@type": "Answer", "text": "Add up material, electricity, machine wear, your hands-on time, packaging and selling fees, then multiply by 2 to 3 for profit. For most small items the real cost is far higher than the filament alone."}}, {"@type": "Question", "name": "How do I calculate filament cost?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the price of the spool by its weight in grams, then multiply by the grams your slicer reports for the print. A $20 spool of 1,000 g costs 2 cents per gram, so a 50 g print uses $1 of filament."}}, {"@type": "Question", "name": "Should I charge per hour of printing?", "acceptedAnswer": {"@type": "Answer", "text": "Charge a small rate per print hour for machine wear and electricity, and a separate, higher rate for your own hands-on time. Your time is usually the bigger cost."}}]}]</script>
 </head>
 <body>
@@ -33,31 +33,65 @@
 <main id="main" class="art"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Pricing</span></nav>
 <header class="ahead"><h1>How to price 3D prints</h1><p class="lead">The formula, the costs people forget, and why you&#x27;re probably charging too little.</p>
-<div class="ameta"><span class="tag free">Free</span><span class="by"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</span><span>Updated <time datetime="2026-11-19">November 19, 2026</time></span><span>6 min read</span></div></header>
-<div class="agrid"><article class="prose"><p>The most common mistake new sellers make is pricing by filament. A 40 g print uses less than a dollar of PLA, so it's tempting to sell it for $5. Then you add the packing, the trip to the post office, the failed print and the fees, and you've worked for free.</p>
-<blockquote>
-<p><strong>Try it:</strong> the <a href="/tools/3d-print-price-calculator">3D print price calculator</a> does all of this for you.</p>
-</blockquote>
+<div class="ameta"><span class="tag free">Free</span><span class="by"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</span><span>Updated <time datetime="2026-11-19">November 19, 2026</time></span><span>5 min read</span></div></header>
+<div class="agrid"><article class="prose"><div class="qa">
+<p class="qah"><svg class="ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Quick answer</p>
+<p><strong>Add up all your costs, then multiply by 2 to 3.</strong> Filament is usually the smallest cost. Your time is usually the biggest.</p>
+<p>→ Skip the math: use the free <a href="/tools/3d-print-price-calculator">price calculator</a>.</p>
+</div>
 <h2 id="the-formula">The formula</h2>
-<p><strong>Price = (Material + Electricity + Machine + Labour + Packaging) × Markup + Fees</strong></p>
-<p>Let's go through each part.</p>
-<h3 id="1-material">1. Material</h3>
+<p><strong>Price = (Filament + Power + Machine + Your time + Packaging) × 2.5 + Fees</strong></p>
+<p>Let's fill it in, one step at a time.</p>
+<section class="step">
+<div aria-hidden="true" class="stepi"><span class="stepn">1</span><svg class="ico" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg></div>
+<div class="stepb">
+<h2 id="filament">Filament</h2>
 <p><code>spool price ÷ spool grams × grams used</code></p>
-<p>Your slicer shows the grams. Add around 5–10% for purges, supports and the occasional failed print.</p>
-<h3 id="2-electricity">2. Electricity</h3>
-<p><code>watts ÷ 1,000 × print hours × price per kWh</code></p>
-<p>A typical home printer averages roughly 100–150 W while printing. It's usually small, but it adds up on long prints.</p>
-<h3 id="3-machine-wear">3. Machine wear</h3>
-<p>Nozzles, build plates, belts and eventually the printer itself wear out. A simple way: decide what the printer should "earn back" per hour. For example, a $600 printer you expect to run for 3,000 hours costs $0.20 per hour, plus a little for parts.</p>
-<h3 id="4-your-time-the-big-one">4. Your time (the big one)</h3>
-<p>Count only your <strong>hands-on</strong> time: preparing the file, removing supports, cleaning up, packing, messages. Even 15 minutes at a modest hourly rate often costs more than all the filament.</p>
-<h3 id="5-packaging-and-shipping">5. Packaging and shipping</h3>
-<p>Box, padding, label, and the trip. Decide whether shipping is included in the price or charged separately, and check real postage rates for your country before you list.</p>
-<h3 id="6-markup">6. Markup</h3>
-<p>Costs only get you to zero. Multiply by <strong>2 to 3</strong> for profit, more for personalized or unique designs. If you can't sell at that price, the product (or the buyer) is wrong, not the markup.</p>
-<h3 id="7-selling-fees">7. Selling fees</h3>
-<p>Marketplaces take a cut. Etsy, for example, charges a listing fee, a transaction fee on the item and shipping, and a payment processing fee. Add fees on top so your profit stays yours.</p>
-<h2 id="example-a-desk-cable-organizer">Example: a desk cable organizer</h2>
+<p>Your slicer shows the grams. Add <strong>10%</strong> for failed prints and purges.</p>
+<p><strong>Example:</strong> $20 spool of 1,000 g = $0.02 per gram. A 60 g print = <strong>$1.20</strong>, plus 10% = <strong>$1.32</strong>.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepi"><span class="stepn">2</span><svg class="ico" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></div>
+<div class="stepb">
+<h2 id="electricity">Electricity</h2>
+<p><code>watts ÷ 1,000 × hours × price per kWh</code></p>
+<p>A home printer uses about <strong>100–150 W</strong>.</p>
+<p><strong>Example:</strong> 0.12 kW × 3 hours × $0.25 = <strong>$0.09</strong>. Small, but count it.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepi"><span class="stepn">3</span><svg class="ico" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5 5L3 18l3 3 6.5-6.5a4 4 0 0 0 5-5l-2.5 2.5-3-3z"/></svg></div>
+<div class="stepb">
+<h2 id="machine-wear">Machine wear</h2>
+<p>Nozzles, plates and the printer itself wear out. Pick a cost per print hour.</p>
+<p><strong>Example:</strong> a $600 printer that lasts 3,000 hours = $0.20/hour. Round up to $0.25 for parts. 3 hours = <strong>$0.75</strong>.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepi"><span class="stepn">4</span><svg class="ico" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+<div class="stepb">
+<h2 id="your-time">Your time</h2>
+<p>Only count <strong>hands-on</strong> time: removing supports, cleaning up, packing, messages.</p>
+<p><strong>Example:</strong> 15 minutes at $20/hour = <strong>$5.00</strong>. Bigger than everything above combined.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepi"><span class="stepn">5</span><svg class="ico" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+<div class="stepb">
+<h2 id="packaging">Packaging</h2>
+<p>Box, padding, label. Check real shipping prices in your country <strong>before</strong> you set a price.</p>
+<p><strong>Example:</strong> <strong>$1.00</strong></p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepi"><span class="stepn">6</span><svg class="ico" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></div>
+<div class="stepb">
+<h2 id="markup-and-fees">Markup and fees</h2>
+<p>Your costs only get you to zero. Multiply by <strong>2 to 3</strong> for profit. Then add the marketplace fees on top, so they don't eat your profit.</p>
+</div>
+</section>
+<h2 id="the-example-added-up">The example, added up</h2>
 <div class="tbl"><table>
 <thead>
 <tr>
@@ -67,19 +101,19 @@
 </thead>
 <tbody>
 <tr>
-<td>Filament: 60 g at $0.02/g + 10%</td>
+<td>Filament</td>
 <td>$1.32</td>
 </tr>
 <tr>
-<td>Electricity: 3 h × 0.12 kW × $0.25</td>
+<td>Electricity</td>
 <td>$0.09</td>
 </tr>
 <tr>
-<td>Machine: 3 h × $0.25</td>
+<td>Machine</td>
 <td>$0.75</td>
 </tr>
 <tr>
-<td>Your time: 15 min at $20/h</td>
+<td>Your time</td>
 <td>$5.00</td>
 </tr>
 <tr>
@@ -87,35 +121,36 @@
 <td>$1.00</td>
 </tr>
 <tr>
-<td><strong>Cost</strong></td>
+<td><strong>Total cost</strong></td>
 <td><strong>$8.16</strong></td>
 </tr>
 <tr>
-<td>× 2.5 markup</td>
+<td><strong>× 2.5 markup</strong></td>
 <td><strong>$20.40</strong></td>
 </tr>
 </tbody>
 </table></div>
-<p>Round it to <strong>$19.99</strong> or <strong>$21</strong>, then add marketplace fees on top, or include them by pricing a little higher. Note how the filament is the smallest real cost.</p>
-<h2 id="price-psychology-that-helps">Price psychology that helps</h2>
-<ul>
-<li><strong>Sell sets, not singles.</strong> A set of 4 cable clips sells better than 1, and costs you almost the same time.</li>
-<li><strong>Offer personalization</strong> for a higher price. A name on it can double what people will pay.</li>
-<li><strong>Don't race to the bottom.</strong> If someone sells the same thing for $3, they are either not counting their time or not selling for long.</li>
-</ul>
-<h2 id="next">Next</h2>
-<ul>
-<li>Run your own numbers in the <a href="/tools/3d-print-price-calculator">calculator</a>.</li>
-<li>See <a href="/guides/best-3d-prints-to-sell">what 3D prints sell best</a>.</li>
-<li>Get the full pricing worksheets in <a href="/guides/print-to-profit">Print to Profit</a>.</li>
-</ul>
+<p>Round it to <strong>$20–21</strong>, then add fees. Note how small the filament is.</p>
+<div class="call warn">
+<p><span class="calli"><svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></span></p>
+<div>
+<p><strong>The #1 pricing mistake</strong></p>
+<p>Pricing by filament. A $1 print sold for $5 feels like profit. After your time, packing and fees, you worked for free.</p>
+</div>
+</div>
+<h2 id="3-tricks-to-earn-more-per-sale">3 tricks to earn more per sale</h2>
+<div class="icgrid"><div class="ic-card"><span class="ici"><svg class="ico" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></span><b>Sell sets</b><p>4 cable clips sell better than 1, and take almost the same time.</p></div><div class="ic-card"><span class="ici"><svg class="ico" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><b>Offer personalization</b><p>A name on it can double what people will pay.</p></div><div class="ic-card"><span class="ici"><svg class="ico" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><b>Don't race to the bottom</b><p>Someone selling for $3 isn't counting their time. They won't last.</p></div></div>
+
+<div class="dobox"><p class="doh"><svg class="ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Do this today</p><ul><li><span class="cb" aria-hidden="true"></span><span>Pick your best product</span></li><li><span class="cb" aria-hidden="true"></span><span>Put its numbers in the <a href="/tools/3d-print-price-calculator">price calculator</a></span></li><li><span class="cb" aria-hidden="true"></span><span>Compare with your current price. Too low? Raise it.</span></li></ul></div>
+
+<p>Want ready-made pricing worksheets? They're in <a href="/guides/print-to-profit">Print to Profit</a>.</p>
 <aside class="upsell"><img class="coverimg" src="/img/cover-playbook.webp" alt="Print to Profit guide cover" width="600" height="800"><div><b>Want the complete plan?</b><p>Print to Profit takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/print-to-profit">See what's inside</a></div></aside><h2 id="sources">Sources</h2>
 <ul>
 <li><a href="https://checkoutpage.com/blog/etsy-fees" rel="noopener" target="_blank">Etsy fees in 2026 (Checkout Page)</a></li>
 </ul>
 <h2 id="faq">Frequently asked questions</h2><div class="faq"><details><summary>How much should I charge for a 3D print?</summary><p>Add up material, electricity, machine wear, your hands-on time, packaging and selling fees, then multiply by 2 to 3 for profit. For most small items the real cost is far higher than the filament alone.</p></details><details><summary>How do I calculate filament cost?</summary><p>Divide the price of the spool by its weight in grams, then multiply by the grams your slicer reports for the print. A $20 spool of 1,000 g costs 2 cents per gram, so a 50 g print uses $1 of filament.</p></details><details><summary>Should I charge per hour of printing?</summary><p>Charge a small rate per print hour for machine wear and electricity, and a separate, higher rate for your own hands-on time. Your time is usually the bigger cost.</p></details></div>
 </article>
-<aside class="toc" aria-label="On this page"><b>On this page</b><a href="#the-formula">The formula</a><a href="#example-a-desk-cable-organizer">Example: a desk cable organizer</a><a href="#price-psychology-that-helps">Price psychology that helps</a><a href="#next">Next</a><a href="#faq">FAQ</a><div class="tbox"><b style="text-transform:none;letter-spacing:0;color:var(--ink);font-size:15px;margin:0">Free checklist</b><p>The 12 steps to your first sale.</p><a class="btn or wide" href="#waitlist">Get it free</a></div></aside>
+<aside class="toc" aria-label="On this page"><b>On this page</b><a href="#the-formula">The formula</a><a href="#filament">Filament</a><a href="#electricity">Electricity</a><a href="#machine-wear">Machine wear</a><a href="#your-time">Your time</a><a href="#packaging">Packaging</a><a href="#markup-and-fees">Markup and fees</a><a href="#the-example-added-up">The example, added up</a><a href="#3-tricks-to-earn-more-per-sale">3 tricks to earn more per sale</a><a href="#faq">FAQ</a><div class="tbox"><b style="text-transform:none;letter-spacing:0;color:var(--ink);font-size:15px;margin:0">Free checklist</b><p>The 12 steps to your first sale.</p><a class="btn or wide" href="#waitlist">Get it free</a></div></aside>
 </div>
 <div style="margin-top:56px"><div class="signup light" id="waitlist">
 <div><h2>Free: The First Sale Checklist</h2><p>A one-page checklist that takes you from idea to your first sale, plus new guides when they come out.</p><ul><li>The 12 steps to your first sale</li><li>The license check, in 30 seconds</li><li>Pricing cheat sheet</li></ul></div>
@@ -126,7 +161,7 @@
 <p class="err" role="alert" hidden></p>
 <small>Free. No spam. Unsubscribe any time.</small>
 </form></div></div>
-<section class="related" style="margin-top:56px"><h2 style="font-size:28px;margin-bottom:16px">Keep reading</h2><div class="cards"><a class="card" href="/guides/how-to-make-money-with-a-3d-printer"><span class="tag free">Free</span><h3>How to make money with a 3D printer</h3><p>The seven ways people actually make money with a home 3D printer, what each is worth, and how to pick the one that fits you.</p><span class="meta">11 min read →</span></a><a class="card" href="/guides/can-you-sell-3d-prints"><span class="tag free">Free</span><h3>Can you sell 3D prints? Licenses explained</h3><p>What you&#x27;re allowed to sell, what you&#x27;re not, and how to check any model in 30 seconds.</p><span class="meta">7 min read →</span></a><a class="card" href="/guides/selling-3d-prints-on-etsy"><span class="tag free">Free</span><h3>Selling 3D prints on Etsy in 2026</h3><p>What changed in 2025, what you can still sell, what Etsy charges, and how to stay on the right side of the rules.</p><span class="meta">7 min read →</span></a></div></section>
+<section class="related" style="margin-top:56px"><h2 style="font-size:28px;margin-bottom:16px">Keep reading</h2><div class="cards"><a class="card" href="/guides/how-to-make-money-with-a-3d-printer"><span class="tag free">Free</span><h3>How to make money with a 3D printer</h3><p>The seven ways people actually make money with a home 3D printer, what each is worth, and how to pick the one that fits you.</p><span class="meta">6 min read →</span></a><a class="card" href="/guides/can-you-sell-3d-prints"><span class="tag free">Free</span><h3>Can you sell 3D prints? Licenses explained</h3><p>What you&#x27;re allowed to sell, what you&#x27;re not, and how to check any model in 30 seconds.</p><span class="meta">5 min read →</span></a><a class="card" href="/guides/selling-3d-prints-on-etsy"><span class="tag free">Free</span><h3>Selling 3D prints on Etsy in 2026</h3><p>What changed in 2025, what you can still sell, what Etsy charges, and how to stay on the right side of the rules.</p><span class="meta">5 min read →</span></a></div></section>
 </div></main><footer class="foot"><div class="wrap">
 <div><a class="logo" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a><p style="margin:0;max-width:34ch">Honest guides to making money with your 3D printer. Made by <a href="https://www.instagram.com/boredprinter/" rel="noopener" style="display:inline;color:var(--ink);font-weight:600">@boredprinter</a>.</p></div>
 <div><b>Free guides</b><a href="/guides/how-to-make-money-with-a-3d-printer">How to make money with a 3D printer</a><a href="/guides/can-you-sell-3d-prints">Can you sell 3D prints? Licenses explained</a><a href="/guides/how-to-price-3d-prints">How to price 3D prints</a><a href="/guides/selling-3d-prints-on-etsy">Selling 3D prints on Etsy in 2026</a><a href="/guides/best-3d-prints-to-sell">The best 3D prints to sell</a><a href="/tools/3d-print-price-calculator">Price calculator</a></div>
@@ -134,5 +169,5 @@
 <div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener">Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
 <p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
 </div></footer>
-<script src="/assets/site.js?v=9684d87e" defer></script>
+<script src="/assets/site.js?v=f7701d00" defer></script>
 </body></html>

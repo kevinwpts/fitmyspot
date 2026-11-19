@@ -5,7 +5,7 @@ description: "A simple formula to price 3D prints so every sale is worth it: fil
 type: free
 order: 3
 updated: 2026-11-19
-read: 6
+read: 5
 kicker: Pricing
 summary: The formula, the costs people forget, and why you're probably charging too little.
 faq:
@@ -16,74 +16,89 @@ faq:
   - q: Should I charge per hour of printing?
     a: Charge a small rate per print hour for machine wear and electricity, and a separate, higher rate for your own hands-on time. Your time is usually the bigger cost.
 ---
+::: answer
+**Add up all your costs, then multiply by 2 to 3.** Filament is usually the smallest cost. Your time is usually the biggest.
 
-The most common mistake new sellers make is pricing by filament. A 40 g print uses less than a dollar of PLA, so it's tempting to sell it for $5. Then you add the packing, the trip to the post office, the failed print and the fees, and you've worked for free.
-
-> **Try it:** the [3D print price calculator](/tools/3d-print-price-calculator) does all of this for you.
+→ Skip the math: use the free [price calculator](/tools/3d-print-price-calculator).
+:::
 
 ## The formula
 
-**Price = (Material + Electricity + Machine + Labour + Packaging) × Markup + Fees**
+**Price = (Filament + Power + Machine + Your time + Packaging) × 2.5 + Fees**
 
-Let's go through each part.
+Let's fill it in, one step at a time.
 
-### 1. Material
-
+::: step printer | Filament
 `spool price ÷ spool grams × grams used`
 
-Your slicer shows the grams. Add around 5–10% for purges, supports and the occasional failed print.
+Your slicer shows the grams. Add **10%** for failed prints and purges.
 
-### 2. Electricity
+**Example:** $20 spool of 1,000 g = $0.02 per gram. A 60 g print = **$1.20**, plus 10% = **$1.32**.
+:::
 
-`watts ÷ 1,000 × print hours × price per kWh`
+::: step plug | Electricity
+`watts ÷ 1,000 × hours × price per kWh`
 
-A typical home printer averages roughly 100–150 W while printing. It's usually small, but it adds up on long prints.
+A home printer uses about **100–150 W**.
 
-### 3. Machine wear
+**Example:** 0.12 kW × 3 hours × $0.25 = **$0.09**. Small, but count it.
+:::
 
-Nozzles, build plates, belts and eventually the printer itself wear out. A simple way: decide what the printer should "earn back" per hour. For example, a $600 printer you expect to run for 3,000 hours costs $0.20 per hour, plus a little for parts.
+::: step wrench | Machine wear
+Nozzles, plates and the printer itself wear out. Pick a cost per print hour.
 
-### 4. Your time (the big one)
+**Example:** a $600 printer that lasts 3,000 hours = $0.20/hour. Round up to $0.25 for parts. 3 hours = **$0.75**.
+:::
 
-Count only your **hands-on** time: preparing the file, removing supports, cleaning up, packing, messages. Even 15 minutes at a modest hourly rate often costs more than all the filament.
+::: step clock | Your time
+Only count **hands-on** time: removing supports, cleaning up, packing, messages.
 
-### 5. Packaging and shipping
+**Example:** 15 minutes at $20/hour = **$5.00**. Bigger than everything above combined.
+:::
 
-Box, padding, label, and the trip. Decide whether shipping is included in the price or charged separately, and check real postage rates for your country before you list.
+::: step box | Packaging
+Box, padding, label. Check real shipping prices in your country **before** you set a price.
 
-### 6. Markup
+**Example:** **$1.00**
+:::
 
-Costs only get you to zero. Multiply by **2 to 3** for profit, more for personalized or unique designs. If you can't sell at that price, the product (or the buyer) is wrong, not the markup.
+::: step percent | Markup and fees
+Your costs only get you to zero. Multiply by **2 to 3** for profit. Then add the marketplace fees on top, so they don't eat your profit.
+:::
 
-### 7. Selling fees
-
-Marketplaces take a cut. Etsy, for example, charges a listing fee, a transaction fee on the item and shipping, and a payment processing fee. Add fees on top so your profit stays yours.
-
-## Example: a desk cable organizer
+## The example, added up
 
 | Cost | Amount |
 |---|---|
-| Filament: 60 g at $0.02/g + 10% | $1.32 |
-| Electricity: 3 h × 0.12 kW × $0.25 | $0.09 |
-| Machine: 3 h × $0.25 | $0.75 |
-| Your time: 15 min at $20/h | $5.00 |
+| Filament | $1.32 |
+| Electricity | $0.09 |
+| Machine | $0.75 |
+| Your time | $5.00 |
 | Packaging | $1.00 |
-| **Cost** | **$8.16** |
-| × 2.5 markup | **$20.40** |
+| **Total cost** | **$8.16** |
+| **× 2.5 markup** | **$20.40** |
 
-Round it to **$19.99** or **$21**, then add marketplace fees on top, or include them by pricing a little higher. Note how the filament is the smallest real cost.
+Round it to **$20–21**, then add fees. Note how small the filament is.
 
-## Price psychology that helps
+::: warn | The #1 pricing mistake
+Pricing by filament. A $1 print sold for $5 feels like profit. After your time, packing and fees, you worked for free.
+:::
 
-- **Sell sets, not singles.** A set of 4 cable clips sells better than 1, and costs you almost the same time.
-- **Offer personalization** for a higher price. A name on it can double what people will pay.
-- **Don't race to the bottom.** If someone sells the same thing for $3, they are either not counting their time or not selling for long.
+## 3 tricks to earn more per sale
 
-## Next
+::: icons
+list | Sell sets | 4 cable clips sell better than 1, and take almost the same time.
+heart | Offer personalization | A name on it can double what people will pay.
+target | Don't race to the bottom | Someone selling for $3 isn't counting their time. They won't last.
+:::
 
-- Run your own numbers in the [calculator](/tools/3d-print-price-calculator).
-- See [what 3D prints sell best](/guides/best-3d-prints-to-sell).
-- Get the full pricing worksheets in [Print to Profit](/guides/print-to-profit).
+::: do | Do this today
+- Pick your best product
+- Put its numbers in the [price calculator](/tools/3d-print-price-calculator)
+- Compare with your current price. Too low? Raise it.
+:::
+
+Want ready-made pricing worksheets? They're in [Print to Profit](/guides/print-to-profit).
 
 ## Sources
 

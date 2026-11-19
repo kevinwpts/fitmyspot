@@ -5,7 +5,7 @@ description: 3D printed products that sell in 2026, why they sell, and how to ma
 type: free
 order: 5
 updated: 2026-11-19
-read: 6
+read: 4
 kicker: Product ideas
 summary: Product types that sell, the pattern behind them, and how to find your own winner.
 faq:
@@ -14,57 +14,62 @@ faq:
   - q: Do 3D printed organizers sell?
     a: Yes. Organizers made to fit a specific drawer, device or hobby sell well because store-bought ones rarely fit. They're also easy to design yourself.
 ---
+::: answer
+What sells has a pattern: **a specific person, with a specific problem, and a product that fits exactly.** The 6 categories below keep working. Make your own version so you can sell it anywhere.
+:::
 
-There's no secret list of products that print money. What sells has a pattern: **a specific person with a specific problem, and a product that fits exactly.** Here are the categories that keep working, and how to make your own version.
+## 6 types of prints that sell
 
-> **Remember the rules.** To sell anywhere (including Etsy), make your own designs. The ideas below are categories, not files to copy. [Licenses explained](/guides/can-you-sell-3d-prints).
+::: icons
+heart | Personalized items | Name signs, keychains, pet tags, cake toppers.
+box | Organizers that fit | Drawer inserts, desk and cable organizers.
+game | Hobby accessories | Board game inserts, fishing, aquarium, sim racing.
+home | Home & kitchen helpers | Clips, hooks, racks, holders. Sell in sets.
+wrench | Replacement parts | Dishwasher wheels, shelf pegs, knobs, clips.
+gift | Gifts & seasonal | Ornaments, holiday decor, lithophanes.
+:::
 
-## 1. Personalized items
+::: warn | Ideas, not files to copy
+To sell anywhere (including Etsy), make your own designs. [Licenses explained](/guides/can-you-sell-3d-prints).
+:::
 
-Name signs, keychains, pet tags, bag tags, kids' door signs, wedding and party decorations, cake toppers. People pay for their own name, and these are allowed on Etsy as personalized items.
+## Your edge in each category
 
-**Your edge:** a clean template where changing the name takes one minute.
+| Category | How to stand out |
+|---|---|
+| Personalized | A template where changing the name takes 1 minute |
+| Organizers | Made for **one** thing: "fits IKEA Alex drawer" |
+| Hobby | Pick a hobby you know. You'll spot problems others miss |
+| Home helpers | Solve a small annoyance better, sell in sets |
+| Replacement parts | List the exact models it fits. No logos, nothing safety-critical |
+| Seasonal | List **6–8 weeks** before the holiday |
 
-## 2. Organizers that fit exactly
+## Find your own winner in 5 steps
 
-Drawer inserts, desk organizers, cable holders, under-desk mounts, tool holders, organizers for a specific game, console or device. Store-bought organizers almost never fit; yours can.
+::: step users | Pick one buyer
+"Board gamers", "cat owners", "people with small flats". Not "everyone".
+:::
 
-**Your edge:** make it for one thing ("fits the IKEA Alex drawer", "holds 8 Switch cartridges") and say so in the title.
+::: step search | Find their annoyances
+Read reviews, forums and Reddit. Look for **"I wish there was…"** and **"doesn't fit…"**.
+:::
 
-## 3. Hobby accessories
+::: step pencil | Design a simple first version
+Simple is good. Print it.
+:::
 
-Board game inserts and token trays, fishing lure boxes, aquarium parts, guitar pedal mounts, model railway scenery, sim racing button boxes, camera mounts. Hobby buyers spend money and search for exactly what they need.
+::: step hand | Use it for real
+A few days in real life. Fix what annoys you. Photograph it **in use**.
+:::
 
-**Your edge:** pick a hobby you know. You'll spot problems others miss.
+::: step rocket | Post it and watch
+List it or post it. See what people click and ask about. Improve, repeat.
+:::
 
-## 4. Home and kitchen helpers
+::: do | Do this today
+- Pick one buyer group
+- Find 3 complaints they have online
+- Sketch one product that fixes one of them
+:::
 
-Clips, hooks, spice racks, sponge holders, bag clips, wall mounts for gadgets, plant pots with drainage. Cheap to print, easy to ship.
-
-**Your edge:** solve a small annoyance better than the store version, and sell in sets.
-
-## 5. Replacement parts
-
-Dishwasher wheels, shelf pegs, knobs, battery covers, car interior clips. People search for the exact part and pay to avoid replacing the whole item.
-
-**Your edge:** measure carefully, list the exact models it fits, and avoid safety-critical parts and brand logos.
-
-## 6. Gifts and seasonal items
-
-Ornaments, advent calendars, Halloween decorations, Mother's and Father's Day gifts, lithophanes. Big spikes before holidays.
-
-**Your edge:** list 6–8 weeks before the holiday, not the week before.
-
-## How to find your own winner
-
-1. **Pick one buyer.** "Board gamers", "cat owners", "people with small apartments".
-2. **Find their annoyances.** Read reviews, forums and Reddit threads: "I wish there was…", "doesn't fit…".
-3. **Design a simple first version** and print it.
-4. **Test it in real life** and photograph it in use.
-5. **List it or post it.** Look at what people click, then improve.
-
-## Next
-
-- [How to price it](/guides/how-to-price-3d-prints) so it's worth your time.
-- [Where and how to sell on Etsy](/guides/selling-3d-prints-on-etsy).
-- Learn to design your own in [Design Your Own Bestseller](/guides/design-your-own-bestseller).
+Next: [price it right](/guides/how-to-price-3d-prints) and [learn the Etsy rules](/guides/selling-3d-prints-on-etsy). Want to design it yourself? [Design Your Own Bestseller](/guides/design-your-own-bestseller).

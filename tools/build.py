@@ -3,7 +3,9 @@
 Kör: python3 tools/build.py"""
 import json, re, html, datetime, shutil, hashlib
 from pathlib import Path
-import yaml, markdown
+import yaml, markdown, sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from blocks import preprocess
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "public"
@@ -262,9 +264,9 @@ gi += header("guides") + f"""
 write("/guides", gi); PAGES.append(("/guides", TODAY, "0.9"))
 
 # ---------- gratisguider ----------
-MD = lambda: markdown.Markdown(extensions=["tables", "toc", "attr_list", "sane_lists"], extension_configs={"toc": {"permalink": False}})
+MD = lambda: markdown.Markdown(extensions=["tables", "toc", "attr_list", "sane_lists", "md_in_html"], extension_configs={"toc": {"permalink": False}})
 for g in FREE:
-    md = MD(); body = md.convert(g["body"])
+    md = MD(); body = md.convert(preprocess(g["body"]))
     body = re.sub(r"<table>", '<div class="tbl"><table>', body).replace("</table>", "</table></div>")
     body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
     # upsell före "Sources" (eller sist)

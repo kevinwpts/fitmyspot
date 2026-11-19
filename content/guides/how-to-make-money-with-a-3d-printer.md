@@ -5,7 +5,7 @@ description: Seven real ways to make money with a 3D printer in 2026, what each 
 type: free
 order: 1
 updated: 2026-11-19
-read: 11
+read: 6
 kicker: Start here
 summary: The seven ways people actually make money with a home 3D printer, what each is worth, and how to pick the one that fits you.
 faq:
@@ -18,121 +18,130 @@ faq:
   - q: What is the easiest way to start?
     a: Print-on-demand for people around you (custom parts, replacements, name tags) needs no shop and no design skills. It is the fastest way to your first sale.
 ---
+::: answer
+Pick **one** way to earn (below), make something for **one specific group of people**, check you're **allowed to sell it**, and **price in your time**. Most people make a side income, not a salary. That's fine: it's how everyone starts.
+:::
 
-Most "make money with 3D printing" articles list fifty ideas and skip the hard parts: licenses, fees, and the fact that thousands of people own the same printer as you. This guide does the opposite. It covers the seven ways that actually work, what each one is worth, and how to choose.
+## The 7 ways to earn
 
-> **The short version:** the money is in **what** you print and **who** you print it for, not in the printer. Sell your own designs, or solve a specific problem for a specific group of people.
+::: icons
+home | Print for people nearby | Friends, neighbours, local groups. Fastest first sale.
+pencil | Sell your own designs | Where the real money is. You can sell them anywhere.
+heart | Personalized items | Names, pets, gifts. People pay more for "made for me".
+wrench | Replacement parts | Broken clips, wheels, knobs. People search for exact parts.
+file | Sell the files | Design once, sell many times on MakerWorld or Printables.
+store | Print for businesses | Signs, displays, jigs. Bigger orders that repeat.
+camera | Make content | Videos of your prints can grow an audience that buys.
+:::
 
-## First: the three rules that matter
+::: tip | Pick just one
+Trying all seven at once is the #1 reason people give up. Choose one, get your first sale, then add more.
+:::
 
-Before you pick a method, know these. They decide whether you make money or waste a month.
+Now follow these steps.
 
-1. **You need the right to sell what you print.** Most models on MakerWorld, Printables and Thingiverse are free to *print*, not free to *sell*. Some licenses allow it, many don't. → [Can you sell 3D prints? Licenses explained](/guides/can-you-sell-3d-prints)
-2. **Etsy only allows your own designs.** Since June 2025, 3D printed items on Etsy must be based on the seller's original design (or personalized to the buyer). Printing someone else's dragon and listing it is out. → [Selling 3D prints on Etsy in 2026](/guides/selling-3d-prints-on-etsy)
-3. **Your time is a cost.** Printing is cheap. Removing supports, packing, answering messages and posting the parcel is not. Price for it from day one. → [How to price 3D prints](/guides/how-to-price-3d-prints)
+::: step target | Choose your way to earn
+Use this quick guide:
 
-## The 7 ways to make money with a 3D printer
+- **Want a sale this week?** Print for people nearby.
+- **Want income that grows?** Sell your own designs.
+- **Easy start with designs?** Personalized items.
+- **Love CAD?** Sell files and your own products.
+- **Reliable printer?** Print for businesses.
+:::
 
-| Method | Start-up effort | Earning potential | Skills needed |
-|---|---|---|---|
-| 1. Local print-on-demand | Low | Low–medium | Printing |
-| 2. Sell your own designs (physical) | Medium | Medium–high | Simple CAD |
-| 3. Personalized products | Medium | Medium | Basic CAD |
-| 4. Replacement & repair parts | Low | Low–medium | Measuring, CAD |
-| 5. Sell digital files | Medium | Low–high | Good CAD |
-| 6. Printing for businesses (B2B) | Medium | Medium–high | Reliability |
-| 7. Content: show what you make | High | Low–high | Video |
+::: step users | Pick one group of buyers
+Not "everyone". Pick a group with a clear problem:
 
-### 1. Local print-on-demand
+- Board gamers with messy boxes
+- Cat owners
+- People with small flats
+- Car owners with broken clips
 
-Friends, neighbours, local Facebook groups and marketplaces: people need a broken clip, a cable holder, a custom hook. You print it, they pay. No shop, no fees, no shipping.
+A specific buyer makes everything easier: what to make, where to post it, what to write.
+:::
 
-- **Good for:** your first sale this week.
-- **Watch out for:** it doesn't scale. You are trading time for money. Charge a minimum per order (for example $10) so small jobs are worth it.
+::: step scale | Check you're allowed to sell it
+This step saves your shop.
 
-### 2. Sell your own designs as physical products
+::: yesno | Safe to sell | Not safe
++ Your own design
++ Models with a license that allows selling (like CC BY)
++ Personalized items made for the buyer
+- Models marked **NC**, "personal use" or MakerWorld's Standard license
+- Characters, logos, brand names
+- Other people's designs on **Etsy** (not allowed since 2025)
+:::
 
-This is where most real income comes from. You design a product, test it, photograph it well and sell it on Etsy, your own site or at markets. Because the design is yours, nobody can legally copy it, and you can sell it anywhere.
+→ [Licenses explained simply](/guides/can-you-sell-3d-prints)
+:::
 
-- **Good for:** anyone willing to learn basic CAD (Tinkercad, Onshape or Fusion are enough).
-- **Watch out for:** your first design probably won't sell. Expect to make several before one takes off.
+::: step tag | Price it so it's worth your time
+Filament is the **smallest** cost. Count it all:
 
-### 3. Personalized products
+1. Filament
+2. Electricity
+3. Machine wear
+4. **Your time** (usually the biggest cost)
+5. Packaging
+6. Fees
 
-Name signs, keychains, pet tags, lithophanes, custom cookie cutters, wedding cake toppers. Buyers pay more for something made for them, and a personalized item is easier to sell on Etsy under the 2025 rules.
+Then multiply by **2 to 3** for profit.
 
-- **Good for:** steady orders, especially before holidays.
-- **Watch out for:** every order is a little different, so build a template that makes changes fast.
+→ Use the free [price calculator](/tools/3d-print-price-calculator)
+:::
 
-### 4. Replacement and repair parts
+::: step camera | Take good photos
+Phone + window light is enough.
 
-A broken dishwasher wheel, a missing shelf peg, a cracked car clip. People search for these exact parts and will pay well, because the alternative is buying a whole new appliance.
+- Clean, plain background
+- One photo **in use**
+- One showing **size** (a hand or a ruler)
+- Daylight, no flash
+:::
 
-- **Good for:** people who like measuring and problem-solving.
-- **Watch out for:** don't copy branded parts' logos, and be careful with anything safety-related (car brakes, child seats, gas, electrical).
+::: step rocket | Post it where your buyers are
+- **Nearby:** local Facebook groups, marketplaces
+- **Online:** Etsy (own designs only), your own shop
+- **Your people:** a hobby forum or group for your buyers
 
-### 5. Sell digital files
+Write what it **does**, not what it is: "Keeps 8 Switch games tidy" beats "3D printed holder".
+:::
 
-Instead of shipping plastic, sell the STL or 3MF file on MakerWorld, Printables, Cults or your own shop. You design once and sell many times. MakerWorld also pays creators through points and offers commercial licenses that other sellers can buy.
+## How much can you make?
 
-- **Good for:** strong designers who like making things other people want to print.
-- **Watch out for:** it's slow to start. You usually need a following before files sell.
+Simple math: **profit per item × sales per week × 4**.
 
-### 6. Printing for businesses (B2B)
+| Profit per item | Sales per week | Per month |
+|---|---|---|
+| $5 | 5 | $100 |
+| $8 | 10 | $320 |
+| $12 | 20 | $960 |
 
-Shops need display stands, cafés need custom signs, workshops need jigs and fixtures, product designers need prototypes. Orders are larger and repeat.
-
-- **Good for:** reliable printers and people comfortable sending an email to a business.
-- **Watch out for:** deadlines and consistency. One failed batch costs you the customer.
-
-### 7. Content: show what you make
-
-Videos of prints, timelapses and "I made this for my desk" posts can grow an audience. An audience then buys your products, files or guides, and can bring brand deals and affiliate income.
-
-- **Good for:** people who enjoy filming and posting regularly.
-- **Watch out for:** it takes months, and views don't equal income until you have something to sell.
-
-## How much can you actually make?
-
-Honest answer: **most people who try make a small side income**. The difference between them and the sellers who make real money is rarely the printer. It's usually:
-
-- **Their own designs** instead of downloaded ones.
-- **A clear buyer**: "gamers with a messy desk", not "everyone".
-- **Good photos** taken in daylight, on a clean background, in use.
-- **Pricing that includes their time**, so each sale is worth it.
-- **Showing up every week**: new listings, posts, follow-ups.
-
-A simple way to estimate: *(profit per item) × (sales per week) × 4*. If you make $8 profit per item and sell 10 a week, that's about $320 a month. Want more? Raise the profit per item or the number of sales. Usually raising the price is easier than you think.
+::: warn | Be realistic
+Many hobby sellers make under $200 a month. The ones who earn more sell their own designs, have great photos, and show up every week. Be careful with anyone promising "$5,000 a month".
+:::
 
 ## What it costs to start
 
 If you already own a printer, very little:
 
-- **Filament:** most PLA costs around $15–25 per kg. A small item often uses 20–80 g.
-- **Electricity:** a typical home printer uses roughly 100–150 W while printing. Check your own price per kWh.
-- **Wear parts:** nozzles, build plates, belts. Budget a little per print hour.
-- **Packaging and shipping:** often the biggest cost per order. Check it *before* you set a price.
-- **Selling fees:** Etsy, for example, charges listing, transaction and payment fees. See the Etsy guide for the numbers.
+::: icons
+printer | Filament | Most PLA costs about $15–25 per kg.
+plug | Electricity | A home printer uses about 100–150 W.
+wrench | Wear parts | Nozzles, plates and belts wear out.
+box | Packaging | Often the biggest cost per order.
+percent | Fees | Marketplaces like Etsy take a cut.
+:::
 
-Use our [3D print price calculator](/tools/3d-print-price-calculator) to see what an item really costs you.
+::: do | Do this today
+- Write down **3 product ideas** for **one** type of buyer
+- Check the license of anything you didn't design
+- Run your numbers in the [price calculator](/tools/3d-print-price-calculator)
+- Post **one** item, in one place
+:::
 
-## Which method should you pick?
-
-- **You want a sale this week:** local print-on-demand (method 1).
-- **You want income that grows:** your own designs (method 2), with personalization (method 3) as an easy first step.
-- **You love CAD:** digital files (method 5) plus your own physical products.
-- **You have a reliable printer and like order:** businesses (method 6).
-
-Pick **one**. Doing all seven at once is the most common reason people give up.
-
-## Your next step
-
-1. Read [what 3D prints sell best](/guides/best-3d-prints-to-sell) and write down three product ideas for one type of buyer.
-2. Check the [license rules](/guides/can-you-sell-3d-prints) for anything you didn't design.
-3. Work out your price with the [calculator](/tools/3d-print-price-calculator).
-4. Make one listing or one post. Today.
-
-Want the full step-by-step plan, from first idea to steady weekly sales? That's what [Print to Profit](/guides/print-to-profit) is for.
+Want every step in detail, with worksheets and a 30-day plan? That's [Print to Profit](/guides/print-to-profit).
 
 ## Sources
 
