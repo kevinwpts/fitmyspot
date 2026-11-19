@@ -191,7 +191,7 @@ home += header() + f"""
 <div>
 <h1>Turn your 3D printer into a <em>side income.</em></h1>
 <p class="lead">Learn exactly what to print, what to charge and where to sell it. Step by step, and without breaking Etsy's new rules.</p>
-<div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a></div>
+<div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 <ul class="trust"><li>{CHECK}<span><b>{SITE['followers']}</b> follow <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a></span></li><li>{CHECK}<span>14-day money-back guarantee</span></li><li>{CHECK}<span>Read on your phone, instant access</span></li></ul>
 </div>
 {cover('playbook')}
@@ -206,6 +206,7 @@ home += header() + f"""
 <section class="sec"><div class="wrap">
 <div class="sech"><div><h2>What you'll learn in Print to Profit</h2><p>Everything you need to go from "I have a printer" to "people pay me for my prints".</p></div></div>
 <div class="learn">{"".join(f'<div><span class="ic">{CHECK}</span><b>{e(t)}</b><p>{e(d)}</p></div>' for t, d in learn)}</div>
+<p style="margin-top:20px"><a class="more" href="/guides/print-to-profit/pick-your-lane">Try it: read chapter 1 free →</a></p>
 </div></section>
 
 <section class="sec alt"><div class="wrap">
@@ -220,7 +221,7 @@ home += header() + f"""
 <p class="lead" style="margin-top:12px">The complete guide to selling your 3D prints.</p>
 <ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>14-day money-back guarantee</li></ul>
 <div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">one-time payment</span></div>
-<div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit">See what's inside</a></div>
+<div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 <p class="fine2">Secure checkout by Stripe. VAT handled for your country.</p>
 </div>
 </div></div></section>
@@ -356,7 +357,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
 PREM_FAQ = [
     {"q": "What format is it?", "a": "An online guide you read on this site, on your phone, tablet or computer. You log in with your email, no password. Plus the worksheets and templates listed above."},
     {"q": "How do I get it after paying?", "a": "Right after checkout. You can come back any time via My guides by logging in with your email (no password)."},
-    {"q": "Do I get updates?", "a": "Yes. When rules, fees or methods change, the guide is updated and you can download the new version for free."},
+    {"q": "Do I get updates?", "a": "Yes. When rules, fees or methods change, the guide is updated, and you see the new version right away. Free."},
     {"q": "Can I get a refund?", "a": "Yes. If it's not for you, contact us within 14 days of buying for a full refund."},
     {"q": "Who handles payment and tax?", "a": "Payment is handled securely by Stripe, which also takes care of VAT and sales tax in your country."},
 ]
