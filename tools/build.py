@@ -99,7 +99,8 @@ def cover(prod_key, cls=""):
     g = next(x for x in PREM if x["product"] == prod_key)
     alt = e(g["h1"]) + " guide cover"
     if cls == "book" or cls == "":
-        return f'<img class="bookimg" src="/img/book-{prod_key}.webp" alt="{alt}" width="746" height="1000" fetchpriority="high">'
+        w, h = (857, 1200) if prod_key == "playbook" else (746, 1000)
+        return f'<img class="bookimg" src="/img/book-{prod_key}.webp" alt="{alt}" width="{w}" height="{h}" fetchpriority="high">'
     return f'<img class="coverimg" src="/img/cover-{prod_key}.webp" alt="{alt}" width="600" height="800">'
 
 def buy_btn(key, cls="btn or big wide"):
