@@ -232,3 +232,9 @@ h3{font-size:20px;font-weight:700;letter-spacing:-.02em}
 .mbar{display:none}
 @media(max-width:899px){.mbar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;justify-content:space-between;align-items:center;gap:12px;background:var(--ink);color:#fff;border:0;border-radius:14px;padding:13px 16px;font:600 15px var(--body);box-shadow:0 10px 30px -10px rgba(0,0,0,.5);cursor:pointer}.mbar b{font:800 20px var(--display)}.mbar.off{display:none}}
 @media(max-width:520px){.nav .lgx{display:none}.nav{gap:2px}.top .wrap{gap:8px}}
+
+.bookimg{width:100%;max-width:420px;height:auto;margin:0 auto;filter:drop-shadow(0 24px 30px rgba(22,22,26,.18))}
+.coverimg{width:100%;height:auto;border-radius:4px 8px 8px 4px;box-shadow:0 10px 24px -12px rgba(22,22,26,.5),inset 0 0 0 1px rgba(0,0,0,.05)}
+.prod .coverimg{max-width:120px}.upsell .coverimg{max-width:96px}
+@media(max-width:520px){.prod .coverimg{max-width:84px}}
+@media(max-width:899px){.hero .bookimg{max-width:260px}.phero .bookimg{max-width:240px}}

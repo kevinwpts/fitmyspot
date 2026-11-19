@@ -94,10 +94,11 @@ def footer():
 </body></html>"""
 
 def cover(prod_key, cls=""):
-    p = PROD[prod_key]; g = next(x for x in PREM if x["product"] == prod_key)
-    color = " green" if prod_key == "design" else ""
-    cells = "<i></i>" * 18
-    return f"""<div class="cover{color} {cls}" aria-hidden="true"><span class="ck">boredprinter</span><span class="ct">{e(g['h1'])}</span><span class="cs">{e(g['summary'])}</span><span class="grid">{cells}</span><span class="cb">{LOGO_W}@boredprinter</span></div>"""
+    g = next(x for x in PREM if x["product"] == prod_key)
+    alt = e(g["h1"]) + " guide cover"
+    if cls == "book" or cls == "":
+        return f'<img class="bookimg" src="/img/book-{prod_key}.webp" alt="{alt}" width="746" height="1000" fetchpriority="high">'
+    return f'<img class="coverimg" src="/img/cover-{prod_key}.webp" alt="{alt}" width="600" height="800" loading="lazy">'
 
 def buy_btn(key, cls="btn or big wide"):
     p = PROD[key]
@@ -129,7 +130,7 @@ def prod_cards():
     out = []
     for g in PREM:
         k = g["product"]; p = PROD[k]
-        out.append(f"""<div class="prod">{cover(k)}<div><span class="tag pro">Premium · PDF</span><h3 style="margin-top:10px"><a href="/guides/{g['slug']}" style="text-decoration:none">{e(g['h1'])}</a></h3><p>{e(g['summary'])}</p><div class="row"><span class="price">${p['price']}</span><a class="btn" href="/guides/{g['slug']}">See what's inside</a></div></div></div>""")
+        out.append(f"""<div class="prod">{cover(k, "flat")}<div><span class="tag pro">Premium · PDF</span><h3 style="margin-top:10px"><a href="/guides/{g['slug']}" style="text-decoration:none">{e(g['h1'])}</a></h3><p>{e(g['summary'])}</p><div class="row"><span class="price">${p['price']}</span><a class="btn" href="/guides/{g['slug']}">See what's inside</a></div></div></div>""")
     b = PROD["bundle"]; full = PROD["playbook"]["price"] + PROD["design"]["price"]
     bl = f'<a class="btn or" href="{e(b["link"])}">Get both · ${b["price"]}</a>' if b.get("link") else '<a class="btn or" href="/guides/side-hustle-playbook#waitlist">Get notified</a>'
     return f'<div class="prods">{"".join(out)}</div><div class="bundle"><div><b>Get both guides · ${b["price"]}</b><br><span>Save ${full - b["price"]} compared to buying them separately.</span></div>{bl}</div>'
@@ -222,7 +223,7 @@ for g in FREE:
     body = re.sub(r"<table>", '<div class="tbl"><table>', body).replace("</table>", "</table></div>")
     body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
     # upsell före "Sources" (eller sist)
-    up = f"""<aside class="upsell">{cover('playbook')}<div><b>Want the complete plan?</b><p>The 3D Print Side Hustle Playbook takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/side-hustle-playbook">See what's inside</a></div></aside>"""
+    up = f"""<aside class="upsell">{cover('playbook', 'flat')}<div><b>Want the complete plan?</b><p>The 3D Print Side Hustle Playbook takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/side-hustle-playbook">See what's inside</a></div></aside>"""
     if '<h2 id="sources">' in body: body = body.replace('<h2 id="sources">', up + '<h2 id="sources">', 1)
     else: body += up
     toc = "".join(f'<a href="#{t["id"]}">{e(t["name"])}</a>' for t in md.toc_tokens if t["id"] not in ("sources",))
