@@ -77,7 +77,7 @@ def header(active=""):
         return f'<a href="{href}" class="{cls}"{cur}>{label}</a>'
     return f"""<header class="top"><div class="wrap">
 <a class="logo" href="/" aria-label="boredprinter home">{LOGO}boredprinter</a>
-<nav class="nav" aria-label="Main">{a('/guides', 'Guides', 'guides')}{a('/tools/3d-print-price-calculator', 'Calculator', 'calc', 'hm')}{a('/library', 'My guides', 'lib', 'hm')}<a class="btn or" href="/guides/side-hustle-playbook">Get the Playbook</a></nav>
+<nav class="nav" aria-label="Main">{a('/guides', 'Guides', 'guides')}{a('/tools/3d-print-price-calculator', 'Calculator', 'calc', 'hm')}{a('/library', 'My guides', 'lib', 'hm')}<a class="btn or" href="/guides/side-hustle-playbook"><span class="lgx">Get the </span>Playbook</a></nav>
 </div></header>"""
 
 def footer():
