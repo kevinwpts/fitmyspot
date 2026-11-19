@@ -1,0 +1,51 @@
+<div class="cbox" id="libLogin">
+  <form id="libForm" class="sform" novalidate style="gap:12px">
+    <label for="libEmail" style="font-weight:600">Email used at checkout</label>
+    <input id="libEmail" type="email" autocomplete="email" placeholder="you@email.com" required style="background:#fff;color:var(--ink);border-color:var(--line)">
+    <button class="btn or big" type="submit">Email me a login link</button>
+    <p class="err" role="alert" hidden style="color:#B42318"></p>
+  </form>
+  <p id="libSent" hidden style="margin:0"><b>Check your inbox.</b> We sent a login link to <span id="libTo"></span>. It can take a minute, and check spam too.</p>
+</div>
+<div id="libList" hidden></div>
+<p style="margin-top:22px;font-size:14px;color:var(--muted)">Problems? Send a DM to <a href="https://www.instagram.com/boredprinter/" rel="noopener">@boredprinter</a> on Instagram with your receipt number.</p>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const NAMES = { playbook: "The 3D Print Side Hustle Playbook", design: "Design Your Own Bestseller" };
+  let tok = null;
+  try { const s = JSON.parse(localStorage.getItem("bp_token") || "null"); if (s && s.exp > Date.now()) tok = s.t; } catch {}
+  async function load(){
+    $("libLogin").hidden = true; const box = $("libList"); box.hidden = false; box.innerHTML = '<div class="cbox">Loading your guides…</div>';
+    const r = await fetch("/api/library", { headers: { authorization: "Bearer " + tok } });
+    if (r.status === 401) { try { localStorage.removeItem("bp_token"); } catch {} $("libLogin").hidden = false; box.hidden = true; return; }
+    const d = await r.json().catch(() => ({}));
+    const items = (d.products || []);
+    box.innerHTML = `<p style="margin:0 0 14px;color:var(--muted)">Logged in as <b style="color:var(--ink)">${(d.email || "").replace(/[<>&"]/g, "")}</b> · <a href="#" id="libOut">Log out</a></p>` + (items.length ? items.map(k => `<div class="cbox owned"><div><span class="tag pro">PDF</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><button class="btn or" data-dl="${k}">Download</button></div>`).join("") :
+      `<div class="cbox"><h3>No guides found for this email</h3><p style="color:var(--muted);margin:8px 0 0">Did you use another email at checkout? Log out and try that one. Or <a href="/guides">browse the guides</a>.</p></div>`);
+    $("libOut").onclick = e => { e.preventDefault(); try { localStorage.removeItem("bp_token"); } catch {} location.reload(); };
+    box.querySelectorAll("[data-dl]").forEach(b => b.onclick = async () => {
+      b.disabled = true; const t = b.textContent; b.textContent = "Preparing…";
+      try {
+        const r = await fetch("/api/download?product=" + b.dataset.dl, { headers: { authorization: "Bearer " + tok } });
+        if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || "Download failed");
+        const blob = await r.blob(), a = document.createElement("a");
+        a.href = URL.createObjectURL(blob); a.download = (r.headers.get("x-filename") || b.dataset.dl + ".pdf"); document.body.append(a); a.click(); a.remove();
+      } catch (e) { toast(e.message); }
+      b.disabled = false; b.textContent = t;
+    });
+  }
+  $("libForm").addEventListener("submit", async e => {
+    e.preventDefault(); const email = $("libEmail").value.trim(), err = $("libForm").querySelector(".err");
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { err.textContent = "Please enter a valid email."; err.hidden = false; return; }
+    const btn = $("libForm").querySelector("button"); btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      const r = await fetch(`${bp.SB}/auth/v1/otp?redirect_to=${encodeURIComponent(location.origin + "/library")}`, { method: "POST", headers: { apikey: bp.KEY, "content-type": "application/json" }, body: JSON.stringify({ email, create_user: true }) });
+      if (!r.ok) throw 0;
+      $("libForm").hidden = true; $("libTo").textContent = email; $("libSent").hidden = false;
+    } catch { btn.disabled = false; btn.textContent = "Email me a login link"; err.textContent = "Couldn't send the link. Wait a minute and try again."; err.hidden = false; }
+  });
+  addEventListener("DOMContentLoaded", () => { if (tok) load(); });
+  if (document.readyState !== "loading" && tok) setTimeout(load, 0);
+})();
+</script>

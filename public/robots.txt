@@ -1,19 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-
-# AI-sökning får gärna läsa sidan
-User-agent: GPTBot
-Allow: /
-User-agent: OAI-SearchBot
-Allow: /
-User-agent: ChatGPT-User
-Allow: /
-User-agent: PerplexityBot
-Allow: /
-User-agent: ClaudeBot
-Allow: /
-User-agent: Google-Extended
-Allow: /
+Disallow: /library
+Disallow: /thanks
 
 Sitemap: https://boredprinter.com/sitemap.xml

@@ -1,11 +1,15 @@
-# FitMySpot
+# boredprinter.com
 
-Snap a photo of a spot, get 3D print ideas that fit.
+Guides on making money with a 3D printer. Static site + 3 small Vercel functions.
 
-- `public/` – the website
-- `api/` – Vercel functions (AI analysis, model search, credits)
-- `lib/` – shared Supabase helpers
+- Content: `content/guides/*.md` (free + premium), `content/pages/*.md`
+- Design: `site/site.css`, `site/site.js`, `site/*.html` (calculator, library, thanks)
+- Build: `python3 tools/build.py` → writes `public/` (commit the output)
+- Payments: Stripe Payment Links (Managed Payments). Put links in `site/site.json`.
+  After-payment redirect: `https://boredprinter.com/thanks?session_id={CHECKOUT_SESSION_ID}`
+  Product names in Stripe must contain "Playbook", "Design" or "Bundle".
+- Env on Vercel: `STRIPE_SECRET_KEY` (restricted key, read Checkout Sessions)
+- PDFs for sale: `private/guides/` (never public)
+- Email list: Supabase table `subscribers` (via RPC `subscribe`)
 
-Environment variables (Vercel → Settings → Environment Variables):
-- `GEMINI_API_KEY` – Google Gemini key
-- `SCAN_KEY` – server key for the credit system (matches Supabase Vault `scan_key`)
+Old photo app: branch `archive/photo-app-2026-11`.

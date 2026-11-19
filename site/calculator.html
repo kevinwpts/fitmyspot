@@ -1,0 +1,82 @@
+<div class="calc" id="calc">
+<div class="cbox">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px"><h3 style="margin:0">Your numbers</h3>
+  <div class="seg" role="group" aria-label="Currency"><button type="button" data-cur="$" class="on">$</button><button type="button" data-cur="€">€</button><button type="button" data-cur="£">£</button><button type="button" data-cur="kr">kr</button></div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Material</p><div class="fgrid">
+    <div class="field"><label for="c-spool">Spool price</label><div class="in"><input id="c-spool" type="number" inputmode="decimal" min="0" step="0.01" value="20"><span class="u cur">$</span></div></div>
+    <div class="field"><label for="c-spoolg">Spool weight</label><div class="in"><input id="c-spoolg" type="number" inputmode="numeric" min="1" value="1000"><span class="u">g</span></div></div>
+    <div class="field"><label for="c-grams">Grams used (from slicer)</label><div class="in"><input id="c-grams" type="number" inputmode="decimal" min="0" value="60"><span class="u">g</span></div></div>
+    <div class="field"><label for="c-waste">Failed prints / waste</label><div class="in"><input id="c-waste" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div></div>
+  </div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Printer</p><div class="fgrid">
+    <div class="field"><label for="c-hours">Print time</label><div class="in"><input id="c-hours" type="number" inputmode="decimal" min="0" step="0.1" value="3"><span class="u">hours</span></div></div>
+    <div class="field"><label for="c-watts">Power use</label><div class="in"><input id="c-watts" type="number" inputmode="numeric" min="0" value="120"><span class="u">W</span></div></div>
+    <div class="field"><label for="c-kwh">Electricity price</label><div class="in"><input id="c-kwh" type="number" inputmode="decimal" min="0" step="0.01" value="0.25"><span class="u"><span class="cur">$</span>/kWh</span></div></div>
+    <div class="field"><label for="c-mach">Machine wear</label><div class="in"><input id="c-mach" type="number" inputmode="decimal" min="0" step="0.01" value="0.25"><span class="u"><span class="cur">$</span>/hour</span></div></div>
+  </div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Your time and packing</p><div class="fgrid">
+    <div class="field"><label for="c-min">Hands-on time</label><div class="in"><input id="c-min" type="number" inputmode="numeric" min="0" value="15"><span class="u">min</span></div></div>
+    <div class="field"><label for="c-rate">Your hourly rate</label><div class="in"><input id="c-rate" type="number" inputmode="decimal" min="0" value="20"><span class="u"><span class="cur">$</span>/hour</span></div></div>
+    <div class="field"><label for="c-pack">Packaging</label><div class="in"><input id="c-pack" type="number" inputmode="decimal" min="0" step="0.01" value="1"><span class="u cur">$</span></div></div>
+    <div class="field"><label for="c-qty">Items per print</label><div class="in"><input id="c-qty" type="number" inputmode="numeric" min="1" value="1"><span class="u">pcs</span></div></div>
+  </div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Price and fees</p><div class="fgrid">
+    <div class="field"><label for="c-mark">Markup</label><div class="in"><input id="c-mark" type="number" inputmode="decimal" min="1" step="0.1" value="2.5"><span class="u">× cost</span></div></div>
+    <div class="field"><label for="c-feep">Marketplace fees</label><div class="in"><input id="c-feep" type="number" inputmode="decimal" min="0" max="60" step="0.1" value="9.5"><span class="u">%</span></div></div>
+    <div class="field"><label for="c-feef">Fixed fee per order</label><div class="in"><input id="c-feef" type="number" inputmode="decimal" min="0" step="0.01" value="0.45"><span class="u cur">$</span></div></div>
+  </div><p style="margin:12px 0 0;font-size:13px;color:var(--muted)">Default fees ≈ Etsy US (6.5% transaction + ~3% payment, $0.20 listing + $0.25 payment). Set to 0 if you sell locally.</p></div>
+</div>
+<div class="res" id="res" aria-live="polite">
+  <span class="sub">Suggested price per item</span>
+  <div class="big" id="r-price">–</div>
+  <span class="sub" id="r-profit">–</span>
+  <dl>
+    <dt>Filament</dt><dd id="r-mat">–</dd>
+    <dt>Electricity</dt><dd id="r-el">–</dd>
+    <dt>Machine wear</dt><dd id="r-mach">–</dd>
+    <dt>Your time</dt><dd id="r-lab">–</dd>
+    <dt>Packaging</dt><dd id="r-pack">–</dd>
+    <dt class="tot">Total cost</dt><dd class="tot" id="r-cost">–</dd>
+    <dt>Fees on this price</dt><dd id="r-fee">–</dd>
+    <dt class="tot">You keep</dt><dd class="tot pf" id="r-keep">–</dd>
+  </dl>
+  <a class="btn or wide" style="margin-top:20px" href="/guides/how-to-price-3d-prints">How to use these numbers</a>
+</div>
+</div>
+<button type="button" class="mbar" id="mbar" aria-label="See full result"><span>Suggested price</span><b id="m-price">–</b></button>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let cur = "$";
+  const ids = ["spool","spoolg","grams","waste","hours","watts","kwh","mach","min","rate","pack","qty","mark","feep","feef"];
+  const v = id => Math.max(0, parseFloat($("c-" + id).value) || 0);
+  const fmt = n => (cur === "kr" ? Math.round(n).toLocaleString("sv-SE") + " kr" : cur + n.toFixed(2));
+  try { const s = JSON.parse(localStorage.getItem("bp_calc") || "null"); if (s) { ids.forEach(i => { if (s[i] != null) $("c-" + i).value = s[i]; }); if (s.cur) cur = s.cur; } } catch {}
+  function calc(){
+    const qty = Math.max(1, Math.round(v("qty")));
+    const mat = v("spool") / Math.max(1, v("spoolg")) * v("grams") * (1 + v("waste") / 100) / qty;
+    const el = v("watts") / 1000 * v("hours") * v("kwh") / qty;
+    const mach = v("mach") * v("hours") / qty;
+    const lab = v("min") / 60 * v("rate");
+    const pack = v("pack");
+    const cost = mat + el + mach + lab + pack;
+    const base = cost * Math.max(1, v("mark"));
+    const pct = Math.min(0.6, v("feep") / 100);
+    const price = (base + v("feef")) / (1 - pct); // avgifter läggs ovanpå
+    const fee = price * pct + v("feef");
+    const keep = price - fee;
+    const set = (id, n) => $(id).textContent = fmt(n);
+    set("r-mat", mat); set("r-el", el); set("r-mach", mach); set("r-lab", lab); set("r-pack", pack); set("r-cost", cost);
+    set("r-fee", fee); set("r-keep", keep); set("r-price", price); set("m-price", price);
+    $("r-profit").textContent = `Profit ${fmt(keep - cost)} per item (${cost > 0 ? Math.round((keep - cost) / keep * 100) : 0}% margin)`;
+    document.querySelectorAll("#calc .cur").forEach(x => x.textContent = cur);
+    document.querySelectorAll("[data-cur]").forEach(b => { b.classList.toggle("on", b.dataset.cur === cur); b.setAttribute("aria-pressed", b.dataset.cur === cur); });
+    try { const s = { cur }; ids.forEach(i => s[i] = $("c-" + i).value); localStorage.setItem("bp_calc", JSON.stringify(s)); } catch {}
+  }
+  ids.forEach(i => $("c-" + i).addEventListener("input", calc));
+  document.querySelectorAll("[data-cur]").forEach(b => b.onclick = () => { cur = b.dataset.cur; calc(); });
+  $("mbar").onclick = () => $("res").scrollIntoView({ behavior: "smooth", block: "start" });
+  if ("IntersectionObserver" in window) new IntersectionObserver(es => $("mbar").classList.toggle("off", es[0].isIntersecting), { threshold: .2 }).observe($("res"));
+  calc();
+})();
+</script>

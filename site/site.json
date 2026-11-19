@@ -1,0 +1,13 @@
+{
+  "name": "boredprinter",
+  "url": "https://boredprinter.com",
+  "instagram": "https://www.instagram.com/boredprinter/",
+  "followers": "15k",
+  "supabase_url": "https://rcntkzrbanwigypkumvd.supabase.co",
+  "supabase_anon": "sb_publishable_Eoce1JVPaM-SgVSllLbi4g_ZiTaGejr",
+  "products": {
+    "playbook": { "name": "The 3D Print Side Hustle Playbook", "price": 29, "slug": "side-hustle-playbook", "link": "" },
+    "design": { "name": "Design Your Own Bestseller", "price": 19, "slug": "design-your-own-bestseller", "link": "" },
+    "bundle": { "name": "Both guides (bundle)", "price": 39, "slug": "side-hustle-playbook", "link": "" }
+  }
+}

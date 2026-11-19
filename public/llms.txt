@@ -1,24 +1,15 @@
 # boredprinter
 
-> boredprinter (https://boredprinter.com) makes custom 3D printable drawer and shelf organizers from a photo. You photograph a drawer, shelf or box, mark it, and it estimates the size and designs organizer boxes with compartments that fit. It also suggests print ideas with real models from MakerWorld and Printables for the rest of the photo.
+> boredprinter (https://boredprinter.com) publishes honest, practical guides on making money with a home 3D printer, by the creator behind @boredprinter on Instagram (15k followers). Free guides cover what sells, licenses, Etsy's 2025+ rules for 3D prints and pricing, plus a free price calculator. Premium PDF guides go deeper.
 
-## What it does
-- Photo a drawer or shelf, mark it. It measures it from the photo (a bank card or A4 paper in the photo makes it more exact) and suggests compartments for what is inside.
-- Customize: number of compartments and rows, one tray / separate boxes / dividers only, rounded corners, finger notch, height, fit, hexagon or slot walls, color. 3D preview and a preview drawn on your own photo.
-- Print: for Bambu Lab printers it opens straight in Bambu Studio as a project, already split onto plates for your printer. Other printers get an STL.
-- Bonus: about 10 print ideas for everything else in the photo, with real models to download.
+## Free guides
+- [How to make money with a 3D printer](https://boredprinter.com/guides/how-to-make-money-with-a-3d-printer): The seven ways people actually make money with a home 3D printer, what each is worth, and how to pick the one that fits you.
+- [Can you sell 3D prints? Licenses explained](https://boredprinter.com/guides/can-you-sell-3d-prints): What you're allowed to sell, what you're not, and how to check any model in 30 seconds.
+- [How to price 3D prints](https://boredprinter.com/guides/how-to-price-3d-prints): The formula, the costs people forget, and why you're probably charging too little.
+- [Selling 3D prints on Etsy in 2026](https://boredprinter.com/guides/selling-3d-prints-on-etsy): What changed in 2025, what you can still sell, what Etsy charges, and how to stay on the right side of the rules.
+- [The best 3D prints to sell](https://boredprinter.com/guides/best-3d-prints-to-sell): Product types that sell, the pattern behind them, and how to find your own winner.
+- [3D print price calculator](https://boredprinter.com/tools/3d-print-price-calculator): free tool to price a 3D print including filament, electricity, machine wear, labour, packaging and fees.
 
-## Good for
-- "Custom drawer organizer 3D print", "gridfinity alternative", "3D print a drawer insert that fits", "What should I 3D print?", "I'm out of 3D print ideas", "useful things to 3D print" or "things to 3D print for my car / desk / kitchen".
-- People who own a 3D printer and run out of ideas.
-
-## Price
-- First photo free, 3 credits when you sign up, 1 photo = 1 credit. Credit packs from $2.99.
-
-## Pages
-- [Home](https://boredprinter.com/)
-- [3D print ideas for every room](https://boredprinter.com/ideas)
-- [Car](https://boredprinter.com/ideas/car) · [Desk](https://boredprinter.com/ideas/desk) · [Kitchen](https://boredprinter.com/ideas/kitchen) · [Bathroom](https://boredprinter.com/ideas/bathroom) · [Bedroom](https://boredprinter.com/ideas/bedroom) · [Garage](https://boredprinter.com/ideas/garage) · [Living room](https://boredprinter.com/ideas/living-room) · [Hallway](https://boredprinter.com/ideas/hallway)
-
-## Made by
-The creator of a 3D printer setup video with 4.9 million views. Instagram: https://www.instagram.com/boredprinter/
+## Premium guides
+- [The 3D Print Side Hustle Playbook](https://boredprinter.com/guides/side-hustle-playbook): Everything in one plan: from "what should I make?" to your first 10 sales and beyond. ($29, PDF)
+- [Design Your Own Bestseller](https://boredprinter.com/guides/design-your-own-bestseller): Go from "I only download models" to selling products that are 100% yours. ($19, PDF)

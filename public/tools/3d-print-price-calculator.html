@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3D Print Price Calculator (Free): What to Charge for 3D Prints</title>
+<meta name="description" content="Free 3D printing price calculator: filament, electricity, machine wear, labour, packaging and Etsy-style fees. Get a selling price and profit per print.">
+<link rel="canonical" href="https://boredprinter.com/tools/3d-print-price-calculator">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="google-site-verification" content="k2pg0YUW4uSaR17aU-OOrcagvWNx2prDQFDTYDuasYI">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="boredprinter">
+<meta property="og:title" content="3D Print Price Calculator (Free): What to Charge for 3D Prints">
+<meta property="og:description" content="Free 3D printing price calculator: filament, electricity, machine wear, labour, packaging and Etsy-style fees. Get a selling price and profit per print.">
+<meta property="og:url" content="https://boredprinter.com/tools/3d-print-price-calculator">
+<meta property="og:image" content="https://boredprinter.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBFAF7">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css?v=d4da62f1">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://boredprinter.com/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://boredprinter.com/tools/3d-print-price-calculator"}, {"@type": "ListItem", "position": 3, "name": "Price calculator", "item": "https://boredprinter.com/tools/3d-print-price-calculator"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate the cost of a 3D print?", "acceptedAnswer": {"@type": "Answer", "text": "Add the filament cost (spool price ÷ grams × grams used), electricity (watts × hours × price per kWh), machine wear per hour, your hands-on time, packaging and selling fees."}}, {"@type": "Question", "name": "What markup should I use for 3D prints?", "acceptedAnswer": {"@type": "Answer", "text": "Most sellers multiply their total cost by 2 to 3. Personalized or unique designs can go higher."}}, {"@type": "Question", "name": "How much electricity does a 3D printer use?", "acceptedAnswer": {"@type": "Answer", "text": "A typical home FDM printer averages roughly 100–150 W while printing. A heated chamber or a large bed can use more."}}]}, {"@context": "https://schema.org", "@type": "WebApplication", "name": "3D Print Price Calculator", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "url": "https://boredprinter.com/tools/3d-print-price-calculator"}]</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap">
+<a class="logo" href="/" aria-label="boredprinter home"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a>
+<nav class="nav" aria-label="Main"><a href="/guides" class="">Guides</a><a href="/tools/3d-print-price-calculator" class="hm" aria-current="page">Calculator</a><a href="/library" class="hm">My guides</a><a class="btn or" href="/guides/side-hustle-playbook">Get the Playbook</a></nav>
+</div></header>
+<main id="main" class="art"><div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Price calculator</span></nav>
+<div class="ahead"><span class="kick">Free tool</span><h1>3D print price calculator</h1><p class="lead">Fill in your numbers and see what a print really costs you, and what to charge. Everything stays in your browser.</p></div>
+<div class="calc" id="calc">
+<div class="cbox">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px"><h3 style="margin:0">Your numbers</h3>
+  <div class="seg" role="group" aria-label="Currency"><button type="button" data-cur="$" class="on">$</button><button type="button" data-cur="€">€</button><button type="button" data-cur="£">£</button><button type="button" data-cur="kr">kr</button></div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Material</p><div class="fgrid">
+    <div class="field"><label for="c-spool">Spool price</label><div class="in"><input id="c-spool" type="number" inputmode="decimal" min="0" step="0.01" value="20"><span class="u cur">$</span></div></div>
+    <div class="field"><label for="c-spoolg">Spool weight</label><div class="in"><input id="c-spoolg" type="number" inputmode="numeric" min="1" value="1000"><span class="u">g</span></div></div>
+    <div class="field"><label for="c-grams">Grams used (from slicer)</label><div class="in"><input id="c-grams" type="number" inputmode="decimal" min="0" value="60"><span class="u">g</span></div></div>
+    <div class="field"><label for="c-waste">Failed prints / waste</label><div class="in"><input id="c-waste" type="number" inputmode="numeric" min="0" max="100" value="10"><span class="u">%</span></div></div>
+  </div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Printer</p><div class="fgrid">
+    <div class="field"><label for="c-hours">Print time</label><div class="in"><input id="c-hours" type="number" inputmode="decimal" min="0" step="0.1" value="3"><span class="u">hours</span></div></div>
+    <div class="field"><label for="c-watts">Power use</label><div class="in"><input id="c-watts" type="number" inputmode="numeric" min="0" value="120"><span class="u">W</span></div></div>
+    <div class="field"><label for="c-kwh">Electricity price</label><div class="in"><input id="c-kwh" type="number" inputmode="decimal" min="0" step="0.01" value="0.25"><span class="u"><span class="cur">$</span>/kWh</span></div></div>
+    <div class="field"><label for="c-mach">Machine wear</label><div class="in"><input id="c-mach" type="number" inputmode="decimal" min="0" step="0.01" value="0.25"><span class="u"><span class="cur">$</span>/hour</span></div></div>
+  </div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Your time and packing</p><div class="fgrid">
+    <div class="field"><label for="c-min">Hands-on time</label><div class="in"><input id="c-min" type="number" inputmode="numeric" min="0" value="15"><span class="u">min</span></div></div>
+    <div class="field"><label for="c-rate">Your hourly rate</label><div class="in"><input id="c-rate" type="number" inputmode="decimal" min="0" value="20"><span class="u"><span class="cur">$</span>/hour</span></div></div>
+    <div class="field"><label for="c-pack">Packaging</label><div class="in"><input id="c-pack" type="number" inputmode="decimal" min="0" step="0.01" value="1"><span class="u cur">$</span></div></div>
+    <div class="field"><label for="c-qty">Items per print</label><div class="in"><input id="c-qty" type="number" inputmode="numeric" min="1" value="1"><span class="u">pcs</span></div></div>
+  </div></div>
+  <div class="cgroup"><p style="margin:0 0 12px;font-weight:600">Price and fees</p><div class="fgrid">
+    <div class="field"><label for="c-mark">Markup</label><div class="in"><input id="c-mark" type="number" inputmode="decimal" min="1" step="0.1" value="2.5"><span class="u">× cost</span></div></div>
+    <div class="field"><label for="c-feep">Marketplace fees</label><div class="in"><input id="c-feep" type="number" inputmode="decimal" min="0" max="60" step="0.1" value="9.5"><span class="u">%</span></div></div>
+    <div class="field"><label for="c-feef">Fixed fee per order</label><div class="in"><input id="c-feef" type="number" inputmode="decimal" min="0" step="0.01" value="0.45"><span class="u cur">$</span></div></div>
+  </div><p style="margin:12px 0 0;font-size:13px;color:var(--muted)">Default fees ≈ Etsy US (6.5% transaction + ~3% payment, $0.20 listing + $0.25 payment). Set to 0 if you sell locally.</p></div>
+</div>
+<div class="res" id="res" aria-live="polite">
+  <span class="sub">Suggested price per item</span>
+  <div class="big" id="r-price">–</div>
+  <span class="sub" id="r-profit">–</span>
+  <dl>
+    <dt>Filament</dt><dd id="r-mat">–</dd>
+    <dt>Electricity</dt><dd id="r-el">–</dd>
+    <dt>Machine wear</dt><dd id="r-mach">–</dd>
+    <dt>Your time</dt><dd id="r-lab">–</dd>
+    <dt>Packaging</dt><dd id="r-pack">–</dd>
+    <dt class="tot">Total cost</dt><dd class="tot" id="r-cost">–</dd>
+    <dt>Fees on this price</dt><dd id="r-fee">–</dd>
+    <dt class="tot">You keep</dt><dd class="tot pf" id="r-keep">–</dd>
+  </dl>
+  <a class="btn or wide" style="margin-top:20px" href="/guides/how-to-price-3d-prints">How to use these numbers</a>
+</div>
+</div>
+<button type="button" class="mbar" id="mbar" aria-label="See full result"><span>Suggested price</span><b id="m-price">–</b></button>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let cur = "$";
+  const ids = ["spool","spoolg","grams","waste","hours","watts","kwh","mach","min","rate","pack","qty","mark","feep","feef"];
+  const v = id => Math.max(0, parseFloat($("c-" + id).value) || 0);
+  const fmt = n => (cur === "kr" ? Math.round(n).toLocaleString("sv-SE") + " kr" : cur + n.toFixed(2));
+  try { const s = JSON.parse(localStorage.getItem("bp_calc") || "null"); if (s) { ids.forEach(i => { if (s[i] != null) $("c-" + i).value = s[i]; }); if (s.cur) cur = s.cur; } } catch {}
+  function calc(){
+    const qty = Math.max(1, Math.round(v("qty")));
+    const mat = v("spool") / Math.max(1, v("spoolg")) * v("grams") * (1 + v("waste") / 100) / qty;
+    const el = v("watts") / 1000 * v("hours") * v("kwh") / qty;
+    const mach = v("mach") * v("hours") / qty;
+    const lab = v("min") / 60 * v("rate");
+    const pack = v("pack");
+    const cost = mat + el + mach + lab + pack;
+    const base = cost * Math.max(1, v("mark"));
+    const pct = Math.min(0.6, v("feep") / 100);
+    const price = (base + v("feef")) / (1 - pct); // avgifter läggs ovanpå
+    const fee = price * pct + v("feef");
+    const keep = price - fee;
+    const set = (id, n) => $(id).textContent = fmt(n);
+    set("r-mat", mat); set("r-el", el); set("r-mach", mach); set("r-lab", lab); set("r-pack", pack); set("r-cost", cost);
+    set("r-fee", fee); set("r-keep", keep); set("r-price", price); set("m-price", price);
+    $("r-profit").textContent = `Profit ${fmt(keep - cost)} per item (${cost > 0 ? Math.round((keep - cost) / keep * 100) : 0}% margin)`;
+    document.querySelectorAll("#calc .cur").forEach(x => x.textContent = cur);
+    document.querySelectorAll("[data-cur]").forEach(b => { b.classList.toggle("on", b.dataset.cur === cur); b.setAttribute("aria-pressed", b.dataset.cur === cur); });
+    try { const s = { cur }; ids.forEach(i => s[i] = $("c-" + i).value); localStorage.setItem("bp_calc", JSON.stringify(s)); } catch {}
+  }
+  ids.forEach(i => $("c-" + i).addEventListener("input", calc));
+  document.querySelectorAll("[data-cur]").forEach(b => b.onclick = () => { cur = b.dataset.cur; calc(); });
+  $("mbar").onclick = () => $("res").scrollIntoView({ behavior: "smooth", block: "start" });
+  if ("IntersectionObserver" in window) new IntersectionObserver(es => $("mbar").classList.toggle("off", es[0].isIntersecting), { threshold: .2 }).observe($("res"));
+  calc();
+})();
+</script>
+
+<div class="agrid" style="margin-top:56px"><div class="prose"><h2>How the calculator works</h2><p>It adds up every cost of one item: filament (with a buffer for failed prints), electricity, machine wear, your hands-on time and packaging. Then it applies your markup and adds marketplace fees on top, so the profit you see is what you actually keep.</p><p>Not sure about the numbers? Read <a href="/guides/how-to-price-3d-prints">how to price 3D prints</a> for a full walkthrough.</p><h2>Frequently asked questions</h2><div class="faq"><details><summary>How do I calculate the cost of a 3D print?</summary><p>Add the filament cost (spool price ÷ grams × grams used), electricity (watts × hours × price per kWh), machine wear per hour, your hands-on time, packaging and selling fees.</p></details><details><summary>What markup should I use for 3D prints?</summary><p>Most sellers multiply their total cost by 2 to 3. Personalized or unique designs can go higher.</p></details><details><summary>How much electricity does a 3D printer use?</summary><p>A typical home FDM printer averages roughly 100–150 W while printing. A heated chamber or a large bed can use more.</p></details></div></div></div>
+<div style="margin-top:56px"><div class="signup light" id="waitlist">
+<div><h2>Free: The First Sale Checklist</h2><p>A one-page checklist that takes you from idea to your first sale, plus new guides when they come out.</p><ul><li>The 12 steps to your first sale</li><li>The license check, in 30 seconds</li><li>Pricing cheat sheet</li></ul></div>
+<form class="sform" data-src="calc" data-btn="Send me the checklist" data-ok="&lt;p class=&quot;ok&quot;&gt;&lt;b&gt;Done! 🎉&lt;/b&gt; Your checklist: &lt;a href=&quot;/free/first-sale-checklist.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;open the PDF&lt;/a&gt;. New guides will come to your inbox.&lt;/p&gt;" novalidate>
+<label for="em-calc" class="skip">Email</label>
+<input id="em-calc" type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
+<button class="btn or big" type="submit">Send me the checklist</button>
+<p class="err" role="alert" hidden></p>
+<small>Free. No spam. Unsubscribe any time.</small>
+</form></div></div>
+</div></main><footer class="foot"><div class="wrap">
+<div><a class="logo" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a><p style="margin:0;max-width:34ch">Honest guides to making money with your 3D printer. Made by <a href="https://www.instagram.com/boredprinter/" rel="noopener" style="display:inline;color:var(--ink);font-weight:600">@boredprinter</a>.</p></div>
+<div><b>Free guides</b><a href="/guides/how-to-make-money-with-a-3d-printer">How to make money with a 3D printer</a><a href="/guides/can-you-sell-3d-prints">Can you sell 3D prints? Licenses explained</a><a href="/guides/how-to-price-3d-prints">How to price 3D prints</a><a href="/guides/selling-3d-prints-on-etsy">Selling 3D prints on Etsy in 2026</a><a href="/guides/best-3d-prints-to-sell">The best 3D prints to sell</a><a href="/tools/3d-print-price-calculator">Price calculator</a></div>
+<div><b>Premium</b><a href="/guides/side-hustle-playbook">The 3D Print Side Hustle Playbook</a><a href="/guides/design-your-own-bestseller">Design Your Own Bestseller</a><a href="/library">My guides</a></div>
+<div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener">Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
+<p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
+</div></footer>
+<script src="/assets/site.js?v=d4da62f1" defer></script>
+</body></html>
