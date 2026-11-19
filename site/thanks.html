@@ -1,15 +1,17 @@
-<div class="ahead"><h1 style="font-size:clamp(34px,5vw,50px)" id="tTitle">Thank you! Your guide is ready</h1><p class="lead" id="tLead">Download it below. A receipt is on its way to your email.</p></div>
+<div class="ahead"><h1 style="font-size:clamp(34px,5vw,50px)" id="tTitle">Thank you! Your guide is unlocked</h1><p class="lead" id="tLead">Start reading below. A receipt is on its way to your email.</p></div>
 <div id="tList"><div class="cbox">Checking your purchase…</div></div>
-<div class="cbox" style="margin-top:14px"><b>Download again later</b><p style="margin:6px 0 12px;color:var(--muted)">Go to My guides and log in with the email you used at checkout. No password.</p><a class="btn ghost" href="/library">Go to My guides</a></div>
+<div class="cbox" style="margin-top:14px"><b>Read on another device</b><p style="margin:6px 0 12px;color:var(--muted)">Go to My guides and log in with the email you used at checkout. No password.</p><a class="btn ghost" href="/library">Go to My guides</a></div>
 <script>
 (() => {
   const NAMES = { playbook: "Print to Profit", design: "Design Your Own Bestseller" };
+  const START = { playbook: "/guides/print-to-profit/pick-your-lane", design: "/guides/design-your-own-bestseller" };
   const sid = new URLSearchParams(location.search).get("session_id") || "";
   const box = document.getElementById("tList");
   if (!/^cs_[A-Za-z0-9_]+$/.test(sid)) { box.innerHTML = '<div class="cbox">We couldn\'t find your order here. Your guides are in <a href="/library">My guides</a>.</div>'; return; }
   fetch("/api/session?session_id=" + encodeURIComponent(sid)).then(r => r.json()).then(d => {
     if (!d.products || !d.products.length) throw 0;
-    box.innerHTML = d.products.map(k => `<div class="cbox owned" style="margin-bottom:10px"><div><span class="tag pro">PDF</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><a class="btn or" href="/api/download?product=${k}&session_id=${encodeURIComponent(sid)}">Download</a></div>`).join("");
+    try { const a = JSON.parse(localStorage.getItem("bp_sess") || "[]"); if (!a.includes(sid)) a.push(sid); localStorage.setItem("bp_sess", JSON.stringify(a.slice(-5))); } catch {}
+    box.innerHTML = d.products.map(k => `<div class="cbox owned" style="margin-bottom:10px"><div><span class="tag pro">PDF</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><a class="btn or" href="${START[k]}">Start reading</a></div>`).join("");
   }).catch(() => { box.innerHTML = '<div class="cbox">Your payment is being confirmed. Refresh in a moment, or find your guides in <a href="/library">My guides</a>.</div>'; });
 })();
 </script>

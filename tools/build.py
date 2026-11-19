@@ -31,9 +31,10 @@ PROD = SITE["products"]
 (OUT / "assets").mkdir(parents=True, exist_ok=True)
 css = (ROOT / "site/site.css").read_text()
 js = (ROOT / "site/site.js").read_text().replace("__SB_URL__", SITE["supabase_url"]).replace("__SB_ANON__", SITE["supabase_anon"])
-ver = hashlib.sha1((css + js).encode()).hexdigest()[:8]
+ver = hashlib.sha1((css + js + (ROOT / "site/reader.js").read_text()).encode()).hexdigest()[:8]
 (OUT / "assets/site.css").write_text(css)
 (OUT / "assets/site.js").write_text(js)
+(OUT / "assets/reader.js").write_text((ROOT / "site/reader.js").read_text())
 
 LOGO = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>'
 LOGO_W = LOGO.replace('fill="#1A1918"', 'fill="#FFFFFF"').replace('stroke="#1A1918"', 'stroke="#FFFFFF"').replace('#FFF8F1', '#1A1918')
@@ -99,7 +100,7 @@ def cover(prod_key, cls=""):
     g = next(x for x in PREM if x["product"] == prod_key)
     alt = e(g["h1"]) + " guide cover"
     if cls == "book" or cls == "":
-        w, h = (857, 1200) if prod_key == "playbook" else (746, 1000)
+        w, h = (857, 1200) if prod_key == "playbook" else (826, 1200)
         return f'<img class="bookimg" src="/img/book-{prod_key}.webp" alt="{alt}" width="{w}" height="{h}" fetchpriority="high">'
     return f'<img class="coverimg" src="/img/cover-{prod_key}.webp" alt="{alt}" width="600" height="800">'
 
@@ -298,6 +299,59 @@ for g in FREE:
 </div></main>""" + footer()
     write(path, page); PAGES.append((path, str(g["updated"]), "0.8"))
 
+# ---------- kurser (läsläge) ----------
+COURSES = {}
+LOCK = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>'
+for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
+    c = yaml.safe_load(cy.read_text()); COURSES[c["guide"]] = c
+    gdir = cy.parent; n = len(c["chapters"])
+    (ROOT / "private/course" / c["guide"]).mkdir(parents=True, exist_ok=True)
+    prod_k = c["product"]; P_ = PROD[prod_k]
+    buy_url = P_["link"] or f"/guides/{c['guide']}#waitlist"
+    buy_lbl = f"Get {c['title']} · ${P_['price']}" if P_["link"] else f"Get {c['title']} · ${P_['price']}"
+    for i, ch in enumerate(c["chapters"]):
+        src = gdir / f"{ch['slug']}.md"
+        ch["ready"] = src.exists()
+        if ch["ready"]:
+            md = MD(); body = md.convert(preprocess(src.read_text()))
+            body = re.sub(r"<table>", '<div class="tbl"><table>', body).replace("</table>", "</table></div>")
+            body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
+        else:
+            body = f'<div class="call note"><span class="calli"></span><div><p><b>This chapter is being written.</b></p><p>You\'ll get an email when it\'s ready. It\'s included in what you bought, no extra cost.</p></div></div>'
+        ch["html"] = body
+        if not ch.get("free"):
+            (ROOT / "private/course" / c["guide"] / f"{ch['slug']}.html").write_text(body)
+    for i, ch in enumerate(c["chapters"]):
+        path = f"/guides/{c['guide']}/{ch['slug']}"
+        side = "".join(
+            f'<a href="/guides/{c["guide"]}/{x["slug"]}" data-ch="{x["slug"]}"{" aria-current=page" if j == i else ""}><span class="chn">{j+1}</span><span class="cht">{e(x["title"])}</span>{"<span class=\"tag free\">Free</span>" if x.get("free") else "<span class=\"lk\">" + LOCK + "</span>"}</a>'
+            for j, x in enumerate(c["chapters"]))
+        prev_ = c["chapters"][i - 1] if i > 0 else None; next_ = c["chapters"][i + 1] if i < n - 1 else None
+        nav = '<nav class="rnav">' + (f'<a class="btn ghost" href="/guides/{c["guide"]}/{prev_["slug"]}">← {e(prev_["title"])}</a>' if prev_ else '<span></span>') + (f'<a class="btn" href="/guides/{c["guide"]}/{next_["slug"]}">Next: {e(next_["title"])} →</a>' if next_ else '') + '</nav>'
+        unlock = f"""<aside class="unlock"><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><div><b>Unlock all {n} chapters</b><p>{e(c['title'])} takes you from your first idea to your first 10 sales and beyond. Read it here, on any device.</p><a class="btn or" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">14-day money-back guarantee · Already bought? <a href="/library">Log in</a></p></div></aside>"""
+        if ch.get("free"):
+            content = f'<div class="prose">{ch["html"]}</div>{unlock}'
+        else:
+            content = f"""<div id="chBody" class="prose" data-g="{c['guide']}" data-c="{ch['slug']}" hidden></div>
+<div id="chLock" class="lockbox"><div class="lki">{LOCK}</div><h2>This chapter is part of {e(c['title'])}</h2><p>{e(ch['summary'])}</p><a class="btn or big" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">Already bought it? <a href="/library">Log in with your email</a> · <a href="/guides/{c['guide']}/{c['chapters'][0]['slug']}">Read chapter 1 free</a></p></div>
+<p id="chLoad" class="small" hidden>Loading chapter…</p>"""
+        title = f"{ch['title']} | {c['title']}, chapter {i+1}" + (" (free)" if ch.get("free") else "")
+        ld = [crumbs_ld([("Home", "/"), ("Guides", "/guides"), (c["title"], f"/guides/{c['guide']}"), (ch["title"], path)])]
+        if ch.get("free"):
+            ld.append({"@context": "https://schema.org", "@type": "Article", "headline": f"{ch['title']}: {c['title']} chapter {i+1}", "description": ch["summary"], "author": {"@type": "Organization", "name": "boredprinter"}, "mainEntityOfPage": URL + path, "image": URL + "/og.png", "datePublished": TODAY, "dateModified": TODAY})
+        page = head(title, ch["summary"], path, ld, "article", noindex=not ch.get("free")) + header("guides") + f"""
+<main id="main" class="art"><div class="wrap reader">
+<aside class="rside" aria-label="Chapters"><details class="rtoc" open><summary><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><span><b>{e(c['title'])}</b><small>{n} chapters</small></span></summary><nav>{side}</nav></details></aside>
+<div class="rmain">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/{c['guide']}">{e(c['title'])}</a> / <span>Chapter {i+1}</span></nav>
+<header class="ahead" style="margin:18px 0 26px"><p class="chk2">Chapter {i+1} of {n} · {ch['minutes']} min{' · <span class="tag free">Free preview</span>' if ch.get('free') else ''}</p><h1 style="font-size:clamp(32px,4.6vw,48px)">{e(ch['title'])}</h1><p class="lead">{e(ch['summary'])}</p></header>
+{content}
+{nav}
+</div></div></main>
+<script src="/assets/reader.js?v={ver}" defer></script>""" + footer()
+        write(path, page)
+        if ch.get("free"): PAGES.append((path, TODAY, "0.8"))
+
 # ---------- premiumsidor ----------
 PREM_FAQ = [
     {"q": "What format is it?", "a": "An online guide you read on this site, on your phone, tablet or computer. You log in with your email, no password. Plus the worksheets and templates listed above."},
@@ -308,7 +362,11 @@ PREM_FAQ = [
 ]
 for g in PREM:
     k = g["product"]; p = PROD[k]; path = f"/guides/{g['slug']}"
-    outline = "".join(f'<li><span>{i+1:02d}</span>{e(x)}</li>' for i, x in enumerate(g["outline"]))
+    crs = COURSES.get(g["slug"])
+    if crs:
+        outline = "".join(f'<li><span>{i+1:02d}</span><a href="/guides/{g["slug"]}/{x["slug"]}" style="text-decoration:none;color:inherit"><b>{e(x["title"])}</b>{" <span class=\"tag free\">Free</span>" if x.get("free") else ""}<br><small style="color:var(--muted)">{e(x["summary"])}</small></a></li>' for i, x in enumerate(crs["chapters"]))
+    else:
+        outline = "".join(f'<li><span>{i+1:02d}</span>{e(x)}</li>' for i, x in enumerate(g["outline"]))
     inc = "".join(f"<li>{e(x)}</li>" for x in g["includes"])
     intro = markdown.markdown(g["body"])
     avail = "https://schema.org/InStock" if p.get("link") else "https://schema.org/PreOrder"
@@ -325,7 +383,7 @@ for g in PREM:
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Premium</span></nav>
 <h1 style="margin-top:18px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
 <p class="lead" style="margin-top:16px">{e(g['summary'])}</p>
-<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{buy_btn(k)}{soon}<p class="note">Secure checkout by Stripe · 14-day refund · Free updates</p></div>
+<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">Secure checkout by Stripe · 14-day refund · Free updates</p></div>
 </div></div></section>
 <section class="sec alt"><div class="wrap cols">
 <div class="prose" style="font-size:17px">{intro}</div>
@@ -363,7 +421,7 @@ write(path, page); PAGES.append((path, TODAY, "0.9"))
 
 # ---------- My guides ----------
 lib_html = (ROOT / "site/library.html").read_text()
-page = head("My guides | boredprinter", "Download the boredprinter guides you've bought.", "/library", noindex=True) + header("lib") + f"""
+page = head("My guides | boredprinter", "Read the boredprinter guides you have bought.", "/library", noindex=True) + header("lib") + f"""
 <main id="main" class="art"><div class="wrap lib">
 <div class="ahead"><h1 style="font-size:clamp(34px,5vw,48px)">Your guides</h1><p class="lead">Log in with the email you used at checkout. We'll email you a link, no password needed.</p></div>
 {lib_html}

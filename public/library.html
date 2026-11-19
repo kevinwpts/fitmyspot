@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>My guides | boredprinter</title>
-<meta name="description" content="Download the boredprinter guides you&#x27;ve bought.">
+<meta name="description" content="Read the boredprinter guides you have bought.">
 <link rel="canonical" href="https://boredprinter.com/library">
 <meta name="robots" content="noindex">
 <meta name="google-site-verification" content="k2pg0YUW4uSaR17aU-OOrcagvWNx2prDQFDTYDuasYI">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="boredprinter">
 <meta property="og:title" content="My guides | boredprinter">
-<meta property="og:description" content="Download the boredprinter guides you&#x27;ve bought.">
+<meta property="og:description" content="Read the boredprinter guides you have bought.">
 <meta property="og:url" content="https://boredprinter.com/library">
 <meta property="og:image" content="https://boredprinter.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=f7701d00">
+<link rel="stylesheet" href="/assets/site.css?v=bee998d8">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}</script>
 </head>
 <body>
@@ -47,6 +47,7 @@
 (() => {
   const $ = id => document.getElementById(id);
   const NAMES = { playbook: "Print to Profit", design: "Design Your Own Bestseller" };
+  const START = { playbook: "/guides/print-to-profit/pick-your-lane", design: "/guides/design-your-own-bestseller" };
   let tok = null;
   try { const s = JSON.parse(localStorage.getItem("bp_token") || "null"); if (s && s.exp > Date.now()) tok = s.t; } catch {}
   async function load(){
@@ -55,19 +56,9 @@
     if (r.status === 401) { try { localStorage.removeItem("bp_token"); } catch {} $("libLogin").hidden = false; box.hidden = true; return; }
     const d = await r.json().catch(() => ({}));
     const items = (d.products || []);
-    box.innerHTML = `<p style="margin:0 0 14px;color:var(--muted)">Logged in as <b style="color:var(--ink)">${(d.email || "").replace(/[<>&"]/g, "")}</b> · <a href="#" id="libOut">Log out</a></p>` + (items.length ? items.map(k => `<div class="cbox owned"><div><span class="tag pro">PDF</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><button class="btn or" data-dl="${k}">Download</button></div>`).join("") :
+    box.innerHTML = `<p style="margin:0 0 14px;color:var(--muted)">Logged in as <b style="color:var(--ink)">${(d.email || "").replace(/[<>&"]/g, "")}</b> · <a href="#" id="libOut">Log out</a></p>` + (items.length ? items.map(k => `<div class="cbox owned"><div><span class="tag pro">Online guide</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><a class="btn or" href="${START[k] || "/guides"}">Read</a></div>`).join("") :
       `<div class="cbox"><h3>No guides found for this email</h3><p style="color:var(--muted);margin:8px 0 0">Did you use another email at checkout? Log out and try that one. Or <a href="/guides">browse the guides</a>.</p></div>`);
     $("libOut").onclick = e => { e.preventDefault(); try { localStorage.removeItem("bp_token"); } catch {} location.reload(); };
-    box.querySelectorAll("[data-dl]").forEach(b => b.onclick = async () => {
-      b.disabled = true; const t = b.textContent; b.textContent = "Preparing…";
-      try {
-        const r = await fetch("/api/download?product=" + b.dataset.dl, { headers: { authorization: "Bearer " + tok } });
-        if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || "Download failed");
-        const blob = await r.blob(), a = document.createElement("a");
-        a.href = URL.createObjectURL(blob); a.download = (r.headers.get("x-filename") || b.dataset.dl + ".pdf"); document.body.append(a); a.click(); a.remove();
-      } catch (e) { toast(e.message); }
-      b.disabled = false; b.textContent = t;
-    });
   }
   $("libForm").addEventListener("submit", async e => {
     e.preventDefault(); const email = $("libEmail").value.trim(), err = $("libForm").querySelector(".err");
@@ -91,5 +82,5 @@
 <div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener">Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
 <p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
 </div></footer>
-<script src="/assets/site.js?v=f7701d00" defer></script>
+<script src="/assets/site.js?v=bee998d8" defer></script>
 </body></html>

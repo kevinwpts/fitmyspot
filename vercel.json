@@ -3,8 +3,8 @@
   "trailingSlash": false,
   "outputDirectory": "public",
   "functions": {
-    "api/download.js": {
-      "includeFiles": "private/guides/**"
+    "api/chapter.js": {
+      "includeFiles": "private/course/**"
     }
   },
   "redirects": [
