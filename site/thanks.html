@@ -3,7 +3,7 @@
 <div class="cbox" style="margin-top:14px"><b>Download again later</b><p style="margin:6px 0 12px;color:var(--muted)">Go to My guides and log in with the email you used at checkout. No password.</p><a class="btn ghost" href="/library">Go to My guides</a></div>
 <script>
 (() => {
-  const NAMES = { playbook: "The 3D Print Side Hustle Playbook", design: "Design Your Own Bestseller" };
+  const NAMES = { playbook: "Print to Profit", design: "Design Your Own Bestseller" };
   const sid = new URLSearchParams(location.search).get("session_id") || "";
   const box = document.getElementById("tList");
   if (!/^cs_[A-Za-z0-9_]+$/.test(sid)) { box.innerHTML = '<div class="cbox">We couldn\'t find your order here. Your guides are in <a href="/library">My guides</a>.</div>'; return; }

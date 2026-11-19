@@ -1,6 +1,6 @@
 # boredprinter
 
-> boredprinter (https://boredprinter.com) publishes honest, practical guides on making money with a home 3D printer, by the creator behind @boredprinter on Instagram (15k followers). Free guides cover what sells, licenses, Etsy's 2025+ rules for 3D prints and pricing, plus a free price calculator. Premium PDF guides go deeper.
+> boredprinter (https://boredprinter.com) publishes honest, practical guides on making money with a home 3D printer, by the creator behind @boredprinter on Instagram (15k followers). Free guides cover what sells, licenses, Etsy's 2025+ rules for 3D prints and pricing, plus a free price calculator. Premium online guides go deeper.
 
 ## Free guides
 - [How to make money with a 3D printer](https://boredprinter.com/guides/how-to-make-money-with-a-3d-printer): The seven ways people actually make money with a home 3D printer, what each is worth, and how to pick the one that fits you.
@@ -11,5 +11,5 @@
 - [3D print price calculator](https://boredprinter.com/tools/3d-print-price-calculator): free tool to price a 3D print including filament, electricity, machine wear, labour, packaging and fees.
 
 ## Premium guides
-- [The 3D Print Side Hustle Playbook](https://boredprinter.com/guides/side-hustle-playbook): Everything in one plan: from "what should I make?" to your first 10 sales and beyond. ($29, PDF)
-- [Design Your Own Bestseller](https://boredprinter.com/guides/design-your-own-bestseller): Go from "I only download models" to selling products that are 100% yours. ($19, PDF)
+- [Print to Profit](https://boredprinter.com/guides/print-to-profit): The complete guide to selling your 3D prints, from your first idea to your first 10 sales and beyond. ($29, online guide)
+- [Design Your Own Bestseller](https://boredprinter.com/guides/design-your-own-bestseller): Go from "I only download models" to selling products that are 100% yours. ($19, online guide)

@@ -132,7 +132,7 @@ Pick **one**. Doing all seven at once is the most common reason people give up.
 3. Work out your price with the [calculator](/tools/3d-print-price-calculator).
 4. Make one listing or one post. Today.
 
-Want the full step-by-step plan, from first idea to steady weekly sales? That's what [The 3D Print Side Hustle Playbook](/guides/side-hustle-playbook) is for.
+Want the full step-by-step plan, from first idea to steady weekly sales? That's what [Print to Profit](/guides/print-to-profit) is for.
 
 ## Sources
 

@@ -12,7 +12,7 @@
 <script>
 (() => {
   const $ = id => document.getElementById(id);
-  const NAMES = { playbook: "The 3D Print Side Hustle Playbook", design: "Design Your Own Bestseller" };
+  const NAMES = { playbook: "Print to Profit", design: "Design Your Own Bestseller" };
   let tok = null;
   try { const s = JSON.parse(localStorage.getItem("bp_token") || "null"); if (s && s.exp > Date.now()) tok = s.t; } catch {}
   async function load(){

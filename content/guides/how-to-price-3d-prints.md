@@ -83,7 +83,7 @@ Round it to **$19.99** or **$21**, then add marketplace fees on top, or include 
 
 - Run your own numbers in the [calculator](/tools/3d-print-price-calculator).
 - See [what 3D prints sell best](/guides/best-3d-prints-to-sell).
-- Get the full pricing worksheets in [The 3D Print Side Hustle Playbook](/guides/side-hustle-playbook).
+- Get the full pricing worksheets in [Print to Profit](/guides/print-to-profit).
 
 ## Sources
 

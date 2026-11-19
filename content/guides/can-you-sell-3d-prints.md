@@ -64,7 +64,7 @@ Many designers sell a **commercial tier** on Patreon, Gumroad or their own site.
 
 Selling your own designs avoids all of this. You can sell anywhere, nobody can claim it, and it's what buyers on Etsy are now looking for. You don't need to be an engineer: many bestsellers are simple shapes made in Tinkercad or Onshape.
 
-Next: [what 3D prints sell best](/guides/best-3d-prints-to-sell), or the full plan in [The 3D Print Side Hustle Playbook](/guides/side-hustle-playbook).
+Next: [what 3D prints sell best](/guides/best-3d-prints-to-sell), or the full plan in [Print to Profit](/guides/print-to-profit).
 
 ## Sources
 

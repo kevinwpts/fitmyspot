@@ -77,7 +77,7 @@ def header(active=""):
         return f'<a href="{href}" class="{cls}"{cur}>{label}</a>'
     return f"""<header class="top"><div class="wrap">
 <a class="logo" href="/" aria-label="boredprinter home">{LOGO}boredprinter</a>
-<nav class="nav" aria-label="Main">{a('/guides', 'Guides', 'guides')}{a('/tools/3d-print-price-calculator', 'Calculator', 'calc', 'hm')}{a('/library', 'My guides', 'lib', 'hm')}<a class="btn or" href="/guides/side-hustle-playbook"><span class="lgx">Get the </span>Playbook</a></nav>
+<nav class="nav" aria-label="Main">{a('/guides', 'Guides', 'guides')}{a('/tools/3d-print-price-calculator', 'Calculator', 'calc', 'hm')}{a('/library', 'My guides', 'lib', 'hm')}<a class="btn or" href="/guides/print-to-profit">Get the guide</a></nav>
 </div></header>"""
 
 def footer():
@@ -98,7 +98,7 @@ def cover(prod_key, cls=""):
     alt = e(g["h1"]) + " guide cover"
     if cls == "book" or cls == "":
         return f'<img class="bookimg" src="/img/book-{prod_key}.webp" alt="{alt}" width="746" height="1000" fetchpriority="high">'
-    return f'<img class="coverimg" src="/img/cover-{prod_key}.webp" alt="{alt}" width="600" height="800" loading="lazy">'
+    return f'<img class="coverimg" src="/img/cover-{prod_key}.webp" alt="{alt}" width="600" height="800">'
 
 def buy_btn(key, cls="btn or big wide"):
     p = PROD[key]
@@ -121,19 +121,20 @@ def signup(src="home", title="Free: The First Sale Checklist", text="A one-page 
 
 def card(g):
     tag = '<span class="tag free">Free</span>' if g["type"] == "free" else '<span class="tag pro">Premium</span>'
-    meta = f'{g["read"]} min read' if g["type"] == "free" else f'PDF · {g["pages"]} pages · ${g["price"]}'
+    meta = f'{g["read"]} min read' if g["type"] == "free" else f'Online guide · ${g["price"]}'
     return f'<a class="card" href="/guides/{g["slug"]}">{tag}<h3>{e(g["h1"])}</h3><p>{e(g["summary"])}</p><span class="meta">{meta} →</span></a>'
 
 CALC_CARD = '<a class="card tool" href="/tools/3d-print-price-calculator"><span class="tag" style="background:#2A2A31;color:#fff">Free tool</span><h3>3D print price calculator</h3><p>Filament, power, machine wear, your time and fees. Get a price that is worth it.</p><span class="meta">Use it →</span></a>'
 
-def prod_cards():
+def prod_cards(only=None):
     out = []
     for g in PREM:
+        if only and g["product"] not in only: continue
         k = g["product"]; p = PROD[k]
-        out.append(f"""<div class="prod">{cover(k, "flat")}<div><span class="tag pro">Premium · PDF</span><h3 style="margin-top:10px"><a href="/guides/{g['slug']}" style="text-decoration:none">{e(g['h1'])}</a></h3><p>{e(g['summary'])}</p><div class="row"><span class="price">${p['price']}</span><a class="btn" href="/guides/{g['slug']}">See what's inside</a></div></div></div>""")
+        out.append(f"""<div class="prod">{cover(k, "flat")}<div><span class="tag pro">Premium guide</span><h3 style="margin-top:10px"><a href="/guides/{g['slug']}" style="text-decoration:none">{e(g['h1'])}</a></h3><p>{e(g['summary'])}</p><div class="row"><span class="price">${p['price']}</span><a class="btn" href="/guides/{g['slug']}">See what's inside</a></div></div></div>""")
     b = PROD["bundle"]; full = PROD["playbook"]["price"] + PROD["design"]["price"]
-    bl = f'<a class="btn or" href="{e(b["link"])}">Get both · ${b["price"]}</a>' if b.get("link") else '<a class="btn or" href="/guides/side-hustle-playbook#waitlist">Get notified</a>'
-    return f'<div class="prods">{"".join(out)}</div><div class="bundle"><div><b>Get both guides · ${b["price"]}</b><br><span>Save ${full - b["price"]} compared to buying them separately.</span></div>{bl}</div>'
+    bl = f'<a class="btn or" href="{e(b["link"])}">Get both · ${b["price"]}</a>' if b.get("link") else '<a class="btn or" href="/guides/print-to-profit#waitlist">Get notified</a>'
+    return f'<div class="prods{" one" if only and len(only) == 1 else ""}">{"".join(out)}</div><div class="bundle"><div><b>Get both guides · ${b["price"]}</b><br><span>Save ${full - b["price"]} compared to buying them separately.</span></div>{bl}</div>'
 
 def faq_html(items):
     return '<div class="faq">' + "".join(f"<details><summary>{e(f['q'])}</summary><p>{e(f['a'])}</p></details>" for f in items) + "</div>"
@@ -153,56 +154,100 @@ PAGES = []  # för sitemap: (path, lastmod, prio)
 
 # ---------- startsida ----------
 HOME_FAQ = [
-    {"q": "Can you really make money with a 3D printer?", "a": "Yes, but for most people it's a side income, not a salary. The sellers who do best sell their own designs to a specific group of buyers and price in their time. Our free guides show you how."},
-    {"q": "Are the free guides really free?", "a": "Yes. No account and no email needed to read them. The email list is optional and gets you a free checklist."},
-    {"q": "What do I get with a premium guide?", "a": "A downloadable PDF guide with worksheets and templates, plus free updates when rules or fees change. You can read it on your phone or computer."},
-    {"q": "Do I need an account to buy?", "a": "No. Pay with your email and download right away. To download again later, go to My guides and log in with a link we email you. No password."},
-    {"q": "What if the guide isn't for me?", "a": "Contact us within 14 days and you'll get a full refund. See terms for details."},
+    {"q": "Can you really make money with a 3D printer?", "a": "Yes, but for most people it's a side income, not a salary. The people who do best sell their own designs to a specific group of buyers and price in their time. That's exactly what Print to Profit teaches."},
+    {"q": "I'm a complete beginner at selling. Is this for me?", "a": "Yes. You need to know how to print. Everything about selling, from picking a product to getting paid, is explained step by step."},
+    {"q": "What is Print to Profit, exactly?", "a": "A complete online guide you read on this site, on your phone or computer. It comes with pricing worksheets, listing templates and a 30-day plan, and you get free updates when rules or fees change."},
+    {"q": "Do I need to know CAD or 3D design?", "a": "No. Print to Profit works without it. If you want to design your own products (which Etsy now requires), Design Your Own Bestseller takes you from zero."},
+    {"q": "What if it's not for me?", "a": "Contact us within 14 days and you get a full refund. No questions asked."},
+    {"q": "Do I need an account to buy?", "a": "No. You pay with your email and get access right away. To come back later, log in with a link we email you. No password."},
 ]
-home = head("Make Money With Your 3D Printer: Honest Guides | boredprinter",
-            "Free and premium guides on making money with a 3D printer: what sells, licenses, Etsy rules, pricing and a free price calculator. By @boredprinter.",
+P = PROD["playbook"]
+main_cta = (f'<a class="btn or big" href="{e(P["link"])}">Get Print to Profit · ${P["price"]}</a>' if P.get("link")
+            else f'<a class="btn or big" href="/guides/print-to-profit">Get Print to Profit · ${P["price"]}</a>')
+CHECK = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+CROSS = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>'
+pains = ["Your printer mostly sits there doing nothing", "You have no idea what would actually sell", "You're not sure what you're even allowed to sell", "Your prices barely cover the filament", "Etsy's new rules confuse you"]
+learn = [
+    ("What to make", "A simple method to find products people already want to buy, so you don't waste weeks on things that don't sell."),
+    ("What you're allowed to sell", "Licenses and Etsy's 2025 rules in plain English, so your shop doesn't get shut down."),
+    ("What to charge", "Worksheets that include filament, power, your time and fees, so every sale is actually worth it."),
+    ("Where to sell", "Etsy, your own shop, local buyers and businesses. Which fits you, and how to start."),
+    ("How to get your first 10 sales", "Photos, listings and posts that sell, without paying for ads."),
+    ("A 30-day plan", "What to do each day, from today until your first sales come in."),
+]
+steps = [("Pick one product", "Use the research method to find something a specific group of people wants."),
+         ("Price it right", "Run the numbers once with the worksheet. Never sell at a loss again."),
+         ("Make your first sales", "Follow the 30-day plan: photos, listing, and getting it in front of buyers.")]
+home = head("Make Money With Your 3D Printer | boredprinter",
+            "Learn what to print, what to charge and where to sell it. Step-by-step guides to making money with your 3D printer, by @boredprinter. Free guides + price calculator.",
             "/", [faq_ld(HOME_FAQ), {"@context": "https://schema.org", "@type": "WebSite", "name": "boredprinter", "url": URL}])
 home += header() + f"""
 <main id="main">
 <section class="hero"><div class="wrap">
 <div>
-<h1>Make money with your <em>3D printer.</em></h1>
-<p class="lead">Honest, practical guides on what to print, how to price it and where to sell it. Start free. Go deeper when you're ready.</p>
-<div class="ctas"><a class="btn or big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a><a class="btn ghost big" href="/guides/side-hustle-playbook">See the Playbook</a></div>
-<p class="proof"><span>By <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a> · <b>{SITE['followers']}</b> followers on Instagram</span></p>
+<h1>Turn your 3D printer into a <em>side income.</em></h1>
+<p class="lead">Learn exactly what to print, what to charge and where to sell it. Step by step, and without breaking Etsy's new rules.</p>
+<div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a></div>
+<ul class="trust"><li>{CHECK}<span><b>{SITE['followers']}</b> follow <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a></span></li><li>{CHECK}<span>14-day money-back guarantee</span></li><li>{CHECK}<span>Read on your phone, instant access</span></li></ul>
 </div>
 {cover('playbook')}
 </div></section>
 
+<section class="sec alt"><div class="wrap pain">
+<div><h2>Bought a 3D printer to make money, but…</h2></div>
+<ul class="xlist">{"".join(f"<li>{CROSS}<span>{e(x)}</span></li>" for x in pains)}</ul>
+<p class="pain-end">You're not alone. Most people who try to sell 3D prints give up within weeks. Not because it doesn't work, but because they guess. <b>Print to Profit replaces the guessing with a plan.</b></p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+<div class="sech"><div><h2>What you'll learn in Print to Profit</h2><p>Everything you need to go from "I have a printer" to "people pay me for my prints".</p></div></div>
+<div class="learn">{"".join(f'<div><span class="ic">{CHECK}</span><b>{e(t)}</b><p>{e(d)}</p></div>' for t, d in learn)}</div>
+</div></section>
+
 <section class="sec alt"><div class="wrap">
-<div class="sech"><div><h2>Free guides</h2><p>Everything a beginner needs to know before selling a single print.</p></div><a class="more" href="/guides">All guides →</a></div>
+<div class="sech"><div><h2>How it works</h2></div></div>
+<ol class="steps">{"".join(f'<li><span>{i+1}</span><b>{e(t)}</b><p>{e(d)}</p></li>' for i, (t, d) in enumerate(steps))}</ol>
+</div></section>
+
+<section class="sec"><div class="wrap"><div class="offer">
+<div class="offer-img">{cover('playbook')}</div>
+<div>
+<h2>Print to Profit</h2>
+<p class="lead" style="margin-top:12px">The complete guide to selling your 3D prints.</p>
+<ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>14-day money-back guarantee</li></ul>
+<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">one-time payment</span></div>
+<div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit">See what's inside</a></div>
+<p class="fine2">Secure checkout by Stripe. VAT handled for your country.</p>
+</div>
+</div></div></section>
+
+<section class="sec"><div class="wrap"><div class="guar"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke-linecap="round"/></svg><div><b>14-day money-back guarantee</b><p>Read it, try it. If it's not for you, contact us within 14 days and you get every cent back. No questions asked.</p></div></div></div></section>
+
+<section class="sec alt"><div class="wrap">
+<div class="sech"><div><h2>Not ready to buy? Start free</h2><p>Our free guides answer the questions every beginner has.</p></div><a class="more" href="/guides">All guides →</a></div>
 <div class="cards">{"".join(card(g) for g in FREE)}{CALC_CARD}</div>
 </div></section>
 
 <section class="sec"><div class="wrap">
-<div class="sech"><div><h2>Premium guides</h2><p>The full step-by-step plans, with worksheets and templates.</p></div></div>
-{prod_cards()}
+<div class="sech"><div><h2>Want to design your own products?</h2><p>Etsy now only allows 3D prints of your own designs. This guide teaches you how, even if you've never used CAD.</p></div></div>
+{prod_cards(["design"])}
 </div></section>
 
 <section class="sec"><div class="wrap">{signup('home', anchor='waitlist')}</div></section>
 
-<section class="sec"><div class="wrap">
-<div class="sech"><div><h2>How the guides are written</h2></div></div>
-<div class="prin">
-<div><b>Honest numbers</b><p>Real costs and realistic earnings. No "$10k a month" screenshots.</p></div>
-<div><b>Legal first</b><p>Licenses and marketplace rules explained, so your shop doesn't get shut down.</p></div>
-<div><b>Sources included</b><p>Each guide shows when it was last updated and links to where the facts come from.</p></div>
-<div><b>Do it today</b><p>Every guide ends with steps you can take right now.</p></div>
-</div>
-</div></section>
-
 <section class="sec alt"><div class="wrap"><h2 style="margin-bottom:18px">Questions</h2>{faq_html(HOME_FAQ)}</div></section>
+
+<section class="sec"><div class="wrap final">
+<h2>Your printer could be paying for itself.</h2>
+<p class="lead" style="margin:14px auto 26px">Start today with Print to Profit, or read the free guide first.</p>
+<div class="ctas" style="justify-content:center">{main_cta}<a class="btn ghost big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a></div>
+</div></section>
 </main>""" + footer()
 write("/", home); PAGES.append(("/", TODAY, "1.0"))
 
 # ---------- guideindex ----------
 gi = head("3D Printing Business Guides: Free & Premium | boredprinter",
-          "All boredprinter guides on making money with 3D printing: what sells, licenses, Etsy, pricing, and in-depth premium playbooks.",
+          "All boredprinter guides on making money with 3D printing: what sells, licenses, Etsy, pricing, and in-depth premium guides.",
           "/guides", [crumbs_ld([("Home", "/"), ("Guides", "/guides")])])
 gi += header("guides") + f"""
 <main id="main" class="art"><div class="wrap">
@@ -223,7 +268,7 @@ for g in FREE:
     body = re.sub(r"<table>", '<div class="tbl"><table>', body).replace("</table>", "</table></div>")
     body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
     # upsell före "Sources" (eller sist)
-    up = f"""<aside class="upsell">{cover('playbook', 'flat')}<div><b>Want the complete plan?</b><p>The 3D Print Side Hustle Playbook takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/side-hustle-playbook">See what's inside</a></div></aside>"""
+    up = f"""<aside class="upsell">{cover('playbook', 'flat')}<div><b>Want the complete plan?</b><p>Print to Profit takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/print-to-profit">See what's inside</a></div></aside>"""
     if '<h2 id="sources">' in body: body = body.replace('<h2 id="sources">', up + '<h2 id="sources">', 1)
     else: body += up
     toc = "".join(f'<a href="#{t["id"]}">{e(t["name"])}</a>' for t in md.toc_tokens if t["id"] not in ("sources",))
@@ -252,8 +297,8 @@ for g in FREE:
 
 # ---------- premiumsidor ----------
 PREM_FAQ = [
-    {"q": "What format is it?", "a": "A PDF you can read on your phone, tablet or computer, plus the worksheets and templates listed above."},
-    {"q": "How do I get it after paying?", "a": "You can download it right after checkout. You can also download it again any time from My guides by logging in with your email (no password)."},
+    {"q": "What format is it?", "a": "An online guide you read on this site, on your phone, tablet or computer. You log in with your email, no password. Plus the worksheets and templates listed above."},
+    {"q": "How do I get it after paying?", "a": "Right after checkout. You can come back any time via My guides by logging in with your email (no password)."},
     {"q": "Do I get updates?", "a": "Yes. When rules, fees or methods change, the guide is updated and you can download the new version for free."},
     {"q": "Can I get a refund?", "a": "Yes. If it's not for you, contact us within 14 days of buying for a full refund."},
     {"q": "Who handles payment and tax?", "a": "Payment is handled securely by Stripe, which also takes care of VAT and sales tax in your country."},
@@ -277,7 +322,7 @@ for g in PREM:
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Premium</span></nav>
 <h1 style="margin-top:18px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
 <p class="lead" style="margin-top:16px">{e(g['summary'])}</p>
-<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· PDF · {g['pages']} pages</span></div>{buy_btn(k)}{soon}<p class="note">Secure checkout by Stripe · 14-day refund · Free updates</p></div>
+<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{buy_btn(k)}{soon}<p class="note">Secure checkout by Stripe · 14-day refund · Free updates</p></div>
 </div></div></section>
 <section class="sec alt"><div class="wrap cols">
 <div class="prose" style="font-size:17px">{intro}</div>
@@ -356,12 +401,12 @@ Sitemap: {URL}/sitemap.xml
 """)
 llms = f"""# boredprinter
 
-> boredprinter ({URL}) publishes honest, practical guides on making money with a home 3D printer, by the creator behind @boredprinter on Instagram ({SITE['followers']} followers). Free guides cover what sells, licenses, Etsy's 2025+ rules for 3D prints and pricing, plus a free price calculator. Premium PDF guides go deeper.
+> boredprinter ({URL}) publishes honest, practical guides on making money with a home 3D printer, by the creator behind @boredprinter on Instagram ({SITE['followers']} followers). Free guides cover what sells, licenses, Etsy's 2025+ rules for 3D prints and pricing, plus a free price calculator. Premium online guides go deeper.
 
 ## Free guides
 """ + "".join(f"- [{g['h1']}]({URL}/guides/{g['slug']}): {g['summary']}\n" for g in FREE) + f"""- [3D print price calculator]({URL}/tools/3d-print-price-calculator): free tool to price a 3D print including filament, electricity, machine wear, labour, packaging and fees.
 
 ## Premium guides
-""" + "".join(f"- [{g['h1']}]({URL}/guides/{g['slug']}): {g['summary']} (${PROD[g['product']]['price']}, PDF)\n" for g in PREM)
+""" + "".join(f"- [{g['h1']}]({URL}/guides/{g['slug']}): {g['summary']} (${PROD[g['product']]['price']}, online guide)\n" for g in PREM)
 (OUT / "llms.txt").write_text(llms)
 print("built", len(PAGES), "indexed pages")

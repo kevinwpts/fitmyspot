@@ -1,5 +1,5 @@
 ---
-title: "Design Your Own Bestseller: 3D Design for Sellers (PDF Guide)"
+title: "Design Your Own Bestseller: 3D Design for Sellers (Online Guide)"
 h1: Design Your Own Bestseller
 description: Learn to design your own 3D printable products from scratch, even if you've never used CAD. Sell them anywhere, including Etsy, with no license worries.
 type: premium
@@ -20,7 +20,7 @@ outline:
   - Testing and improving a design before you list it
   - Protecting your designs and handling copycats
 includes:
-  - The full guide as a PDF
+  - The full guide online, made for reading on your phone
   - 5 starter product projects with measurements
   - A printable tolerance test file
   - Free updates
