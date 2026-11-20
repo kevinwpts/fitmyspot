@@ -15,4 +15,4 @@
 - [3D print price calculator](https://boredprinter.com/tools/3d-print-price-calculator): free tool to price a 3D print including filament, electricity, machine wear, labour, packaging and fees.
 
 ## Premium guides
-- [Print to Profit](https://boredprinter.com/guides/print-to-profit): Your first 10 sales in 30 days, step by step. ($29, online guide)
+- [Print to Profit](https://boredprinter.com/guides/print-to-profit): A step-by-step 30-day plan to your first 10 sales. ($29, online guide)

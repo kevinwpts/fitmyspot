@@ -167,7 +167,7 @@ HOME_FAQ = [
     {"q": "I'm a complete beginner at selling. Is this for me?", "a": "Yes. You need to know how to print. Everything about selling, from picking a product to getting paid, is explained step by step."},
     {"q": "What is Print to Profit, exactly?", "a": "A complete online guide you read on this site, on your phone or computer. It comes with pricing worksheets, listing templates and a 30-day plan, and you get free updates when rules or fees change."},
     {"q": "Do I need to know CAD or 3D design?", "a": "No. Print to Profit works without it, and shows you simple ways to make products that are your own design."},
-    {"q": "What if something doesn't work?", "a": "Contact us and we'll fix it. You get instant access, so all sales are final, except if something doesn't work."},
+    {"q": "What if it's not for me?", "a": "You have a 30-day money-back guarantee. Read it, try the plan. If it's not worth it to you, message me within 30 days and you get all your money back. No questions."},
     {"q": "Do I need an account to buy?", "a": "No. You pay with your email and get access right away. To come back later, log in with a link we email you. No password."},
 ]
 P = PROD["playbook"]
@@ -233,16 +233,16 @@ home += header() + f"""
 <div class="offer-img">{cover('playbook')}</div>
 <div>
 <h2>Print to Profit</h2>
-<p class="lead" style="margin-top:12px">Your first 10 sales in 30 days, step by step.</p>
+<p class="lead" style="margin-top:12px">A step-by-step 30-day plan to your first 10 sales.</p>
 <ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>Instant access on any device</li></ul>
-<p class="vstack">11 chapters · about 70 minutes · spreadsheet toolkit, templates, a real example and a 30-day plan</p>
-<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{launch_note(P) or 'one-time payment'}</span></div>
+<p class="vstack">11 chapters · about 70 minutes · spreadsheet toolkit, templates, a worked example and a 30-day plan</p>
+<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{launch_note(P) or 'one-time payment'}</span></div><p class="valline">About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</p>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
-<p class="fine2">Secure checkout by Stripe. VAT handled for your country.</p>
+<p class="fine2">30-day money-back guarantee. Secure checkout by Stripe, VAT handled for your country.</p>
 </div>
 </div></div></section>
 
-<section class="sec tight"><div class="wrap"><p class="facts"><span>Instant access</span><span>Free updates when the rules change</span><span>Something broken? I fix it</span></p></div></section>
+<section class="sec tight"><div class="wrap"><p class="facts"><span>Instant access</span><span>Free updates when the rules change</span><span>30-day money-back guarantee</span></p></div></section>
 
 <section class="sec alt"><div class="wrap">
 <div class="sech"><div><h2>Not ready to buy? Start free</h2><p>Our free guides answer the questions every beginner has.</p></div><a class="more" href="/guides">All guides →</a></div>
@@ -253,7 +253,7 @@ home += header() + f"""
 
 <section class="sec"><div class="wrap">{signup('home', anchor='waitlist')}</div></section>
 
-<section class="sec"><div class="wrap"><div class="me"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><h2>Hi, I'm Kevin</h2><p class="lead" style="margin-top:12px">I run <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a>, where {SITE['followers']} people follow my 3D printing. The question I get most is: "Can you actually make money with this thing?"</p><p>These guides are my honest answer. No "$10k a month" promises. Just the steps that work, written so anyone can follow them.</p><a class="btn ghost" href="/about">More about me</a></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="me"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><h2>Hi, I'm Kevin</h2><p class="lead" style="margin-top:12px">I run <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a>, where {SITE['followers']} people follow my 3D printing. The question I get most is: "Can you actually make money with this thing?"</p><p>These guides are my honest answer. No "$10k a month" promises. Just researched, up-to-date steps, checked against the current rules and written so anyone can follow them.</p><a class="btn ghost" href="/about">More about me</a></div></div></div></section>
 
 <section class="sec alt"><div class="wrap"><h2 style="margin-bottom:18px">Questions</h2>{faq_html(HOME_FAQ)}</div></section>
 
@@ -262,7 +262,7 @@ home += header() + f"""
 <p class="lead" style="margin:14px auto 26px">Start today with Print to Profit, or read the free guide first.</p>
 <div class="ctas" style="justify-content:center">{main_cta}<a class="btn ghost big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a></div>
 </div></section>
-<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>Your first 10 sales in 30 days</small></span>{main_cta.replace('btn or big', 'btn or')}</div>
+<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>30-day plan to your first 10 sales</small></span>{main_cta.replace('btn or big', 'btn or')}</div>
 <script>(()=>{{const b=document.getElementById("mcta"),h=document.querySelector(".hero");if(!b||!h||!("IntersectionObserver" in window))return;new IntersectionObserver(es=>{{b.hidden=es[0].isIntersecting}}).observe(h)}})();</script>
 </main>""" + footer()
 write("/", home); PAGES.append(("/", TODAY, "1.0"))
@@ -379,7 +379,7 @@ PREM_FAQ = [
     {"q": "What format is it?", "a": "An online guide you read on this site, on your phone, tablet or computer. You log in with your email, no password. Plus the worksheets and templates listed above."},
     {"q": "How do I get it after paying?", "a": "Right after checkout. You can come back any time via My guides by logging in with your email (no password)."},
     {"q": "Do I get updates?", "a": "Yes. When rules, fees or methods change, the guide is updated, and you see the new version right away. Free."},
-    {"q": "Can I get a refund?", "a": "You get instant access to the whole guide, so all sales are final. If something doesn't work, contact us and we'll fix it."},
+    {"q": "Can I get a refund?", "a": "Yes. 30-day money-back guarantee. Read it, try the plan. If it's not worth it to you, message me within 30 days and you get all your money back. No questions."},
     {"q": "Who handles payment and tax?", "a": "Payment is handled securely by Stripe, which also takes care of VAT and sales tax in your country."},
 ]
 for g in PREM:
@@ -405,7 +405,7 @@ for g in PREM:
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Premium</span></nav>
 <h1 style="margin-top:18px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
 <p class="lead" style="margin-top:16px">{e(g['summary'])}</p>
-<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{f'<p class="launch">{launch_note(p)}</p>' if launch_note(p) else ''}{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">Secure checkout by Stripe · Instant access · Free updates</p></div>
+<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{f'<p class="launch">{launch_note(p)}</p>' if launch_note(p) else ''}{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">30-day money-back guarantee · Secure checkout by Stripe · Instant access</p><p class="valline">About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</p></div>
 </div></div></section>
 <section class="sec alt"><div class="wrap cols">
 <div class="prose" style="font-size:17px">{intro}</div>

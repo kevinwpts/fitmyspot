@@ -417,3 +417,4 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
 .facts span{display:inline-flex;align-items:center;gap:8px}
 .facts span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--or)}
 .prod h3{margin-top:0}
+.valline{margin:10px 0 0;font-size:14px;color:var(--muted)}

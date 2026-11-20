@@ -9,7 +9,7 @@ order: 10
 updated: 2026-11-19
 pages: 60+
 kicker: Premium guide
-summary: "Your first 10 sales in 30 days, step by step."
+summary: "A step-by-step 30-day plan to your first 10 sales."
 outline:
   - "Pick your lane: the 7 ways to earn, and a quiz to choose yours"
   - Find products that sell, with a step-by-step research method
@@ -26,7 +26,7 @@ includes:
   - The full guide online, made for reading on your phone
   - "The toolkit: pricing, idea scoring and shipping spreadsheet (Excel and Google Sheets)"
   - Listing templates and copy-paste scripts (PDF)
-  - "One real example product, followed through every chapter"
+  - "One worked example product, followed through every chapter"
   - A 14-day sales sprint and a printable 30-day checklist
   - Free updates when the rules change
 ---

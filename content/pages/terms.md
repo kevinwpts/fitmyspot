@@ -17,13 +17,13 @@ Our guides are information and education. They are **not legal, tax or financial
 - You can read your guides any time from **My guides** by logging in with the email you used at checkout.
 - When we update a guide, you see the new version right away, for free.
 
-## Refunds
+## Refunds: 30-day money-back guarantee
 
 Our guides are digital content that you get **instant access** to right after payment.
 
-Refund questions about the payment itself can also go to [Link support](https://support.link.com/topics/sold-through-link). Your legal rights as a consumer are not affected.
+If the guide isn't worth it to you, message us **within 30 days** of buying and you get a full refund. No questions. Send a DM on Instagram ([@boredprinter](https://www.instagram.com/boredprinter/)) with the email you used at checkout.
 
-If something doesn't work, for example you can't open a chapter you paid for, contact us and we'll fix it. If we can't, you get a refund. Contact us with your receipt via a DM on Instagram: [@boredprinter](https://www.instagram.com/boredprinter/).
+You can also contact [Link support](https://support.link.com/topics/sold-through-link) about the payment. Your legal rights as a consumer are not affected.
 
 ## Free content and the calculator
 
