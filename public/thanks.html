@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=7e5c4433">
+<link rel="stylesheet" href="/assets/site.css?v=d20ca7cd">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}</script>
 </head>
 <body>
@@ -43,7 +43,7 @@
   fetch("/api/session?session_id=" + encodeURIComponent(sid)).then(r => r.json()).then(d => {
     if (!d.products || !d.products.length) throw 0;
     try { const a = JSON.parse(localStorage.getItem("bp_sess") || "[]"); if (!a.includes(sid)) a.push(sid); localStorage.setItem("bp_sess", JSON.stringify(a.slice(-5))); } catch {}
-    box.innerHTML = d.products.map(k => `<div class="cbox owned" style="margin-bottom:10px"><div><span class="tag pro">Online guide</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><a class="btn or" href="${START[k]}">Start reading</a></div>`).join("");
+    box.innerHTML = d.products.map(k => `<div class="cbox owned" style="margin-bottom:10px"><div><small style="color:var(--muted)">Online guide</small><h3 style="margin-top:4px">${NAMES[k] || k}</h3></div><a class="btn or" href="${START[k]}">Start reading</a></div>`).join("");
   }).catch(() => { box.innerHTML = '<div class="cbox">Your payment is being confirmed. Refresh in a moment, or find your guides in <a href="/library">My guides</a>.</div>'; });
 })();
 </script>
@@ -54,5 +54,5 @@
 <div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener">Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
 <p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
 </div></footer>
-<script src="/assets/site.js?v=7e5c4433" defer></script>
+<script src="/assets/site.js?v=d20ca7cd" defer></script>
 </body></html>

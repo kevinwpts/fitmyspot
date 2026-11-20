@@ -124,18 +124,17 @@ def signup(src="home", title="Free: The First Sale Checklist", text="A one-page 
 </form></div>"""
 
 def card(g):
-    tag = '<span class="tag free">Free</span>' if g["type"] == "free" else '<span class="tag pro">Premium</span>'
-    meta = f'{g["read"]} min read' if g["type"] == "free" else f'Online guide · ${g["price"]}'
-    return f'<a class="card" href="/guides/{g["slug"]}">{tag}<h3>{e(g["h1"])}</h3><p>{e(g["summary"])}</p><span class="meta">{meta} →</span></a>'
+    meta = f'{e(g.get("kicker") or "Guide")} · {g["read"]} min read' if g["type"] == "free" else f'Online guide · ${g["price"]}'
+    return f'<a class="card" href="/guides/{g["slug"]}"><h3>{e(g["h1"])}</h3><p>{e(g["summary"])}</p><span class="meta">{meta} →</span></a>'
 
-CALC_CARD = '<a class="card tool" href="/tools/3d-print-price-calculator"><span class="tag" style="background:#2A2A31;color:#fff">Free tool</span><h3>3D print price calculator</h3><p>Filament, power, machine wear, your time and fees. Get a price that is worth it.</p><span class="meta">Use it →</span></a>'
+CALC_CARD = '<a class="card tool" href="/tools/3d-print-price-calculator"><h3>3D print price calculator</h3><p>Filament, power, machine wear, your time and fees. Get a price that is worth it.</p><span class="meta">Free tool · Use it →</span></a>'
 
 def prod_cards(only=None):
     out = []
     for g in PREM:
         if only and g["product"] not in only: continue
         k = g["product"]; p = PROD[k]
-        out.append(f"""<div class="prod">{cover(k, "flat")}<div><span class="tag pro">Premium guide</span><h3 style="margin-top:10px"><a href="/guides/{g['slug']}" style="text-decoration:none">{e(g['h1'])}</a></h3><p>{e(g['summary'])}</p><div class="row"><span class="price">${p['price']}</span><a class="btn" href="/guides/{g['slug']}">See what's inside</a></div></div></div>""")
+        out.append(f"""<div class="prod">{cover(k, "flat")}<div><h3><a href="/guides/{g['slug']}" style="text-decoration:none">{e(g['h1'])}</a></h3><p>{e(g['summary'])}</p><div class="row"><span class="price">${p['price']}</span><a class="btn" href="/guides/{g['slug']}">See what's inside</a></div></div></div>""")
     one = " one" if len(out) == 1 else ""
     if "bundle" not in PROD or len(PREM) < 2:
         return f'<div class="prods{one}">{"".join(out)}</div>'
@@ -228,10 +227,7 @@ home += header() + f"""
 </div>
 </div></section>
 
-<section class="sec alt"><div class="wrap">
-<div class="sech"><div><h2>How it works</h2></div></div>
-<ol class="steps">{"".join(f'<li><span>{i+1}</span><b>{e(t)}</b><p>{e(d)}</p></li>' for i, (t, d) in enumerate(steps))}</ol>
-</div></section>
+
 
 <section class="sec"><div class="wrap"><div class="offer">
 <div class="offer-img">{cover('playbook')}</div>
@@ -246,7 +242,7 @@ home += header() + f"""
 </div>
 </div></div></section>
 
-<section class="sec"><div class="wrap"><div class="guar"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke-linecap="round"/></svg><div><b>Instant access, free updates</b><p>Start reading the second you buy. When rules or fees change, the guide is updated for you, free. Something not working? Contact us and we'll fix it.</p></div></div></div></section>
+<section class="sec tight"><div class="wrap"><p class="facts"><span>Instant access</span><span>Free updates when the rules change</span><span>Something broken? I fix it</span></p></div></section>
 
 <section class="sec alt"><div class="wrap">
 <div class="sech"><div><h2>Not ready to buy? Start free</h2><p>Our free guides answer the questions every beginner has.</p></div><a class="more" href="/guides">All guides →</a></div>
@@ -313,7 +309,7 @@ for g in FREE:
 <main id="main" class="art"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>{e(g['kicker'])}</span></nav>
 <header class="ahead"><h1>{e(g['h1'])}</h1><p class="lead">{e(g['summary'])}</p>
-<div class="ameta"><span class="tag free">Free</span><span class="by"><img src="/img/kevin-sm.webp" alt="" width="26" height="26">By Kevin</span><span>Updated <time datetime="{g['updated']}">{upd}</time></span><span>{g['read']} min read</span></div></header>
+<div class="ameta"><span class="by"><img src="/img/kevin-sm.webp" alt="" width="26" height="26">By Kevin</span><span>Updated <time datetime="{g['updated']}">{upd}</time></span><span>{g['read']} min read</span></div></header>
 {hero}<div class="agrid"><article class="prose">{body}
 {('<h2 id="faq">Frequently asked questions</h2>' + faq_html(g['faq'])) if g.get('faq') else ''}
 </article>
@@ -350,7 +346,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
     for i, ch in enumerate(c["chapters"]):
         path = f"/guides/{c['guide']}/{ch['slug']}"
         side = "".join(
-            f'<a href="/guides/{c["guide"]}/{x["slug"]}" data-ch="{x["slug"]}"{" aria-current=page" if j == i else ""}><span class="chn">{j+1}</span><span class="cht">{e(x["title"])}</span>{"<span class=\"tag free\">Free</span>" if x.get("free") else "<span class=\"lk\">" + LOCK + "</span>"}</a>'
+            f'<a href="/guides/{c["guide"]}/{x["slug"]}" data-ch="{x["slug"]}"{" aria-current=page" if j == i else ""}><span class="chn">{j+1}</span><span class="cht">{e(x["title"])}</span>{"" if x.get("free") else "<span class=\"lk\">" + LOCK + "</span>"}</a>'
             for j, x in enumerate(c["chapters"]))
         prev_ = c["chapters"][i - 1] if i > 0 else None; next_ = c["chapters"][i + 1] if i < n - 1 else None
         nav = '<nav class="rnav">' + (f'<a class="btn ghost" href="/guides/{c["guide"]}/{prev_["slug"]}">← {e(prev_["title"])}</a>' if prev_ else '<span></span>') + (f'<a class="btn" href="/guides/{c["guide"]}/{next_["slug"]}">Next: {e(next_["title"])} →</a>' if next_ else '') + '</nav>'
@@ -370,7 +366,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
 <aside class="rside" aria-label="Chapters"><details class="rtoc" open><summary><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><span><b>{e(c['title'])}</b><small>{n} chapters</small></span></summary><nav>{side}</nav></details></aside>
 <div class="rmain">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/{c['guide']}">{e(c['title'])}</a> / <span>Chapter {i+1}</span></nav>
-<header class="ahead" style="margin:18px 0 26px"><p class="chk2">Chapter {i+1} of {n} · {ch['minutes']} min{' · <span class="tag free">Free preview</span>' if ch.get('free') else ''}</p><h1 style="font-size:clamp(32px,4.6vw,48px)">{e(ch['title'])}</h1><p class="lead">{e(ch['summary'])}</p></header>
+<header class="ahead" style="margin:18px 0 26px"><p class="chk2">Chapter {i+1} of {n} · {ch['minutes']} min{' · Free to read' if ch.get('free') else ''}</p><h1 style="font-size:clamp(32px,4.6vw,48px)">{e(ch['title'])}</h1><p class="lead">{e(ch['summary'])}</p></header>
 {content}
 {nav}
 </div></div></main>
@@ -390,7 +386,7 @@ for g in PREM:
     k = g["product"]; p = PROD[k]; path = f"/guides/{g['slug']}"
     crs = COURSES.get(g["slug"])
     if crs:
-        outline = "".join(f'<li><span>{i+1:02d}</span><a href="/guides/{g["slug"]}/{x["slug"]}" style="text-decoration:none;color:inherit"><b>{e(x["title"])}</b>{" <span class=\"tag free\">Free</span>" if x.get("free") else ""}<br><small style="color:var(--muted)">{e(x["summary"])}</small></a></li>' for i, x in enumerate(crs["chapters"]))
+        outline = "".join(f'<li><span>{i+1:02d}</span><a href="/guides/{g["slug"]}/{x["slug"]}" style="text-decoration:none;color:inherit"><b>{e(x["title"])}</b>{" <small class=\"freeto\">· Free to read</small>" if x.get("free") else ""}<br><small style="color:var(--muted)">{e(x["summary"])}</small></a></li>' for i, x in enumerate(crs["chapters"]))
     else:
         outline = "".join(f'<li><span>{i+1:02d}</span>{e(x)}</li>' for i, x in enumerate(g["outline"]))
     inc = "".join(f"<li>{e(x)}</li>" for x in g["includes"])
@@ -399,7 +395,7 @@ for g in PREM:
     ld = [crumbs_ld([("Home", "/"), ("Guides", "/guides"), (g["h1"], path)]), faq_ld(PREM_FAQ),
           {"@context": "https://schema.org", "@type": "Product", "name": g["h1"], "description": g["description"], "brand": {"@type": "Brand", "name": "boredprinter"}, "image": URL + "/og.png",
            "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": "USD", "availability": avail, "url": URL + path}}]
-    soon = "" if p.get("link") else '<p class="note"><span class="tag soon">Coming soon</span> Join the list and get it first, at the launch price.</p>'
+    soon = "" if p.get("link") else '<p class="note">Coming soon. Join the list and get it first, at the launch price.</p>'
     other = next((x for x in PREM if x["product"] != k), None)
     page = head(g["title"], g["description"], path, ld) + header("guides") + f"""
 <main id="main">
