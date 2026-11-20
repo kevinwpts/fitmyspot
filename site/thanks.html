@@ -1,6 +1,6 @@
 <div class="ahead"><h1 style="font-size:clamp(34px,5vw,50px)" id="tTitle">Thank you! Your guide is unlocked</h1><p class="lead" id="tLead">Start reading below. A receipt is on its way to your email.</p></div>
 <div id="tList"><div class="cbox">Checking your purchase…</div></div>
-<div class="cbox" style="margin-top:14px"><b>Read on another device</b><p style="margin:6px 0 12px;color:var(--muted)">Go to My guides and log in with the email you used at checkout. No password.</p><a class="btn ghost" href="/library">Go to My guides</a></div>
+<div class="cbox" style="margin-top:14px" id="tSave" hidden><b>Save your personal access link</b><p style="margin:6px 0 12px;color:var(--muted)">Open it on any device to read your guide. Bookmark it, or send it to yourself.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="tLink" readonly style="flex:1 1 260px;min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff;color:var(--ink)"><button class="btn" type="button" id="tCopy">Copy link</button></div><p style="margin:12px 0 0;font-size:14px;color:var(--muted)">You can also log in on <a href="/library">My guides</a> with the email you used at checkout.</p></div>
 <script>
 (() => {
   const NAMES = { playbook: "Print to Profit", design: "Design Your Own Bestseller" };
@@ -11,6 +11,9 @@
   fetch("/api/session?session_id=" + encodeURIComponent(sid)).then(r => r.json()).then(d => {
     if (!d.products || !d.products.length) throw 0;
     try { const a = JSON.parse(localStorage.getItem("bp_sess") || "[]"); if (!a.includes(sid)) a.push(sid); localStorage.setItem("bp_sess", JSON.stringify(a.slice(-5))); } catch {}
+    const link = location.origin + "/thanks?session_id=" + encodeURIComponent(sid);
+    document.getElementById("tLink").value = link; document.getElementById("tSave").hidden = false;
+    document.getElementById("tCopy").onclick = async () => { const i = document.getElementById("tLink"); try { await navigator.clipboard.writeText(link); } catch { i.select(); document.execCommand && document.execCommand("copy"); } document.getElementById("tCopy").textContent = "Copied ✓"; };
     box.innerHTML = d.products.map(k => `<div class="cbox owned" style="margin-bottom:10px"><div><small style="color:var(--muted)">Online guide</small><h3 style="margin-top:4px">${NAMES[k] || k}</h3></div><a class="btn or" href="${START[k]}">Start reading</a></div>`).join("");
   }).catch(() => { box.innerHTML = '<div class="cbox">Your payment is being confirmed. Refresh in a moment, or find your guides in <a href="/library">My guides</a>.</div>'; });
 })();

@@ -4,10 +4,25 @@
   const $ = (s, r = document) => r.querySelector(s);
   window.bp = { SB, KEY };
 
+  // Inloggning: ger en giltig token, förnyar den tyst när den gått ut (så man slipper logga in igen)
+  window.bpToken = async () => {
+    let s; try { s = JSON.parse(localStorage.getItem("bp_token") || "null"); } catch { return null; }
+    if (!s) return null;
+    if (s.exp > Date.now() + 60000) return s.t;
+    if (!s.r) return null;
+    try {
+      const r = await fetch(`${SB}/auth/v1/token?grant_type=refresh_token`, { method: "POST", headers: { apikey: KEY, "content-type": "application/json" }, body: JSON.stringify({ refresh_token: s.r }) });
+      if (!r.ok) throw 0;
+      const d = await r.json();
+      localStorage.setItem("bp_token", JSON.stringify({ t: d.access_token, r: d.refresh_token, exp: Date.now() + (d.expires_in || 3600) * 1000 }));
+      return d.access_token;
+    } catch { try { localStorage.removeItem("bp_token"); } catch {} return null; }
+  };
+
   // Inloggningslänk från mejlet landar med #access_token → spara och gå till My guides
   if (location.hash.includes("access_token=")) {
     const p = new URLSearchParams(location.hash.slice(1));
-    try { localStorage.setItem("bp_token", JSON.stringify({ t: p.get("access_token"), exp: Date.now() + (+p.get("expires_in") || 3600) * 1000 })); } catch {}
+    try { localStorage.setItem("bp_token", JSON.stringify({ t: p.get("access_token"), r: p.get("refresh_token"), exp: Date.now() + (+p.get("expires_in") || 3600) * 1000 })); } catch {}
     history.replaceState(null, "", location.pathname);
     if (location.pathname !== "/library") location.href = "/library";
   }

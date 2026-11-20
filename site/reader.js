@@ -15,7 +15,7 @@
   // Verktygslådan: ladda ner filer med samma bevis som kapitlen
   document.addEventListener("click", async (ev) => {
     const b = ev.target.closest("button[data-file]"); if (!b) return;
-    const t = (() => { const s = get("bp_token", null); return s && s.exp > Date.now() ? s.t : null; })();
+    const t = window.bpToken ? await window.bpToken() : null;
     const ss = get("bp_sess", []);
     const q = new URLSearchParams({ f: b.dataset.file });
     if (!t && ss.length) q.set("session_id", ss[ss.length - 1]);
@@ -37,17 +37,22 @@
     const end = document.querySelector(".rnav"); if (end && "IntersectionObserver" in window) new IntersectionObserver((es) => es[0].isIntersecting && mark()).observe(end);
     return;
   }
-  const tok = (() => { const s = get("bp_token", null); return s && s.exp > Date.now() ? s.t : null; })();
-  const sess = get("bp_sess", []);
-  if (!tok && !sess.length) return; // inte köpt/inloggad → låsrutan syns
-  $("chLock").hidden = true; $("chLoad").hidden = false;
-  const q = new URLSearchParams({ g: body.dataset.g, c: body.dataset.c });
-  if (!tok && sess.length) q.set("session_id", sess[sess.length - 1]);
-  fetch("/api/chapter?" + q, { headers: tok ? { authorization: "Bearer " + tok } : {} })
-    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-    .then((d) => {
+  addEventListener("DOMContentLoaded", async () => {
+    const tok = window.bpToken ? await window.bpToken() : null;
+    const sess = get("bp_sess", []);
+    if (!tok && !sess.length) return; // inte köpt/inloggad → låsrutan syns
+    $("chLock").hidden = true; $("chLoad").hidden = false;
+    const ask = (useTok) => {
+      const q = new URLSearchParams({ g: body.dataset.g, c: body.dataset.c });
+      if (!useTok) q.set("session_id", sess[sess.length - 1]);
+      return fetch("/api/chapter?" + q, { headers: useTok ? { authorization: "Bearer " + tok } : {} }).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
+    };
+    // Först inloggning, annars köp-id från tack-sidan
+    let p = tok ? ask(true) : ask(false);
+    if (tok && sess.length) p = p.catch(() => ask(false));
+    p.then((d) => {
       body.innerHTML = d.html; body.hidden = false; $("chLoad").hidden = true;
       const end = document.querySelector(".rnav"); if (end && "IntersectionObserver" in window) new IntersectionObserver((es) => es[0].isIntersecting && mark()).observe(end);
-    })
-    .catch(() => { $("chLoad").hidden = true; $("chLock").hidden = false; });
+    }).catch(() => { $("chLoad").hidden = true; $("chLock").hidden = false; });
+  });
 })();

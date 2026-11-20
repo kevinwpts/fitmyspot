@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=c4b3b3cb">
+<link rel="stylesheet" href="/assets/site.css?v=675a3e14">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}</script>
 </head>
 <body>
@@ -49,7 +49,6 @@
   const NAMES = { playbook: "Print to Profit", design: "Design Your Own Bestseller" };
   const START = { playbook: "/guides/print-to-profit/pick-your-lane", design: "/guides/design-your-own-bestseller" };
   let tok = null;
-  try { const s = JSON.parse(localStorage.getItem("bp_token") || "null"); if (s && s.exp > Date.now()) tok = s.t; } catch {}
   async function load(){
     $("libLogin").hidden = true; const box = $("libList"); box.hidden = false; box.innerHTML = '<div class="cbox">Loading your guides…</div>';
     const r = await fetch("/api/library", { headers: { authorization: "Bearer " + tok } });
@@ -70,7 +69,17 @@
       $("libForm").hidden = true; $("libTo").textContent = email; $("libSent").hidden = false;
     } catch { btn.disabled = false; btn.textContent = "Email me a login link"; err.textContent = "Couldn't send the link. Wait a minute and try again."; err.hidden = false; }
   });
-  addEventListener("DOMContentLoaded", () => { if (tok) load(); });
+  addEventListener("DOMContentLoaded", async () => {
+    tok = window.bpToken ? await window.bpToken() : null;
+    if (tok) return load();
+    // Inte inloggad men har köpt på den här enheten → visa guiderna direkt
+    let sess = []; try { sess = JSON.parse(localStorage.getItem("bp_sess") || "[]"); } catch {}
+    if (!sess.length) return;
+    const r = await fetch("/api/session?session_id=" + encodeURIComponent(sess[sess.length - 1])).then(r => r.json()).catch(() => ({}));
+    if (!(r.products || []).length) return;
+    const box = $("libList"); box.hidden = false;
+    box.innerHTML = r.products.map(k => `<div class="cbox owned" style="margin-bottom:12px"><div><small style="color:var(--muted)">Online guide · bought on this device</small><h3 style="margin-top:4px">${NAMES[k] || k}</h3></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn or" href="${START[k] || "/guides"}">Read</a>${k === "playbook" ? `<a class="btn ghost" href="/guides/print-to-profit/your-30-day-plan#toolkit">Toolkit</a>` : ""}</span></div>`).join("") + `<p style="color:var(--muted);font-size:15px;margin:4px 0 18px">Want it on another device too? Log in below.</p>`;
+  });
   if (document.readyState !== "loading" && tok) setTimeout(load, 0);
 })();
 </script>
@@ -82,5 +91,5 @@
 <div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener" class="igl"><svg class="i" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
 <p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
 </div></footer>
-<script src="/assets/site.js?v=c4b3b3cb" defer></script>
+<script src="/assets/site.js?v=675a3e14" defer></script>
 </body></html>

@@ -14,7 +14,7 @@ If you sign up for the checklist or a waitlist, we store **your email address**,
 
 ## Purchases
 
-Payments are handled by **Stripe**, which acts as the seller of record and handles VAT and sales tax. We never see or store your card details. We receive your email and what you bought, so you can download your guides.
+Payments are handled by **Stripe**, which acts as the seller of record and handles VAT and sales tax. We never see or store your card details. We receive your email and what you bought, so you can read your guides.
 
 ## Logging in to My guides
 
@@ -26,7 +26,7 @@ The price calculator remembers your numbers in your own browser (local storage).
 
 ## Cookies and tracking
 
-We don't use advertising cookies. Our hosting provider (Vercel) may keep anonymous, aggregated visit statistics.
+We don't use cookies for tracking or advertising. We count page views and button clicks without cookies and without storing your IP address, so we can see which pages help people. Your browser stores small bits of data on your own device (your login, which chapters you've read, your calculator numbers) so the site works. Our hosting provider (Vercel) may keep anonymous, aggregated visit statistics.
 
 ## Your rights
 
