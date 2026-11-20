@@ -4,7 +4,7 @@ h1: Print to Profit
 description: "The complete step-by-step guide to selling your 3D prints: what to make, what you're allowed to sell, what to charge, where to sell it and how to get your first 10 sales."
 type: premium
 product: playbook
-price: 29
+price: 19
 order: 10
 updated: 2026-11-19
 pages: 60+
