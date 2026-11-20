@@ -2,6 +2,7 @@
 title: "How to Ship 3D Prints Without Losing Your Profit"
 h1: "How to Ship 3D Prints Without Losing Your Profit"
 description: How to pack and ship 3D prints so they arrive in one piece without eating your profit. Packaging, postage, tracking and the costs to plan for.
+image_alt: "A 3D printed phone stand wrapped in honeycomb paper inside a padded kraft mailer, with tape and a scale on a packing table"
 nav: How to ship 3D prints
 type: free
 order: 8
