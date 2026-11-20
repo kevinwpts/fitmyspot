@@ -10,6 +10,10 @@ The good news: you don't need a camera, a lightbox or editing skills.
 
 ## Your 10-minute home studio
 
+::: figure studio
+:::
+
+
 ::: icons
 home | A window | Daylight from the side. No direct sun.
 file | White paper or card | A large sheet as background. Curve it up the wall.

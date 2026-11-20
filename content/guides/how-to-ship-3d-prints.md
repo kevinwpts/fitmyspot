@@ -20,6 +20,10 @@ faq:
 
 ## Ship it in 6 steps
 
+::: figure packing
+:::
+
+
 ::: step ruler | Design for the mailbox
 Check your post's size limits for flat parcels or large letters. A few millimetres thinner can halve the price. Can it print in parts, or lie flat?
 :::

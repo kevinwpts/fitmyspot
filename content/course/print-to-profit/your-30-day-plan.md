@@ -8,6 +8,10 @@ Just continue the next day. The plan works if you finish it, not if you follow i
 
 ## Week 1: Decide
 
+::: figure plan
+:::
+
+
 | Day | Task | Chapter |
 |---|---|---|
 | 1 | Do the quiz, pick your lane, write your **what + for whom** | 1 |

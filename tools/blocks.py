@@ -10,6 +10,8 @@
 Varje block slutar med en rad ":::".
 """
 import re, html
+from pathlib import Path
+ILL = Path(__file__).resolve().parent.parent / "site/ill"
 
 ICONS = {
   "search": '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
@@ -100,6 +102,10 @@ def preprocess(md):
                 ic, t, d = (p.strip() for p in (x.split("|") + ["", ""])[:3])
                 cards.append(f'<div class="ic-card"><span class="ici">{icon(ic, 24)}</span><b>{inline(t)}</b><p>{inline(d)}</p></div>')
             out.append(f'<div class="icgrid">{"".join(cards)}</div>\n')
+        elif kind == "figure":
+            name = args[0] if args else ""; cap = args[1] if len(args) > 1 else ""
+            svg = (ILL / f"{name}.svg").read_text().strip()
+            out.append(f'<figure class="ill">{svg}{f"<figcaption>{inline(cap)}</figcaption>" if cap else ""}</figure>\n')
         else:
             out.extend([lines[i - len(body) - 2]] + body + [":::"])
     return "\n".join(out)

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A product sells where a specific buyer, a real annoyance and an exact fit meet">
+<style>.demand-t{font:700 16px Geist,system-ui,sans-serif;fill:#16161A}.demand-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.demand-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.demand-w{font:800 17px "Bricolage Grotesque",Geist,sans-serif;fill:#fff}</style>
+<rect width="720" height="360" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="demand-b">What makes a product sell</text>
+<g style="mix-blend-mode:multiply">
+<circle cx="300" cy="170" r="92" fill="#FFD3BF"/>
+<circle cx="410" cy="170" r="92" fill="#CDEBDA"/>
+<circle cx="355" cy="258" r="92" fill="#E3E1DA"/>
+</g>
+<circle cx="355" cy="200" r="34" fill="#FF5B1F"/><text x="355" y="206" class="demand-w" text-anchor="middle">Sells</text>
+<text x="250" y="140" class="demand-t" text-anchor="middle">A specific</text><text x="250" y="160" class="demand-t" text-anchor="middle">buyer</text>
+<text x="462" y="140" class="demand-t" text-anchor="middle">A real</text><text x="462" y="160" class="demand-t" text-anchor="middle">annoyance</text>
+<text x="355" y="300" class="demand-t" text-anchor="middle">An exact fit</text>
+<text x="560" y="250" class="demand-s">Missing one?</text><text x="560" y="268" class="demand-s">Then it's a hobby print,</text><text x="560" y="286" class="demand-s">not a product.</text>
+</svg>

@@ -29,6 +29,10 @@ This is a plain-English overview. Every model can have its own terms, and they c
 
 ## Check any model in 5 steps
 
+::: figure license
+:::
+
+
 ::: step search | Find the license
 Open the model's page. The license is usually under the description or next to the download button.
 :::

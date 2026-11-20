@@ -4,6 +4,10 @@
 
 ## Why most sellers charge too little
 
+::: figure price
+:::
+
+
 They look at the filament: "It's only $1 of plastic, I'll sell it for $6." Then they forget:
 
 ::: icons

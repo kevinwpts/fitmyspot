@@ -4,6 +4,10 @@ Don't guess what people want. **Find proof first**: people asking for it, compla
 
 ## The rule: demand first, design second
 
+::: figure demand
+:::
+
+
 Most new sellers start with "what can I print?" The ones who sell start with **"what do people already want?"**
 
 A product sells when three things meet:

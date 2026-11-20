@@ -1,0 +1,20 @@
+<svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flowchart: can you sell prints of this model?">
+<style>.license-t{font:600 15px Geist,system-ui,sans-serif;fill:#16161A}.license-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.license-w{font:700 15px Geist,system-ui,sans-serif;fill:#fff}.license-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}</style>
+<rect width="720" height="400" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="license-b">Can I sell prints of this model?</text>
+<defs><marker id="license-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8A8B93"/></marker></defs>
+<g stroke="#8A8B93" stroke-width="2" fill="none" marker-end="url(#license-ar)">
+ <path d="M190 112H246"/><path d="M420 112H476"/><path d="M335 140V196"/><path d="M565 140V196"/><path d="M190 228H246"/>
+</g>
+<rect x="36" y="80" width="154" height="64" rx="14" fill="#F3F1EC"/><text x="113" y="108" class="license-t" text-anchor="middle">Did you</text><text x="113" y="128" class="license-t" text-anchor="middle">design it?</text>
+<rect x="250" y="80" width="170" height="64" rx="14" fill="#F3F1EC"/><text x="335" y="108" class="license-t" text-anchor="middle">Character, logo</text><text x="335" y="128" class="license-t" text-anchor="middle">or brand on it?</text>
+<rect x="480" y="80" width="170" height="64" rx="14" fill="#F3F1EC"/><text x="565" y="108" class="license-t" text-anchor="middle">License says NC</text><text x="565" y="128" class="license-t" text-anchor="middle">or personal use?</text>
+<text x="200" y="104" class="license-s">no</text><text x="430" y="104" class="license-s">no</text><text x="345" y="174" class="license-s">yes</text><text x="575" y="174" class="license-s">no</text>
+<rect x="36" y="200" width="154" height="56" rx="14" fill="#0E7A47"/><text x="113" y="234" class="license-w" text-anchor="middle">✓ Sell it</text>
+<path d="M113 144V196" stroke="#8A8B93" stroke-width="2" marker-end="url(#license-ar)"/><text x="122" y="174" class="license-s">yes</text>
+<rect x="250" y="200" width="170" height="56" rx="14" fill="#B42318"/><text x="335" y="234" class="license-w" text-anchor="middle">✕ Don't sell</text>
+<rect x="480" y="200" width="170" height="56" rx="14" fill="#0E7A47"/><text x="565" y="226" class="license-w" text-anchor="middle">✓ Sell it</text><text x="565" y="245" class="license-w" text-anchor="middle" style="font-size:12px;font-weight:500">credit the designer</text>
+<path d="M650 112H676V290H335V260" stroke="#8A8B93" stroke-width="2" fill="none" marker-end="url(#license-ar)"/><text x="684" y="200" class="license-s">yes</text>
+<text x="36" y="340" class="license-s">On Etsy, only your own designs (or personalized items) are allowed,</text>
+<text x="36" y="360" class="license-s">even with a license that allows selling.</text>
+</svg>

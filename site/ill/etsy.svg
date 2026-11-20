@@ -1,0 +1,24 @@
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Etsy rule since 2025: your own design or personalized is allowed, someone else's model is not">
+<style>.etsy-t{font:700 16px Geist,system-ui,sans-serif;fill:#16161A}.etsy-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.etsy-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.etsy-w{font:700 14px Geist,system-ui,sans-serif;fill:#fff}</style>
+<rect width="720" height="320" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="etsy-b">Etsy since 2025: whose design is it?</text>
+<g transform="translate(36 76)">
+ <rect width="200" height="190" rx="18" fill="#E3F4EA"/>
+ <g transform="translate(66 26)"><rect width="68" height="56" rx="10" fill="#FF5B1F"/><path d="M8 40l14-14 10 10 14-18 14 22" stroke="#fff" stroke-width="3" fill="none" stroke-linejoin="round"/></g>
+ <text x="100" y="116" class="etsy-t" text-anchor="middle">Your own design</text><text x="100" y="136" class="etsy-s" text-anchor="middle">even a simple one</text>
+ <rect x="62" y="150" width="76" height="26" rx="13" fill="#0E7A47"/><text x="100" y="168" class="etsy-w" text-anchor="middle">✓ OK</text>
+</g>
+<g transform="translate(260 76)">
+ <rect width="200" height="190" rx="18" fill="#E3F4EA"/>
+ <g transform="translate(46 30)"><rect width="108" height="44" rx="8" fill="#16161A"/><text x="54" y="29" text-anchor="middle" style="font:800 18px 'Bricolage Grotesque',sans-serif;fill:#FF5B1F">EMMA</text></g>
+ <text x="100" y="116" class="etsy-t" text-anchor="middle">Personalized</text><text x="100" y="136" class="etsy-s" text-anchor="middle">made for the buyer</text>
+ <rect x="62" y="150" width="76" height="26" rx="13" fill="#0E7A47"/><text x="100" y="168" class="etsy-w" text-anchor="middle">✓ OK</text>
+</g>
+<g transform="translate(484 76)">
+ <rect width="200" height="190" rx="18" fill="#FDECEC"/>
+ <g transform="translate(70 22)"><path d="M0 8h44l16 16v40H0z" fill="#fff" stroke="#16161A" stroke-width="2"/><path d="M44 8v16h16" fill="none" stroke="#16161A" stroke-width="2"/><text x="28" y="50" text-anchor="middle" style="font:700 12px Geist,sans-serif;fill:#16161A">.STL</text></g>
+ <text x="100" y="116" class="etsy-t" text-anchor="middle">Someone else's model</text><text x="100" y="136" class="etsy-s" text-anchor="middle">free or "commercial"</text>
+ <rect x="52" y="150" width="96" height="26" rx="13" fill="#B42318"/><text x="100" y="168" class="etsy-w" text-anchor="middle">✕ Not OK</text>
+</g>
+<text x="36" y="298" class="etsy-s">Check Etsy's Seller Policy before you list. Rules can change.</text>
+</svg>

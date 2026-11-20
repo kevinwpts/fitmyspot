@@ -28,6 +28,10 @@ This reflects Etsy's rules and fees as reported up to November 2026. Check Etsy'
 
 Etsy updated its **creativity standards**. 3D printed items must now be **based on the seller's original design**.
 
+::: figure etsy
+:::
+
+
 ::: yesno | OK on Etsy | Not OK on Etsy
 + You designed it yourself (even in Tinkercad)
 + It's personalized: their name, size or photo

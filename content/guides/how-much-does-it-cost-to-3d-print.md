@@ -32,6 +32,10 @@ clock | Your time | Prep, cleanup, supports. Usually the biggest cost.
 
 ## Example costs
 
+::: figure price | Filament is the smallest part of a fair price.
+:::
+
+
 Prices: $20 per kg filament, 120 W printer, $0.25 per kWh, $0.25 per hour machine wear.
 
 | Print | Filament | Time | Material + power + wear |

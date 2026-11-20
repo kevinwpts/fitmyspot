@@ -8,6 +8,10 @@ This is a plain-English overview to keep you out of the most common trouble. Rul
 
 ## The 5-check list
 
+::: figure license
+:::
+
+
 ::: step scale | Check 1: Do you have the right to sell it?
 | Where the design comes from | Can you sell prints? |
 |---|---|

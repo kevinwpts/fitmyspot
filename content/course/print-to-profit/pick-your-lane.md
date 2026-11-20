@@ -16,6 +16,10 @@ Picking one doesn't lock you in forever. It's for the next 30 days. Once you've 
 
 ## The 7 lanes
 
+::: figure lanes
+:::
+
+
 | Lane | First sale | Can grow to | You need |
 |---|---|---|---|
 | **Print for people nearby** | Days | Low–medium | A printer |

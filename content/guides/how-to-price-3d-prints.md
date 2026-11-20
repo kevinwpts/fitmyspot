@@ -26,6 +26,10 @@ faq:
 
 **Price = (Filament + Power + Machine + Your time + Packaging) × 2.5 + Fees**
 
+::: figure price
+:::
+
+
 Let's fill it in, one step at a time.
 
 ::: step printer | Filament

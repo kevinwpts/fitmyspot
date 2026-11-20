@@ -20,6 +20,10 @@ faq:
 
 ## Set up in 10 minutes
 
+::: figure studio
+:::
+
+
 ::: step home | Find a window
 Table next to a window, light from the side. Cloudy days are perfect. Turn off ceiling lights.
 :::

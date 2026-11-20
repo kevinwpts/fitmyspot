@@ -1,0 +1,22 @@
+<svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The 7 ways to earn plotted by how fast the first sale comes and how big they can grow">
+<style>.lanes-t{font:600 13.5px Geist,system-ui,sans-serif;fill:#16161A}.lanes-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.lanes-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}</style>
+<rect width="720" height="420" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="lanes-b">7 ways to earn: speed vs. potential</text>
+<g transform="translate(90 80)">
+ <rect width="580" height="270" rx="12" fill="#FBFAF7" stroke="#E7E4DD"/>
+ <path d="M290 0V270M0 135H580" stroke="#E7E4DD" stroke-dasharray="5 6"/>
+ <text x="-14" y="20" class="lanes-s" text-anchor="end">High</text><text x="-14" y="266" class="lanes-s" text-anchor="end">Low</text>
+ <text x="6" y="292" class="lanes-s">First sale: fast</text><text x="574" y="292" class="lanes-s" text-anchor="end">slow</text>
+ <text x="-56" y="140" class="lanes-s" transform="rotate(-90 -56 140)" text-anchor="middle">Can grow to</text>
+ <g>
+  <circle cx="60" cy="200" r="9" fill="#FF8A57"/><text x="76" y="205" class="lanes-t">Print for people nearby</text>
+  <circle cx="150" cy="160" r="9" fill="#FF8A57"/><text x="166" y="165" class="lanes-t">Replacement parts</text>
+  <circle cx="200" cy="105" r="9" fill="#FF5B1F"/><text x="216" y="110" class="lanes-t">Personalized items</text>
+  <circle cx="330" cy="50" r="11" fill="#C2410C"/><text x="348" y="55" class="lanes-t">Your own designs ★</text>
+  <circle cx="350" cy="88" r="9" fill="#FF5B1F"/><text x="366" y="93" class="lanes-t">Print for businesses</text>
+  <circle cx="490" cy="150" r="9" fill="#B9BAC2"/><text x="474" y="178" class="lanes-t" text-anchor="middle">Sell the files</text>
+  <circle cx="530" cy="215" r="9" fill="#B9BAC2"/><text x="520" y="243" class="lanes-t" text-anchor="middle">Make content</text>
+ </g>
+</g>
+<text x="36" y="400" class="lanes-s">Start top-left. Personalized items and your own designs are the sweet spot for most people.</text>
+</svg>

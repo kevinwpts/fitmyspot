@@ -40,7 +40,7 @@ LOGO = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9
 LOGO_W = LOGO.replace('fill="#1A1918"', 'fill="#FFFFFF"').replace('stroke="#1A1918"', 'stroke="#FFFFFF"').replace('#FFF8F1', '#1A1918')
 IG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>'
 
-def head(title, desc, path, extra_ld=None, og_type="website", noindex=False):
+def head(title, desc, path, extra_ld=None, og_type="website", noindex=False, image=None):
     can = URL + path
     ld = [{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": URL, "logo": URL + "/icon-512.png", "sameAs": [SITE["instagram"]]}]
     if extra_ld: ld += extra_ld
@@ -59,7 +59,7 @@ def head(title, desc, path, extra_ld=None, og_type="website", noindex=False):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{can}">
-<meta property="og:image" content="{URL}/og.png">
+<meta property="og:image" content="{URL}{image or "/og.png"}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FBFAF7">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -290,12 +290,15 @@ for g in FREE:
     if g.get("faq"): ld.append(faq_ld(g["faq"]))
     rel = [x for x in FREE if x["slug"] != g["slug"]][:3]
     upd = datetime.date.fromisoformat(str(g["updated"])).strftime("%B %-d, %Y")
-    page = head(g["title"], g["description"], path, ld, "article") + header("guides") + f"""
+    hero_f = OUT / "img/guides" / f"{g['slug']}.webp"
+    hero = f'<img class="ahero" src="/img/guides/{g["slug"]}.webp" alt="{e(g.get("image_alt", g["h1"]))}" width="1600" height="900" fetchpriority="high">' if hero_f.exists() else ""
+    if hero: ld[1]["image"] = URL + f"/img/guides/{g['slug']}.webp"
+    page = head(g["title"], g["description"], path, ld, "article", image=(f"/img/guides/{g['slug']}.webp" if hero else None)) + header("guides") + f"""
 <main id="main" class="art"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>{e(g['kicker'])}</span></nav>
 <header class="ahead"><h1>{e(g['h1'])}</h1><p class="lead">{e(g['summary'])}</p>
 <div class="ameta"><span class="tag free">Free</span><span class="by"><img src="/img/kevin-sm.webp" alt="" width="26" height="26">By Kevin</span><span>Updated <time datetime="{g['updated']}">{upd}</time></span><span>{g['read']} min read</span></div></header>
-<div class="agrid"><article class="prose">{body}
+{hero}<div class="agrid"><article class="prose">{body}
 {('<h2 id="faq">Frequently asked questions</h2>' + faq_html(g['faq'])) if g.get('faq') else ''}
 </article>
 <aside class="toc" aria-label="On this page"><b>On this page</b>{toc}{'<a href="#faq">FAQ</a>' if g.get('faq') else ''}<div class="tbox"><b style="text-transform:none;letter-spacing:0;color:var(--ink);font-size:15px;margin:0">Free checklist</b><p>The 12 steps to your first sale.</p><a class="btn or wide" href="#waitlist">Get it free</a></div></aside>

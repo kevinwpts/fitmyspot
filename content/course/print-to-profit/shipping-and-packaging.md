@@ -8,6 +8,10 @@ A $20 product that costs $8 to ship and $1.50 to pack only works if you planned 
 
 ## Plan shipping in 5 steps
 
+::: figure packing
+:::
+
+
 ::: step ruler | Design for the mailbox
 The cheapest shipping is usually for **flat, light parcels** (often called large letter or small packet). Check your national post's size limits and design around them:
 

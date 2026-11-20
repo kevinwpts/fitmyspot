@@ -1,0 +1,18 @@
+<svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The 30-day plan in four weeks: decide, make, launch, sell">
+<style>.plan-t{font:700 17px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.plan-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.plan-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.plan-w{font:700 13px Geist,system-ui,sans-serif;fill:#fff}</style>
+<rect width="720" height="260" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="plan-b">30 days, 4 weeks</text>
+<path d="M60 112H660" stroke="#E7E4DD" stroke-width="6" stroke-linecap="round"/>
+<path d="M60 112H660" stroke="url(#plan-g)" stroke-width="6" stroke-linecap="round"/>
+<defs><linearGradient id="plan-g"><stop offset="0" stop-color="#FFB08F"/><stop offset="1" stop-color="#FF5B1F"/></linearGradient></defs>
+<g>
+ <circle cx="96" cy="112" r="24" fill="#16161A"/><text x="96" y="117" class="plan-w" text-anchor="middle">1–7</text>
+ <text x="96" y="168" class="plan-t" text-anchor="middle">Decide</text><text x="96" y="188" class="plan-s" text-anchor="middle">lane, product,</text><text x="96" y="206" class="plan-s" text-anchor="middle">legal check</text>
+ <circle cx="272" cy="112" r="24" fill="#16161A"/><text x="272" y="117" class="plan-w" text-anchor="middle">8–14</text>
+ <text x="272" y="168" class="plan-t" text-anchor="middle">Make</text><text x="272" y="188" class="plan-s" text-anchor="middle">print, price,</text><text x="272" y="206" class="plan-s" text-anchor="middle">photos</text>
+ <circle cx="448" cy="112" r="24" fill="#16161A"/><text x="448" y="117" class="plan-w" text-anchor="middle">15–21</text>
+ <text x="448" y="168" class="plan-t" text-anchor="middle">Launch</text><text x="448" y="188" class="plan-s" text-anchor="middle">listing, packing,</text><text x="448" y="206" class="plan-s" text-anchor="middle">first posts</text>
+ <circle cx="624" cy="112" r="24" fill="#FF5B1F"/><text x="624" y="117" class="plan-w" text-anchor="middle">22–30</text>
+ <text x="624" y="168" class="plan-t" text-anchor="middle">Sell</text><text x="624" y="188" class="plan-s" text-anchor="middle">videos, groups,</text><text x="624" y="206" class="plan-s" text-anchor="middle">reviews</text>
+</g>
+</svg>

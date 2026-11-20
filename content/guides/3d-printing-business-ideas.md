@@ -84,6 +84,10 @@ camera | 25. Content | Show what you make. Audience → buyers.
 
 ## How to pick yours
 
+::: figure demand
+:::
+
+
 ::: step users | Start with what you know
 A hobby, a job, a problem at home. You'll understand the buyers better than anyone.
 :::

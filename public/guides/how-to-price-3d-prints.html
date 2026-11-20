@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=9ffeeb85">
+<link rel="stylesheet" href="/assets/site.css?v=91ec846d">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://boredprinter.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://boredprinter.com/guides"}, {"@type": "ListItem", "position": 3, "name": "How to price 3D prints", "item": "https://boredprinter.com/guides/how-to-price-3d-prints"}]}, {"@context": "https://schema.org", "@type": "Article", "headline": "How to price 3D prints", "description": "A simple formula to price 3D prints so every sale is worth it: filament, electricity, machine wear, your time, packaging and fees. Includes a free calculator.", "datePublished": "2026-11-19", "dateModified": "2026-11-19", "author": {"@type": "Person", "name": "Kevin", "url": "https://boredprinter.com/about", "image": "https://boredprinter.com/img/kevin.webp", "sameAs": ["https://www.instagram.com/boredprinter/"], "jobTitle": "Creator of @boredprinter"}, "publisher": {"@type": "Organization", "name": "boredprinter", "logo": {"@type": "ImageObject", "url": "https://boredprinter.com/icon-512.png"}}, "mainEntityOfPage": "https://boredprinter.com/guides/how-to-price-3d-prints", "image": "https://boredprinter.com/og.png"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much should I charge for a 3D print?", "acceptedAnswer": {"@type": "Answer", "text": "Add up material, electricity, machine wear, your hands-on time, packaging and selling fees, then multiply by 2 to 3 for profit. For most small items the real cost is far higher than the filament alone."}}, {"@type": "Question", "name": "How do I calculate filament cost?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the price of the spool by its weight in grams, then multiply by the grams your slicer reports for the print. A $20 spool of 1,000 g costs 2 cents per gram, so a 50 g print uses $1 of filament."}}, {"@type": "Question", "name": "Should I charge per hour of printing?", "acceptedAnswer": {"@type": "Answer", "text": "Charge a small rate per print hour for machine wear and electricity, and a separate, higher rate for your own hands-on time. Your time is usually the bigger cost."}}]}]</script>
 </head>
 <body>
@@ -41,6 +41,32 @@
 </div>
 <h2 id="the-formula">The formula</h2>
 <p><strong>Price = (Filament + Power + Machine + Your time + Packaging) × 2.5 + Fees</strong></p>
+<figure class="ill"><svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Where the price of a 3D print goes: filament is the smallest part, your time the biggest">
+<style>.price-t{font:600 15px Geist,system-ui,sans-serif;fill:#16161A}.price-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.price-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}</style>
+<rect width="720" height="360" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="price-b">Where a $20 price goes</text>
+<g transform="translate(36 80)">
+ <!-- stacked bar -->
+ <rect x="80" y="182" width="120" height="18" fill="#FFB08F"/>
+ <rect x="80" y="178" width="120" height="4" fill="#FFD3BF"/>
+ <rect x="80" y="160" width="120" height="18" fill="#FF8A57"/>
+ <rect x="80" y="110" width="120" height="50" fill="#FF5B1F"/>
+ <rect x="80" y="100" width="120" height="10" fill="#C2410C"/>
+ <rect x="80" y="20" width="120" height="80" fill="#0E7A47"/>
+ <rect x="80" y="0" width="120" height="20" fill="#2B2B31"/>
+ <rect x="80" y="0" width="120" height="200" rx="8" fill="none" stroke="#16161A" stroke-width="2"/>
+ <g class="price-t">
+  <line x1="200" y1="191" x2="236" y2="191" stroke="#B9BAC2"/><text x="244" y="196">Filament <tspan class="price-s">$1.32 · the smallest part</tspan></text>
+  <line x1="200" y1="169" x2="236" y2="169" stroke="#B9BAC2"/><text x="244" y="174">Power + machine <tspan class="price-s">$0.84</tspan></text>
+  <line x1="200" y1="135" x2="236" y2="135" stroke="#B9BAC2"/><text x="244" y="140">Your time <tspan class="price-s">$5.00 · the biggest cost</tspan></text>
+  <line x1="200" y1="105" x2="236" y2="105" stroke="#B9BAC2"/><text x="244" y="110">Packaging <tspan class="price-s">$1.00</tspan></text>
+  <line x1="200" y1="60" x2="236" y2="60" stroke="#B9BAC2"/><text x="244" y="65" style="fill:#0E7A47">Profit <tspan class="price-s">from the × 2.5 markup</tspan></text>
+  <line x1="200" y1="10" x2="236" y2="10" stroke="#B9BAC2"/><text x="244" y="15">Marketplace fees <tspan class="price-s">on top</tspan></text>
+ </g>
+</g>
+<text x="36" y="326" class="price-s">Example: a desk organizer. Filament is under 7% of the price. Price by your time, not your plastic.</text>
+</svg></figure>
+
 <p>Let's fill it in, one step at a time.</p>
 <section class="step">
 <div aria-hidden="true" class="stepi"><span class="stepn">1</span><svg class="ico" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg></div>
@@ -170,5 +196,5 @@
 <div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener">Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
 <p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
 </div></footer>
-<script src="/assets/site.js?v=9ffeeb85" defer></script>
+<script src="/assets/site.js?v=91ec846d" defer></script>
 </body></html>

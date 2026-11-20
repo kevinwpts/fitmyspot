@@ -20,6 +20,10 @@ What sells has a pattern: **a specific person, with a specific problem, and a pr
 
 ## 6 types of prints that sell
 
+::: figure demand
+:::
+
+
 ::: icons
 heart | Personalized items | Name signs, keychains, pet tags, cake toppers.
 box | Organizers that fit | Drawer inserts, desk and cable organizers.

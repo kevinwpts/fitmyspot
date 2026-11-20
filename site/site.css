@@ -365,3 +365,8 @@ h3{font-size:20px;font-weight:700;letter-spacing:-.02em}
 .me img{width:100%;max-width:240px;aspect-ratio:1;height:auto;border-radius:24px;object-fit:cover}
 .me p{max-width:60ch}.me .btn{margin-top:8px}
 @media(max-width:520px){.author{grid-template-columns:64px 1fr;gap:14px;padding:16px}.author img{width:64px;height:64px}}
+.prose figure.ill{margin:26px 0;padding:0}
+.prose figure.ill svg{display:block;width:100%;height:auto;border-radius:20px;border:1px solid var(--line)}
+.prose figure.ill figcaption{font-size:14px;color:var(--muted);margin-top:8px;text-align:center}
+@media(max-width:640px){.prose figure.ill{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-left:-18px;margin-right:-18px;padding:0 18px}.prose figure.ill svg{min-width:600px}.prose figure.ill::after{content:"← swipe →";display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:6px;position:sticky;left:0}}
+.ahero{width:100%;max-width:1120px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:22px;margin:0 0 34px}

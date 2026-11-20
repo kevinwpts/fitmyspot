@@ -24,6 +24,10 @@ Pick **one** way to earn (below), make something for **one specific group of peo
 
 ## The 7 ways to earn
 
+::: figure lanes
+:::
+
+
 ::: icons
 home | Print for people nearby | Friends, neighbours, local groups. Fastest first sale.
 pencil | Sell your own designs | Where the real money is. You can sell them anywhere.
