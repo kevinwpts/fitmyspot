@@ -29,7 +29,7 @@ Weigh your product **with packaging** and measure the box. Then check prices at 
 - Your nearest neighbour countries
 - The US / your biggest market
 
-Write them in a small table. Use these numbers in your price (chapter 5).
+Write them in a small table. Use these numbers in your price (chapter 6).
 :::
 
 ::: step box | Choose your packaging
@@ -89,7 +89,7 @@ Find your post's cheapest parcel size (often around 2–3 cm thick for large let
 :::
 
 ::: step truck | US buyers: keep shipping under $6
-Etsy prioritizes US listings with shipping under $6. Move the rest into the item price (chapter 5).
+Etsy prioritizes US listings with shipping under $6. Move the rest into the item price (chapter 6).
 :::
 
 ::: step box | Make a 3-minute packing kit

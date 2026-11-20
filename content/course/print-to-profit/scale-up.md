@@ -15,7 +15,7 @@ Scale only **after** you have a product that sells steadily. Then grow in this o
 - You want to scale "to make it work"
 :::
 
-If you're not ready, go back to chapter 9. More printers don't fix a product nobody buys.
+If you're not ready, go back to chapter 10. More printers don't fix a product nobody buys.
 
 ## Grow in 5 steps
 
@@ -25,7 +25,7 @@ Your time is the limit long before your printer is.
 - **Batch print:** fill the whole plate with the same product
 - **Print stock** of your bestseller in popular colors, ready to ship
 - **Templates:** for personalization, titles and messages
-- **Packing station** (chapter 8) so each order takes 3 minutes
+- **Packing station** (chapter 9) so each order takes 3 minutes
 - **Fewer supports:** redesign to print faster with less cleanup
 :::
 

@@ -19,6 +19,10 @@ chapters:
     title: The legal part, done right
     summary: Licenses, Etsy's rules, trademarks and taxes basics, so your shop never gets shut down.
     minutes: 9
+  - slug: where-to-sell
+    title: Choose where to sell
+    summary: Etsy, eBay, Facebook Marketplace, TikTok Shop, your own link or local shops. What each costs and how to pick yours.
+    minutes: 8
   - slug: price-it-right
     title: Price it right
     summary: The pricing worksheet, step by step. Never sell at a loss again.

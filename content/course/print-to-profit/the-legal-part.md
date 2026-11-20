@@ -23,6 +23,8 @@ This is a plain-English overview to keep you out of the most common trouble. Rul
 
 Save a screenshot of the license with the date. Licenses can change.
 
+**Fonts count too.** Text on a product (a name sign, a keychain) uses a font, and fonts have licenses. Fonts from **Google Fonts** use the Open Font License, which lets you print them on products you sell. Many "free" fonts on download sites are **personal use only**. Check before you use one, and keep a list of the fonts you use.
+
 Full guide: [Can you sell 3D prints?](/guides/can-you-sell-3d-prints)
 :::
 
@@ -145,4 +147,4 @@ star | Stay ahead | Improve your product, add personalization, build your name. 
 
 ## Next chapter
 
-In **Price it right** you'll work out exactly what your product costs you and what to charge, so every sale is worth it.
+In **Choose where to sell** you'll compare Etsy, eBay, Facebook Marketplace, TikTok Shop and more, and pick the two places that fit your product.

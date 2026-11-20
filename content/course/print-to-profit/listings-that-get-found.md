@@ -89,6 +89,16 @@ The same rules apply. Write what it **does**, show the **size**, make **buying e
 Titles like "Holder Organizer Stand Storage Box Gift Desk Gamer Switch" look spammy and can hurt you. Write for humans, using buyers' words.
 :::
 
+## Selling on eBay or Facebook instead?
+
+The same listing works everywhere, with small changes:
+
+| Platform | What matters most |
+|---|---|
+| **eBay** | Exact words in the title: brand it fits, model number, part number. Fill in every **item specific**. |
+| **Facebook Marketplace** | A clear first photo, the price, and fast replies. Buyers message first, so answer within an hour if you can. |
+| **TikTok Shop** | The video sells, the listing confirms. Use the same first photo as your video's best frame. |
+
 ## Etsy's newest rules for titles (2026)
 
 Etsy updated its title guidance in April 2026. In short:
@@ -152,7 +162,7 @@ Keeps 12 Switch game cards upright, sorted and easy to grab. The slots are tight
 - Write your title using the template
 - Write your description using the template
 - Add tags and the FAQ
-- Publish your first listing (or post), with the 5 photos from chapter 6
+- Publish your first listing (or post), with the 5 photos from chapter 7
 :::
 
 ## Next chapter

@@ -34,8 +34,8 @@ rows = [
  "1. Settings: fill in your own numbers once (yellow cells).",
  "2. Pricing: one row per product. Fill in the yellow cells, the rest calculates.",
  "3. Ideas: score your product ideas before you design anything (chapter 2).",
- "4. Shipping: weigh and measure each product packed, compare carriers (chapter 8).",
- "5. Monthly: your numbers every month, so you know what really pays (chapter 10).",
+ "4. Shipping: weigh and measure each product packed, compare carriers (chapter 9).",
+ "5. Monthly: your numbers every month, so you know what really pays (chapter 11).",
  "",
  "Yellow cell with blue text = you fill it in. Everything else is a formula, don't type over it.",
  "Row 1 in each tab is the example from the guide (the Switch game card holder). Overwrite it with your own.",
@@ -124,7 +124,7 @@ ws.freeze_panes = "B5"
 # Shipping
 ws = sheet("Shipping")
 ws["A1"] = "Shipping"; ws["A1"].font = T
-ws["A2"] = "Weigh and measure each product packed. Compare 2–3 carriers. Check your post's exact letter limits. Chapter 8."; ws["A2"].font = G
+ws["A2"] = "Weigh and measure each product packed. Compare 2–3 carriers. Check your post's exact letter limits. Chapter 9."; ws["A2"].font = G
 head(ws, 4, ["Product", "Packed weight (g)", "Length (mm)", "Width (mm)", "Height (mm)", "Under 25 mm?", "Carrier 1 ($)", "Carrier 2 ($)", "Carrier 3 ($)", "Cheapest"])
 for r in range(5, 20):
     ex = r == 5
@@ -141,7 +141,7 @@ ws.freeze_panes = "B5"
 # Monthly
 ws = sheet("Monthly")
 ws["A1"] = "Monthly numbers"; ws["A1"].font = T
-ws["A2"] = "Fill in once a month. Profit per hour is the number that tells you if it's worth it. Chapter 10."; ws["A2"].font = G
+ws["A2"] = "Fill in once a month. Profit per hour is the number that tells you if it's worth it. Chapter 11."; ws["A2"].font = G
 head(ws, 4, ["Month", "Orders", "Revenue ($)", "Fees ($)", "Material + packaging ($)", "Shipping you paid ($)", "Ads and other ($)", "Profit ($)", "Hours worked", "Profit per hour", "Best channel"])
 for r in range(5, 17):
     inp(ws.cell(r, 1), None, "@")

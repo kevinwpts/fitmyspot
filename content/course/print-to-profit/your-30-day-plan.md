@@ -30,7 +30,7 @@ listing-templates.pdf | Listing templates & scripts (PDF) | Title, 13-tag sheet,
 | 4 | Score your top 3 ideas, pick the winner | 2 |
 | 5 | Design your first version in Tinkercad | 3 |
 | 6 | Run the 5 legal checks on your product | 4 |
-| 7 | **Rest**, or catch up |  |
+| 7 | Pick where you'll sell: one marketplace + one local channel | 5 |
 
 ## Week 2: Make
 
@@ -38,42 +38,42 @@ listing-templates.pdf | Listing templates & scripts (PDF) | Title, 13-tag sheet,
 |---|---|---|
 | 8 | Print the first version, use it for real | 3 |
 | 9 | Fix what annoys you, print version 2 | 3 |
-| 10 | Fill in the pricing worksheet, set your price | 5 |
-| 11 | Check real postage and packaging costs | 8 |
-| 12 | Set up your window studio, take the 5 photos | 6 |
-| 13 | Edit photos, pick your hero shot | 6 |
+| 10 | Fill in the pricing worksheet, set your price | 6 |
+| 11 | Check real postage and packaging costs | 9 |
+| 12 | Set up your window studio, take the 5 photos | 7 |
+| 13 | Edit photos, pick your hero shot | 7 |
 | 14 | **Rest**, or catch up |  |
 
 ## Week 3: Launch
 
 | Day | Task | Chapter |
 |---|---|---|
-| 15 | Collect 10–15 search phrases | 7 |
-| 16 | Write title, description, tags and FAQ | 7 |
-| 17 | **Publish** your listing (or shop post) | 7 |
-| 18 | Set up your packing station, write your thank-you card | 8 |
-| 19 | Post it on your personal account, send to 5 people | 9 |
-| 20 | Post in 1 local group | 9 |
-| 21 | Film and post your first 15-second video | 9 |
+| 15 | Collect 10–15 search phrases | 8 |
+| 16 | Write title, description, tags and FAQ | 8 |
+| 17 | **Publish** your listing (or shop post) | 8 |
+| 18 | Set up your packing station, write your thank-you card | 9 |
+| 19 | Post it on your personal account, send to 5 people | 10 |
+| 20 | Post in 1 local group | 10 |
+| 21 | Film and post your first 15-second video | 10 |
 
 ## Week 4: Sell
 
 | Day | Task | Chapter |
 |---|---|---|
-| 22 | Join 2 hobby communities, help someone | 9 |
-| 23 | Post a second video, different angle | 9 |
-| 24 | Ask your first buyer (or a friend) for a review | 9 |
-| 25 | Contact 1 local shop or café | 9 |
-| 26 | Improve your weakest photo or title | 6, 7 |
-| 27 | Post a making-of video | 9 |
-| 28 | Look at your numbers: views, clicks, messages, sales | 9 |
-| 29 | Offer a small launch deal to your network | 9 |
-| 30 | **Review:** what worked? Plan your next 30 days | 10 |
+| 22 | Join 2 hobby communities, help someone | 10 |
+| 23 | Post a second video, different angle | 10 |
+| 24 | Ask your first buyer (or a friend) for a review | 10 |
+| 25 | Contact 1 local shop or café | 10 |
+| 26 | Improve your weakest photo or title | 7, 8 |
+| 27 | Post a making-of video | 10 |
+| 28 | Look at your numbers: views, clicks, messages, sales | 10 |
+| 29 | Offer a small launch deal to your network | 10 |
+| 30 | **Review:** what worked? Plan your next 30 days | 11 |
 
 ## After day 30
 
 ::: icons
-check | 10+ sales? | Go to chapter 10 and start saving time and raising value per order.
+check | 10+ sales? | Go to chapter 11 and start saving time and raising value per order.
 target | A few sales? | Keep the 14-day sprint going. Double down on the channel that worked.
 search | No sales? | Normal for some. Check: was there proof of demand? Are the photos clear? Is the price right? Then try idea #2 from your top 3.
 :::

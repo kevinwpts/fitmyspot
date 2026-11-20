@@ -85,6 +85,8 @@ Marketplaces take a cut of the price. To keep your profit, add the fees on top:
 
 **Example:** price $20, fees 9.5% + $0.45 → ($20 + $0.45) ÷ 0.905 = **$22.60**
 
+Use the fees of the channel you picked in chapter 5. On Etsy, about **9.5% + $0.45** covers the normal fees. Orders that come from Etsy's **Offsite Ads** cost 15% more, so keep some margin.
+
 The [calculator](/tools/3d-print-price-calculator) does this for you, with Etsy-like fees pre-filled.
 :::
 
@@ -125,7 +127,7 @@ Two simple options:
 - **Free shipping, built into the price.** Buyers love it. Add your average shipping cost to the price.
 - **Shipping charged separately.** Fine for local or heavy items.
 
-Whichever you choose, check real postage rates for your country **before** you publish the price. More in chapter 8.
+Whichever you choose, check real postage rates for your country **before** you publish the price. More in chapter 9.
 
 ## Insider pricing moves
 

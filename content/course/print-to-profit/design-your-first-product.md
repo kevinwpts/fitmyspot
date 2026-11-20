@@ -8,7 +8,7 @@ Etsy's rule since 2025: physical items **must be produced from the seller's orig
 
 - Nobody can take down your listing over a license.
 - You can change sizes, colors and text whenever buyers ask.
-- You can sell the file later on MakerWorld (chapter 10).
+- You can sell the file later on MakerWorld (chapter 11).
 
 ::: tip | Start simple
 Look at the bestsellers in your niche: many are plain boxes with holes in them. They sell because they fit. Buyers pay for the fit, not for fancy curves.
@@ -36,7 +36,7 @@ A print is never exactly the size you drew. Add **0.2–0.4 mm on each side** fo
 :::
 
 ::: step box | Decide the outside size
-Walls of at least **2 mm** feel solid. Keep the whole product under **25 mm high** if you can: it then often ships as a large letter, which is much cheaper (chapter 8).
+Walls of at least **2 mm** feel solid. Keep the whole product under **25 mm high** if you can: it then often ships as a large letter, which is much cheaper (chapter 9).
 
 **Example:** 12 slots, 8 mm apart, 4 mm floor → **110 × 30 × 18 mm**.
 :::
@@ -116,6 +116,41 @@ Right-click the text → **Change filament** → pick a second color. With an AM
 
 ::: tip | Proof before you print
 For personalized orders, send the buyer a screenshot of the name in Bambu Studio before you print. One message saves you from reprints over spelling mistakes.
+:::
+
+## Pick the right material
+
+The material decides if your product survives real life. Buyers don't care that it's 3D printed. They care that it doesn't bend in a hot car.
+
+| Material | Use it for | Watch out |
+|---|---|---|
+| **PLA** | Indoor items: organizers, signs, desk stuff, decor | Softens at about 55–60 °C. Not for cars, dishwashers or sunny windows |
+| **PETG** | Stronger items, bathrooms, outdoor in shade | A bit harder to print clean. Strings more |
+| **ASA** | Outdoor, cars, sun | Needs an enclosure and good ventilation |
+| **TPU** | Flexible things: bumpers, grips, cases | Slow to print |
+
+::: warn | Say it in the listing
+Write the material and its limits in the description: *"Made from PLA. Keep away from heat, like a hot car."* It prevents most complaints and returns.
+:::
+
+## Print it so it looks bought, not homemade
+
+Small settings make a big difference in your photos and reviews.
+
+::: step layers | Put the ugly side down
+Turn the model so the side buyers see is **not** touching the bed and has no supports. Use a textured plate for a nice bottom.
+:::
+
+::: step ruler | Hide the seam
+In your slicer, set the **seam** to the back or to a sharp corner. A seam line down the front looks cheap.
+:::
+
+::: step palette | Pick colors that photograph well
+Matte black, white, grey and one accent color look premium. Shiny "silk" filament shows every layer line.
+:::
+
+::: step check | Check every piece before it ships
+Look at it in daylight for 10 seconds: strings, blobs, sharp edges, bad first layer. Remove strings with a quick pass of a heat gun or a hair dryer on max. Never ship a print you wouldn't buy.
 :::
 
 ## When you outgrow Tinkercad

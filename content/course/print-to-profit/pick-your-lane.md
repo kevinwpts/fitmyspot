@@ -77,7 +77,7 @@ Answer 4 questions. Pick the answer that's most true for you.
     own: ["Your own designs", "Pick one buyer group and one problem. Chapter 2 shows you how to find a product that sells."],
     parts: ["Replacement parts", "Look around your home for one broken plastic part. Measure it, design it, print it. That's your first listing."],
     files: ["Sell the files", "Start with physical products in parallel. Files sell slowly until you have a following."],
-    biz: ["Print for businesses", "List 5 local businesses that could use signs, displays or holders. You'll contact them in chapter 9."],
+    biz: ["Print for businesses", "List 5 local businesses that could use signs, displays or holders. You'll contact them in chapter 10."],
     content: ["Make content", "Film your next print from start to finish. Post it. Do this every week, and pick a product lane too so you have something to sell."] };
   document.getElementById("quizGo").onclick = () => {
     const score = {}; let n = 0;
@@ -171,5 +171,6 @@ You've picked your lane. Now it gets practical. In the next chapters you'll:
 - **Find a product people already buy**, with a 20-minute research routine (chapter 2)
 - **Design it yourself in Tinkercad**, free, in about an hour (chapter 3)
 - **Check that it's safe to sell**, so your shop never gets shut down (chapter 4)
-- **Set a price that pays you**, with the spreadsheet toolkit (chapter 5)
-- **Get your first 10 buyers** without ads, with copy-paste scripts (chapter 9)
+- **Pick where to sell**: Etsy, eBay, Facebook, TikTok Shop or local (chapter 5)
+- **Set a price that pays you**, with the spreadsheet toolkit (chapter 6)
+- **Get your first 10 buyers** without ads, with copy-paste scripts (chapter 10)

@@ -201,7 +201,7 @@ learn = [
     ("How to design it yourself", "Your own product in Tinkercad (free) in about an hour, plus names and text in Bambu Studio. No design skills needed."),
     ("What you're allowed to sell", "Licenses and Etsy's 2025 rules in plain English, so your shop doesn't get shut down."),
     ("What to charge", "A spreadsheet that includes filament, power, your time and fees, so every sale is actually worth it."),
-    ("Where to sell", "Etsy, your own shop, local buyers and businesses. Which fits you, and how to start."),
+    ("Where to sell", "Etsy, eBay, Facebook Marketplace, TikTok Shop, your own link or local shops. What each one costs, and which fits your product."),
     ("How to get your first 10 sales", "Photos, listings and posts that sell, without paying for ads."),
     ("A 30-day plan", "What to do each day, from today until your first sales come in. With one real example product followed through every step."),
 ]
@@ -238,7 +238,7 @@ home += header() + f"""
 <div class="sech"><div><h2>Look inside</h2><p>Short chapters, made for your phone. Every one ends with a task you can do the same day.</p></div><a class="more" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free →</a></div>
 <div class="inside">
 <figure><div class="phone"><img src="/img/inside/quiz.webp" alt="A quiz in chapter 1 that picks your way to make money" width="780" height="1560" loading="lazy"></div><figcaption><b>Quizzes that decide for you</b>Find the way to earn that fits you.</figcaption></figure>
-<figure><div class="phone"><img src="/img/inside/steps.webp" alt="Step-by-step pricing worksheet in chapter 5" width="780" height="1560" loading="lazy"></div><figcaption><b>Fill-in worksheets</b>Work out your real price, step by step.</figcaption></figure>
+<figure><div class="phone"><img src="/img/inside/steps.webp" alt="Step-by-step pricing worksheet in chapter 6" width="780" height="1560" loading="lazy"></div><figcaption><b>Fill-in worksheets</b>Work out your real price, step by step.</figcaption></figure>
 <figure><div class="phone"><img src="/img/inside/yesno.webp" alt="Clear do and don't lists in chapter 4" width="780" height="1560" loading="lazy"></div><figcaption><b>Clear yes and no</b>Know exactly what you can sell.</figcaption></figure>
 </div>
 </div></section>
@@ -251,7 +251,7 @@ home += header() + f"""
 <h2>Print to Profit</h2>
 <p class="lead" style="margin-top:12px">A step-by-step 30-day plan to your first 10 sales.</p>
 <ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>Instant access on any device</li></ul>
-<p class="vstack">11 chapters · about 70 minutes · spreadsheet toolkit, templates, a worked example and a 30-day plan</p>
+<p class="vstack">12 chapters · about 80 minutes · spreadsheet toolkit, templates, a worked example and a 30-day plan</p>
 <div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{launch_note(P) or 'one-time payment'}</span></div><p class="valline">About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</p>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 <p class="fine2">30-day money-back guarantee. Secure checkout by Stripe, VAT handled for your country.</p>
@@ -398,6 +398,7 @@ PREM_FAQ = [
     {"q": "How do I get it after paying?", "a": "Right after checkout. You can come back any time via My guides by logging in with your email (no password)."},
     {"q": "Do I get updates?", "a": "Yes. When rules, fees or methods change, the guide is updated, and you see the new version right away. Free."},
     {"q": "Can I get a refund?", "a": "Yes. 30-day money-back guarantee. Read it, try the plan. If it's not worth it to you, message me within 30 days and you get all your money back. No questions."},
+    {"q": "Is it only about Etsy?", "a": "No. Etsy gets a lot of detail because it's where most buyers of 3D printed items search. Chapter 5 compares Etsy, eBay, Facebook Marketplace, TikTok Shop, your own payment link, local shops and fairs, with real fees, and helps you pick the two that fit your product."},
     {"q": "Who handles payment and tax?", "a": "Payment is handled securely by Stripe, which also takes care of VAT and sales tax in your country."},
 ]
 for g in PREM:

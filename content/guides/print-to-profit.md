@@ -15,6 +15,7 @@ outline:
   - Find products that sell, with a step-by-step research method
   - "Design your first product in Tinkercad (free), plus names and text in Bambu Studio"
   - "The legal part done right: licenses, Etsy rules, what to avoid"
+  - "Where to sell: Etsy, eBay, Facebook Marketplace, TikTok Shop or local, with real fees"
   - Pricing worksheets that include your time, fees and shipping
   - Photos that sell, shot with just a phone and a window
   - "Listings that rank: titles, tags and descriptions, with templates"
