@@ -209,7 +209,15 @@ home += header() + f"""
 <section class="sec"><div class="wrap">
 <div class="sech"><div><h2>What you'll learn in Print to Profit</h2><p>Everything you need to go from "I have a printer" to "people pay me for my prints".</p></div></div>
 <div class="learn">{"".join(f'<div><span class="ic">{CHECK}</span><b>{e(t)}</b><p>{e(d)}</p></div>' for t, d in learn)}</div>
-<p style="margin-top:20px"><a class="more" href="/guides/print-to-profit/pick-your-lane">Try it: read chapter 1 free →</a></p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+<div class="sech"><div><h2>Look inside</h2><p>Short chapters, made for your phone. Every one ends with a task you can do the same day.</p></div><a class="more" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free →</a></div>
+<div class="inside">
+<figure><div class="phone"><img src="/img/inside/quiz.webp" alt="A quiz in chapter 1 that picks your way to make money" width="780" height="1560" loading="lazy"></div><figcaption><b>Quizzes that decide for you</b>Find the way to earn that fits you.</figcaption></figure>
+<figure><div class="phone"><img src="/img/inside/steps.webp" alt="Step-by-step pricing worksheet in chapter 4" width="780" height="1560" loading="lazy"></div><figcaption><b>Fill-in worksheets</b>Work out your real price, step by step.</figcaption></figure>
+<figure><div class="phone"><img src="/img/inside/yesno.webp" alt="Clear do and don't lists in chapter 3" width="780" height="1560" loading="lazy"></div><figcaption><b>Clear yes and no</b>Know exactly what you can sell.</figcaption></figure>
+</div>
 </div></section>
 
 <section class="sec alt"><div class="wrap">
@@ -223,6 +231,7 @@ home += header() + f"""
 <h2>Print to Profit</h2>
 <p class="lead" style="margin-top:12px">Your first 10 sales in 30 days, step by step.</p>
 <ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>Instant access on any device</li></ul>
+<p class="vstack">10 chapters · about 60 minutes · quiz, worksheets, templates and a 30-day plan</p>
 <div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{'one-time payment' if P.get('link') else 'at launch · join the list for a launch discount'}</span></div>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 <p class="fine2">Secure checkout by Stripe. VAT handled for your country.</p>
@@ -252,6 +261,8 @@ home += header() + f"""
 <p class="lead" style="margin:14px auto 26px">Start today with Print to Profit, or read the free guide first.</p>
 <div class="ctas" style="justify-content:center">{main_cta}<a class="btn ghost big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a></div>
 </div></section>
+<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>Your first 10 sales in 30 days</small></span>{main_cta.replace('btn or big', 'btn or')}</div>
+<script>(()=>{{const b=document.getElementById("mcta"),h=document.querySelector(".hero");if(!b||!h||!("IntersectionObserver" in window))return;new IntersectionObserver(es=>{{b.hidden=es[0].isIntersecting}}).observe(h)}})();</script>
 </main>""" + footer()
 write("/", home); PAGES.append(("/", TODAY, "1.0"))
 
