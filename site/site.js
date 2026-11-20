@@ -46,7 +46,7 @@
   window.toast = (m) => { let t = $(".toast"); if (!t) { t = document.createElement("div"); t.className = "toast"; t.setAttribute("role", "status"); document.body.append(t); } t.textContent = m; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => (t.hidden = true), 3200); };
 
   // E-postformulär (checklista / väntelista)
-  document.querySelectorAll("form.sform[data-src]").forEach((f) => {
+  const bindForm = (f) => {
     f.addEventListener("submit", async (e) => {
       e.preventDefault();
       const inp = f.querySelector("input[type=email]"), btn = f.querySelector("button"), err = f.querySelector(".err");
@@ -57,9 +57,36 @@
         const r = await fetch(`${SB}/rest/v1/rpc/subscribe`, { method: "POST", headers: { apikey: KEY, authorization: `Bearer ${KEY}`, "content-type": "application/json" }, body: JSON.stringify({ p_email: email, p_source: f.dataset.src || "site" }) });
         if (!r.ok) throw 0;
         f.innerHTML = f.dataset.ok; track("signup", f.dataset.src);
+        try { localStorage.setItem("bp_sub", "1"); } catch {}
       } catch { btn.disabled = false; btn.textContent = f.dataset.btn || "Send"; err.textContent = "Something went wrong. Try again."; err.hidden = false; }
     });
-  });
+  };
+  document.querySelectorAll("form.sform[data-src]").forEach(bindForm);
+
+  // Gratisplanen: liten ruta som glider upp när man läst halva sidan (max var 3:e dag)
+  (() => {
+    const P = location.pathname;
+    if (/^\/(plan|library|thanks|stats)/.test(P) || P.startsWith("/guides/print-to-profit/")) return;
+    let skip = false;
+    try { skip = localStorage.getItem("bp_sub") === "1" || localStorage.getItem("bp_owned") === "1" || JSON.parse(localStorage.getItem("bp_sess") || "[]").length > 0 || Date.now() - (+localStorage.getItem("bp_pop") || 0) < 3 * 864e5; } catch {}
+    if (skip) return;
+    const show = () => {
+      removeEventListener("scroll", on);
+      const ok = '<p class="ok"><b>Done! 🎉</b> <a href="/free/7-day-first-sale-plan.pdf" target="_blank" rel="noopener">Open your free 7-day plan</a></p>';
+      const d = document.createElement("div"); d.className = "pop"; d.setAttribute("role", "dialog"); d.setAttribute("aria-label", "Free 7-day plan");
+      d.innerHTML = `<button type="button" class="px" aria-label="Close">✕</button><p class="pk">Free · 10-page PDF</p><b class="pt">Not ready to buy? Start with the free 7-day plan.</b><p class="pd">From idea to your first sale, one step a day.</p>
+        <form class="sform" data-src="popup" data-btn="Get the free plan" novalidate><input type="email" placeholder="you@email.com" autocomplete="email" aria-label="Email" required><button class="btn or" type="submit">Get the free plan</button><p class="err" role="alert" hidden></p></form>`;
+      d.querySelector("form").dataset.ok = ok;
+      document.body.append(d); bindForm(d.querySelector("form"));
+      requestAnimationFrame(() => d.classList.add("in"));
+      const m = document.getElementById("mcta"); if (m) m.style.visibility = "hidden";
+      d.querySelector(".px").onclick = () => { d.classList.remove("in"); setTimeout(() => d.remove(), 300); if (m) m.style.visibility = ""; };
+      try { localStorage.setItem("bp_pop", Date.now()); } catch {}
+      track("popup");
+    };
+    const on = () => { const h = document.documentElement.scrollHeight - innerHeight; if (h > 400 && scrollY / h > 0.5) show(); };
+    addEventListener("scroll", on, { passive: true });
+  })();
 
   // Har köpt guiden → visa "Continue reading" i stället för "Get the guide"
   window.bpOwned = (path) => {

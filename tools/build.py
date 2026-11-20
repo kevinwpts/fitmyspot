@@ -119,7 +119,7 @@ def signup(src="home", title="Free: The 7-Day First Sale Plan", text="One small 
 <form class="sform" data-src="{src}" data-btn="Send me the free plan" data-ok="{ok}" novalidate>
 <label for="em-{src}" class="skip">Email</label>
 <input id="em-{src}" type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
-<button class="btn or big" type="submit">Send me the checklist</button>
+<button class="btn or big" type="submit">Send me the free plan</button>
 <p class="err" role="alert" hidden></p>
 <small>Free. No spam. Unsubscribe any time.</small>
 </form></div>"""
@@ -279,6 +279,7 @@ home += header() + f"""
 <div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 {IGCHIP}
 <ul class="trust"><li>{ico('shield')}<span>30-day money-back guarantee</span></li><li>{ico('coins')}<span>{launch_note(P) or 'One-time payment, free updates'}</span></li></ul>
+<a class="freeline" href="/plan">{ico('file', 18)}<span><b>New here?</b> Start with the free 7-day plan</span><span aria-hidden="true">→</span></a>
 </div>
 {cover('playbook')}
 </div></section>
