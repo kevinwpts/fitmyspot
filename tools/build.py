@@ -167,7 +167,7 @@ HOME_FAQ = [
 ]
 P = PROD["playbook"]
 main_cta = (f'<a class="btn or big" href="{e(P["link"])}">Get Print to Profit · ${P["price"]}</a>' if P.get("link")
-            else f'<a class="btn or big" href="/guides/print-to-profit">Get Print to Profit · ${P["price"]}</a>')
+            else '<a class="btn or big" href="/guides/print-to-profit#waitlist">Get early access</a>')
 CHECK = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
 CROSS = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>'
 pains = ["Your printer mostly sits there doing nothing", "You have no idea what would actually sell", "You're not sure what you're even allowed to sell", "Your prices barely cover the filament", "Etsy's new rules confuse you"]
@@ -220,7 +220,7 @@ home += header() + f"""
 <h2>Print to Profit</h2>
 <p class="lead" style="margin-top:12px">The complete guide to selling your 3D prints.</p>
 <ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>14-day money-back guarantee</li></ul>
-<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">one-time payment</span></div>
+<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{'one-time payment' if P.get('link') else 'at launch · join the list for a launch discount'}</span></div>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 <p class="fine2">Secure checkout by Stripe. VAT handled for your country.</p>
 </div>
@@ -309,7 +309,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
     (ROOT / "private/course" / c["guide"]).mkdir(parents=True, exist_ok=True)
     prod_k = c["product"]; P_ = PROD[prod_k]
     buy_url = P_["link"] or f"/guides/{c['guide']}#waitlist"
-    buy_lbl = f"Get {c['title']} · ${P_['price']}" if P_["link"] else f"Get {c['title']} · ${P_['price']}"
+    buy_lbl = f"Get {c['title']} · ${P_['price']}" if P_["link"] else "Get early access (launch discount)"
     for i, ch in enumerate(c["chapters"]):
         src = gdir / f"{ch['slug']}.md"
         ch["ready"] = src.exists()

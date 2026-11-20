@@ -12,6 +12,18 @@
     if (location.pathname !== "/library") location.href = "/library";
   }
 
+  // Enkel statistik utan cookies: sidvisningar, klick på knappar, anmälningar
+  const noTrack = (() => { try { if (location.search.includes("notrack")) localStorage.setItem("bp_nt", "1"); return localStorage.getItem("bp_nt") === "1"; } catch { return false; } })();
+  const sid = (() => { try { let s = sessionStorage.getItem("bp_sid"); if (!s) { s = Math.random().toString(36).slice(2, 10); sessionStorage.setItem("bp_sid", s); } return s; } catch { return null; } })();
+  const src = (() => { const u = new URLSearchParams(location.search).get("utm_source"); if (u) return u.slice(0, 40); try { const h = document.referrer && new URL(document.referrer).hostname; return h && h !== location.hostname ? h.replace(/^www\./, "").replace(/^l\./, "").slice(0, 60) : null; } catch { return null; } })();
+  window.track = (name, path) => {
+    if (noTrack || navigator.webdriver || /bot|crawl|spider|preview/i.test(navigator.userAgent)) return;
+    fetch(`${SB}/rest/v1/rpc/track`, { method: "POST", keepalive: true, headers: { apikey: KEY, authorization: `Bearer ${KEY}`, "content-type": "application/json" },
+      body: JSON.stringify({ p_name: name, p_path: (path || location.pathname).slice(0, 200), p_ref: src, p_mobile: matchMedia("(pointer: coarse)").matches, p_sid: sid }) }).catch(() => {});
+  };
+  track("view");
+  document.addEventListener("click", (e) => { const a = e.target.closest("a.btn, button.btn, a.more, .card"); if (a) track("click", (a.getAttribute("href") || a.textContent.trim().slice(0, 40)) + " @" + location.pathname); });
+
   // Header får kant när man scrollar
   const top = $(".top");
   if (top) { const f = () => top.classList.toggle("sc", scrollY > 8); addEventListener("scroll", f, { passive: true }); f(); }
@@ -29,7 +41,7 @@
       try {
         const r = await fetch(`${SB}/rest/v1/rpc/subscribe`, { method: "POST", headers: { apikey: KEY, authorization: `Bearer ${KEY}`, "content-type": "application/json" }, body: JSON.stringify({ p_email: email, p_source: f.dataset.src || "site" }) });
         if (!r.ok) throw 0;
-        f.innerHTML = f.dataset.ok;
+        f.innerHTML = f.dataset.ok; track("signup", f.dataset.src);
       } catch { btn.disabled = false; btn.textContent = f.dataset.btn || "Send"; err.textContent = "Something went wrong. Try again."; err.hidden = false; }
     });
   });

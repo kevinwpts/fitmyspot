@@ -83,6 +83,7 @@ Answer 4 questions. Pick the answer that's most true for you.
     const top = Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
     box.innerHTML = `<p class="qrk">Your lane</p><p class="qrt">${L[top][0]}</p><p><b>Your first move:</b> ${L[top][1]}</p>`;
     try { localStorage.setItem("bp_lane", top); } catch {}
+    window.track && track("quiz", top);
     box.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 })();
