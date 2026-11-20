@@ -87,6 +87,10 @@ Use your phone's built-in editor. Only these:
 | Straighten | Lines straight |
 | Colors | **Don't change.** The color must match what arrives. |
 
+**On iPhone:** open the photo → **Edit** → **Crop** icon → pick **Square** → straighten with the dial → tap **Adjust** → **Exposure** about +10 to +20 → **Done**.
+
+**On Android:** open the photo in **Google Photos** → **Edit** → **Crop** → **Square** → **Tools/Adjust** → **Brightness** a little up → **Save copy**.
+
 ::: warn | Honest photos only
 Never use other people's photos, renders that look better than the real print, or filters that change the color. It leads to bad reviews and returns.
 :::

@@ -61,6 +61,23 @@
     });
   });
 
+  // Har köpt guiden → visa "Continue reading" i stället för "Get the guide"
+  window.bpOwned = (path) => {
+    try { localStorage.setItem("bp_owned", "1"); if (path) localStorage.setItem("bp_last", path); } catch {}
+    ownedUI();
+  };
+  const ownedUI = () => {
+    let owned = false, last = "/guides/print-to-profit/pick-your-lane";
+    try { owned = localStorage.getItem("bp_owned") === "1" || JSON.parse(localStorage.getItem("bp_sess") || "[]").length > 0; last = localStorage.getItem("bp_last") || last; } catch {}
+    if (!owned) return;
+    const b = document.querySelector('.nav a.btn.or');
+    if (b) { b.textContent = "Continue reading"; b.href = last; }
+    const m = document.getElementById("mcta"); if (m) m.remove();
+    document.querySelectorAll("aside.unlock").forEach((x) => x.remove());
+    document.querySelectorAll('a.btn.or[href*="buy.stripe.com"]').forEach((x) => { x.textContent = "Continue reading →"; x.href = last; });
+  };
+  ownedUI();
+
   // Uppgifter i "Your task"-rutor: bocka av, sparas på enheten
   const TK = "bp_tasks";
   const tget = () => { try { return JSON.parse(localStorage.getItem(TK) || "{}"); } catch { return {}; } };
@@ -98,6 +115,31 @@
     }
   });
   window.bpTasks = tsync; tsync();
+
+  // Kapitel: fast rad under menyn som visar vilken del man läser, tryck för att hoppa
+  window.bpSecbar = () => {
+    const otp = document.querySelector("details.otp"), top = document.querySelector(".top");
+    if (!otp || !top || top.querySelector(".secbar")) return;
+    const links = [...otp.querySelectorAll("ol a")], heads = links.map((a) => document.getElementById(a.getAttribute("href").slice(1))).filter(Boolean);
+    if (heads.length < 3) return;
+    const bar = document.createElement("div"); bar.className = "secbar"; bar.hidden = true;
+    bar.innerHTML = `<div class="sbw"><button type="button" aria-expanded="false"><span class="sbn"></span><span class="sbt"></span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><ol>${links.map((a, i) => `<li><a href="${a.getAttribute("href")}"><span>${i + 1}</span>${a.textContent}</a></li>`).join("")}</ol></div>`;
+    top.append(bar);
+    const btn = bar.querySelector("button");
+    const close = () => { bar.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); };
+    btn.onclick = () => { const o = bar.classList.toggle("open"); btn.setAttribute("aria-expanded", o); };
+    bar.querySelectorAll("ol a").forEach((a) => a.addEventListener("click", close));
+    const upd = () => {
+      const show = otp.getBoundingClientRect().bottom < 0 && heads[heads.length - 1].getBoundingClientRect().top > -2000;
+      bar.hidden = !show; if (!show) return close();
+      let cur = 0; heads.forEach((h, i) => { if (h.getBoundingClientRect().top < 140) cur = i; });
+      bar.querySelector(".sbn").textContent = `Part ${cur + 1} of ${heads.length}`;
+      bar.querySelector(".sbt").textContent = heads[cur].textContent;
+      bar.querySelectorAll("ol li").forEach((li, i) => li.classList.toggle("on", i === cur));
+    };
+    addEventListener("scroll", upd, { passive: true }); upd();
+  };
+  window.bpSecbar();
 
   // Innehållsförteckning: markera avsnittet man läser
   const toc = document.querySelectorAll(".toc a[href^='#']");

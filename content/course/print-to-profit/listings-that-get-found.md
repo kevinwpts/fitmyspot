@@ -72,6 +72,75 @@ Add a short FAQ at the end of the description. Every question a buyer has is a r
 listing-templates.pdf | Listing templates & scripts (PDF) | Title, 13-tag sheet, description, FAQ, messages, video hooks and shot list.
 :::
 
+## Open your Etsy shop, step by step
+
+It takes about 30 minutes. Have these ready: your ID (passport or driving licence), your bank details and a payment card. Etsy changes its screens now and then, so a button can have a slightly different name.
+
+::: step pointer | Start the shop
+Go to **etsy.com/sell** and tap **Open your Etsy shop**. Log in, or create an account with your email.
+:::
+
+::: step pencil | Pick language, country and currency
+Choose **English** as the shop language if you want to sell worldwide. It can't be changed later. Pick the currency of your bank account, otherwise Etsy charges 2.5% to convert every payout.
+:::
+
+::: step tag | Name your shop
+4–20 letters or numbers, no spaces. Short, easy to say, and about your niche, for example `DeskFitStudio` or `GameShelfPrints`. Have 2–3 backups ready in case your first choice is taken.
+:::
+
+::: step box | Add your first listing
+Etsy needs one listing before the shop can open. Use the next section to fill it in, field by field.
+:::
+
+::: step coins | Set up how you get paid
+Add your bank account. The name must match the account holder exactly. Then verify your identity with your ID (Etsy uses a partner called Persona). Add a card for Etsy's fees, and pay the one-time setup fee if your country has one. Etsy shows the exact amount before you pay.
+:::
+
+::: step shield | Turn on two-factor login
+**Settings → Security → Two-factor authentication.** It protects your payouts. Etsy may ask for it anyway.
+:::
+
+::: step check | Open the shop
+Tap **Open your shop**. Then fill in your **policies** (Settings → Policies, use Etsy's template), your **About** section and a shop icon. A finished shop looks trustworthy, and Etsy says the policy template helps in search.
+:::
+
+## Publish your listing, field by field
+
+Go to **Shop Manager → Listings → Add a listing**. Fill it in from top to bottom:
+
+| Field | What to put there |
+|---|---|
+| **Photos** | Your 5 photos from chapter 7. The hero shot first. Up to 10 are allowed. |
+| **Video** | Optional, 5–15 seconds. Your product in use, no sound needed. |
+| **Title** | Your title from the template above. |
+| **About this listing** | "I did" + "A finished product" + "Made to order" for prints you make after the order. |
+| **Category** | Type what it is, pick the closest suggestion. |
+| **Attributes** | Fill in every one: color, material, room, occasion. They power Etsy's filters. |
+| **Description** | Your description from the template, with the FAQ at the end. |
+| **Personalization** | Turn on if you add names. Write clear instructions and a character limit. |
+| **Price and quantity** | Your price from the worksheet. Quantity 5–10 for made-to-order items, so it doesn't sell out after one order. |
+| **Variations** | Colors or sizes. Give each its own price if they cost more. |
+| **Tags** | All 13, from the tag formula below. |
+| **Shipping** | Create a shipping profile once (next step) and reuse it. |
+| **Return policy** | Pick one. Even "no returns, but I fix problems" beats nothing. |
+| **Product safety (EU)** | If you sell to the EU: your name, address, a product code and any warnings (chapter 4). |
+
+::: step truck | Make your shipping profile once
+In the listing, under **Shipping**, tap **Create shipping profile**:
+
+- **Ship from:** your postcode
+- **Processing time:** how many days you need to make and pack it, for example 1–3 days
+- **Where you ship:** your country first, then add the US, UK and the EU when you know the prices
+- **Price per country:** from your shipping table in chapter 9. US buyers: under $6, the rest goes in the item price
+- **Item weight and size:** with packaging. Etsy uses it for calculated shipping and labels
+
+Save it with a clear name, like `Small flat parcel`. Next time you just pick it.
+:::
+
+::: step check | Preview, then publish
+Tap **Preview** and look at it on your phone. Is the first photo clear? Does the title say what it is? Then **Publish**. It costs $0.20.
+:::
+
 ## Make every listing look like a brand
 
 ::: icons

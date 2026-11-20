@@ -62,6 +62,26 @@ You don't need a website to sell to your followers. Use a **payment link**: Stri
 
 > Thanks for asking! It's $[price] including shipping to [country]. Pay here and I'll ship within [X] days: [link]. Want a name on it? Just reply with the name.
 
+### Make a payment link with Stripe in 5 minutes
+
+::: step pointer | Create a free Stripe account
+Go to **stripe.com**, sign up and verify your identity and bank account.
+:::
+
+::: step box | Add your product
+**Product catalog → Add product.** Name, photo and price. For a physical product, also turn on **shipping address collection** when you create the link.
+:::
+
+::: step link | Create the link
+**Payment Links → New.** Pick the product. Under options, tick **Collect customers' addresses** and choose the countries you ship to. Tap **Create link** and copy it.
+:::
+
+::: step msg | Share it
+Paste it in your Instagram bio, your link page, or DMs. You get an email for every order, with the buyer's address.
+:::
+
+PayPal works the same way: **PayPal Business → Pay Links and Buttons**.
+
 ::: tip | Make videos even if you sell on Etsy
 A short video can send buyers to your Etsy listing. Those visits and sales also help the listing in Etsy search. Your videos and your shop work together.
 :::

@@ -50,6 +50,26 @@ Small shops, gift shops and cafés sometimes sell local products on commission. 
 Christmas markets, craft fairs, maker fairs. Great for personalized items: people order on the spot. You also learn fast what people pick up and what they ignore.
 :::
 
+## Film your first video in 10 minutes
+
+::: step camera | Set up the phone
+Vertical, 1080p, 30 fps. Lean the phone against a mug or use a small tripod. Stand by a window, no ceiling light.
+:::
+
+::: step list | Film 3 short clips
+1. **The problem**, 2 seconds: the messy drawer, the cards everywhere.
+2. **The product**, 4 seconds: put it in place, slowly.
+3. **The result**, 3 seconds: everything tidy. Hold still for 1 extra second at the end.
+:::
+
+::: step pencil | Put it together in the app
+Open Instagram (or the free app **Edits** or **CapCut**), add the 3 clips in order. Add one line of text in the **first second**, for example *"My drawer was chaos"*. Big letters, middle of the screen.
+:::
+
+::: step zap | Add sound and post
+Pick a trending sound and turn it down to about 20%. Write a caption that ends with a question, like *"Would you use this?"*. Post between 6 and 8 pm, and answer every comment in the first hour.
+:::
+
 ## Your 14-day sales sprint
 
 One small action per day. Check it off.

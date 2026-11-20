@@ -82,6 +82,8 @@ Outside your trade area (for example from the EU to the UK or US), parcels may n
 
 ::: step tag | Buy labels through the marketplace
 In many countries (including the US, UK and Canada), Etsy sells discounted shipping labels right in the order screen. It's often cheaper than the post office counter, adds tracking automatically and marks the order as shipped.
+
+How: **Shop Manager → Orders & Shipping →** open the order **→ Purchase shipping label →** check the weight and size **→** pick the cheapest tracked option **→ Buy → Print.** A cheap thermal label printer saves a lot of time once you ship a few orders a week.
 :::
 
 ::: step ruler | Design to the size limit, not the product

@@ -103,6 +103,8 @@ When you create a listing, Etsy asks who made it and when. Answer **"I did"** an
 
 ::: step shield | Add the EU safety info in Etsy
 If you sell to buyers in the EU, Etsy asks for product safety information (GPSR). Fill in your name, address and contact as the responsible person, add a product identifier (for example a product code like `BP-CAB-01`) and any warnings. Put the same info on a small card in the package.
+
+Where: in each listing, scroll to **Product safety** (or set it once for the shop under **Settings → Options**). Etsy moves this now and then, so search for "GPSR" in Etsy's help if you can't find it.
 :::
 
 ::: do | Before you list a product

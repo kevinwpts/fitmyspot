@@ -67,6 +67,20 @@ Businesses order more, and they come back. Ideas:
 Bring a sample, show a price list, promise a delivery date you can keep. Ask for 50% upfront on big orders.
 :::
 
+## Batch printing in Bambu Studio, step by step
+
+::: step copy | Fill the plate
+Open your product. Right-click it → **Fill bed with copies** (in older versions: select it, press **+** a few times, then press **A** to arrange). Leave at least 5 mm between parts.
+:::
+
+::: step clock | Check the time per piece
+Slice and divide the total time by the number of pieces. Batch printing is often much faster per piece, because the printer heats up and levels only once.
+:::
+
+::: step file | Save it as a batch project
+**File → Save project as**, for example `card-holder-plate-4x.3mf`. Next time: open, slice, print. No setup.
+:::
+
 ## Know your numbers every month
 
 A simple monthly check:
