@@ -2,6 +2,7 @@
 title: "Can You Sell 3D Prints? The 30-Second License Check"
 h1: "Can You Sell 3D Prints? The 30-Second Check That Saves Your Shop"
 description: Which 3D models you can legally sell prints of, what CC, MakerWorld and Printables licenses mean, and how commercial licenses work. Plain English.
+image_alt: "A finished 3D printed lamp base on a print plate next to a license document and reading glasses"
 nav: Can you sell 3D prints?
 type: free
 order: 2
