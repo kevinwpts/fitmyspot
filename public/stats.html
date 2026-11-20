@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Stats | boredprinter</title>
+<meta name="description" content="Private stats.">
+<link rel="canonical" href="https://boredprinter.com/stats">
+<meta name="robots" content="noindex">
+<meta name="google-site-verification" content="k2pg0YUW4uSaR17aU-OOrcagvWNx2prDQFDTYDuasYI">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="boredprinter">
+<meta property="og:title" content="Stats | boredprinter">
+<meta property="og:description" content="Private stats.">
+<meta property="og:url" content="https://boredprinter.com/stats">
+<meta property="og:image" content="https://boredprinter.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBFAF7">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css?v=4c658671">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a><header class="top"><div class="wrap">
+<a class="logo" href="/" aria-label="boredprinter home"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a>
+<nav class="nav" aria-label="Main"><a href="/guides" class="">Guides</a><a href="/tools/3d-print-price-calculator" class="hm">Calculator</a><a href="/library" class="hm">My guides</a><a class="btn or" href="/guides/print-to-profit">Get the guide</a></nav>
+</div></header>
+<main id="main" class="art"><div class="wrap lib"><div class="ahead"><h1 style="font-size:clamp(32px,5vw,46px)">Stats</h1><p class="lead">Visitors, buy clicks and sales. Your own visits on this device are not counted.</p></div>
+<div class="stx" id="stTabs"><button data-d="1">Today</button><button data-d="7" class="on">7 days</button><button data-d="30">30 days</button><button data-d="365">All</button></div>
+<div id="stErr" class="cbox" hidden></div>
+<div id="stBody" hidden>
+  <div class="kpis">
+    <div><span>Visitors</span><b id="kV">–</b></div>
+    <div><span>Buy clicks</span><b id="kB">–</b></div>
+    <div class="hl"><span>Sales</span><b id="kS">–</b></div>
+    <div class="hl"><span>Revenue</span><b id="kR">–</b></div>
+  </div>
+  <h3 class="sth">Funnel</h3>
+  <div class="cbox" id="fun"></div>
+  <h3 class="sth">Visitors per day</h3>
+  <div class="cbox"><div class="bars" id="days"></div></div>
+  <h3 class="sth">Where they come from</h3>
+  <div class="cbox"><ul class="tl" id="src"></ul></div>
+  <h3 class="sth">Top pages</h3>
+  <div class="cbox"><ul class="tl" id="pages"></ul></div>
+  <h3 class="sth">Top buttons</h3>
+  <div class="cbox"><ul class="tl" id="btns"></ul></div>
+  <p class="small" style="color:var(--muted);margin-top:18px" id="stNote"></p>
+</div>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const key = (location.hash.slice(1) || (() => { try { return localStorage.getItem("bp_statkey") || ""; } catch { return ""; } })());
+  try { if (key) localStorage.setItem("bp_statkey", key); localStorage.setItem("bp_nt", "1"); } catch {}
+  if (location.hash) history.replaceState(null, "", "/stats");
+  const esc = (s) => String(s ?? "").replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+  const nice = (p) => esc(p === "/" ? "Home" : p.replace(/https:\/\/buy\.stripe\.com\/\S+/, "BUY (Stripe)").replace(/^\/guides\/print-to-profit\//, "Ch: ").replace(/ @(\/\S*)$/, " · on $1"));
+  const list = (el, rows, label) => { const max = Math.max(1, ...rows.map((r) => r.n)); el.innerHTML = rows.length ? rows.map((r) => `<li><span>${label(r)}</span><b>${r.n}</b><i style="width:${(r.n / max) * 100}%"></i></li>`).join("") : "<li><span>No data yet</span></li>"; };
+  async function load(d) {
+    $("stErr").hidden = true;
+    const r = await fetch(`${bp.SB}/rest/v1/rpc/stats`, { method: "POST", headers: { apikey: bp.KEY, authorization: `Bearer ${bp.KEY}`, "content-type": "application/json" }, body: JSON.stringify({ p_key: key, p_days: d }) });
+    if (!r.ok) { $("stErr").hidden = false; $("stErr").textContent = "No access. Open the stats link Claude gave you."; $("stBody").hidden = true; return; }
+    const s = await r.json(); $("stBody").hidden = false;
+    $("kV").textContent = s.visitors; $("kB").textContent = s.buy_clicks;
+    $("kS").textContent = "…"; $("kR").textContent = "…";
+    fetch(`/api/sales?k=${encodeURIComponent(key)}&d=${d}`).then((x) => x.json()).then((x) => {
+      if (x.error) { $("kS").textContent = s.thanks; $("kR").textContent = "?"; $("stNote").textContent = "Sales from thank-you page visits (Stripe: " + x.error + ")."; return; }
+      $("kS").textContent = x.sales; $("kR").textContent = "$" + x.revenue.toFixed(0);
+      $("stNote").textContent = `Sales and revenue come from Stripe (before fees and VAT). ${x.discounted} used a discount code. ${s.mobile_pct ?? 0}% of visitors are on mobile.`;
+    }).catch(() => {});
+    const steps = [["Visitors", s.visitors], ["Saw the guide page", s.product_visitors], ["Read chapter 1", s.ch1_visitors], ["Did the quiz", s.quiz], ["Clicked buy", s.buy_clicks], ["Bought (thank-you page)", s.thanks]];
+    const top = Math.max(1, s.visitors);
+    $("fun").innerHTML = steps.map(([t, n]) => `<div class="fr"><span>${t}</span><b>${n}</b><em>${Math.round((n / top) * 100)}%</em><i style="width:${(n / top) * 100}%"></i></div>`).join("");
+    const dmax = Math.max(1, ...s.daily.map((x) => x.visitors));
+    $("days").innerHTML = s.daily.length ? s.daily.map((x) => `<div title="${x.day}: ${x.visitors} visitors, ${x.buy_clicks} buy clicks"><i style="height:${(x.visitors / dmax) * 100}%"></i><u style="height:${(x.buy_clicks / dmax) * 100}%"></u><small>${x.day.slice(3)}</small><b>${x.visitors}</b></div>`).join("") : "No data yet";
+    list($("src"), s.sources, (r) => esc(r.src === "ig" || /instagram/.test(r.src) ? "Instagram" : r.src === "direct / app" ? "Direct / Instagram app" : r.src));
+    list($("pages"), s.pages, (r) => nice(r.path));
+    list($("btns"), s.buttons, (r) => nice(r.path));
+  }
+  document.querySelectorAll("#stTabs button").forEach((b) => b.onclick = () => { document.querySelectorAll("#stTabs button").forEach((x) => x.classList.toggle("on", x === b)); load(+b.dataset.d); });
+  addEventListener("DOMContentLoaded", () => key ? load(7) : ($("stErr").hidden = false, $("stErr").textContent = "No access."));
+})();
+</script>
+</div></main><footer class="foot"><div class="wrap">
+<div><a class="logo" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="40" y="54" width="9" height="6" rx="2" fill="#1A1918"/><rect x="8" y="7" width="48" height="50" rx="11" fill="#1A1918"/><rect x="14" y="18" width="36" height="30" rx="6" fill="#FFF8F1"/><path d="M27 13h10v7l-5 5-5-5z" fill="#FF5B1F"/><path d="M19 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M35 33.5h10a5 5 0 0 1-10 0z" fill="#1A1918"/><path d="M28.5 43h7" stroke="#1A1918" stroke-width="2.6" stroke-linecap="round"/></svg>boredprinter</a><p style="margin:0;max-width:34ch">Honest guides to making money with your 3D printer. Made by <a href="https://www.instagram.com/boredprinter/" rel="noopener" style="display:inline;color:var(--ink);font-weight:600">@boredprinter</a>.</p></div>
+<div><b>Free guides</b><a href="/guides/how-to-make-money-with-a-3d-printer">Make money with a 3D printer</a><a href="/guides/can-you-sell-3d-prints">Can you sell 3D prints?</a><a href="/guides/how-to-price-3d-prints">How to price 3D prints</a><a href="/guides/selling-3d-prints-on-etsy">Selling 3D prints on Etsy</a><a href="/guides/best-3d-prints-to-sell">Best 3D prints to sell</a><a href="/guides/how-much-does-it-cost-to-3d-print">What a 3D print costs</a><a href="/guides/3d-printing-business-ideas">25 business ideas</a><a href="/guides/how-to-ship-3d-prints">How to ship 3D prints</a><a href="/guides/how-to-photograph-3d-prints">Photographing 3D prints</a><a href="/tools/3d-print-price-calculator">Price calculator</a></div>
+<div><b>Premium</b><a href="/guides/print-to-profit">Print to Profit</a><a href="/library">My guides</a></div>
+<div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener" class="igl"><svg class="i" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
+<p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
+</div></footer>
+<script src="/assets/site.js?v=4c658671" defer></script>
+</body></html>

@@ -525,6 +525,11 @@ page = head("3D Print Price Calculator (Free): What to Charge for 3D Prints", "F
 </div></main>""" + footer()
 write(path, page); PAGES.append((path, TODAY, "0.9"))
 
+# ---------- Statistik (privat) ----------
+page = head("Stats | boredprinter", "Private stats.", "/stats", noindex=True) + header() + f"""
+<main id="main" class="art"><div class="wrap lib">{(ROOT / "site/stats.html").read_text()}</div></main>""" + footer()
+write("/stats", page)
+
 # ---------- My guides ----------
 _cy = yaml.safe_load((ROOT / "content/course/print-to-profit/course.yaml").read_text())
 lib_html = (ROOT / "site/library.html").read_text().replace("__CHAPTERS__", json.dumps([{"p": f"/guides/print-to-profit/{c['slug']}", "t": c["title"]} for c in _cy["chapters"]])).replace('<label for="libEmail" style="font-weight:600">', f'<label for="libEmail" style="font-weight:600;display:flex;align-items:center;gap:8px">{ico("mail", 18)}')

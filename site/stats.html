@@ -1,0 +1,56 @@
+<div class="ahead"><h1 style="font-size:clamp(32px,5vw,46px)">Stats</h1><p class="lead">Visitors, buy clicks and sales. Your own visits on this device are not counted.</p></div>
+<div class="stx" id="stTabs"><button data-d="1">Today</button><button data-d="7" class="on">7 days</button><button data-d="30">30 days</button><button data-d="365">All</button></div>
+<div id="stErr" class="cbox" hidden></div>
+<div id="stBody" hidden>
+  <div class="kpis">
+    <div><span>Visitors</span><b id="kV">–</b></div>
+    <div><span>Buy clicks</span><b id="kB">–</b></div>
+    <div class="hl"><span>Sales</span><b id="kS">–</b></div>
+    <div class="hl"><span>Revenue</span><b id="kR">–</b></div>
+  </div>
+  <h3 class="sth">Funnel</h3>
+  <div class="cbox" id="fun"></div>
+  <h3 class="sth">Visitors per day</h3>
+  <div class="cbox"><div class="bars" id="days"></div></div>
+  <h3 class="sth">Where they come from</h3>
+  <div class="cbox"><ul class="tl" id="src"></ul></div>
+  <h3 class="sth">Top pages</h3>
+  <div class="cbox"><ul class="tl" id="pages"></ul></div>
+  <h3 class="sth">Top buttons</h3>
+  <div class="cbox"><ul class="tl" id="btns"></ul></div>
+  <p class="small" style="color:var(--muted);margin-top:18px" id="stNote"></p>
+</div>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const key = (location.hash.slice(1) || (() => { try { return localStorage.getItem("bp_statkey") || ""; } catch { return ""; } })());
+  try { if (key) localStorage.setItem("bp_statkey", key); localStorage.setItem("bp_nt", "1"); } catch {}
+  if (location.hash) history.replaceState(null, "", "/stats");
+  const esc = (s) => String(s ?? "").replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+  const nice = (p) => esc(p === "/" ? "Home" : p.replace(/https:\/\/buy\.stripe\.com\/\S+/, "BUY (Stripe)").replace(/^\/guides\/print-to-profit\//, "Ch: ").replace(/ @(\/\S*)$/, " · on $1"));
+  const list = (el, rows, label) => { const max = Math.max(1, ...rows.map((r) => r.n)); el.innerHTML = rows.length ? rows.map((r) => `<li><span>${label(r)}</span><b>${r.n}</b><i style="width:${(r.n / max) * 100}%"></i></li>`).join("") : "<li><span>No data yet</span></li>"; };
+  async function load(d) {
+    $("stErr").hidden = true;
+    const r = await fetch(`${bp.SB}/rest/v1/rpc/stats`, { method: "POST", headers: { apikey: bp.KEY, authorization: `Bearer ${bp.KEY}`, "content-type": "application/json" }, body: JSON.stringify({ p_key: key, p_days: d }) });
+    if (!r.ok) { $("stErr").hidden = false; $("stErr").textContent = "No access. Open the stats link Claude gave you."; $("stBody").hidden = true; return; }
+    const s = await r.json(); $("stBody").hidden = false;
+    $("kV").textContent = s.visitors; $("kB").textContent = s.buy_clicks;
+    $("kS").textContent = "…"; $("kR").textContent = "…";
+    fetch(`/api/sales?k=${encodeURIComponent(key)}&d=${d}`).then((x) => x.json()).then((x) => {
+      if (x.error) { $("kS").textContent = s.thanks; $("kR").textContent = "?"; $("stNote").textContent = "Sales from thank-you page visits (Stripe: " + x.error + ")."; return; }
+      $("kS").textContent = x.sales; $("kR").textContent = "$" + x.revenue.toFixed(0);
+      $("stNote").textContent = `Sales and revenue come from Stripe (before fees and VAT). ${x.discounted} used a discount code. ${s.mobile_pct ?? 0}% of visitors are on mobile.`;
+    }).catch(() => {});
+    const steps = [["Visitors", s.visitors], ["Saw the guide page", s.product_visitors], ["Read chapter 1", s.ch1_visitors], ["Did the quiz", s.quiz], ["Clicked buy", s.buy_clicks], ["Bought (thank-you page)", s.thanks]];
+    const top = Math.max(1, s.visitors);
+    $("fun").innerHTML = steps.map(([t, n]) => `<div class="fr"><span>${t}</span><b>${n}</b><em>${Math.round((n / top) * 100)}%</em><i style="width:${(n / top) * 100}%"></i></div>`).join("");
+    const dmax = Math.max(1, ...s.daily.map((x) => x.visitors));
+    $("days").innerHTML = s.daily.length ? s.daily.map((x) => `<div title="${x.day}: ${x.visitors} visitors, ${x.buy_clicks} buy clicks"><i style="height:${(x.visitors / dmax) * 100}%"></i><u style="height:${(x.buy_clicks / dmax) * 100}%"></u><small>${x.day.slice(3)}</small><b>${x.visitors}</b></div>`).join("") : "No data yet";
+    list($("src"), s.sources, (r) => esc(r.src === "ig" || /instagram/.test(r.src) ? "Instagram" : r.src === "direct / app" ? "Direct / Instagram app" : r.src));
+    list($("pages"), s.pages, (r) => nice(r.path));
+    list($("btns"), s.buttons, (r) => nice(r.path));
+  }
+  document.querySelectorAll("#stTabs button").forEach((b) => b.onclick = () => { document.querySelectorAll("#stTabs button").forEach((x) => x.classList.toggle("on", x === b)); load(+b.dataset.d); });
+  addEventListener("DOMContentLoaded", () => key ? load(7) : ($("stErr").hidden = false, $("stErr").textContent = "No access."));
+})();
+</script>
