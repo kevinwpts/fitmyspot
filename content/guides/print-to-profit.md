@@ -4,7 +4,7 @@ h1: Print to Profit
 description: "Step-by-step guide to selling your 3D prints: what to make, what you can legally sell, what to charge, where to sell and how to get your first 10 sales."
 type: premium
 product: playbook
-price: 19
+price: 29
 order: 10
 updated: 2026-11-19
 pages: 60+
@@ -13,6 +13,7 @@ summary: "Your first 10 sales in 30 days, step by step."
 outline:
   - "Pick your lane: the 7 ways to earn, and a quiz to choose yours"
   - Find products that sell, with a step-by-step research method
+  - "Design your first product in Tinkercad (free), plus names and text in Bambu Studio"
   - "The legal part done right: licenses, Etsy rules, what to avoid"
   - Pricing worksheets that include your time, fees and shipping
   - Photos that sell, shot with just a phone and a window
@@ -23,9 +24,10 @@ outline:
   - The 30-day action plan, day by day
 includes:
   - The full guide online, made for reading on your phone
-  - Pricing worksheet + the free price calculator
-  - Listing templates you can copy
-  - A 14-day sales sprint and a 30-day day-by-day plan
+  - "The toolkit: pricing, idea scoring and shipping spreadsheet (Excel and Google Sheets)"
+  - Listing templates and copy-paste scripts (PDF)
+  - "One real example product, followed through every chapter"
+  - A 14-day sales sprint and a printable 30-day checklist
   - Free updates when the rules change
 ---
 

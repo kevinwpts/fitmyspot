@@ -172,6 +172,10 @@ HOME_FAQ = [
     {"q": "Do I need an account to buy?", "a": "No. You pay with your email and get access right away. To come back later, log in with a link we email you. No password."},
 ]
 P = PROD["playbook"]
+def launch_note(p):
+    if not p.get("later_price"): return ""
+    when = f' on {p["price_until"]}' if p.get("price_until") else " after launch"
+    return f'Launch price. Goes up to ${p["later_price"]}{when}.'
 main_cta = (f'<a class="btn or big" href="{e(P["link"])}">Get Print to Profit · ${P["price"]}</a>' if P.get("link")
             else '<a class="btn or big" href="/guides/print-to-profit#waitlist">Get early access</a>')
 CHECK = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
@@ -179,11 +183,12 @@ CROSS = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="cur
 pains = ["Your printer mostly sits there doing nothing", "You have no idea what would actually sell", "You're not sure what you're even allowed to sell", "Your prices barely cover the filament", "Etsy's new rules confuse you"]
 learn = [
     ("What to make", "A simple method to find products people already want to buy, so you don't waste weeks on things that don't sell."),
+    ("How to design it yourself", "Your own product in Tinkercad (free) in about an hour, plus names and text in Bambu Studio. No design skills needed."),
     ("What you're allowed to sell", "Licenses and Etsy's 2025 rules in plain English, so your shop doesn't get shut down."),
-    ("What to charge", "Worksheets that include filament, power, your time and fees, so every sale is actually worth it."),
+    ("What to charge", "A spreadsheet that includes filament, power, your time and fees, so every sale is actually worth it."),
     ("Where to sell", "Etsy, your own shop, local buyers and businesses. Which fits you, and how to start."),
     ("How to get your first 10 sales", "Photos, listings and posts that sell, without paying for ads."),
-    ("A 30-day plan", "What to do each day, from today until your first sales come in."),
+    ("A 30-day plan", "What to do each day, from today until your first sales come in. With one real example product followed through every step."),
 ]
 steps = [("Pick one product", "Use the research method to find something a specific group of people wants."),
          ("Price it right", "Run the numbers once with the worksheet. Never sell at a loss again."),
@@ -218,8 +223,8 @@ home += header() + f"""
 <div class="sech"><div><h2>Look inside</h2><p>Short chapters, made for your phone. Every one ends with a task you can do the same day.</p></div><a class="more" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free →</a></div>
 <div class="inside">
 <figure><div class="phone"><img src="/img/inside/quiz.webp" alt="A quiz in chapter 1 that picks your way to make money" width="780" height="1560" loading="lazy"></div><figcaption><b>Quizzes that decide for you</b>Find the way to earn that fits you.</figcaption></figure>
-<figure><div class="phone"><img src="/img/inside/steps.webp" alt="Step-by-step pricing worksheet in chapter 4" width="780" height="1560" loading="lazy"></div><figcaption><b>Fill-in worksheets</b>Work out your real price, step by step.</figcaption></figure>
-<figure><div class="phone"><img src="/img/inside/yesno.webp" alt="Clear do and don't lists in chapter 3" width="780" height="1560" loading="lazy"></div><figcaption><b>Clear yes and no</b>Know exactly what you can sell.</figcaption></figure>
+<figure><div class="phone"><img src="/img/inside/steps.webp" alt="Step-by-step pricing worksheet in chapter 5" width="780" height="1560" loading="lazy"></div><figcaption><b>Fill-in worksheets</b>Work out your real price, step by step.</figcaption></figure>
+<figure><div class="phone"><img src="/img/inside/yesno.webp" alt="Clear do and don't lists in chapter 4" width="780" height="1560" loading="lazy"></div><figcaption><b>Clear yes and no</b>Know exactly what you can sell.</figcaption></figure>
 </div>
 </div></section>
 
@@ -234,8 +239,8 @@ home += header() + f"""
 <h2>Print to Profit</h2>
 <p class="lead" style="margin-top:12px">Your first 10 sales in 30 days, step by step.</p>
 <ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>Instant access on any device</li></ul>
-<p class="vstack">10 chapters · about 60 minutes · quiz, worksheets, templates and a 30-day plan</p>
-<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{'one-time payment' if P.get('link') else 'at launch · join the list for a launch discount'}</span></div>
+<p class="vstack">11 chapters · about 70 minutes · spreadsheet toolkit, templates, a real example and a 30-day plan</p>
+<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{launch_note(P) or 'one-time payment'}</span></div>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 <p class="fine2">Secure checkout by Stripe. VAT handled for your country.</p>
 </div>
@@ -329,7 +334,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
     (ROOT / "private/course" / c["guide"]).mkdir(parents=True, exist_ok=True)
     prod_k = c["product"]; P_ = PROD[prod_k]
     buy_url = P_["link"] or f"/guides/{c['guide']}#waitlist"
-    buy_lbl = f"Get {c['title']} · ${P_['price']}" if P_["link"] else "Get early access (launch discount)"
+    buy_lbl = f"Get {c['title']} · ${P_['price']}" if P_["link"] else "Get early access"
     for i, ch in enumerate(c["chapters"]):
         src = gdir / f"{ch['slug']}.md"
         ch["ready"] = src.exists()
@@ -394,7 +399,7 @@ for g in PREM:
     ld = [crumbs_ld([("Home", "/"), ("Guides", "/guides"), (g["h1"], path)]), faq_ld(PREM_FAQ),
           {"@context": "https://schema.org", "@type": "Product", "name": g["h1"], "description": g["description"], "brand": {"@type": "Brand", "name": "boredprinter"}, "image": URL + "/og.png",
            "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": "USD", "availability": avail, "url": URL + path}}]
-    soon = "" if p.get("link") else '<p class="note"><span class="tag soon">Coming soon</span> Join the list and get it first, with a launch discount.</p>'
+    soon = "" if p.get("link") else '<p class="note"><span class="tag soon">Coming soon</span> Join the list and get it first, at the launch price.</p>'
     other = next((x for x in PREM if x["product"] != k), None)
     page = head(g["title"], g["description"], path, ld) + header("guides") + f"""
 <main id="main">
@@ -404,7 +409,7 @@ for g in PREM:
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Premium</span></nav>
 <h1 style="margin-top:18px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
 <p class="lead" style="margin-top:16px">{e(g['summary'])}</p>
-<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">Secure checkout by Stripe · Instant access · Free updates</p></div>
+<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{f'<p class="launch">{launch_note(p)}</p>' if launch_note(p) else ''}{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">Secure checkout by Stripe · Instant access · Free updates</p></div>
 </div></div></section>
 <section class="sec alt"><div class="wrap cols">
 <div class="prose" style="font-size:17px">{intro}</div>
@@ -414,7 +419,7 @@ for g in PREM:
 <div><h2 style="font-size:28px;margin-bottom:16px">You get</h2><ul class="chk">{inc}</ul></div>
 <div><h2 style="font-size:28px;margin-bottom:16px">Questions</h2>{faq_html(PREM_FAQ)}</div>
 </div></section>
-<section class="sec"><div class="wrap">{signup('wait-' + k, title='Get it first', text='Join the list and you\'ll get an email the day it launches, with a launch discount. Plus the free First Sale Checklist right away.', bullets=('Launch day email', 'Launch discount', 'Free checklist now'), anchor='waitlist') if not p.get('link') else ''}
+<section class="sec"><div class="wrap">{signup('wait-' + k, title='Get it first', text='Join the list and you\'ll get an email the day it launches, at the launch price. Plus the free First Sale Checklist right away.', bullets=('Launch day email', 'Launch price', 'Free checklist now'), anchor='waitlist') if not p.get('link') else ''}
 <div style="margin-top:40px"><h2 style="font-size:28px;margin-bottom:16px">Also available</h2><div class="cards">{card(other) if other else ""}{card(FREE[0])}{card(FREE[1])}{CALC_CARD}</div></div>
 </div></section>
 </main>""" + footer()

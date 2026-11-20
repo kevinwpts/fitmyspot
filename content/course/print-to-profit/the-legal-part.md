@@ -122,6 +122,20 @@ msg | Report it | Marketplaces have forms for reporting copied designs.
 star | Stay ahead | Improve your product, add personalization, build your name. Copycats rarely keep up.
 :::
 
+::: case Switch game card holder
+**License:** our own design, built in Tinkercad from scratch. ✓
+
+**Brand names:** "Nintendo" and "Switch" are trademarks. Saying it **fits Switch game cards** describes what it works with. No Nintendo logo, no characters, no official-looking packaging, and "Nintendo" is not in the shop name. ✓
+
+**Product safety:** a desk organizer, not a toy, no small loose parts. ✓
+
+**EU buyers (GPSR):** our name and address and a product ID (the listing number) go in the listing and on the package. ✓
+
+**Taxes:** sales are tracked from day 1 in the toolkit spreadsheet. ✓
+
+*Example numbers to show the method. Yours will differ.*
+:::
+
 ::: do | Your task for this chapter
 - Run the **5 checks** on your product from chapter 2
 - Fix anything that fails (or pick your second idea)

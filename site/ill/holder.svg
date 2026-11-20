@@ -1,0 +1,35 @@
+<svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The example product: a 12-slot game card holder, 110 by 30 by 18 mm, with slots 3.8 by 22 mm, 14 mm deep, every 8 mm">
+<style>.hd-t{font:600 15px Geist,system-ui,sans-serif;fill:#16161A}.hd-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.hd-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.hd-d{stroke:#5E6169;stroke-width:1.5;fill:none}</style>
+<rect width="720" height="380" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="hd-b">The example: a 12-slot game card holder</text>
+<text x="36" y="72" class="hd-s">Top view and side view. All sizes in millimetres.</text>
+<!-- top view -->
+<g transform="translate(60 110)">
+ <rect x="0" y="0" width="440" height="120" rx="10" fill="#FFE3D6" stroke="#16161A" stroke-width="2"/>
+ <g fill="#16161A">
+  <rect x="36" y="16" width="15" height="88" rx="2"/><rect x="68" y="16" width="15" height="88" rx="2"/><rect x="100" y="16" width="15" height="88" rx="2"/><rect x="132" y="16" width="15" height="88" rx="2"/><rect x="164" y="16" width="15" height="88" rx="2"/><rect x="196" y="16" width="15" height="88" rx="2"/><rect x="228" y="16" width="15" height="88" rx="2"/><rect x="260" y="16" width="15" height="88" rx="2"/><rect x="292" y="16" width="15" height="88" rx="2"/><rect x="324" y="16" width="15" height="88" rx="2"/><rect x="356" y="16" width="15" height="88" rx="2"/><rect x="388" y="16" width="15" height="88" rx="2"/>
+ </g>
+ <path class="hd-d" d="M0 140v12M440 140v12M0 146h440"/><text x="220" y="170" text-anchor="middle" class="hd-t">110</text>
+ <path class="hd-d" d="M460 0h12M460 120h12M466 0v120"/><text x="482" y="65" class="hd-t">30</text>
+ <path class="hd-d" d="M36 -8v-8M68 -8v-8M36 -12h32"/><text x="52" y="-20" text-anchor="middle" class="hd-s">8 apart</text>
+ <path class="hd-d" d="M418 16h10M418 104h10M423 16v88"/>
+</g>
+<!-- slot detail -->
+<g transform="translate(560 108)">
+ <text x="0" y="0" class="hd-t">One slot</text>
+ <rect x="0" y="16" width="30" height="120" rx="3" fill="#16161A"/>
+ <text x="42" y="36" class="hd-s">3.8 wide</text>
+ <text x="42" y="56" class="hd-s">22 long</text>
+ <text x="42" y="76" class="hd-s">14 deep</text>
+ <text x="42" y="110" class="hd-s">Card: 31 × 21 × 3</text>
+ <text x="42" y="128" class="hd-s">+0.4 mm room</text>
+</g>
+<!-- side view -->
+<g transform="translate(60 300)">
+ <rect x="0" y="0" width="440" height="40" rx="6" fill="#FFE3D6" stroke="#16161A" stroke-width="2"/>
+ <rect x="0" y="0" width="440" height="9" fill="#FFFFFF" opacity="0"/>
+ <path d="M0 31h440" stroke="#16161A" stroke-dasharray="5 5" stroke-width="1.5"/>
+ <text x="452" y="18" class="hd-t">18 high</text>
+ <text x="452" y="38" class="hd-s">4 mm solid floor</text>
+</g>
+</svg>

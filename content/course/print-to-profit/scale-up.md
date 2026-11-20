@@ -15,7 +15,7 @@ Scale only **after** you have a product that sells steadily. Then grow in this o
 - You want to scale "to make it work"
 :::
 
-If you're not ready, go back to chapter 8. More printers don't fix a product nobody buys.
+If you're not ready, go back to chapter 9. More printers don't fix a product nobody buys.
 
 ## Grow in 5 steps
 
@@ -25,7 +25,7 @@ Your time is the limit long before your printer is.
 - **Batch print:** fill the whole plate with the same product
 - **Print stock** of your bestseller in popular colors, ready to ship
 - **Templates:** for personalization, titles and messages
-- **Packing station** (chapter 7) so each order takes 3 minutes
+- **Packing station** (chapter 8) so each order takes 3 minutes
 - **Fewer supports:** redesign to print faster with less cleanup
 :::
 
@@ -108,6 +108,18 @@ Exclusive models can't be published anywhere else, so only use it for designs yo
 
 ::: step target | Use free files as marketing
 Upload a simple free version of your product (for example a basic, non-personalized one). People who print it find you, and some will buy the personalized or premium version from your shop.
+:::
+
+::: case Switch game card holder
+**Batch printing:** 4 holders per plate, a plate overnight and one in the day = 8 per day from one printer.
+
+**More value per order:** a 24-slot version and a matching cable clip as a set.
+
+**Business orders:** game shops and gaming cafés, 10+ in their own colors with their logo (with their permission).
+
+**Passive:** a simple 6-slot version as a free model on MakerWorld for points and traffic. The personalized version stays in the shop.
+
+*Example numbers to show the method. Yours will differ.*
 :::
 
 ::: do | Your task for this chapter

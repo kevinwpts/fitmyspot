@@ -79,7 +79,7 @@ truck | US: shipping under $6 | Etsy prioritizes US listings with shipping under
 - Put shipping into your price with the [calculator](/tools/3d-print-price-calculator)
 :::
 
-More on packing, unboxing and handling problems in [Print to Profit](/guides/print-to-profit), chapter 7.
+More on packing, unboxing and handling problems in [Print to Profit](/guides/print-to-profit), chapter 8.
 
 ## Sources
 

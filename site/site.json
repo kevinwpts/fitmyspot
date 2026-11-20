@@ -8,9 +8,11 @@
   "products": {
     "playbook": {
       "name": "Print to Profit",
-      "price": 19,
+      "price": 29,
       "slug": "print-to-profit",
-      "link": ""
+      "link": "",
+      "later_price": 49,
+      "price_until": ""
     }
   }
 }

@@ -76,7 +76,7 @@ def preprocess(md):
                 depth -= 1
             body.append(lines[i]); i += 1
         i += 1
-        b = preprocess("\n".join(body)).strip() if kind in ("step", "tip", "warn", "note", "answer") else "\n".join(body).strip()
+        b = preprocess("\n".join(body)).strip() if kind in ("step", "tip", "warn", "note", "answer", "case") else "\n".join(body).strip()
         if kind == "step":
             step += 1
             ic, title = (args + ["", ""])[:2]
@@ -87,6 +87,17 @@ def preprocess(md):
             t = args[0] if args else ""
             who = '<p class="kev"><img src="/img/kevin-sm.webp" alt="" width="28" height="28"><span>Kevin\'s tip</span></p>\n' if kind == "tip" else ""
             out.append(f'<div class="call {kind}" markdown="1">\n{who}<div markdown="1">\n\n{"**" + t + "**" if t else ""}\n\n{b}\n\n</div>\n</div>\n')
+        elif kind == "case":
+            t = args[0] if args else "Follow along"
+            out.append(f'<div class="case" markdown="1">\n<p class="caseh">Follow along · {html.escape(t)}</p>\n\n{b}\n\n</div>\n')
+        elif kind == "download":
+            # rader: filnamn | Titel | beskrivning
+            items = []
+            for x in body:
+                if "|" not in x: continue
+                f, t, d = (p.strip() for p in (x.split("|") + ["", ""])[:3])
+                items.append(f'<div class="dl"><div><b>{inline(t)}</b><p>{inline(d)}</p></div><button type="button" class="btn or" data-file="{html.escape(f)}">Download</button></div>')
+            out.append(f'<div class="dls">{"".join(items)}</div>\n')
         elif kind == "do":
             t = args[0] if args else "Do this now"
             items = "".join(f'<li><span class="cb" aria-hidden="true"></span><span>{inline(x[2:])}</span></li>' for x in body if x.startswith("- "))

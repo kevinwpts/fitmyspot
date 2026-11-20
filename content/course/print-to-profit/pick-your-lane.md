@@ -1,4 +1,4 @@
-Welcome to Print to Profit. This guide has 10 short chapters. Each one ends with a small task. Do the task before you read the next chapter, and in 30 days you'll have a product, a price and real buyers.
+Welcome to Print to Profit. This guide has 11 short chapters, and one example product we follow all the way through. Each one ends with a small task. Do the task before you read the next chapter, and in 30 days you'll have a product, a price and real buyers.
 
 ::: answer
 In this chapter you'll **pick one way to make money** with your printer, set a **realistic first goal**, and block **time in your week** for it. That's it. One decision, made properly.
@@ -77,7 +77,7 @@ Answer 4 questions. Pick the answer that's most true for you.
     own: ["Your own designs", "Pick one buyer group and one problem. Chapter 2 shows you how to find a product that sells."],
     parts: ["Replacement parts", "Look around your home for one broken plastic part. Measure it, design it, print it. That's your first listing."],
     files: ["Sell the files", "Start with physical products in parallel. Files sell slowly until you have a following."],
-    biz: ["Print for businesses", "List 5 local businesses that could use signs, displays or holders. You'll contact them in chapter 8."],
+    biz: ["Print for businesses", "List 5 local businesses that could use signs, displays or holders. You'll contact them in chapter 9."],
     content: ["Make content", "Film your next print from start to finish. Post it. Do this every week, and pick a product lane too so you have something to sell."] };
   document.getElementById("quizGo").onclick = () => {
     const score = {}; let n = 0;
@@ -141,6 +141,20 @@ Saying no is part of the plan. For the next 30 days:
 
 ::: warn | The trap: endless research
 It's tempting to keep reading and planning. Don't. The next chapters each end with a task. Do the task, then move on.
+:::
+
+::: case Switch game card holder
+In every chapter we follow **one example product** from idea to sales, so you see each step done for real, not just explained.
+
+**Lane:** your own designs.
+
+**What + for whom:** desk organizers for people who play Nintendo Switch.
+
+**Why this buyer:** they own lots of small game cards that get lost, they spend money on their hobby, and they hang out in easy-to-find communities.
+
+**First goal:** 10 sales in 30 days.
+
+*Example numbers to show the method. Yours will differ.*
 :::
 
 ::: do | Your task for this chapter

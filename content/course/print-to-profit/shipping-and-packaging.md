@@ -29,7 +29,7 @@ Weigh your product **with packaging** and measure the box. Then check prices at 
 - Your nearest neighbour countries
 - The US / your biggest market
 
-Write them in a small table. Use these numbers in your price (chapter 4).
+Write them in a small table. Use these numbers in your price (chapter 5).
 :::
 
 ::: step box | Choose your packaging
@@ -89,11 +89,25 @@ Find your post's cheapest parcel size (often around 2–3 cm thick for large let
 :::
 
 ::: step truck | US buyers: keep shipping under $6
-Etsy prioritizes US listings with shipping under $6. Move the rest into the item price (chapter 4).
+Etsy prioritizes US listings with shipping under $6. Move the rest into the item price (chapter 5).
 :::
 
 ::: step box | Make a 3-minute packing kit
 Pre-fold boxes, pre-cut padding, pre-written thank-you cards. Pack 5 orders at once at a fixed time each day, not one by one.
+:::
+
+::: case Switch game card holder
+**Size and weight:** 110 × 30 × 18 mm, about 65 g packed.
+
+**Packaging:** padded envelope + a piece of cardboard so it can't bend. Shake test: nothing moves. ✓
+
+**Why it's cheap to ship:** we kept it **under 25 mm high** in the design chapter, so it often goes as a large letter instead of a parcel. Check your post's exact limits.
+
+**Etsy US:** shipping set under $6. The rest is in the item price.
+
+**Thank-you card:** "Thanks for your order! Tag @yourshop when it's on your desk." 
+
+*Example numbers to show the method. Yours will differ.*
 :::
 
 ::: do | Your task for this chapter

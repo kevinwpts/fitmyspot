@@ -12,6 +12,26 @@
   // Mobil: stäng listan som standard
   if (matchMedia("(max-width: 899px)").matches) document.querySelector(".rtoc")?.removeAttribute("open");
 
+  // Verktygslådan: ladda ner filer med samma bevis som kapitlen
+  document.addEventListener("click", async (ev) => {
+    const b = ev.target.closest("button[data-file]"); if (!b) return;
+    const t = (() => { const s = get("bp_token", null); return s && s.exp > Date.now() ? s.t : null; })();
+    const ss = get("bp_sess", []);
+    const q = new URLSearchParams({ f: b.dataset.file });
+    if (!t && ss.length) q.set("session_id", ss[ss.length - 1]);
+    const old = b.textContent; b.disabled = true; b.textContent = "Downloading…";
+    try {
+      const r = await fetch("/api/file?" + q, { headers: t ? { authorization: "Bearer " + t } : {} });
+      if (!r.ok) throw r.status;
+      const url = URL.createObjectURL(await r.blob());
+      const a = document.createElement("a"); a.href = url; a.download = b.dataset.file; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      b.textContent = "Downloaded ✓"; window.track && window.track("download", b.dataset.file);
+    } catch (e) {
+      b.textContent = e === 401 || e === 403 ? "Log in on My guides first" : "Try again";
+    } finally { b.disabled = false; setTimeout(() => { b.textContent = old; }, 4000); }
+  });
+
   const body = $("chBody");
   if (!body) { // gratiskapitel
     const end = document.querySelector(".rnav"); if (end && "IntersectionObserver" in window) new IntersectionObserver((es) => es[0].isIntersecting && mark()).observe(end);

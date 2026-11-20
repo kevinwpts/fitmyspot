@@ -131,6 +131,20 @@ Take these 10 photos, in this order. That fills a typical listing:
 Shoot all products in one session per month. Same light, same background, same settings. It's faster, and your shop looks like a brand.
 :::
 
+::: case Switch game card holder
+**Shot list for the holder:**
+
+1. **Hero:** holder full of cards on a clean desk, window light from the side.
+2. **In use:** a hand pulling one card out.
+3. **Proof:** held **upside down**, cards still in. This answers the #1 complaint from the research.
+4. **Size:** next to the console, so buyers see how small it is.
+5. **Personal:** close-up of the name, plus the color options.
+
+**Video (8 seconds):** fill it, flip it upside down, nothing falls out.
+
+*Example numbers to show the method. Yours will differ.*
+:::
+
 ::: do | Your task for this chapter
 - Set up your window studio (10 minutes)
 - Take the **5 photos** of your product

@@ -11,6 +11,10 @@ chapters:
     title: Find products that sell
     summary: A simple research method to find products people already want, before you print anything.
     minutes: 11
+  - slug: design-your-first-product
+    title: Design your first product
+    summary: Your own design in Tinkercad, free and in about an hour. Plus names and text in Bambu Studio.
+    minutes: 12
   - slug: the-legal-part
     title: The legal part, done right
     summary: Licenses, Etsy's rules, trademarks and taxes basics, so your shop never gets shut down.

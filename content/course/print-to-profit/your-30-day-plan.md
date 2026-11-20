@@ -6,6 +6,16 @@ This is the whole guide as a day-by-day plan. About **30–60 minutes a day**. E
 Just continue the next day. The plan works if you finish it, not if you follow it perfectly.
 :::
 
+## Your toolkit {#toolkit}
+
+Everything you need to follow the plan. Download once, use for every product.
+
+::: download
+30-day-checklist.pdf | 30-day checklist (PDF) | Print it, put it on the wall, tick a box every day.
+print-to-profit-toolkit.xlsx | Toolkit spreadsheet (Excel / Google Sheets) | Pricing, idea scoring, shipping and monthly numbers. Fill in the yellow cells, the rest calculates.
+listing-templates.pdf | Listing templates & scripts (PDF) | Title, 13-tag sheet, description, FAQ, messages, video hooks and shot list.
+:::
+
 ## Week 1: Decide
 
 ::: figure plan
@@ -18,52 +28,52 @@ Just continue the next day. The plan works if you finish it, not if you follow i
 | 2 | Collect 20 annoyances from your buyers | 2 |
 | 3 | Check demand on marketplaces, read the bad reviews | 2 |
 | 4 | Score your top 3 ideas, pick the winner | 2 |
-| 5 | Run the 5 legal checks on your product | 3 |
-| 6 | Design (or adapt) your first version | 2 |
+| 5 | Design your first version in Tinkercad | 3 |
+| 6 | Run the 5 legal checks on your product | 4 |
 | 7 | **Rest**, or catch up |  |
 
 ## Week 2: Make
 
 | Day | Task | Chapter |
 |---|---|---|
-| 8 | Print the first version, use it for real | 2 |
-| 9 | Fix what annoys you, print version 2 | 2 |
-| 10 | Fill in the pricing worksheet, set your price | 4 |
-| 11 | Check real postage and packaging costs | 7 |
-| 12 | Set up your window studio, take the 5 photos | 5 |
-| 13 | Edit photos, pick your hero shot | 5 |
+| 8 | Print the first version, use it for real | 3 |
+| 9 | Fix what annoys you, print version 2 | 3 |
+| 10 | Fill in the pricing worksheet, set your price | 5 |
+| 11 | Check real postage and packaging costs | 8 |
+| 12 | Set up your window studio, take the 5 photos | 6 |
+| 13 | Edit photos, pick your hero shot | 6 |
 | 14 | **Rest**, or catch up |  |
 
 ## Week 3: Launch
 
 | Day | Task | Chapter |
 |---|---|---|
-| 15 | Collect 10–15 search phrases | 6 |
-| 16 | Write title, description, tags and FAQ | 6 |
-| 17 | **Publish** your listing (or shop post) | 6 |
-| 18 | Set up your packing station, write your thank-you card | 7 |
-| 19 | Post it on your personal account, send to 5 people | 8 |
-| 20 | Post in 1 local group | 8 |
-| 21 | Film and post your first 15-second video | 8 |
+| 15 | Collect 10–15 search phrases | 7 |
+| 16 | Write title, description, tags and FAQ | 7 |
+| 17 | **Publish** your listing (or shop post) | 7 |
+| 18 | Set up your packing station, write your thank-you card | 8 |
+| 19 | Post it on your personal account, send to 5 people | 9 |
+| 20 | Post in 1 local group | 9 |
+| 21 | Film and post your first 15-second video | 9 |
 
 ## Week 4: Sell
 
 | Day | Task | Chapter |
 |---|---|---|
-| 22 | Join 2 hobby communities, help someone | 8 |
-| 23 | Post a second video, different angle | 8 |
-| 24 | Ask your first buyer (or a friend) for a review | 8 |
-| 25 | Contact 1 local shop or café | 8 |
-| 26 | Improve your weakest photo or title | 5, 6 |
-| 27 | Post a making-of video | 8 |
-| 28 | Look at your numbers: views, clicks, messages, sales | 8 |
-| 29 | Offer a small launch deal to your network | 8 |
-| 30 | **Review:** what worked? Plan your next 30 days | 9 |
+| 22 | Join 2 hobby communities, help someone | 9 |
+| 23 | Post a second video, different angle | 9 |
+| 24 | Ask your first buyer (or a friend) for a review | 9 |
+| 25 | Contact 1 local shop or café | 9 |
+| 26 | Improve your weakest photo or title | 6, 7 |
+| 27 | Post a making-of video | 9 |
+| 28 | Look at your numbers: views, clicks, messages, sales | 9 |
+| 29 | Offer a small launch deal to your network | 9 |
+| 30 | **Review:** what worked? Plan your next 30 days | 10 |
 
 ## After day 30
 
 ::: icons
-check | 10+ sales? | Go to chapter 9 and start saving time and raising value per order.
+check | 10+ sales? | Go to chapter 10 and start saving time and raising value per order.
 target | A few sales? | Keep the 14-day sprint going. Double down on the channel that worked.
 search | No sales? | Normal for some. Check: was there proof of demand? Are the photos clear? Is the price right? Then try idea #2 from your top 3.
 :::

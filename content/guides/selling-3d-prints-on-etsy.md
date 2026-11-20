@@ -115,7 +115,7 @@ truck | Shipping under $6 | For US buyers, Etsy prioritizes listings with shippi
 
 **Example title:** "Personalized Cat Name Sign for Door, Black and Orange PLA"
 
-The full tag formula, title templates and the research routine are in [Print to Profit](/guides/print-to-profit), chapter 6.
+The full tag formula, title templates and the research routine are in [Print to Profit](/guides/print-to-profit), chapter 7.
 
 ::: do | Do this today
 - Go through your Etsy listings (or ideas)

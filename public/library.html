@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700..800&family=Geist:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=0fdf271a">
+<link rel="stylesheet" href="/assets/site.css?v=7e5c4433">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "boredprinter", "url": "https://boredprinter.com", "logo": "https://boredprinter.com/icon-512.png", "sameAs": ["https://www.instagram.com/boredprinter/"]}</script>
 </head>
 <body>
@@ -56,7 +56,7 @@
     if (r.status === 401) { try { localStorage.removeItem("bp_token"); } catch {} $("libLogin").hidden = false; box.hidden = true; return; }
     const d = await r.json().catch(() => ({}));
     const items = (d.products || []);
-    box.innerHTML = `<p style="margin:0 0 14px;color:var(--muted)">Logged in as <b style="color:var(--ink)">${(d.email || "").replace(/[<>&"]/g, "")}</b> · <a href="#" id="libOut">Log out</a></p>` + (items.length ? items.map(k => `<div class="cbox owned"><div><span class="tag pro">Online guide</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><a class="btn or" href="${START[k] || "/guides"}">Read</a></div>`).join("") :
+    box.innerHTML = `<p style="margin:0 0 14px;color:var(--muted)">Logged in as <b style="color:var(--ink)">${(d.email || "").replace(/[<>&"]/g, "")}</b> · <a href="#" id="libOut">Log out</a></p>` + (items.length ? items.map(k => `<div class="cbox owned"><div><span class="tag pro">Online guide</span><h3 style="margin-top:8px">${NAMES[k] || k}</h3></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn or" href="${START[k] || "/guides"}">Read</a>${k === "playbook" ? `<a class="btn ghost" href="/guides/print-to-profit/your-30-day-plan#toolkit">Toolkit</a>` : ""}</span></div>`).join("") :
       `<div class="cbox"><h3>No guides found for this email</h3><p style="color:var(--muted);margin:8px 0 0">Did you use another email at checkout? Log out and try that one. Or <a href="/guides">browse the guides</a>.</p></div>`);
     $("libOut").onclick = e => { e.preventDefault(); try { localStorage.removeItem("bp_token"); } catch {} location.reload(); };
   }
@@ -82,5 +82,5 @@
 <div><b>About</b><a href="/about">About</a><a href="https://www.instagram.com/boredprinter/" rel="noopener">Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
 <p class="fine">© 2026 boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
 </div></footer>
-<script src="/assets/site.js?v=0fdf271a" defer></script>
+<script src="/assets/site.js?v=7e5c4433" defer></script>
 </body></html>

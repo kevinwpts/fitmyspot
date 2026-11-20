@@ -1,0 +1,203 @@
+<div class="qa">
+<p class="qah">The short answer</p>
+<p>You don't need to be a designer. Most products that sell are <strong>boxes, holes and text</strong>. In this chapter you'll build your first own design in <strong>Tinkercad</strong> (free, in the browser), test the fit with a tiny print, and learn to add a name in <strong>Bambu Studio</strong> in under a minute. Your own design is what makes your product safe to sell anywhere, including Etsy.</p>
+</div>
+<h2 id="why-your-own-design-matters">Why your own design matters</h2>
+<p>Etsy's rule since 2025: physical items <strong>must be produced from the seller's original design</strong>. A remix of someone else's model, or a printed file you downloaded, isn't enough. Your own design also means:</p>
+<ul>
+<li>Nobody can take down your listing over a license.</li>
+<li>You can change sizes, colors and text whenever buyers ask.</li>
+<li>You can sell the file later on MakerWorld (chapter 10).</li>
+</ul>
+<div class="call tip">
+<p class="kev"><img src="/img/kevin-sm.webp" alt="" width="28" height="28"><span>Kevin's tip</span></p>
+<div>
+<p><strong>Start simple</strong></p>
+<p>Look at the bestsellers in your niche: many are plain boxes with holes in them. They sell because they fit. Buyers pay for the fit, not for fancy curves.</p>
+</div>
+</div>
+<h2 id="the-example-well-build">The example we'll build</h2>
+<p>Throughout this guide we follow one product: <strong>a 12-slot holder for Switch game cards.</strong> You'll build it here, step by step. Then build your own product the same way.</p>
+<figure class="ill"><svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The example product: a 12-slot game card holder, 110 by 30 by 18 mm, with slots 3.8 by 22 mm, 14 mm deep, every 8 mm">
+<style>.hd-t{font:600 15px Geist,system-ui,sans-serif;fill:#16161A}.hd-s{font:500 13px Geist,system-ui,sans-serif;fill:#5E6169}.hd-b{font:800 22px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.hd-d{stroke:#5E6169;stroke-width:1.5;fill:none}</style>
+<rect width="720" height="380" rx="22" fill="#FFFFFF"/>
+<text x="36" y="48" class="hd-b">The example: a 12-slot game card holder</text>
+<text x="36" y="72" class="hd-s">Top view and side view. All sizes in millimetres.</text>
+<!-- top view -->
+<g transform="translate(60 110)">
+ <rect x="0" y="0" width="440" height="120" rx="10" fill="#FFE3D6" stroke="#16161A" stroke-width="2"/>
+ <g fill="#16161A">
+  <rect x="36" y="16" width="15" height="88" rx="2"/><rect x="68" y="16" width="15" height="88" rx="2"/><rect x="100" y="16" width="15" height="88" rx="2"/><rect x="132" y="16" width="15" height="88" rx="2"/><rect x="164" y="16" width="15" height="88" rx="2"/><rect x="196" y="16" width="15" height="88" rx="2"/><rect x="228" y="16" width="15" height="88" rx="2"/><rect x="260" y="16" width="15" height="88" rx="2"/><rect x="292" y="16" width="15" height="88" rx="2"/><rect x="324" y="16" width="15" height="88" rx="2"/><rect x="356" y="16" width="15" height="88" rx="2"/><rect x="388" y="16" width="15" height="88" rx="2"/>
+ </g>
+ <path class="hd-d" d="M0 140v12M440 140v12M0 146h440"/><text x="220" y="170" text-anchor="middle" class="hd-t">110</text>
+ <path class="hd-d" d="M460 0h12M460 120h12M466 0v120"/><text x="482" y="65" class="hd-t">30</text>
+ <path class="hd-d" d="M36 -8v-8M68 -8v-8M36 -12h32"/><text x="52" y="-20" text-anchor="middle" class="hd-s">8 apart</text>
+ <path class="hd-d" d="M418 16h10M418 104h10M423 16v88"/>
+</g>
+<!-- slot detail -->
+<g transform="translate(560 108)">
+ <text x="0" y="0" class="hd-t">One slot</text>
+ <rect x="0" y="16" width="30" height="120" rx="3" fill="#16161A"/>
+ <text x="42" y="36" class="hd-s">3.8 wide</text>
+ <text x="42" y="56" class="hd-s">22 long</text>
+ <text x="42" y="76" class="hd-s">14 deep</text>
+ <text x="42" y="110" class="hd-s">Card: 31 × 21 × 3</text>
+ <text x="42" y="128" class="hd-s">+0.4 mm room</text>
+</g>
+<!-- side view -->
+<g transform="translate(60 300)">
+ <rect x="0" y="0" width="440" height="40" rx="6" fill="#FFE3D6" stroke="#16161A" stroke-width="2"/>
+ <rect x="0" y="0" width="440" height="9" fill="#FFFFFF" opacity="0"/>
+ <path d="M0 31h440" stroke="#16161A" stroke-dasharray="5 5" stroke-width="1.5"/>
+ <text x="452" y="18" class="hd-t">18 high</text>
+ <text x="452" y="38" class="hd-s">4 mm solid floor</text>
+</g>
+</svg><figcaption>The numbers come from the real card size (31 × 21 × 3 mm) plus a little room.</figcaption></figure>
+
+<h2 id="before-you-open-tinkercad-3-numbers">Before you open Tinkercad: 3 numbers</h2>
+<section class="step">
+<div aria-hidden="true" class="stepn">01</div>
+<div class="stepb">
+<h2 id="measure-the-thing-your-product-holds-or-fits">Measure the thing your product holds or fits</h2>
+<p>Use calipers (about $10 online, the best tool you'll buy) or a ruler. Write down length, width and thickness.</p>
+<p><strong>Example:</strong> a Switch game card is <strong>31 × 21 × 3 mm</strong>.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">02</div>
+<div class="stepb">
+<h2 id="add-room-for-the-fit">Add room for the fit</h2>
+<p>A print is never exactly the size you drew. Add <strong>0.2–0.4 mm on each side</strong> for things that slide in and out.</p>
+<p><strong>Example:</strong> the card is 3 mm thick, so the slot gets <strong>3.8 mm</strong>. It's 21 mm wide, so the slot gets <strong>22 mm</strong>.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">03</div>
+<div class="stepb">
+<h2 id="decide-the-outside-size">Decide the outside size</h2>
+<p>Walls of at least <strong>2 mm</strong> feel solid. Keep the whole product under <strong>25 mm high</strong> if you can: it then often ships as a large letter, which is much cheaper (chapter 8).</p>
+<p><strong>Example:</strong> 12 slots, 8 mm apart, 4 mm floor → <strong>110 × 30 × 18 mm</strong>.</p>
+</div>
+</section>
+<h2 id="build-it-in-tinkercad-step-by-step">Build it in Tinkercad, step by step</h2>
+<section class="step">
+<div aria-hidden="true" class="stepn">01</div>
+<div class="stepb">
+<h2 id="open-a-new-design">Open a new design</h2>
+<p>Go to <strong>tinkercad.com</strong>, make a free account, click <strong>Create</strong> → <strong>3D Design</strong>. The grid is your build plate. Units are millimetres by default.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">02</div>
+<div class="stepb">
+<h2 id="make-the-body">Make the body</h2>
+<p>From <strong>Basic Shapes</strong> on the right, drag a <strong>Box</strong> onto the grid. Click it. Click the size numbers that appear next to the handles and type <strong>110</strong> (length), <strong>30</strong> (width) and <strong>18</strong> (height).</p>
+<p>In the shape panel, set <strong>Radius</strong> to <strong>2</strong> for soft corners. It instantly looks less "printed".</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">03</div>
+<div class="stepb">
+<h2 id="make-one-slot-as-a-hole">Make one slot as a hole</h2>
+<p>Drag a second <strong>Box</strong> onto the grid. In the shape panel, click <strong>Hole</strong>. Set its size to <strong>3.8 × 22 × 14</strong>.</p>
+<p>Lift it up so it cuts from the top and leaves a floor: set its height above the grid (the small number above the shape when you drag the black cone on top) to <strong>4</strong>. 4 + 14 = 18, so it ends exactly at the top.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">04</div>
+<div class="stepb">
+<h2 id="make-12-slots-exactly-8-mm-apart">Make 12 slots, exactly 8 mm apart</h2>
+<p>Set <strong>Snap Grid</strong> (bottom right) to <strong>1 mm</strong>. Select the hole, press <strong>Ctrl+D</strong> (Cmd+D on Mac) to duplicate, then press the right arrow key <strong>8 times</strong>. Now press <strong>Ctrl+D</strong> again <strong>10 times</strong>: Tinkercad repeats the same move every time. You now have 12 holes, 8 mm apart.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">05</div>
+<div class="stepb">
+<h2 id="center-the-slots">Center the slots</h2>
+<p>Select all 12 holes (drag a box around them). Shift-click the body so it's selected too. Click <strong>Align</strong> (top right) and click the middle dots for length and width. Everything is now centered.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">06</div>
+<div class="stepb">
+<h2 id="cut-the-slots">Cut the slots</h2>
+<p>Select everything (<strong>Ctrl+A</strong>) and click <strong>Group</strong>. The holes cut into the body. Done: that's your product.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">07</div>
+<div class="stepb">
+<h2 id="export-the-file">Export the file</h2>
+<p>Click <strong>Export</strong> → <strong>.STL</strong>. Open the file in Bambu Studio (or your slicer). It should print flat on the bed <strong>without supports</strong>.</p>
+</div>
+</section>
+<div class="call warn">
+<div>
+<p><strong>Before you print the whole thing</strong></p>
+<p>Print a <strong>fit test</strong> first. Make a small box (30 × 30 × 18) with 3 slots: <strong>3.6, 3.8 and 4.0 mm</strong> wide. It takes 15 minutes and 5 grams. Pick the slot that fits best and use that size. Every printer and filament is a little different.</p>
+</div>
+</div>
+<h2 id="5-rules-for-designs-that-print-well">5 rules for designs that print well</h2>
+<div class="yesno"><div class="yes"><p>Do</p><ul><li><svg class="ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A flat bottom on the bed: no supports, clean finish</span></li><li><svg class="ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Walls of <strong>2 mm</strong> or more: solid in the hand, survives the post</span></li><li><svg class="ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Overhangs under <strong>45°</strong>: prints clean without supports</span></li></ul></div><div class="no"><p>Avoid</p><ul><li><svg class="ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg><span>Thin spikes and tiny text: they break in the post</span></li><li><svg class="ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg><span>Sharp outside corners: use Radius 1–2, it looks better and chips less</span></li></ul></div></div>
+
+<h2 id="add-a-name-in-bambu-studio-personalization">Add a name in Bambu Studio (personalization)</h2>
+<p>A name can <strong>double</strong> what people will pay, and it takes under a minute per order once you've set it up.</p>
+<section class="step">
+<div aria-hidden="true" class="stepn">01</div>
+<div class="stepb">
+<h2 id="open-your-model">Open your model</h2>
+<p>Open the STL in <strong>Bambu Studio</strong> and place it on the plate as you'll print it.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">02</div>
+<div class="stepb">
+<h2 id="add-the-text">Add the text</h2>
+<p>Right-click the model → <strong>Add part</strong> → <strong>Text</strong>. Type the name, pick a font and set the size. Use a <strong>bold</strong> font, at least <strong>6 mm</strong> high. Place it on the front or top surface.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">03</div>
+<div class="stepb">
+<h2 id="raised-or-engraved">Raised or engraved?</h2>
+<ul>
+<li><strong>Raised:</strong> leave it as a part. Set the height to <strong>0.6–1 mm</strong>.</li>
+<li><strong>Engraved:</strong> right-click the text in the object list → <strong>Change type</strong> → <strong>Negative part</strong>. Use <strong>0.6 mm</strong> or more of depth (at least 3 layers).</li>
+</ul>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">04</div>
+<div class="stepb">
+<h2 id="give-it-a-second-color-optional">Give it a second color (optional)</h2>
+<p>Right-click the text → <strong>Change filament</strong> → pick a second color. With an AMS it prints in two colors on its own. Without one, add a filament change at the layer where the text starts.</p>
+</div>
+</section>
+<section class="step">
+<div aria-hidden="true" class="stepn">05</div>
+<div class="stepb">
+<h2 id="save-it-as-your-template">Save it as your template</h2>
+<p><strong>File → Save project as</strong> (a .3mf file), for example <code>card-holder-NAME.3mf</code>. For each order: open it, double-click the text, change the name, slice, print.</p>
+</div>
+</section>
+<div class="call tip">
+<p class="kev"><img src="/img/kevin-sm.webp" alt="" width="28" height="28"><span>Kevin's tip</span></p>
+<div>
+<p><strong>Proof before you print</strong></p>
+<p>For personalized orders, send the buyer a screenshot of the name in Bambu Studio before you print. One message saves you from reprints over spelling mistakes.</p>
+</div>
+</div>
+<h2 id="when-you-outgrow-tinkercad">When you outgrow Tinkercad</h2>
+<p>Tinkercad is enough for most products that sell. When you want curves, threads or exact edits later, try <strong>Onshape</strong> (free for public projects, in the browser) or <strong>Fusion</strong> (free personal license). Don't switch before your first 10 sales.</p>
+<div class="case">
+<p class="caseh">Follow along · Switch game card holder</p>
+<p><strong>Design:</strong> 110 × 30 × 18 mm, 12 slots of 3.8 × 22 mm, 14 mm deep, 8 mm apart, 4 mm floor, Radius 2.</p>
+<p><strong>Fit test:</strong> 3.8 mm held the cards without falling out when turned upside down. 4.0 was too loose.</p>
+<p><strong>Print:</strong> about 45 g of PLA and 2 hours. Flat on the bed, no supports. 4 fit on one plate.</p>
+<p><strong>Personalized version:</strong> a name engraved 0.8 mm into the front, in a second color. Template saved as <code>card-holder-NAME.3mf</code>.</p>
+<p><em>Example numbers for one product. Yours will differ.</em></p>
+</div>
+<div class="dobox"><p class="doh">Your task: design version 1 today</p><ul><li><span class="cb" aria-hidden="true"></span><span>Measure the thing your product fits, and add your clearance</span></li><li><span class="cb" aria-hidden="true"></span><span>Build it in Tinkercad (boxes, holes, Group)</span></li><li><span class="cb" aria-hidden="true"></span><span>Print a fit test, then version 1</span></li><li><span class="cb" aria-hidden="true"></span><span>Use it for a few days and fix what annoys you</span></li></ul></div>
+
+<h2 id="next-chapter">Next chapter</h2>
+<p>In <strong>The legal part, done right</strong> you'll check that your product is safe to sell: licenses, Etsy's rules, brand names, product safety and the basics of taxes.</p>

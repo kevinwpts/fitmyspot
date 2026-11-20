@@ -68,6 +68,10 @@ Add a short FAQ at the end of the description. Every question a buyer has is a r
 - **How long until it arrives?** → making time + shipping
 :::
 
+::: download
+listing-templates.pdf | Listing templates & scripts (PDF) | Title, 13-tag sheet, description, FAQ, messages, video hooks and shot list.
+:::
+
 ## Make every listing look like a brand
 
 ::: icons
@@ -126,12 +130,29 @@ file | Use the policy template | Etsy says filling in your shop policies with th
 calendar | Refresh before seasons | Update titles and tags 6–8 weeks before big holidays.
 :::
 
+::: case Switch game card holder
+**Title** (11 words):
+Switch Game Card Holder, 12 Slot Desk Stand, Personalized Cartridge Organizer
+
+**13 tags** (all under 20 characters):
+switch game holder · game card holder · cartridge holder · switch card case · game card storage · switch organizer · gamer desk decor · personalized gamer · gift for gamer · game room decor · cartridge stand · switch accessories · desk organizer
+
+**First two lines of the description:**
+Keeps 12 Switch game cards upright, sorted and easy to grab. The slots are tight: turn it upside down and the cards stay in.
+
+**Personalization box:** "Name for the front (max 10 letters). Leave empty for no name."
+
+**FAQ:** Does it fit Switch 2 cards? → Answer only what you have tested yourself.
+
+*Example numbers to show the method. Yours will differ.*
+:::
+
 ::: do | Your task for this chapter
 - Collect 10–15 real search phrases for your product
 - Write your title using the template
 - Write your description using the template
 - Add tags and the FAQ
-- Publish your first listing (or post), with the 5 photos from chapter 5
+- Publish your first listing (or post), with the 5 photos from chapter 6
 :::
 
 ## Next chapter

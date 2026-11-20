@@ -403,3 +403,10 @@ h3{font-size:20px;font-weight:700;letter-spacing:-.02em}
 ol.learn{list-style:none;padding:0;margin:0;counter-reset:l;gap:0 32px}
 ol.learn>li{counter-increment:l;background:none;border:0;border-top:2px solid var(--ink);border-radius:0;padding:16px 0}
 ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:800 26px/1 var(--display);color:var(--or);margin-bottom:10px}
+.prose .case{border:2px solid var(--ink);border-radius:18px;padding:18px 20px;margin:28px 0;background:var(--card)}
+.prose .case .caseh{font:700 13px var(--body);letter-spacing:.02em;color:var(--or-ink);margin:0 0 8px}
+.prose .case>*:last-child{margin-bottom:0}
+.prose .dls{display:grid;gap:10px;margin:20px 0}
+.prose .dl{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.prose .dl p{margin:4px 0 0;font-size:15px;color:var(--muted)}
+.buy .launch{margin:6px 0 0;font:600 14px var(--body);color:var(--or-ink)}

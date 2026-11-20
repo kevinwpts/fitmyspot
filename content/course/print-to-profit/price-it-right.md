@@ -88,6 +88,12 @@ Marketplaces take a cut of the price. To keep your profit, add the fees on top:
 The [calculator](/tools/3d-print-price-calculator) does this for you, with Etsy-like fees pre-filled.
 :::
 
+::: download
+print-to-profit-toolkit.xlsx | Toolkit spreadsheet (Excel / Google Sheets) | Pricing, idea scoring, shipping and monthly numbers. Fill in the yellow cells, the rest calculates.
+:::
+
+Prefer to work in a spreadsheet? The **Pricing** tab does all of this for up to 20 products. Fill in your settings once.
+
 ## Check it against the market
 
 Now compare with similar listings:
@@ -119,7 +125,7 @@ Two simple options:
 - **Free shipping, built into the price.** Buyers love it. Add your average shipping cost to the price.
 - **Shipping charged separately.** Fine for local or heavy items.
 
-Whichever you choose, check real postage rates for your country **before** you publish the price. More in chapter 7.
+Whichever you choose, check real postage rates for your country **before** you publish the price. More in chapter 8.
 
 ## Insider pricing moves
 
@@ -147,6 +153,27 @@ Add personalization as a variation ("+ name: $4") instead of including it for fr
 `(revenue − all costs) ÷ hours worked`
 
 If it's below what you'd accept for a normal side job, raise prices or drop the product that takes the most time per dollar.
+:::
+
+::: case Switch game card holder
+| Cost | Amount |
+|---|---|
+| Filament: 45 g × $0.02 + 10% | $0.99 |
+| Power: 0.12 kW × 2 h × $0.25 | $0.06 |
+| Machine: 2 h × $0.25 | $0.50 |
+| Your time: 10 min at $20/h | $3.33 |
+| Packaging | $1.00 |
+| **Total cost** | **$5.88** |
+| **× 2.5** | **$14.70** |
+| **+ fees (about 10% + $0.45)** | **$16.84** |
+
+**Market check:** similar holders sell for about $12–25. Ours lands in the middle.
+
+**Price ladder:** 12 slots **$17** · with a name **$22** (+5 min of work) · 24 slots **$27**. Most buyers pick the name.
+
+**Profit per sale at $17:** about $12.30 before your time. That's what the toolkit spreadsheet shows when you type in these numbers.
+
+*Example numbers to show the method. Yours will differ.*
 :::
 
 ::: do | Your task for this chapter

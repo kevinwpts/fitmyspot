@@ -98,7 +98,7 @@ A specific title also makes you easier to find in search.
 :::
 
 ::: tip | Use brand names carefully
-"Fits IKEA Bekant" tells buyers what it works with, which is usually fine. Making it look like an official IKEA product, or using their logo, is not. More in chapter 3.
+"Fits IKEA Bekant" tells buyers what it works with, which is usually fine. Making it look like an official IKEA product, or using their logo, is not. More in chapter 4.
 :::
 
 ## 10 product ideas to get you thinking
@@ -119,7 +119,7 @@ store | Small business sign | For cafés and shops nearby
 :::
 
 ::: warn | Avoid these as a beginner
-- **Toys for young children** (strict safety rules, see chapter 3)
+- **Toys for young children** (strict safety rules, see chapter 4)
 - **Anything for food** unless you know food-safe printing
 - **Safety parts** (helmets, car brakes, child seats, gas, electrical)
 - **Huge or fragile items** (expensive and risky to ship)
@@ -166,6 +166,22 @@ MakerWorld and Printables show downloads and prints for every model. A free mode
 Don't copy a winner. Take a proven product and add one thing it doesn't have: a size for a specific brand, a lid, a name, a stackable version, a set of 3. That one difference is your whole marketing message.
 :::
 
+::: case Switch game card holder
+**Annoyances found** (Reddit, reviews, our own desk): loose cards get lost, the official case only holds a few, cheap holders let cards fall out.
+
+**Etsy autocomplete** for "switch game": *switch game case*, *switch game holder*, *switch game card storage*. Real searches.
+
+**Proof of sales:** a top holder listing had about 250 reviews. 250 × 15–30 ≈ **3,750–7,500 sales**. Demand is real.
+
+**Amazon 2–3 star reviews:** "cards fall out when it tips", "too wide for my desk", "wish I could label it".
+
+**Our +1:** slots tight enough that cards stay in **upside down**, a slim 30 mm footprint, and an optional **name** on the front.
+
+**Score:** 8/10. Clear buyer, proven demand, simple to design, cheap to ship.
+
+*Example numbers to show the method. Yours will differ.*
+:::
+
 ::: do | Your task for this chapter
 - Collect **20 annoyances** from your buyers in 30 minutes
 - Check demand on Etsy/eBay for the best 5
@@ -175,4 +191,4 @@ Don't copy a winner. Take a proven product and add one thing it doesn't have: a 
 
 ## Next chapter
 
-In **The legal part, done right** you'll check that your product is safe to sell: licenses, Etsy's rules, brand names, product safety and the basics of taxes.
+In **Design your first product** you'll turn your idea into your own 3D model in Tinkercad, free and in about an hour, and learn to add names in Bambu Studio.

@@ -138,6 +138,20 @@ chart | "Version 1 vs version 5" | Shows your design process.
 Etsy Ads can be tested with a small daily budget. Run it for 2 weeks on your best listing only. If it brings sales with profit, keep it. If not, stop. Never run ads on a listing that doesn't sell without them.
 :::
 
+::: case Switch game card holder
+**Day 1:** a post on our personal account + a message to 5 friends who play Switch.
+
+**Communities:** Switch subreddits and Facebook groups. First read the rules on self-promotion. Many allow a "here's something I made" post with photos of the build.
+
+**Video hook:** "My Switch cards kept going missing, so I designed this." Then the upside-down test.
+
+**Local:** one game shop, offered 5 holders in their colors to sell at the counter.
+
+**Track:** which post brought clicks and which brought sales, in the toolkit spreadsheet.
+
+*Example numbers to show the method. Yours will differ.*
+:::
+
 ::: do | Your task for this chapter
 - Start the **14-day sprint** today
 - Make a simple tracking note: sale, date, where they came from
