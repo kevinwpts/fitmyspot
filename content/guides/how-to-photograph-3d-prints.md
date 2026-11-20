@@ -2,6 +2,7 @@
 title: "How to Photograph 3D Prints With Your Phone: 5 Shots That Sell"
 h1: "Photograph 3D Prints With Just Your Phone: 5 Shots That Sell"
 description: Take product photos of your 3D prints that sell, with just a phone and a window. Setup, the 5 photos every listing needs, and quick editing.
+image_alt: "A home photo setup by a window: a 3D printed vase on white paper, a foam board reflector and a phone on a small tripod"
 nav: Photographing 3D prints
 type: free
 order: 9
