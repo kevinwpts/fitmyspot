@@ -525,6 +525,18 @@ page = head("3D Print Price Calculator (Free): What to Charge for 3D Prints", "F
 </div></main>""" + footer()
 write(path, page); PAGES.append((path, TODAY, "0.9"))
 
+# ---------- Gratis 7-dagarsplan (för Instagram "kommentera PLAN") ----------
+page = head("Free 7-Day First Sale Plan for 3D Printer Owners | boredprinter", "The free 12-step checklist that takes you from 'I have a 3D printer' to 'someone paid me'. One step a day, plus the free price calculator.", "/plan", noindex=True) + header() + f"""
+<main id="main"><section class="sec"><div class="wrap" style="max-width:720px">
+<p class="kick" style="color:var(--or-ink);font-weight:700;margin:0 0 10px">Free · from @boredprinter</p>
+<h1 style="font-size:clamp(36px,7vw,58px);line-height:1.03">Your first sale with your 3D printer: the 7-day plan</h1>
+<p class="lead" style="margin-top:14px">Enter your email and get the free First Sale Checklist right away: 12 small steps, one or two a day. No fluff, no spam.</p>
+<div style="margin-top:22px">{signup('plan', title='Get the free plan', text='It opens right here as soon as you hit the button.', bullets=('What to print first, and how to check it sells', 'The 30-second license check', 'How to price it, list it and get the first buyer'), anchor='waitlist')}</div>
+<div class="cbox" style="margin-top:26px;display:block"><b>Also free:</b> the <a href="/tools/3d-print-price-calculator">3D print price calculator</a>. Fill in your numbers, get a price that's worth it.</div>
+<div class="cbox plcov" style="margin-top:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">{cover("playbook", "flat")}<div style="flex:1;min-width:220px"><b>Want every step in detail?</b><p style="margin:6px 0 12px;color:var(--muted)">Print to Profit: 12 chapters, a spreadsheet toolkit and a 30-day plan. $10 off with code <b>BORED10</b>.</p><a class="btn or" href="/guides/print-to-profit">See what's inside</a></div></div>
+</div></section></main>""" + footer()
+write("/plan", page)
+
 # ---------- Statistik (privat) ----------
 page = head("Stats | boredprinter", "Private stats.", "/stats", noindex=True) + header() + f"""
 <main id="main" class="art"><div class="wrap lib">{(ROOT / "site/stats.html").read_text()}</div></main>""" + footer()
