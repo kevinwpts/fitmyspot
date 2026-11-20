@@ -2,6 +2,7 @@
 title: "How Much Does a 3D Print Really Cost? (Not the Filament)"
 h1: "How Much Does a 3D Print Really Cost? (Hint: Not the Filament)"
 description: "The real cost of a 3D print: filament, electricity, machine wear and your time, with examples for small, medium and large prints. Free calculator included."
+image_alt: "A finished 3D printed organizer on the print bed next to an almost empty spool and a few failed test prints"
 nav: What a 3D print costs
 type: free
 order: 6

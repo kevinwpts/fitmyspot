@@ -8,6 +8,10 @@ Online, buyers can't touch your product. **The photo is the product.** Two shops
 
 The good news: you don't need a camera, a lightbox or editing skills.
 
+<div class="ba"><figure><img src="/img/course/photo-bad.webp" alt="The same organizer photographed badly on a messy kitchen counter at night" width="800" height="800" loading="lazy"><figcaption><b class="no">Before:</b> night, ceiling lamp, messy background</figcaption></figure><figure><img src="/img/course/photo-good.webp" alt="The same organizer photographed well on a plain background in daylight" width="800" height="800" loading="lazy"><figcaption><b class="yes">After:</b> window light, plain paper, 10 minutes</figcaption></figure></div>
+
+Same product, same phone. Only the light and the background changed.
+
 ## Your 10-minute home studio
 
 ::: figure studio

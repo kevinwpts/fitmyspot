@@ -2,6 +2,7 @@
 title: "25 3D Printing Business Ideas You Can Start This Weekend"
 h1: "25 3D Printing Business Ideas You Can Start This Weekend"
 description: 25 realistic 3D printing business ideas for a home printer, grouped by type, with what each needs to get started. All work with your own designs.
+image_alt: "A home maker corner full of 3D printed products: organizers, planters, keychains, a headphone stand and a game insert"
 nav: 25 business ideas
 type: free
 order: 7

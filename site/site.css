@@ -458,3 +458,8 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
 .igl{display:inline-flex!important;align-items:center;gap:6px}
 .card.hasimg{padding-top:0;overflow:hidden}
 .card .cthumb{display:block;width:calc(100% + 44px);max-width:none;margin:0 -22px 4px;aspect-ratio:16/9;height:auto;object-fit:cover;border-bottom:1px solid var(--line)}
+.prose .ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 10px}
+.prose .ba figure{margin:0}
+.prose .ba img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block}
+.prose .ba figcaption{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.4}
+.prose .ba .no{color:#C0392B}.prose .ba .yes{color:var(--free)}
