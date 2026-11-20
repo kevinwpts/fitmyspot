@@ -78,7 +78,10 @@
     document.querySelectorAll("aside.unlock").forEach((x) => x.remove());
     // Produktsidan: du äger redan guiden
     const buy = document.querySelector(".phero .buy");
-    if (buy) buy.innerHTML = '<p class="owns">✓ You own this guide</p><a class="btn or big wide" href="/library">Open my guide →</a>';
+    if (buy) {
+      buy.innerHTML = '<p class="owns">✓ You own this guide</p><a class="btn or big wide" href="/library">Open my guide →</a>';
+      document.querySelectorAll('a[href*="buy.stripe.com"]').forEach((x) => { x.textContent = "Open my guide →"; x.href = "/library"; });
+    }
   };
   ownedUI();
 
@@ -153,6 +156,17 @@
     els.forEach((e) => { if (!e.classList.contains("in")) { e.classList.add("rv"); io.observe(e); } });
   };
   window.bpReveal();
+
+  // Mobil: tryck på en detaljerad bild för att se den större
+  document.addEventListener("click", (e) => {
+    const f = e.target.closest(".prose figure.ill"); if (!f || innerWidth > 700) return;
+    const svg = f.querySelector("svg"), vb = svg && svg.viewBox.baseVal; if (!vb || vb.width < 700) return;
+    const o = document.createElement("div"); o.className = "zoom";
+    o.innerHTML = `<button type="button" aria-label="Close">✕</button><div class="zin">${svg.outerHTML}</div><p>Turn your phone sideways for a bigger view</p>`;
+    o.onclick = (ev) => { if (ev.target === o || ev.target.tagName === "BUTTON") o.remove(); };
+    document.body.append(o);
+  });
+  document.querySelectorAll(".prose figure.ill").forEach((f) => { const vb = f.querySelector("svg")?.viewBox.baseVal; if (vb && vb.width >= 700) f.classList.add("zm"); });
 
   // Innehållsförteckning: markera avsnittet man läser
   const toc = document.querySelectorAll(".toc a[href^='#']");

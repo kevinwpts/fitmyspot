@@ -591,3 +591,11 @@ figure.ill.in .bar:nth-of-type(2){transition-delay:.1s}
 @media(prefers-reduced-motion:reduce){.rv,figure.ill.rv *{transition:none!important;opacity:1!important;transform:none!important;stroke-dashoffset:0!important}}
 .nav .btn.mine{background:var(--ink);color:#fff}
 .phero .owns{margin:0 0 12px;font-weight:650;color:var(--free)}
+@media(max-width:700px){.prose figure.ill.zm{cursor:zoom-in;position:relative}.prose figure.ill.zm::before{content:"Tap to enlarge";position:absolute;right:10px;bottom:10px;z-index:1;font:600 11px var(--body);background:rgba(22,22,26,.75);color:#fff;padding:4px 8px;border-radius:999px}}
+.zoom{position:fixed;inset:0;z-index:100;background:rgba(10,10,12,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px}
+.zoom .zin{width:100%;max-height:85vh;overflow:auto}
+.zoom svg{display:block;width:100%;height:auto;border-radius:14px;background:#fff}
+.zoom p{color:#B9BAC2;font-size:13px;margin:12px 0 0}
+.zoom button{all:unset;position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;color:#fff;font-size:22px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer}
+@media(orientation:landscape){.zoom p{display:none}}
+@media(orientation:portrait){.zoom .zin{width:86vh;max-width:none;max-height:none;overflow:visible;transform:rotate(90deg)}.zoom p{display:none}}

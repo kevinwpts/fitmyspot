@@ -11,6 +11,7 @@
   fetch("/api/session?session_id=" + encodeURIComponent(sid)).then(r => r.json()).then(d => {
     if (!d.products || !d.products.length) throw 0;
     try { const a = JSON.parse(localStorage.getItem("bp_sess") || "[]"); if (!a.includes(sid)) a.push(sid); localStorage.setItem("bp_sess", JSON.stringify(a.slice(-5))); } catch {}
+    window.bpOwned && window.bpOwned();
     const link = location.origin + "/thanks?session_id=" + encodeURIComponent(sid);
     document.getElementById("tLink").value = link; document.getElementById("tSave").hidden = false;
     document.getElementById("tCopy").onclick = async () => { const i = document.getElementById("tLink"); try { await navigator.clipboard.writeText(link); } catch { i.select(); document.execCommand && document.execCommand("copy"); } document.getElementById("tCopy").textContent = "Copied ✓"; };

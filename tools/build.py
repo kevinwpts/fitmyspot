@@ -333,7 +333,7 @@ home += header() + f"""
 <div class="ctas" style="justify-content:center">{main_cta}<a class="btn ghost big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a></div>
 </div></section>
 <div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>30-day plan to your first 10 sales</small></span>{main_cta.replace('btn or big', 'btn or')}</div>
-<script>(()=>{{const b=document.getElementById("mcta"),h=document.querySelector(".hero");if(!b||!h||!("IntersectionObserver" in window))return;new IntersectionObserver(es=>{{b.hidden=es[0].isIntersecting}}).observe(h)}})();</script>
+<script>(()=>{{const b=document.getElementById("mcta"),h=document.querySelector(".hero,.phero .buy");if(!b||!h||!("IntersectionObserver" in window))return;new IntersectionObserver(es=>{{b.hidden=es[0].isIntersecting}}).observe(h)}})();</script>
 </main>""" + footer()
 write("/", home); PAGES.append(("/", TODAY, "1.0"))
 
@@ -490,7 +490,7 @@ for g in PREM:
 <div><h2 style="font-size:28px;margin-bottom:16px">What's inside</h2><ol class="list2">{outline}</ol></div>
 </div></section>
 <section class="sec"><div class="wrap cols">
-<div><h2 style="font-size:28px;margin-bottom:16px">You get</h2><ul class="inc">{inc}<li>{ico('phone')}<span>Instant access on any device</span></li></ul>{trust_row()}</div>
+<div><h2 style="font-size:28px;margin-bottom:16px">You get</h2><ul class="inc">{inc}<li>{ico('phone')}<span>Instant access on any device</span></li></ul><div class="ctas" style="margin-top:18px">{buy_btn(k, "btn or big")}</div>{trust_row()}</div>
 <div><h2 style="font-size:28px;margin-bottom:16px">Questions</h2>{faq_html(PREM_FAQ)}</div>
 </div></section>
 <section class="sec"><div class="wrap">{signup('wait-' + k, title='Get it first', text='Join the list and you\'ll get an email the day it launches, at the launch price. Plus the free First Sale Checklist right away.', bullets=('Launch day email', 'Launch price', 'Free checklist now'), anchor='waitlist') if not p.get('link') else ''}
@@ -498,6 +498,8 @@ for g in PREM:
 <div class="mini">{IGCHIP}<p>Written by Kevin. I research every rule, fee and step so you don't have to guess.</p></div>
 <div style="margin-top:40px"><h2 style="font-size:28px;margin-bottom:16px">Also available</h2><div class="cards">{card(other) if other else ""}{card(FREE[0])}{card(FREE[1])}{CALC_CARD}</div></div>
 </div></section>
+<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>30-day plan to your first 10 sales</small></span>{main_cta.replace('btn or big', 'btn or')}</div>
+<script>(()=>{{const b=document.getElementById("mcta"),h=document.querySelector(".hero,.phero .buy");if(!b||!h||!("IntersectionObserver" in window))return;new IntersectionObserver(es=>{{b.hidden=es[0].isIntersecting}}).observe(h)}})();</script>
 </main>""" + footer()
     write(path, page); PAGES.append((path, str(g["updated"]), "0.9"))
 
