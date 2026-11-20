@@ -1,7 +1,7 @@
 ---
 title: Terms and refunds | boredprinter
 h1: Terms and refunds
-description: The terms for using boredprinter and buying our guides, including our refund policy.
+description: The terms for using boredprinter and buying our guides, including the 30-day money-back guarantee, payments by Stripe and your rights.
 ---
 
 *Last updated: November 20, 2026*

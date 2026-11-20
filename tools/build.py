@@ -403,6 +403,11 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
         ch["ready"] = src.exists()
         if ch["ready"]:
             md = MD(); body = md.convert(preprocess(src.read_text().replace("{{BUY}}", e(buy_url)).replace("{{PRICE}}", str(P_["price"]))))
+            heads = [re.sub(r"\s*\{#.*\}$", "", h).strip() for h in re.findall(r"^## (.+)$", src.read_text(), flags=re.M)]
+            parts = [t for t in md.toc_tokens if t["name"] in heads and t["name"] not in ("Next chapter",)]
+            if len(parts) >= 3:
+                body = (f'<details class="otp"><summary>{ico("book", 16)}In this chapter · {len(parts)} parts</summary><ol>'
+                        + "".join(f'<li><a href="#{t["id"]}">{e(t["name"])}</a></li>' for t in parts) + '</ol></details>') + body
             body = stack_tables(body)
             body = re.sub(r"<table( class=\"stack\")?>", r'<div class="tbl"><table\1>', body).replace("</table>", "</table></div>")
             body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
@@ -434,7 +439,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
 <aside class="rside" aria-label="Chapters"><details class="rtoc" open><summary><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><span><b>{e(c['title'])}</b><small>{n} chapters</small></span></summary><nav>{side}</nav></details></aside>
 <div class="rmain">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/{c['guide']}">{e(c['title'])}</a> / <span>Chapter {i+1}</span></nav>
-<header class="ahead" style="margin:18px 0 26px"><p class="chk2">Chapter {i+1} of {n} · {ch['minutes']} min{' · Free to read' if ch.get('free') else ''}</p><h1 style="font-size:clamp(32px,4.6vw,48px)">{e(ch['title'])}</h1><p class="lead">{e(ch['summary'])}</p></header>
+<header class="ahead" style="margin:18px 0 26px"><p class="chk2">Chapter {i+1} of {n} · {ch['minutes']} min{' · Free to read' if ch.get('free') else ''}</p><div class="cprog" aria-hidden="true"><span style="width:{round((i+1)/n*100)}%"></span></div><h1 style="font-size:clamp(32px,4.6vw,48px)">{e(ch['title'])}</h1><p class="lead">{e(ch['summary'])}</p></header>
 {content}
 {nav}
 </div></div></main>

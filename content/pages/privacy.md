@@ -1,5 +1,5 @@
 ---
-title: Privacy policy | boredprinter
+title: Privacy policy | boredprinter guides
 h1: Privacy policy
 description: How boredprinter handles your data, in plain words. What we store for the email list, purchases and login, and your rights.
 ---
