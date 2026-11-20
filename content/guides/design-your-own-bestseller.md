@@ -9,7 +9,7 @@ order: 11
 updated: 2026-11-19
 pages: 40+
 kicker: Premium guide
-summary: Go from "I only download models" to selling products that are 100% yours.
+summary: "Make products nobody can copy, even if you've never used CAD."
 outline:
   - Why your own designs are the only safe long-term business
   - Which free CAD tool to learn (and which to skip)

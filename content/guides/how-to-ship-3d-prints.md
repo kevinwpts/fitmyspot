@@ -1,13 +1,14 @@
 ---
-title: How to Ship 3D Prints Safely and Cheaply
-h1: How to ship 3D prints
+title: "How to Ship 3D Prints Without Losing Your Profit"
+h1: "How to Ship 3D Prints Without Losing Your Profit"
 description: How to pack and ship 3D prints so they arrive in one piece without eating your profit. Packaging, postage, tracking and the costs to plan for.
+nav: How to ship 3D prints
 type: free
 order: 8
 updated: 2026-11-20
 read: 4
 kicker: Shipping
-summary: Pack fast, ship cheap, and make sure your prints arrive in one piece.
+summary: "Pack fast, ship cheap and make sure your prints arrive in one piece, without eating your profit."
 faq:
   - q: What is the cheapest way to ship 3D prints?
     a: Design products to fit the post's flat parcel or large letter size, use light padded mailers, and buy packaging in bulk. Size and weight decide most of the price.

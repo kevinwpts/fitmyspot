@@ -9,7 +9,7 @@ order: 10
 updated: 2026-11-19
 pages: 60+
 kicker: Premium guide
-summary: The complete guide to selling your 3D prints, from your first idea to your first 10 sales and beyond.
+summary: "Your first 10 sales in 30 days, step by step."
 outline:
   - "Pick your lane: the 7 ways to earn, and a quiz to choose yours"
   - Find products that sell, with a step-by-step research method

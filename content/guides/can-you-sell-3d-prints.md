@@ -1,13 +1,14 @@
 ---
-title: Can You Sell 3D Prints? Licenses Explained Simply (2026)
-h1: Can you sell 3D prints? Licenses explained
+title: "Can You Sell 3D Prints? The 30-Second License Check"
+h1: "Can You Sell 3D Prints? The 30-Second Check That Saves Your Shop"
 description: Which 3D models you can legally sell prints of, what CC, MakerWorld and Printables licenses mean, and how commercial licenses work. Plain English.
+nav: Can you sell 3D prints?
 type: free
 order: 2
 updated: 2026-11-19
 read: 5
 kicker: Legal basics
-summary: What you're allowed to sell, what you're not, and how to check any model in 30 seconds.
+summary: "One quick check tells you if you can legally sell a print. Skip it and your shop can get shut down."
 faq:
   - q: Can I sell prints of free models from MakerWorld?
     a: Usually not. Models under MakerWorld's Standard Digital File License may not be used to make money without the creator's permission. Some creators sell a commercial license membership, and some models use a Creative Commons license that allows selling.

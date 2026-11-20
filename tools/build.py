@@ -84,7 +84,7 @@ def header(active=""):
 </div></header>"""
 
 def footer():
-    free = "".join(f'<a href="/guides/{g["slug"]}">{e(g["h1"])}</a>' for g in FREE)
+    free = "".join(f'<a href="/guides/{g["slug"]}">{e(g.get("nav", g["h1"]))}</a>' for g in FREE)
     prem = "".join(f'<a href="/guides/{g["slug"]}">{e(g["h1"])}</a>' for g in PREM)
     return f"""<footer class="foot"><div class="wrap">
 <div><a class="logo" href="/">{LOGO}boredprinter</a><p style="margin:0;max-width:34ch">Honest guides to making money with your 3D printer. Made by <a href="{SITE['instagram']}" rel="noopener" style="display:inline;color:var(--ink);font-weight:600">@boredprinter</a>.</p></div>
@@ -221,7 +221,7 @@ home += header() + f"""
 <div class="offer-img">{cover('playbook')}</div>
 <div>
 <h2>Print to Profit</h2>
-<p class="lead" style="margin-top:12px">The complete guide to selling your 3D prints.</p>
+<p class="lead" style="margin-top:12px">Your first 10 sales in 30 days, step by step.</p>
 <ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>Instant access on any device</li></ul>
 <div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{'one-time payment' if P.get('link') else 'at launch · join the list for a launch discount'}</span></div>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>

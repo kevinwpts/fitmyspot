@@ -1,13 +1,14 @@
 ---
-title: "Selling 3D Prints on Etsy in 2026: The New Rules and Fees"
-h1: Selling 3D prints on Etsy in 2026
+title: "Selling 3D Prints on Etsy in 2026: What You Can Still Sell"
+h1: "Etsy Changed the Rules for 3D Prints. Here's What You Can Still Sell"
 description: "Etsy now only allows 3D prints of your own designs. What that means, what you can still sell, what Etsy charges, and how to keep listings safe."
+nav: Selling 3D prints on Etsy
 type: free
 order: 4
 updated: 2026-11-19
 read: 5
 kicker: Etsy
-summary: What changed in 2025, what you can still sell, what Etsy charges, and how to stay on the right side of the rules.
+summary: "Etsy now only allows your own designs. What still sells, what it costs, and how to keep your shop safe."
 faq:
   - q: Can you still sell 3D prints on Etsy?
     a: Yes, if the item is based on your own original design or personalized to the buyer. Prints of other people's designs, even free or licensed ones, don't meet Etsy's creativity standards.

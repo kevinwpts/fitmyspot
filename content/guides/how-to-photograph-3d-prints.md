@@ -1,13 +1,14 @@
 ---
-title: How to Photograph 3D Prints With Your Phone
-h1: How to photograph 3D prints
+title: "How to Photograph 3D Prints With Your Phone: 5 Shots That Sell"
+h1: "Photograph 3D Prints With Just Your Phone: 5 Shots That Sell"
 description: Take product photos of your 3D prints that sell, with just a phone and a window. Setup, the 5 photos every listing needs, and quick editing.
+nav: Photographing 3D prints
 type: free
 order: 9
 updated: 2026-11-20
 read: 4
 kicker: Photos
-summary: A 10-minute home studio, the 5 photos that sell, and the mistakes to avoid.
+summary: "A 10-minute window studio and the 5 photos every listing needs. No camera, no lightbox."
 faq:
   - q: Do I need a lightbox to photograph 3D prints?
     a: No. Soft daylight from a window and a sheet of white card work just as well, and often look more natural.

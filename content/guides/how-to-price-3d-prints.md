@@ -1,13 +1,14 @@
 ---
-title: How to Price 3D Prints (Formula + Free Calculator)
-h1: How to price 3D prints
+title: "How to Price 3D Prints (Most Sellers Charge Too Little)"
+h1: "How to Price 3D Prints (Most Sellers Charge Half What They Should)"
 description: "A simple formula to price 3D prints so every sale is worth it: filament, electricity, machine wear, your time, packaging and fees. Includes a free calculator."
+nav: How to price 3D prints
 type: free
 order: 3
 updated: 2026-11-19
 read: 5
 kicker: Pricing
-summary: The formula, the costs people forget, and why you're probably charging too little.
+summary: "The simple formula that makes every sale worth your time, and why filament barely matters."
 faq:
   - q: How much should I charge for a 3D print?
     a: Add up material, electricity, machine wear, your hands-on time, packaging and selling fees, then multiply by 2 to 3 for profit. For most small items the real cost is far higher than the filament alone.

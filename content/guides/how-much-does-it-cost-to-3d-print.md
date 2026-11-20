@@ -1,13 +1,14 @@
 ---
-title: How Much Does It Cost to 3D Print? (Real Cost per Print)
-h1: How much does it cost to 3D print?
+title: "How Much Does a 3D Print Really Cost? (Not the Filament)"
+h1: "How Much Does a 3D Print Really Cost? (Hint: Not the Filament)"
 description: "The real cost of a 3D print: filament, electricity, machine wear and your time, with examples for small, medium and large prints. Free calculator included."
+nav: What a 3D print costs
 type: free
 order: 6
 updated: 2026-11-20
 read: 4
 kicker: Costs
-summary: What a print really costs you, from a keychain to a big organizer, and the costs people forget.
+summary: "From a keychain to a big organizer: what a print really costs you, and the cost almost everyone forgets."
 faq:
   - q: How much does a 3D print cost in filament?
     a: Most PLA costs about $15–25 per kg, so 2–3 cents per gram. A small keychain (10 g) costs about 20–30 cents in filament, a 100 g organizer about $2–3.
