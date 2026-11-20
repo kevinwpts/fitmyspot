@@ -32,7 +32,8 @@ P.append("""<div class="pb"><h2>Before you start</h2>
 <p>This plan replaces guessing with 7 small steps. Do one a day. Don't skip ahead, don't "perfect" anything.</p>
 <div class="box ex"><b>Be realistic.</b> A first sale in 7 days is possible but not guaranteed. What you <i>will</i> have after 7 days: a product people want, a fair price, good photos and a live listing. That's what every seller who makes money has.</div>
 <h3>What you need</h3><ul><li>Your printer and some filament</li><li>Your phone (for photos)</li><li>45 minutes a day</li><li>A free account where you'll sell (Etsy is the easiest start)</li></ul>
-<div class="box"><b>How to use this:</b> read the day, do the task box at the bottom, tick it. Each day also tells you where the full guide goes deeper, in case you get stuck.</div></div>""")
+<div class="box"><b>How to use this:</b> read the day, do the task box at the bottom, tick it. Each day also tells you where the full guide goes deeper, in case you get stuck.</div>
+<div class="box dk" style="margin-top:10pt"><b>Want every step done for you?</b><p style="margin:4pt 0 0;color:#E7E4DD">This plan is the short version of <span style="color:#fff;font-weight:700">Print to Profit</span>: 12 chapters, a spreadsheet toolkit, copy-paste templates and a 30-day plan. <span style="color:#fff;font-weight:700">$10 off with code BORED10</span> at boredprinter.com/guides/print-to-profit</p></div></div>""")
 P.append("""<div class="pb"><span class="day">DAY 1</span><h2>Pick one buyer, not "everyone"</h2>
 <p>Sellers who try a bit of everything (a keychain here, a random model there) rarely get traction. Sellers who pick <b>one type of buyer</b> become "the shop with the great board game inserts", and buyers remember them.</p>
 <h3>Good buyer groups for 3D prints</h3>
