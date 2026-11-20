@@ -2,6 +2,7 @@
 title: "Selling 3D Prints on Etsy in 2026: What You Can Still Sell"
 h1: "Etsy Changed the Rules for 3D Prints. Here's What You Can Still Sell"
 description: "Etsy now only allows 3D prints of your own designs. What that means, what you can still sell, what Etsy charges, and how to keep listings safe."
+image_alt: "A 3D printed plant pot packed in a kraft box with paper filling, ready to ship to an Etsy buyer"
 nav: Selling 3D prints on Etsy
 type: free
 order: 4
