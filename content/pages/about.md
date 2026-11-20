@@ -10,18 +10,28 @@ Hi, I'm **Kevin**, the person behind boredprinter. It started as an Instagram ac
 
 This site is the honest answer.
 
+<p><a class="btn" href="https://www.instagram.com/boredprinter/" rel="noopener">{{ico:ig}} Follow @boredprinter</a></p>
+
 ## What you'll find here
 
-- **Free guides** on what sells, licenses, Etsy's rules and pricing.
-- **A free price calculator** so you never sell at a loss.
-- **Premium guides** with the complete step-by-step plans, worksheets and templates.
+<div class="ilist" markdown="1">
+
+- {{ico:book}} **Free guides** on what sells, licenses, Etsy's rules and pricing.
+- {{ico:coins}} **A free price calculator** so you never sell at a loss.
+- {{ico:sheet}} **Premium guides** with the complete step-by-step plans, worksheets and templates.
+
+</div>
 
 ## How we write
 
-- **No hype.** Most people make a side income, not a fortune, and we say so.
-- **Legal first.** Selling other people's designs gets shops closed. We explain the rules.
-- **Up to date.** Fees and rules change. Guides show when they were last updated, and premium buyers get updates for free.
-- **Sources.** When we state a fee or a rule, we link to where it comes from.
+<div class="ilist" markdown="1">
+
+- {{ico:heart}} **No hype.** Most people make a side income, not a fortune, and we say so.
+- {{ico:scale}} **Legal first.** Selling other people's designs gets shops closed. We explain the rules.
+- {{ico:refresh}} **Up to date.** Fees and rules change. Guides show when they were last updated, and premium buyers get updates for free.
+- {{ico:link}} **Sources.** When we state a fee or a rule, we link to where it comes from.
+
+</div>
 
 ## Contact
 

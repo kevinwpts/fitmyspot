@@ -188,8 +188,25 @@ def ico(name, size=20):
       "box": '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>',
       "calendar": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
       "store": '<path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8h14v-8"/>',
+      "lock": '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+      "coins": '<ellipse cx="9" cy="6" rx="6" ry="2.5"/><path d="M3 6v4c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V6"/><path d="M9 15.5c-3.3 0-6-1.1-6-2.5v4c0 1.4 2.7 2.5 6 2.5 1.2 0 2.3-.1 3.2-.4"/><ellipse cx="17" cy="15" rx="4.5" ry="2"/><path d="M12.5 15v3c0 1.1 2 2 4.5 2s4.5-.9 4.5-2v-3"/>',
+      "mail": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+      "spool": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6"/>',
+      "printer": '<path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/>',
+      "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+      "percent": '<path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>',
+      "search": '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+      "scale": '<path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/>',
+      "heart": '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+      "link": '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
     }[name]
     return f'<svg class="i" viewBox="0 0 24 24" width="{size}" height="{size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{P}</svg>'
+
+def trust_row(items=(("bolt", "Instant access"), ("shield", "30-day money-back guarantee"), ("lock", "Secure checkout by Stripe"))):
+    return '<ul class="trow">' + "".join(f"<li>{ico(i, 16)}<span>{t}</span></li>" for i, t in items) + "</ul>"
+
+def icons_md(html):
+    return re.sub(r"\{\{ico:([a-z]+)\}\}", lambda m: ico(m.group(1), 18), html)
 
 def inc_icon(x):
     t = x.lower()
@@ -197,7 +214,7 @@ def inc_icon(x):
         if k in t: return ico(n)
     return ico("book")
 
-AUTHOR_BOX = f'<aside class="author"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><b>Written by Kevin</b><p>I run <a href="{SITE["instagram"]}" rel="noopener">@boredprinter</a> on Instagram, where {SITE["followers"]} people follow my 3D printing. I write these guides to show what actually works when you sell your prints, without the hype.</p><a class="more" href="/about">More about me →</a></div></aside>'
+AUTHOR_BOX = f'<aside class="author"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><b>Written by Kevin</b><p>I run <a href="{SITE["instagram"]}" rel="noopener">@boredprinter</a> on Instagram, where {SITE["followers"]} people follow my 3D printing. I write these guides to show what actually works when you sell your prints, without the hype.</p><div class="ctas" style="margin-top:10px"><a class="btn" href="{SITE["instagram"]}" rel="noopener">{ico("ig", 16)} Follow</a><a class="more" href="/about">More about me →</a></div></div></aside>'
 
 PAGES = []  # för sitemap: (path, lastmod, prio)
 
@@ -210,6 +227,14 @@ HOME_FAQ = [
     {"q": "What if it's not for me?", "a": "You have a 30-day money-back guarantee. Read it, try the plan. If it's not worth it to you, message me within 30 days and you get all your money back. No questions."},
     {"q": "Do I need an account to buy?", "a": "No. You pay with your email and get access right away. To come back later, log in with a link we email you. No password."},
 ]
+INSIDE = f"""<div class="sech"><div><h2>Look inside</h2><p>Short chapters, made for your phone. Every one ends with a task you can do the same day.</p></div><a class="more" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free →</a></div>
+<div class="inside">
+<figure><div class="phone"><img src="/img/inside/quiz.webp" alt="A quiz in chapter 1 that picks your way to make money" width="780" height="1560" loading="lazy"></div><figcaption><b>Quizzes that decide for you</b>Find the way to earn that fits you.</figcaption></figure>
+<figure><div class="phone"><img src="/img/inside/steps.webp" alt="Step-by-step pricing worksheet in chapter 6" width="780" height="1560" loading="lazy"></div><figcaption><b>Fill-in worksheets</b>Work out your real price, step by step.</figcaption></figure>
+<figure><div class="phone"><img src="/img/inside/yesno.webp" alt="Clear do and don't lists in chapter 4" width="780" height="1560" loading="lazy"></div><figcaption><b>Clear yes and no</b>Know exactly what you can sell.</figcaption></figure>
+</div>
+"""
+IGCHIP = f"""<a class="igchip" href="{SITE['instagram']}" rel="noopener"><img src="/img/kevin-sm.webp" alt="" width="40" height="40"><span><b>{SITE['followers']} followers</b><small>{ico('ig', 15)} @boredprinter on Instagram</small></span></a>"""
 P = PROD["playbook"]
 def launch_note(p):
     if not p.get("later_price"): return ""
@@ -242,7 +267,7 @@ home += header() + f"""
 <h1>Turn your 3D printer into a <em>side income.</em></h1>
 <p class="lead">Learn exactly what to print, what to charge and where to sell it. Step by step, and without breaking Etsy's new rules.</p>
 <div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
-<a class="igchip" href="{SITE['instagram']}" rel="noopener"><img src="/img/kevin-sm.webp" alt="" width="40" height="40"><span><b>{SITE['followers']} followers</b><small>{ico('ig', 15)} @boredprinter on Instagram</small></span></a>
+{IGCHIP}
 <ul class="trust"><li>{ico('refresh')}<span>Free updates when the rules change</span></li><li>{ico('shield')}<span>30-day money-back guarantee</span></li></ul>
 </div>
 {cover('playbook')}
@@ -260,13 +285,7 @@ home += header() + f"""
 </div></section>
 
 <section class="sec"><div class="wrap">
-<div class="sech"><div><h2>Look inside</h2><p>Short chapters, made for your phone. Every one ends with a task you can do the same day.</p></div><a class="more" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free →</a></div>
-<div class="inside">
-<figure><div class="phone"><img src="/img/inside/quiz.webp" alt="A quiz in chapter 1 that picks your way to make money" width="780" height="1560" loading="lazy"></div><figcaption><b>Quizzes that decide for you</b>Find the way to earn that fits you.</figcaption></figure>
-<figure><div class="phone"><img src="/img/inside/steps.webp" alt="Step-by-step pricing worksheet in chapter 6" width="780" height="1560" loading="lazy"></div><figcaption><b>Fill-in worksheets</b>Work out your real price, step by step.</figcaption></figure>
-<figure><div class="phone"><img src="/img/inside/yesno.webp" alt="Clear do and don't lists in chapter 4" width="780" height="1560" loading="lazy"></div><figcaption><b>Clear yes and no</b>Know exactly what you can sell.</figcaption></figure>
-</div>
-</div></section>
+{INSIDE}</div></section>
 
 
 
@@ -277,9 +296,9 @@ home += header() + f"""
 <p class="lead" style="margin-top:12px">A step-by-step 30-day plan to your first 10 sales.</p>
 <ul class="inc">{"".join(f"<li>{inc_icon(x)}<span>{e(x)}</span></li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>{ico('phone')}<span>Instant access on any device</span></li></ul>
 <p class="vstack">12 chapters · about 80 minutes · spreadsheet toolkit, templates, a worked example and a 30-day plan</p>
-<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{launch_note(P) or 'one-time payment'}</span></div><p class="valline">About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</p>
+<div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{launch_note(P) or 'one-time payment'}</span></div><p class="valline vbox">{ico('spool', 18)}<span>About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</span></p>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
-<p class="fine2">30-day money-back guarantee. Secure checkout by Stripe, VAT handled for your country.</p>
+{trust_row()}
 </div>
 </div></div></section>
 
@@ -327,12 +346,12 @@ write("/guides", gi); PAGES.append(("/guides", TODAY, "0.9"))
 # ---------- gratisguider ----------
 MD = lambda: markdown.Markdown(extensions=["tables", "toc", "attr_list", "sane_lists", "md_in_html"], extension_configs={"toc": {"permalink": False}})
 for g in FREE:
-    md = MD(); body = md.convert(preprocess(g["body"]))
+    md = MD(); body = icons_md(md.convert(preprocess(g["body"])))
     body = stack_tables(body)
     body = re.sub(r"<table( class=\"stack\")?>", r'<div class="tbl"><table\1>', body).replace("</table>", "</table></div>")
     body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
     # upsell före "Sources" (eller sist)
-    up = f"""<aside class="upsell">{cover('playbook', 'flat')}<div><b>Want the complete plan?</b><p>Print to Profit takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/print-to-profit">See what's inside</a></div></aside>"""
+    up = f"""<aside class="upsell">{cover('playbook', 'flat')}<div><b>Want the complete plan?</b><p>Print to Profit takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/print-to-profit">See what's inside</a><p class="upg">{ico('shield', 15)} 30-day money-back guarantee</p></div></aside>"""
     if '<h2 id="sources">' in body: body = body.replace('<h2 id="sources">', up + '<h2 id="sources">', 1)
     else: body += up
     toc = "".join(f'<a href="#{t["id"]}">{e(t["name"])}</a>' for t in md.toc_tokens if t["id"] not in ("sources",))
@@ -393,12 +412,12 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
             for j, x in enumerate(c["chapters"]))
         prev_ = c["chapters"][i - 1] if i > 0 else None; next_ = c["chapters"][i + 1] if i < n - 1 else None
         nav = '<nav class="rnav">' + (f'<a class="btn ghost" href="/guides/{c["guide"]}/{prev_["slug"]}">← {e(prev_["title"])}</a>' if prev_ else '<span></span>') + (f'<a class="btn" href="/guides/{c["guide"]}/{next_["slug"]}">Next: {e(next_["title"])} →</a>' if next_ else '') + '</nav>'
-        unlock = f"""<aside class="unlock"><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><div><b>Unlock all {n} chapters</b><p>{e(c['title'])} takes you from your first idea to your first 10 sales and beyond. Read it here, on any device.</p><a class="btn or" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">Instant access · 30-day money-back guarantee · Already bought? <a href="/library">Log in</a></p></div></aside>"""
+        unlock = f"""<aside class="unlock"><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><div><b>Unlock all {n} chapters</b><p>{e(c['title'])} takes you from your first idea to your first 10 sales and beyond. Read it here, on any device.</p><a class="btn or" href="{e(buy_url)}">{e(buy_lbl)}</a>{trust_row()}<p class="small">Already bought? <a href="/library">Log in</a></p></div></aside>"""
         if ch.get("free"):
             content = f'<div class="prose">{ch["html"]}</div>{unlock}'
         else:
             content = f"""<div id="chBody" class="prose" data-g="{c['guide']}" data-c="{ch['slug']}" hidden></div>
-<div id="chLock" class="lockbox"><div class="lki">{LOCK}</div><h2>This chapter is part of {e(c['title'])}</h2><p>{e(ch['summary'])}</p><a class="btn or big" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">Already bought it? <a href="/library">Log in with your email</a> · <a href="/guides/{c['guide']}/{c['chapters'][0]['slug']}">Read chapter 1 free</a></p></div>
+<div id="chLock" class="lockbox"><div class="lki">{LOCK}</div><h2>This chapter is part of {e(c['title'])}</h2><p>{e(ch['summary'])}</p><a class="btn or big" href="{e(buy_url)}">{e(buy_lbl)}</a>{trust_row()}<p class="small">Already bought it? <a href="/library">Log in with your email</a> · <a href="/guides/{c['guide']}/{c['chapters'][0]['slug']}">Read chapter 1 free</a></p></div>
 <p id="chLoad" class="small" hidden>Loading chapter…</p>"""
         title = f"{ch['title']} | {c['title']}, chapter {i+1}" + (" (free)" if ch.get("free") else "")
         ld = [crumbs_ld([("Home", "/"), ("Guides", "/guides"), (c["title"], f"/guides/{c['guide']}"), (ch["title"], path)])]
@@ -433,8 +452,8 @@ for g in PREM:
         outline = "".join(f'<li><span>{i+1:02d}</span><a href="/guides/{g["slug"]}/{x["slug"]}" style="text-decoration:none;color:inherit"><b>{e(x["title"])}</b>{" <small class=\"freeto\">· Free to read</small>" if x.get("free") else ""}<br><small style="color:var(--muted)">{e(x["summary"])}</small></a></li>' for i, x in enumerate(crs["chapters"]))
     else:
         outline = "".join(f'<li><span>{i+1:02d}</span>{e(x)}</li>' for i, x in enumerate(g["outline"]))
-    inc = "".join(f"<li>{e(x)}</li>" for x in g["includes"])
-    intro = markdown.markdown(g["body"])
+    inc = "".join(f"<li>{inc_icon(x)}<span>{e(x)}</span></li>" for x in g["includes"])
+    intro = markdown.markdown(g["body"], extensions=["attr_list", "md_in_html"])
     avail = "https://schema.org/InStock" if p.get("link") else "https://schema.org/PreOrder"
     ld = [crumbs_ld([("Home", "/"), ("Guides", "/guides"), (g["h1"], path)]), faq_ld(PREM_FAQ),
           {"@context": "https://schema.org", "@type": "Product", "name": g["h1"], "description": g["description"], "brand": {"@type": "Brand", "name": "boredprinter"}, "image": URL + "/og.png",
@@ -449,17 +468,19 @@ for g in PREM:
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Premium</span></nav>
 <h1 style="margin-top:18px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
 <p class="lead" style="margin-top:16px">{e(g['summary'])}</p>
-<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{f'<p class="launch">{launch_note(p)}</p>' if launch_note(p) else ''}{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">30-day money-back guarantee · Secure checkout by Stripe · Instant access</p><p class="valline">About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</p></div>
+<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{f'<p class="launch">{launch_note(p)}</p>' if launch_note(p) else ''}{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}{trust_row()}<p class="valline vbox">{ico('spool', 18)}<span>About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</span></p></div>
 </div></div></section>
 <section class="sec alt"><div class="wrap cols">
 <div class="prose" style="font-size:17px">{intro}</div>
 <div><h2 style="font-size:28px;margin-bottom:16px">What's inside</h2><ol class="list2">{outline}</ol></div>
 </div></section>
 <section class="sec"><div class="wrap cols">
-<div><h2 style="font-size:28px;margin-bottom:16px">You get</h2><ul class="chk">{inc}</ul></div>
+<div><h2 style="font-size:28px;margin-bottom:16px">You get</h2><ul class="inc">{inc}<li>{ico('phone')}<span>Instant access on any device</span></li></ul>{trust_row()}</div>
 <div><h2 style="font-size:28px;margin-bottom:16px">Questions</h2>{faq_html(PREM_FAQ)}</div>
 </div></section>
 <section class="sec"><div class="wrap">{signup('wait-' + k, title='Get it first', text='Join the list and you\'ll get an email the day it launches, at the launch price. Plus the free First Sale Checklist right away.', bullets=('Launch day email', 'Launch price', 'Free checklist now'), anchor='waitlist') if not p.get('link') else ''}
+{INSIDE}
+<div class="mini">{IGCHIP}<p>Written by Kevin. I research every rule, fee and step so you don't have to guess.</p></div>
 <div style="margin-top:40px"><h2 style="font-size:28px;margin-bottom:16px">Also available</h2><div class="cards">{card(other) if other else ""}{card(FREE[0])}{card(FREE[1])}{CALC_CARD}</div></div>
 </div></section>
 </main>""" + footer()
@@ -472,6 +493,8 @@ CALC_FAQ = [
     {"q": "How much electricity does a 3D printer use?", "a": "A typical home FDM printer averages roughly 100–150 W while printing. A heated chamber or a large bed can use more."},
 ]
 calc_html = (ROOT / "site/calculator.html").read_text()
+for lab, n in (("Material", "spool"), ("Printer", "printer"), ("Your time and packing", "clock"), ("Price and fees", "percent")):
+    calc_html = calc_html.replace(f'<p style="margin:0 0 12px;font-weight:600">{lab}</p>', f'<p class="cgh">{ico(n, 18)}{lab}</p>')
 path = "/tools/3d-print-price-calculator"
 page = head("3D Print Price Calculator (Free): What to Charge for 3D Prints", "Free 3D printing price calculator: filament, electricity, machine wear, labour, packaging and Etsy-style fees. Get a selling price and profit per print.", path,
             [crumbs_ld([("Home", "/"), ("Tools", path), ("Price calculator", path)]), faq_ld(CALC_FAQ),
@@ -486,7 +509,7 @@ page = head("3D Print Price Calculator (Free): What to Charge for 3D Prints", "F
 write(path, page); PAGES.append((path, TODAY, "0.9"))
 
 # ---------- My guides ----------
-lib_html = (ROOT / "site/library.html").read_text()
+lib_html = (ROOT / "site/library.html").read_text().replace('<label for="libEmail" style="font-weight:600">', f'<label for="libEmail" style="font-weight:600;display:flex;align-items:center;gap:8px">{ico("mail", 18)}')
 page = head("My guides | boredprinter", "Read the boredprinter guides you have bought.", "/library", noindex=True) + header("lib") + f"""
 <main id="main" class="art"><div class="wrap lib">
 <div class="ahead"><h1 style="font-size:clamp(34px,5vw,48px)">Your guides</h1><p class="lead">Log in with the email you used at checkout. We'll email you a link, no password needed.</p></div>
@@ -502,7 +525,7 @@ write("/thanks", page)
 # ---------- om / juridik / 404 ----------
 def simple(path, title, desc, h1, body_md, noindex=False):
     page = head(title, desc, path, noindex=noindex) + header() + f"""
-<main id="main" class="art"><div class="wrap"><div class="ahead"><h1 style="font-size:clamp(34px,5vw,50px)">{e(h1)}</h1></div><div class="prose">{markdown.markdown(body_md, extensions=['tables'])}</div></div></main>""" + footer()
+<main id="main" class="art"><div class="wrap"><div class="ahead"><h1 style="font-size:clamp(34px,5vw,50px)">{e(h1)}</h1></div><div class="prose">{icons_md(markdown.markdown(body_md, extensions=['tables', 'attr_list', 'md_in_html']))}</div></div></main>""" + footer()
     write(path, page)
     if not noindex: PAGES.append((path, TODAY, "0.4"))
 

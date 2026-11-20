@@ -36,11 +36,19 @@ Most people who buy a 3D printer to make money stop after a few weeks. Not becau
 
 ## Who it's for
 
+<div class="listyes" markdown="1">
+
 - You own a 3D printer and want it to pay for itself, and then some.
 - You're a beginner at selling, not necessarily at printing.
 - You want honest numbers, not "$10k a month" screenshots.
 
+</div>
+
 ## Who it's not for
+
+<div class="listno" markdown="1">
 
 - You want to get rich next week.
 - You plan to sell prints of other people's designs. (It doesn't work long-term, and the guide explains why.)
+
+</div>

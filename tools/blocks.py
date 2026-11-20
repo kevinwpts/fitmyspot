@@ -112,7 +112,7 @@ def preprocess(md):
             for x in body:
                 if "|" not in x: continue
                 ic, t, d = (p.strip() for p in (x.split("|") + ["", ""])[:3])
-                cards.append(f'<div class="ic-card"><b>{inline(t)}</b><p>{inline(d)}</p></div>')
+                cards.append(f'<div class="ic-card"><b>{icon(ic, 18)}<span>{inline(t)}</span></b><p>{inline(d)}</p></div>')
             out.append(f'<div class="icgrid">{"".join(cards)}</div>\n')
         elif kind == "figure":
             name = args[0] if args else ""; cap = args[1] if len(args) > 1 else ""
