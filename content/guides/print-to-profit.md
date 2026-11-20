@@ -23,8 +23,9 @@ outline:
   - The 30-day action plan, day by day
 includes:
   - The full guide online, made for reading on your phone
-  - Pricing worksheet (Google Sheets / Excel)
+  - Pricing worksheet + the free price calculator
   - Listing templates you can copy
+  - A 14-day sales sprint and a 30-day day-by-day plan
   - Free updates when the rules change
 ---
 
