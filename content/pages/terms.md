@@ -12,14 +12,16 @@ Our guides are information and education. They are **not legal, tax or financial
 
 ## Buying a premium guide
 
-- Payment is processed by **Stripe**, which acts as the merchant of record and handles VAT and sales tax for your country.
+- Payment is processed by **Stripe** and sold through **Link** (Stripe's checkout), which acts as the merchant of record and handles VAT and sales tax for your country. Your card statement shows **LINK.COM\* BOREDPRINTER.COM**.
 - You get a **personal license**: read the guide online for your own use. Please don't share your access, copy, resell or publish it.
 - You can read your guides any time from **My guides** by logging in with the email you used at checkout.
 - When we update a guide, you see the new version right away, for free.
 
 ## Refunds
 
-Our guides are digital content that you get **instant access** to. At checkout you agree that access starts right away and that you therefore **lose the right of withdrawal** (the 14-day right to cancel). This means **all sales are final**.
+Our guides are digital content that you get **instant access** to right after payment.
+
+Refund questions about the payment itself can also go to [Link support](https://support.link.com/topics/sold-through-link). Your legal rights as a consumer are not affected.
 
 If something doesn't work, for example you can't open a chapter you paid for, contact us and we'll fix it. If we can't, you get a refund. Contact us with your receipt via a DM on Instagram: [@boredprinter](https://www.instagram.com/boredprinter/).
 
