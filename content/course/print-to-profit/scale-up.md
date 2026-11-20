@@ -69,6 +69,10 @@ Bring a sample, show a price list, promise a delivery date you can keep. Ask for
 
 ## Batch printing in Bambu Studio, step by step
 
+::: figure plate
+:::
+
+
 ::: step copy | Fill the plate
 Open your product. Right-click it → **Fill bed with copies** (in older versions: select it, press **+** a few times, then press **A** to arrange). Leave at least 5 mm between parts.
 :::

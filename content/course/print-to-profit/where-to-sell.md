@@ -19,6 +19,10 @@ Don't pick a channel because a YouTuber uses it. Pick it because **your buyer al
 | **Markets and fairs** | Personalized items, gifts | A table fee | Before holidays |
 | **Amazon Handmade** | Hand-finished items | 15% per sale, you must apply | Later, maybe never |
 
+::: figure fees
+:::
+
+
 ::: warn | The Etsy fee most sellers miss
 **Offsite Ads.** When Etsy advertises your item on Google or social media and that ad leads to a sale, Etsy takes an extra **15%** (12% for shops over $10,000 a year, max $100 per order). Shops under $10,000 a year can switch it off under **Settings → Offsite Ads**. Bigger shops can't. Either way, price as if some orders will have it.
 :::

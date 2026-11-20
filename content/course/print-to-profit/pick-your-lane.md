@@ -126,6 +126,10 @@ Put it in your calendar like an appointment. For example:
 - **Saturday morning:** photos, listing, posts (2 hours)
 
 Four focused hours a week beats a whole weekend once a month.
+
+::: figure week
+:::
+
 :::
 
 ::: step shield | Know what you won't do

@@ -52,7 +52,7 @@
     if (tok && sess.length) p = p.catch(() => ask(false));
     p.then((d) => {
       body.innerHTML = d.html; body.hidden = false; $("chLoad").hidden = true;
-      window.bpTasks && window.bpTasks(); window.bpSecbar && window.bpSecbar(); window.bpOwned && window.bpOwned(location.pathname);
+      window.bpTasks && window.bpTasks(); window.bpSecbar && window.bpSecbar(); window.bpOwned && window.bpOwned(location.pathname); window.bpReveal && window.bpReveal();
       const end = document.querySelector(".rnav"); if (end && "IntersectionObserver" in window) new IntersectionObserver((es) => es[0].isIntersecting && mark()).observe(end);
     }).catch(() => { $("chLoad").hidden = true; $("chLock").hidden = false; });
   });

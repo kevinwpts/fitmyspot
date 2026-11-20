@@ -1,0 +1,10 @@
+<svg viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Batch printing: one part per print versus four parts on one plate. Heat up and level once, much less time per piece.">
+<style>.pl-b{font:800 24px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.pl-l{font:700 17px Geist,system-ui,sans-serif;fill:#16161A}.pl-s{font:500 14px Geist,system-ui,sans-serif;fill:#5E6169}.pl-g{font:800 17px Geist,system-ui,sans-serif;fill:#0E7A47}</style>
+<rect width="600" height="270" rx="22" fill="#FFFFFF"/>
+<text x="28" y="44" class="pl-b">Fill the plate, save hours</text>
+<g transform="translate(40 72)"><rect width="200" height="130" rx="12" fill="#2B2B31"/><rect class="pop" x="80" y="45" width="40" height="40" rx="6" fill="#FF5B1F"/><text y="160" class="pl-l">1 per print</text><text y="182" class="pl-s">warm-up every time</text></g>
+<path d="M266 137h60" stroke="#C9C6BF" stroke-width="3" stroke-dasharray="6 6"/><path d="M318 129l10 8-10 8" fill="none" stroke="#C9C6BF" stroke-width="3"/>
+<g transform="translate(352 72)"><rect width="200" height="130" rx="12" fill="#2B2B31"/>
+ <rect class="pop" x="34" y="22" width="40" height="40" rx="6" fill="#FF5B1F"/><rect class="pop d2" x="126" y="22" width="40" height="40" rx="6" fill="#FF5B1F"/><rect class="pop d3" x="34" y="70" width="40" height="40" rx="6" fill="#FF5B1F"/><rect class="pop d4" x="126" y="70" width="40" height="40" rx="6" fill="#FF5B1F"/>
+ <text y="160" class="pl-l">4 per plate</text><text y="182" class="pl-g">less time per piece</text></g>
+</svg>

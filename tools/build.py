@@ -130,6 +130,10 @@ def stack_tables(html):
         t = m.group(0)
         heads = [re.sub(r"<[^>]+>", "", h).strip() for h in re.findall(r"<th[^>]*>(.*?)</th>", t, flags=re.S)]
         if not heads: return t
+        if heads == ["Day", "Action"]:
+            rows = re.findall(r"<tr>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*</tr>", t, flags=re.S)
+            li = "".join(f'<li><label><input type="checkbox" class="dayck"><span class="cb2" aria-hidden="true"></span><span class="dn">Day {d.strip()}</span><span class="dt">{task}</span></label></li>' for d, task in rows)
+            return f'<ol class="days">{li}</ol>'
         if heads[:3] == ["Day", "Task", "Chapter"]:
             rows = re.findall(r"<tr>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*</tr>", t, flags=re.S)
             li = "".join(f'<li><label><input type="checkbox" class="dayck"><span class="cb2" aria-hidden="true"></span><span class="dn">Day {d.strip()}</span><span class="dt">{task}</span>{f"<span class=dc>Ch. {ch.strip()}</span>" if ch.strip() else ""}</label></li>' for d, task, ch in rows)

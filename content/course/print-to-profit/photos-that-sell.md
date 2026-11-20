@@ -52,6 +52,10 @@ Hold a piece of white card on the side **opposite** the window. Watch the shadow
 
 ## The 5 photos every listing needs
 
+::: figure shots
+:::
+
+
 ::: step star | 1. The hero shot
 The product alone, on your clean background, filling most of the frame. Slight angle from above. This is the photo people see in search, so it must be clear even when it's tiny.
 :::

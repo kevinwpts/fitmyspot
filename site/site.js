@@ -67,22 +67,18 @@
     ownedUI();
   };
   const ownedUI = () => {
-    let owned = false, last = "/guides/print-to-profit/pick-your-lane";
-    try { owned = localStorage.getItem("bp_owned") === "1" || JSON.parse(localStorage.getItem("bp_sess") || "[]").length > 0; last = localStorage.getItem("bp_last") || last; } catch {}
+    let owned = false;
+    try { owned = localStorage.getItem("bp_owned") === "1" || JSON.parse(localStorage.getItem("bp_sess") || "[]").length > 0; } catch {}
     if (!owned) return;
+    // Menyn: "My guide" (din profil med framsteg) i stället för köpknappen
     const b = document.querySelector('.nav a.btn.or');
-    document.querySelector(".nav")?.classList.add("owned");
-    if (b) {
-      b.innerHTML = '<span class="lgx2">Continue reading</span><span class="smx2">Continue</span>'; b.href = last;
-      if (!document.querySelector(".nav .pfl")) {
-        const a = document.createElement("a"); a.className = "pfl"; a.href = "/library"; a.setAttribute("aria-label", "My progress"); a.title = "My progress";
-        a.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg>';
-        b.before(a);
-      }
-    }
-    const m = document.getElementById("mcta"); if (m) m.remove();
+    if (b) { b.textContent = "My guide"; b.href = "/library"; b.classList.remove("or"); b.classList.add("mine"); }
+    document.querySelector('.nav a[href="/library"]:not(.btn)')?.remove();
+    document.getElementById("mcta")?.remove();
     document.querySelectorAll("aside.unlock").forEach((x) => x.remove());
-    document.querySelectorAll('a.btn.or[href*="buy.stripe.com"]').forEach((x) => { x.textContent = "Continue reading →"; x.href = last; });
+    // Produktsidan: du äger redan guiden
+    const buy = document.querySelector(".phero .buy");
+    if (buy) buy.innerHTML = '<p class="owns">✓ You own this guide</p><a class="btn or big wide" href="/library">Open my guide →</a>';
   };
   ownedUI();
 
@@ -148,6 +144,15 @@
     addEventListener("scroll", upd, { passive: true }); upd();
   };
   window.bpSecbar();
+
+  // Liv på sidan: illustrationer animeras och kort glider in när man scrollar dit
+  window.bpReveal = () => {
+    const els = document.querySelectorAll(".prose figure.ill, .prose .step, .prose .icgrid, .prose .dobox, .prose .case, .prose .ba, .learn li, .inside figure, .cards .card");
+    if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach((e) => e.classList.add("in")); return; }
+    const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    els.forEach((e) => { if (!e.classList.contains("in")) { e.classList.add("rv"); io.observe(e); } });
+  };
+  window.bpReveal();
 
   // Innehållsförteckning: markera avsnittet man läser
   const toc = document.querySelectorAll(".toc a[href^='#']");

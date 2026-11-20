@@ -72,6 +72,10 @@ Pick a trending sound and turn it down to about 20%. Write a caption that ends w
 
 ## Your 14-day sales sprint
 
+::: figure sprint
+:::
+
+
 One small action per day. Check it off.
 
 | Day | Action |

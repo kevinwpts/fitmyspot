@@ -1,0 +1,14 @@
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="What each channel takes from a 20 dollar sale: local pickup 0, TikTok Shop about 1.60, Facebook shipped about 1, Etsy about 2.40, eBay about 3.10">
+<style>.fe-b{font:800 24px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.fe-l{font:700 19px Geist,system-ui,sans-serif;fill:#16161A}.fe-v{font:700 19px Geist,system-ui,sans-serif;fill:#16161A}.fe-s{font:500 15px Geist,system-ui,sans-serif;fill:#5E6169}</style>
+<rect width="600" height="340" rx="22" fill="#FFFFFF"/>
+<text x="28" y="44" class="fe-b">What each place takes from a $20 sale</text>
+<text x="28" y="70" class="fe-s">Typical US fees, late 2026. Before Etsy Offsite Ads.</text>
+<g transform="translate(28 96)">
+ <text y="20" class="fe-l">Local pickup</text><rect class="bar" x="200" y="4" width="4" height="22" rx="5" fill="#0E7A47"/><text x="214" y="21" class="fe-v">$0</text>
+ <text y="66" class="fe-l">Facebook (shipped)</text><rect class="bar" x="200" y="50" width="60" height="22" rx="5" fill="#FFB08F"/><text x="270" y="67" class="fe-v">~$1.00</text>
+ <text y="112" class="fe-l">TikTok Shop</text><rect class="bar" x="200" y="96" width="96" height="22" rx="5" fill="#FF8A57"/><text x="306" y="113" class="fe-v">~$1.60</text>
+ <text y="158" class="fe-l">Etsy</text><rect class="bar" x="200" y="142" width="144" height="22" rx="5" fill="#FF5B1F"/><text x="354" y="159" class="fe-v">~$2.40</text>
+ <text y="204" class="fe-l">eBay</text><rect class="bar" x="200" y="188" width="186" height="22" rx="5" fill="#C2410C"/><text x="396" y="205" class="fe-v">~$3.10</text>
+</g>
+<text x="28" y="326" class="fe-s">Fees are only half the story. Pick the place where your buyers already search.</text>
+</svg>

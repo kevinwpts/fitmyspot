@@ -42,7 +42,11 @@ Hold white card opposite the window. It bounces light into the shadows.
 Clean the lens. Main camera, 1× or 2×. Tap to focus, nudge brightness up. Rest the phone on something steady.
 :::
 
-## The 5 photos that sell
+## The 5 photos
+
+::: figure shots
+:::
+ that sell
 
 ::: icons
 star | 1. Hero | Product alone, clean background, fills the frame.

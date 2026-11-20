@@ -8,6 +8,10 @@ A $20 product that costs $8 to ship and $1.50 to pack only works if you planned 
 
 ## Plan shipping in 5 steps
 
+::: figure letter
+:::
+
+
 ::: figure packing
 :::
 

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="14-day sales sprint: days 1 to 3 your network, 4 to 7 video and communities, 8 to 10 more reach, 11 to 14 improve and a launch deal">
+<style>.sp-b{font:800 24px "Bricolage Grotesque",Geist,sans-serif;fill:#16161A}.sp-d{font:800 14px Geist,system-ui,sans-serif;fill:#fff}.sp-l{font:700 18px Geist,system-ui,sans-serif;fill:#16161A}.sp-s{font:500 14px Geist,system-ui,sans-serif;fill:#5E6169}</style>
+<rect width="600" height="270" rx="22" fill="#FFFFFF"/>
+<text x="28" y="44" class="sp-b">Your 14-day sales sprint</text>
+<path class="draw" d="M75 112H525" stroke="#E7E4DD" stroke-width="6" stroke-linecap="round"/>
+<g transform="translate(75 112)">
+ <g class="pop"><circle r="24" fill="#16161A"/><text y="5" text-anchor="middle" class="sp-d">1–3</text><text y="56" text-anchor="middle" class="sp-l">Your</text><text y="76" text-anchor="middle" class="sp-l">network</text><text y="98" text-anchor="middle" class="sp-s">post + 5 people</text></g>
+ <g transform="translate(150 0)"><g class="pop d2"><circle r="24" fill="#16161A"/><text y="5" text-anchor="middle" class="sp-d">4–7</text><text y="56" text-anchor="middle" class="sp-l">Video +</text><text y="76" text-anchor="middle" class="sp-l">communities</text><text y="98" text-anchor="middle" class="sp-s">film + a review</text></g></g>
+ <g transform="translate(300 0)"><g class="pop d3"><circle r="24" fill="#16161A"/><text y="5" text-anchor="middle" class="sp-d">8–10</text><text y="56" text-anchor="middle" class="sp-l">More</text><text y="76" text-anchor="middle" class="sp-l">reach</text><text y="98" text-anchor="middle" class="sp-s">video 2 + a shop</text></g></g>
+ <g transform="translate(450 0)"><g class="pop d4"><circle r="24" fill="#FF5B1F"/><text y="5" text-anchor="middle" class="sp-d">11–14</text><text y="56" text-anchor="middle" class="sp-l">Improve +</text><text y="76" text-anchor="middle" class="sp-l">launch deal</text><text y="98" text-anchor="middle" class="sp-s">repeat what works</text></g></g>
+</g>
+</svg>
