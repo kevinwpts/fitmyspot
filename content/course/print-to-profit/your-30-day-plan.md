@@ -18,6 +18,8 @@ listing-templates.pdf | Listing templates & scripts (PDF) | Title, 13-tag sheet,
 
 ## Week 1: Decide
 
+<p class="dayprog">Tick each day when it's done. Your progress is saved on this device.</p>
+
 ::: figure plan
 :::
 

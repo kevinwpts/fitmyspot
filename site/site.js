@@ -61,6 +61,44 @@
     });
   });
 
+  // Uppgifter i "Your task"-rutor: bocka av, sparas på enheten
+  const TK = "bp_tasks";
+  const tget = () => { try { return JSON.parse(localStorage.getItem(TK) || "{}"); } catch { return {}; } };
+  const tsync = () => {
+    const all = tget();
+    document.querySelectorAll(".dobox").forEach((box, bi) => {
+      const key = location.pathname + "#" + bi, done = all[key] || [];
+      const cbs = [...box.querySelectorAll(".dock")];
+      cbs.forEach((c, i) => { c.checked = done.includes(i); c.closest("li").classList.toggle("done", c.checked); });
+      const n = cbs.filter((c) => c.checked).length, p = box.querySelector(".dop");
+      if (p) p.textContent = n ? (n === cbs.length ? " · All done ✓" : ` · ${n} of ${cbs.length} done`) : "";
+      box.classList.toggle("alldone", n > 0 && n === cbs.length);
+    });
+    const days = [...document.querySelectorAll(".dayck")], dd = all[location.pathname + "#days"] || [];
+    days.forEach((c, i) => { c.checked = dd.includes(i); c.closest("li").classList.toggle("done", c.checked); });
+    const dp = document.querySelector(".dayprog");
+    if (dp && days.length) { const n = days.filter((c) => c.checked).length; dp.textContent = `${n} of ${days.length} days done`; dp.style.setProperty("--p", (n / days.length * 100) + "%"); }
+  };
+  document.addEventListener("change", (e) => {
+    if (e.target.closest(".dayck")) {
+      const all = tget(); all[location.pathname + "#days"] = [...document.querySelectorAll(".dayck")].map((x, i) => (x.checked ? i : -1)).filter((i) => i >= 0);
+      try { localStorage.setItem(TK, JSON.stringify(all)); } catch {}
+      return tsync();
+    }
+    const c = e.target.closest(".dock"); if (!c) return;
+    const box = c.closest(".dobox"), bi = [...document.querySelectorAll(".dobox")].indexOf(box);
+    const key = location.pathname + "#" + bi, all = tget();
+    all[key] = [...box.querySelectorAll(".dock")].map((x, i) => (x.checked ? i : -1)).filter((i) => i >= 0);
+    try { localStorage.setItem(TK, JSON.stringify(all)); } catch {}
+    tsync();
+    if (box.classList.contains("alldone")) {
+      try { const r = JSON.parse(localStorage.getItem("bp_read") || "{}"); r[location.pathname] = 1; localStorage.setItem("bp_read", JSON.stringify(r)); } catch {}
+      document.querySelector(`.rtoc a[href="${location.pathname}"]`)?.classList.add("done");
+      track("task_done");
+    }
+  });
+  window.bpTasks = tsync; tsync();
+
   // Innehållsförteckning: markera avsnittet man läser
   const toc = document.querySelectorAll(".toc a[href^='#']");
   if (toc.length && "IntersectionObserver" in window) {

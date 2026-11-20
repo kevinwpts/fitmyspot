@@ -517,3 +517,22 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
 .prose details.otp li{margin:6px 0}
 .prose details.otp a{color:var(--ink);text-decoration:none}
 .prose h2{scroll-margin-top:84px}
+.prose .dobox label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;width:100%;-webkit-tap-highlight-color:transparent}
+.prose .dobox .dock{position:absolute;opacity:0;width:1px;height:1px}
+.prose .dobox .cb{display:grid;place-items:center;transition:background .15s,border-color .15s}
+.prose .dobox .dock:checked+.cb{background:#7BE0A6;border-color:#7BE0A6}
+.prose .dobox .dock:checked+.cb::after{content:"";width:10px;height:6px;border:solid #16161A;border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translate(1px,-1px)}
+.prose .dobox .dock:focus-visible+.cb{outline:2px solid #FFB08F;outline-offset:2px}
+.prose .dobox li.done .dt{color:#9A9BA3;text-decoration:line-through;text-decoration-color:#6B6C75}
+.prose .dobox .dop{font-weight:600;color:#B9BAC2;font-size:14px}
+.prose .dobox.alldone .dop{color:#7BE0A6}
+.prose .dobox li{position:relative}
+.prose ol.days label{display:grid;grid-template-columns:22px 56px 1fr auto;gap:12px;align-items:baseline;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.prose ol.days li{display:block}
+.prose ol.days .dayck{position:absolute;opacity:0;width:1px;height:1px}
+.prose ol.days li{position:relative}
+.prose ol.days .cb2{width:20px;height:20px;border:2px solid #C9C6BF;border-radius:6px;align-self:start;margin-top:2px;display:grid;place-items:center;transition:background .15s,border-color .15s}
+.prose ol.days .dayck:checked+.cb2{background:var(--free);border-color:var(--free)}
+.prose ol.days .dayck:checked+.cb2::after{content:"";width:10px;height:6px;border:solid #fff;border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translate(1px,-1px)}
+.prose ol.days li.done .dt{color:var(--muted);text-decoration:line-through}
+.prose .dayprog{font-size:14px;font-weight:600;color:var(--muted);margin:0 0 4px;--p:0%;background:linear-gradient(90deg,var(--free-soft) var(--p),transparent var(--p));border-radius:10px;padding:8px 12px;border:1px solid var(--line)}

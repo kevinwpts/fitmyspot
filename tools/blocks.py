@@ -100,8 +100,8 @@ def preprocess(md):
             out.append(f'<div class="dls">{"".join(items)}</div>\n')
         elif kind == "do":
             t = args[0] if args else "Do this now"
-            items = "".join(f'<li><span class="cb" aria-hidden="true"></span><span>{inline(x[2:])}</span></li>' for x in body if x.startswith("- "))
-            out.append(f'<div class="dobox"><p class="doh">{html.escape(t)}</p><ul>{items}</ul></div>\n')
+            items = "".join(f'<li><label><input type="checkbox" class="dock"><span class="cb" aria-hidden="true"></span><span class="dt">{inline(x[2:])}</span></label></li>' for x in body if x.startswith("- "))
+            out.append(f'<div class="dobox"><p class="doh">{html.escape(t)}<span class="dop"></span></p><ul>{items}</ul></div>\n')
         elif kind == "yesno":
             yt, nt = (args + ["Allowed", "Not allowed"])[:2] if len(args) >= 2 else ("Allowed", "Not allowed")
             ys = "".join(f'<li>{icon("check", 18)}<span>{inline(x[2:])}</span></li>' for x in body if x.startswith("+ "))
