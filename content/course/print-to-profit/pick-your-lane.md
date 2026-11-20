@@ -14,35 +14,9 @@ That's before your time, and it's not a promise. Plenty of sellers never get pas
 In this chapter you'll **pick one way to make money** with your printer, set a **realistic first goal**, and block **time in your week** for it. That's it. One decision, made properly.
 :::
 
-## Why picking one matters
-
-Most people who try to sell 3D prints do a bit of everything: a keychain here, a Thingiverse model there, a post in a random group. Nothing gets traction, and after a few weeks they quit.
-
-The people who make money pick **one lane** and go deep. They become "the person who makes board game inserts" or "the shop with the great name signs". That focus is what makes buyers remember them.
-
-::: tip | You can change lanes later
-Picking one doesn't lock you in forever. It's for the next 30 days. Once you've made your first sales, adding a second lane is easy.
-:::
-
-## The 7 lanes
-
-::: figure lanes
-:::
-
-
-::: icons
-home | Print for people nearby | Friends, neighbours, local groups. Custom bits and fixes. No shop, no shipping.
-heart | Personalized items | Names, pets, dates. Buyers pay more for "made for me". Allowed on Etsy.
-pencil | Your own designs | Products you design and sell anywhere. Where the real money is.
-wrench | Replacement parts | The broken dishwasher wheel. People search for exact parts and pay well.
-file | Sell the files | Design once, sell many times. Slow to start, needs a following.
-store | Print for businesses | Signs, displays, jigs, prototypes. Bigger orders that repeat.
-camera | Make content | Videos of what you make. An audience that later buys from you.
-:::
-
 ## Quick quiz: which lane fits you?
 
-Answer 4 questions. Pick the answer that's most true for you.
+There are 7 ways to make money with a printer. Answer 4 questions and see which one fits you. It takes 30 seconds.
 
 <div class="quiz" id="lane-quiz">
 <fieldset><legend>1. How fast do you want your first sale?</legend>
@@ -95,6 +69,30 @@ Answer 4 questions. Pick the answer that's most true for you.
 
 ::: note | Not sure?
 If you're torn, pick **Personalized items** or **Your own designs**. They work on every marketplace, including Etsy, and they're where most sellers end up anyway.
+:::
+
+## The 7 lanes
+
+::: figure lanes
+:::
+
+
+::: icons
+home | Print for people nearby | Friends, neighbours, local groups. Custom bits and fixes. No shop, no shipping.
+heart | Personalized items | Names, pets, dates. Buyers pay more for "made for me". Allowed on Etsy.
+pencil | Your own designs | Products you design and sell anywhere. Where the real money is.
+wrench | Replacement parts | The broken dishwasher wheel. People search for exact parts and pay well.
+file | Sell the files | Design once, sell many times. Slow to start, needs a following.
+store | Print for businesses | Signs, displays, jigs, prototypes. Bigger orders that repeat.
+camera | Make content | Videos of what you make. An audience that later buys from you.
+:::
+
+## Why one lane beats five
+
+People who try a bit of everything (a keychain here, a random model there) rarely get traction. People who pick **one lane** become "the shop with the great board game inserts", and buyers remember them.
+
+::: tip | You can change lanes later
+Picking one doesn't lock you in. It's for the next 30 days. After your first sales, adding a second lane is easy.
 :::
 
 ## Now make it real

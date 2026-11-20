@@ -274,7 +274,7 @@ home += header() + f"""
 <p class="lead">Learn exactly what to print, what to charge and where to sell it. Step by step, and without breaking Etsy's new rules.</p>
 <div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 {IGCHIP}
-<ul class="trust"><li>{ico('refresh')}<span>Free updates when the rules change</span></li><li>{ico('shield')}<span>30-day money-back guarantee</span></li></ul>
+<ul class="trust"><li>{ico('shield')}<span>30-day money-back guarantee</span></li><li>{ico('coins')}<span>{launch_note(P) or 'One-time payment, free updates'}</span></li></ul>
 </div>
 {cover('playbook')}
 </div></section>
@@ -295,6 +295,8 @@ home += header() + f"""
 
 
 
+<section class="sec alt"><div class="wrap"><div class="me"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><h2>Hi, I'm Kevin</h2><p class="lead" style="margin-top:12px">I run <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a>, where {SITE['followers']} people follow my 3D printing. The question I get most is: "Can you actually make money with this thing?"</p><p>These guides are my honest answer. No "$10k a month" promises. Just researched, up-to-date steps, checked against the current rules and written so anyone can follow them.</p><div class="ctas" style="margin-top:8px"><a class="btn" href="{SITE['instagram']}" rel="noopener">{ico('ig', 18)} Follow @boredprinter</a><a class="btn ghost" href="/about">More about me</a></div></div></div></div></section>
+
 <section class="sec"><div class="wrap"><div class="offer">
 <div class="offer-img">{cover('playbook')}</div>
 <div>
@@ -308,20 +310,18 @@ home += header() + f"""
 </div>
 </div></div></section>
 
-<section class="sec tight"><div class="wrap"><p class="facts"><span>{ico('bolt')}Instant access</span><span>{ico('refresh')}Free updates when the rules change</span><span>{ico('shield')}30-day money-back guarantee</span></p></div></section>
 
-<section class="sec alt"><div class="wrap">
+
+<section class="sec alt"><div class="wrap"><h2 style="margin-bottom:18px">Questions</h2>{faq_html(HOME_FAQ)}</div></section>
+
+<section class="sec"><div class="wrap">
 <div class="sech"><div><h2>Not ready to buy? Start free</h2><p>Our free guides answer the questions every beginner has.</p></div><a class="more" href="/guides">All guides →</a></div>
-<div class="cards">{"".join(card(g) for g in FREE[:5])}{CALC_CARD}</div>
+<div class="cards">{"".join(card(g) for g in FREE[:3])}{CALC_CARD}</div>
 </div></section>
 
 
 
 <section class="sec"><div class="wrap">{signup('home', anchor='waitlist')}</div></section>
-
-<section class="sec"><div class="wrap"><div class="me"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><h2>Hi, I'm Kevin</h2><p class="lead" style="margin-top:12px">I run <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a>, where {SITE['followers']} people follow my 3D printing. The question I get most is: "Can you actually make money with this thing?"</p><p>These guides are my honest answer. No "$10k a month" promises. Just researched, up-to-date steps, checked against the current rules and written so anyone can follow them.</p><div class="ctas" style="margin-top:8px"><a class="btn" href="{SITE['instagram']}" rel="noopener">{ico('ig', 18)} Follow @boredprinter</a><a class="btn ghost" href="/about">More about me</a></div></div></div></div></section>
-
-<section class="sec alt"><div class="wrap"><h2 style="margin-bottom:18px">Questions</h2>{faq_html(HOME_FAQ)}</div></section>
 
 <section class="sec"><div class="wrap final">
 <h2>Your printer could be paying for itself.</h2>
