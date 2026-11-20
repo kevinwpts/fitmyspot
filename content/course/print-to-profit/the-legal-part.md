@@ -81,6 +81,28 @@ Until you know your exact numbers, put about 30% of every payout in a separate a
 
 Copy this and check it for every new product:
 
+## What Etsy's rule actually says
+
+In June 2025 Etsy changed one sentence that matters a lot for 3D printing. Items "made by a seller" (which includes 3D printing) **"must be produced based on a seller's original design"**. The old text also allowed "a templated design or pattern". That word is gone.
+
+What it means in practice:
+
+- A free or paid model from someone else = not your original design, even if the license allows selling.
+- Changing the text on someone else's name-sign template = still their template.
+- Your own design, even a very simple one, = fine.
+
+::: step file | Keep a design log
+For every product, keep a folder with: your CAD file, 2–3 screenshots of the design process with dates, and the first test print photo. If Etsy ever questions a listing, you can prove it's yours in 5 minutes.
+:::
+
+::: step store | Fill in the "who made it" questions honestly
+When you create a listing, Etsy asks who made it and when. Answer **"I did"** and **"Made to order"** only if that's true. If someone else prints for you (a production partner), Etsy requires you to disclose that partner in your shop.
+:::
+
+::: step shield | Add the EU safety info in Etsy
+If you sell to buyers in the EU, Etsy asks for product safety information (GPSR). Fill in your name, address and contact as the responsible person, add a product identifier (for example a product code like `BP-CAB-01`) and any warnings. Put the same info on a small card in the package.
+:::
+
 ::: do | Before you list a product
 - I designed it, or I have a license that allows selling (screenshot saved)
 - It follows the marketplace's rules

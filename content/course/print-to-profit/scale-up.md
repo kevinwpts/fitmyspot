@@ -83,6 +83,33 @@ A simple monthly check:
 Buying printers, filament stock and tools before sales justify it is the fastest way to turn a side income into a debt. Grow from profit, not from hope.
 :::
 
+## Tools that do the boring work
+
+::: icons
+printer | Bambu Farm Manager | Free from Bambu Lab (Windows). Queue jobs, send to several printers at once, monitor everything locally on your network.
+zap | Automatic plate swapping | Add-ons like AutoSwap or Swapmod, used with tools like SimplyPrint, swap the build plate automatically so printers can run overnight.
+list | A simple order sheet | Order, product, color, personalization, status. Five columns are enough for a long time.
+:::
+
+## Passive income: sell files on MakerWorld
+
+Once you can design, your designs can earn while you sleep.
+
+::: step check | Always add a print profile
+MakerWorld gives far fewer points to models without a print profile, and none for renders without real prints. Upload your tested settings and real photos.
+:::
+
+::: step coins | Know what points are worth
+- **Regular points** buy gift cards and items, mostly for the Bambu Lab store (good for filament and parts).
+- **Exclusive points** (only for models in the Exclusive program) can be cashed out: about **$0.066 per point**, from $100.
+
+Exclusive models can't be published anywhere else, so only use it for designs you won't sell as files elsewhere.
+:::
+
+::: step target | Use free files as marketing
+Upload a simple free version of your product (for example a basic, non-personalized one). People who print it find you, and some will buy the personalized or premium version from your shop.
+:::
+
 ::: do | Your task for this chapter
 - Check the "ready to scale" list honestly
 - Pick **one** time-saver and set it up this week

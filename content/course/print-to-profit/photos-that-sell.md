@@ -102,6 +102,35 @@ Never use other people's photos, renders that look better than the real print, o
 - Color filters
 :::
 
+## What Etsy looks at in your photos
+
+Etsy's own checklist says two things about photos: make the **first photo a clear thumbnail** of the item, and **use all available photo slots**. Etsy's search now also looks at the first photo when deciding what your listing is. So:
+
+- The first photo must show **only** the product, clearly, filling the frame.
+- Fill every photo slot. An empty slot is a missed chance to answer a question.
+- Add a short video. Few 3D printing sellers do, so it helps you stand out.
+
+## A shot list you can follow
+
+Take these 10 photos, in this order. That fills a typical listing:
+
+| # | Photo | Why |
+|---|---|---|
+| 1 | Hero: product alone, clean background | Search thumbnail |
+| 2 | In use, in a real home | Buyers imagine owning it |
+| 3 | In a hand | Shows size instantly |
+| 4 | Next to a ruler, with the measurement visible | Prevents "smaller than expected" |
+| 5 | Detail close-up | Shows quality |
+| 6 | All colors lined up | Helps choosing |
+| 7 | Before / after (messy vs. tidy) | Shows the result |
+| 8 | Personalization example | Shows what they can get |
+| 9 | Packaging | Shows it arrives safe (great for gifts) |
+| 10 | A simple graphic with the size in cm and inches | Answers the #1 question |
+
+::: tip | Batch your photo sessions
+Shoot all products in one session per month. Same light, same background, same settings. It's faster, and your shop looks like a brand.
+:::
+
 ::: do | Your task for this chapter
 - Set up your window studio (10 minutes)
 - Take the **5 photos** of your product

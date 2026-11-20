@@ -121,6 +121,34 @@ Two simple options:
 
 Whichever you choose, check real postage rates for your country **before** you publish the price. More in chapter 7.
 
+## Insider pricing moves
+
+::: step truck | Move shipping into the price (US buyers)
+Etsy prioritizes US listings with **shipping under $6** in search. If your real shipping is $8, set shipping to $5.95 and add the difference to the item price. Same total for the buyer, better ranking for you. Etsy even has a shipping price tool that does this for US listings.
+:::
+
+::: step list | Make a "good, better, best"
+Offer three versions in one listing with variations:
+
+| Option | Example | Price |
+|---|---|---|
+| Single | 1 cable clip | $6 |
+| **Set of 4** (most pick this) | 4 clips | **$15** |
+| Set of 10 | 10 clips | $29 |
+
+Most buyers pick the middle option. The single makes the set look like a deal. The big set makes the middle look reasonable.
+:::
+
+::: step heart | Charge for personalization separately
+Add personalization as a variation ("+ name: $4") instead of including it for free. Buyers who want it happily pay, and you get paid for the extra minutes it takes.
+:::
+
+::: step clock | Check your real hourly rate monthly
+`(revenue − all costs) ÷ hours worked`
+
+If it's below what you'd accept for a normal side job, raise prices or drop the product that takes the most time per dollar.
+:::
+
 ::: do | Your task for this chapter
 - Fill in the worksheet for your product (or use the [calculator](/tools/3d-print-price-calculator))
 - Compare with 5 similar listings

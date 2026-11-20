@@ -125,6 +125,47 @@ store | Small business sign | For cafés and shops nearby
 - **Huge or fragile items** (expensive and risky to ship)
 :::
 
+## The exact 20-minute research routine
+
+This is the routine I'd follow for every new idea. Open a spreadsheet with these columns: **Listing · Price · Reviews · Shop sales · Bestseller? · Est. sales**.
+
+::: step search | Let Etsy tell you the search words
+Go to Etsy, type the first word of your idea (for example "switch game") and **stop**. Write down every suggestion in the dropdown. Each one is something real buyers type. Do the same on Google and Amazon.
+:::
+
+::: step list | Open the top 10 listings
+Search the best phrase. Open the first 10 listings that are **not** ads (ads say "Ad" or "Sponsored"). For each one, fill in your columns. The total sales of a shop are shown on its shop page.
+:::
+
+::: step chart | Estimate sales from reviews
+Only some buyers leave a review. Estimates put it at roughly **3–8% of buyers**. So a quick rule:
+
+**Estimated sales ≈ reviews × 15 to 30**
+
+A listing with 40 reviews has probably sold somewhere around 600–1,200 times. It's a rough guess (it can be off by 2–3×), but it's enough to tell "nobody buys this" from "people buy this every day".
+
+An orange **Bestseller** badge means the listing is selling fast right now compared to similar items. That's the strongest free demand signal on Etsy.
+:::
+
+::: step zap | Use the free tools the pros use
+- **eRank** (free plan): type a keyword and see roughly how often it's searched and how many listings compete. You want **searches high, competition low**.
+- **EverBee** (Chrome extension, free plan): shows estimated monthly sales and revenue for listings while you browse Etsy.
+
+Use them to check, not to decide. Your own eyes on the top 10 listings matter more.
+:::
+
+::: step star | Mine the bad reviews on Amazon too
+Search the mass-market version of your product on Amazon (a plastic drawer organizer, a cable box, a game box insert). Read the **2–3 star reviews**. People write exactly what's wrong: "too shallow", "doesn't fit the Alex drawer", "cards slide around". Every complaint is a product you can print.
+:::
+
+::: step printer | Check MakerWorld downloads as a demand signal
+MakerWorld and Printables show downloads and prints for every model. A free model with **thousands of prints** proves people want that kind of thing. You can't sell that file, but you can design **your own version** that's better: a different size, a version for a specific product, or personalized.
+:::
+
+::: tip | The "+1 rule"
+Don't copy a winner. Take a proven product and add one thing it doesn't have: a size for a specific brand, a lid, a name, a stackable version, a set of 3. That one difference is your whole marketing message.
+:::
+
 ::: do | Your task for this chapter
 - Collect **20 annoyances** from your buyers in 30 minutes
 - Check demand on Etsy/eBay for the best 5

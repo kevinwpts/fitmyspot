@@ -85,6 +85,47 @@ The same rules apply. Write what it **does**, show the **size**, make **buying e
 Titles like "Holder Organizer Stand Storage Box Gift Desk Gamer Switch" look spammy and can hurt you. Write for humans, using buyers' words.
 :::
 
+## Etsy's newest rules for titles (2026)
+
+Etsy updated its title guidance in April 2026. In short:
+
+::: yesno | Do | Don't
++ Keep titles short: under about **15 words**
++ Name the item clearly, most important traits first (what it is, color, material, size)
++ Put extra details in tags, attributes and the description
+- Subjective words like "perfect" or "beautiful"
+- Gift phrases and holidays, unless essential to the item
+- Repeated words, sale or shipping info
+:::
+
+Etsy now looks at **the whole listing**: title, tags, attributes, description, the first photo and even reviews. The title doesn't have to carry every keyword anymore.
+
+**Before:** "Switch Game Holder Organizer Storage Box Gift for Gamer Perfect Christmas Present Desk Stand"
+**After:** "Switch Game Holder for 24 Cartridges, Black PLA, Desk Organizer"
+
+## The tag formula
+
+Etsy gives you **13 tags** (each up to 20 characters). Use all 13, as multi-word phrases. Spread them like this:
+
+| Tags | What they describe | Example |
+|---|---|---|
+| 4 | What it is | switch game holder, cartridge storage |
+| 3 | What it fits / who it's for | nintendo switch, gamer gift |
+| 2 | Where it's used | desk organizer, game room decor |
+| 2 | Style or material | minimalist, 3d printed |
+| 2 | Occasions (only if real) | birthday gift, christmas gift |
+
+Phrases you already selected as attributes (like color or occasion) don't need a tag too. Use that space for another search phrase.
+
+## 4 things most sellers miss
+
+::: icons
+chart | Search visibility page | In Shop Manager, Etsy shows a score for your shop and listings, with tips. Check it monthly.
+msg | Reply fast | Etsy's search looks at your review rating, message response rate and cases over the past 3 months.
+file | Use the policy template | Etsy says filling in your shop policies with their template gives a boost.
+calendar | Refresh before seasons | Update titles and tags 6–8 weeks before big holidays.
+:::
+
 ::: do | Your task for this chapter
 - Collect 10–15 real search phrases for your product
 - Write your title using the template

@@ -94,6 +94,50 @@ heart | Remember them | Repeat buyers are the cheapest buyers.
 Ask your first few buyers personally for a review. One honest review makes the next sale much easier.
 :::
 
+## Copy-paste scripts
+
+Use these as they are, or change the details.
+
+::: step home | Local group post
+> I design and 3D print these [product] myself here in [town]. They [what it does: keep your games tidy / fit the IKEA Alex drawer]. $[price], pick-up or shipping. I can also make it in your color or with a name. Comment or send me a message!
+
+Post with photo 2 (in use) first, not the hero shot. Real homes get more comments than white backgrounds.
+:::
+
+::: step store | Message to a local shop or café
+> Hi! I'm [name], I design and 3D print [product] locally. I made a few samples that I think would fit your shop/your customers. Could I drop by with them for 5 minutes this week? If they sell, great. If not, no hard feelings.
+
+Bring 3 samples and a simple price sheet. Offer them 30–40% of the price, or sell to them at a wholesale price (about half of your retail price).
+:::
+
+::: step game | Reddit / community post (without spamming)
+Share it as a **project**, not an ad:
+
+> I got tired of [problem], so I designed this [product] for [specific thing]. Took 4 versions to get the fit right. Happy to answer questions about the design!
+
+Only add a link where the rules allow, or when someone asks "where can I get one?".
+:::
+
+::: step msg | Review request (after delivery)
+> Hi [name]! Your [product] should have arrived. I hope it fits perfectly. If you have a minute, a review would really help my small shop. And if anything isn't right, just reply here and I'll fix it.
+:::
+
+## Video hooks that work
+
+The first second decides if people keep watching. Start with one of these:
+
+::: icons
+x | "I was tired of…" | Show the problem first, then the product.
+zap | "This took 4 hours to print" | Timelapse of the print growing.
+search | "It fits perfectly" | The satisfying click when it slides in.
+heart | "Making one for my…" | A personal story.
+chart | "Version 1 vs version 5" | Shows your design process.
+:::
+
+::: tip | Try $1 a day
+Etsy Ads can be tested with a small daily budget. Run it for 2 weeks on your best listing only. If it brings sales with profit, keep it. If not, stop. Never run ads on a listing that doesn't sell without them.
+:::
+
 ::: do | Your task for this chapter
 - Start the **14-day sprint** today
 - Make a simple tracking note: sale, date, where they came from

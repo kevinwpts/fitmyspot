@@ -78,6 +78,24 @@ A friendly fix often turns an angry buyer into a 5-star review.
 Outside your trade area (for example from the EU to the UK or US), parcels may need a customs form, and the buyer may pay import fees. Say this clearly in your listing.
 :::
 
+## Money-saving shipping moves
+
+::: step tag | Buy labels through the marketplace
+In many countries (including the US, UK and Canada), Etsy sells discounted shipping labels right in the order screen. It's often cheaper than the post office counter, adds tracking automatically and marks the order as shipped.
+:::
+
+::: step ruler | Design to the size limit, not the product
+Find your post's cheapest parcel size (often around 2–3 cm thick for large letters). Design flat items, like signs and trays, to fit **just under** it. Print taller items in parts that click together.
+:::
+
+::: step truck | US buyers: keep shipping under $6
+Etsy prioritizes US listings with shipping under $6. Move the rest into the item price (chapter 4).
+:::
+
+::: step box | Make a 3-minute packing kit
+Pre-fold boxes, pre-cut padding, pre-written thank-you cards. Pack 5 orders at once at a fixed time each day, not one by one.
+:::
+
 ::: do | Your task for this chapter
 - Weigh and measure your product with packaging
 - Check postage at 2–3 carriers and write down the prices

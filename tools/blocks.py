@@ -62,6 +62,7 @@ def preprocess(md):
     while i < len(lines):
         m = re.match(r"^:::\s*(\w+)\s*(.*)$", lines[i])
         if not m or m.group(1) == "":
+            if lines[i].startswith("## "): step = 0  # nya avsnitt börjar om på steg 1
             out.append(lines[i]); i += 1; continue
         kind, rest = m.group(1), m.group(2)
         rest = rest.strip().lstrip("|").strip()
