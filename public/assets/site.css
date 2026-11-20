@@ -418,3 +418,24 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
 .facts span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--or)}
 .prod h3{margin-top:0}
 .valline{margin:10px 0 0;font-size:14px;color:var(--muted)}
+/* Läsvänligare text */
+.prose{font-size:17px;line-height:1.65}
+@media(max-width:640px){
+ .prose{font-size:16px;line-height:1.6}
+ .prose h2{font-size:24px;margin:38px 0 12px}
+ .art .lead,.ahead .lead{font-size:17px}
+ .prose blockquote{font-size:15px}
+ /* Inga sidledes-svep: figurer skalas, tabeller staplas */
+ .prose figure.ill{overflow:visible;margin-left:0;margin-right:0;padding:0}
+ .prose figure.ill svg{min-width:0}
+ .prose figure.ill::after{content:none}
+ .tbl{overflow:visible;border:0;background:none}
+ .prose table.stack thead{display:none}
+ .prose table.stack,.prose table.stack tbody,.prose table.stack tr,.prose table.stack td{display:block;width:100%}
+ .prose table.stack tr{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:0 0 10px}
+ .prose table.stack td{border:0;padding:5px 0;display:flex;justify-content:space-between;gap:14px;text-align:right}
+ .prose table.stack td::before{content:attr(data-label);font-weight:600;color:var(--muted);text-align:left;flex:0 0 42%}
+ .prose table.stack td:first-child{font-weight:650;text-align:left;font-size:16px}
+ .prose table.stack td:first-child::before{content:none}
+ .prose table.stack td[data-label=""]::before{content:none}
+}

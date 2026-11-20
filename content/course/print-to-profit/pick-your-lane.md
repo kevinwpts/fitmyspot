@@ -1,4 +1,14 @@
-Welcome to Print to Profit. This guide has 11 short chapters, and one example product we follow all the way through. Each one ends with a small task. Do the task before you read the next chapter, and in 30 days you'll have a product, a price and real buyers.
+Your printer can pay for itself, and then some. Not with luck. With a plan.
+
+Here's the honest math. The example product in this guide sells for **$17** and leaves about **$12** after filament, power, packaging and fees:
+
+- **10 sales a month:** about $120
+- **30 sales a month:** about $370
+- **100 sales a month** (with batch printing): about $1,230
+
+That's before your time, and it's not a promise. Plenty of sellers never get past their first few sales. The ones who do have one thing in common: they **picked one thing and did it properly**. That's what this chapter is about.
+
+**In 30 days you'll have:** your own product, a price that actually pays, a live listing and your first buyers. Let's start.
 
 ::: answer
 In this chapter you'll **pick one way to make money** with your printer, set a **realistic first goal**, and block **time in your week** for it. That's it. One decision, made properly.
@@ -19,16 +29,6 @@ Picking one doesn't lock you in forever. It's for the next 30 days. Once you've 
 ::: figure lanes
 :::
 
-
-| Lane | First sale | Can grow to | You need |
-|---|---|---|---|
-| **Print for people nearby** | Days | Low–medium | A printer |
-| **Personalized items** | 1–2 weeks | Medium | Basic CAD |
-| **Your own designs** | 2–4 weeks | High | Simple CAD |
-| **Replacement parts** | 1–2 weeks | Low–medium | Measuring, CAD |
-| **Sell the files** | Months | Low–high | Good CAD |
-| **Print for businesses** | 2–4 weeks | Medium–high | A reliable printer |
-| **Make content** | Months | Low–high | Video, patience |
 
 ::: icons
 home | Print for people nearby | Friends, neighbours, local groups. Custom bits and fixes. No shop, no shipping.
@@ -85,7 +85,7 @@ Answer 4 questions. Pick the answer that's most true for you.
     const box = document.getElementById("quizRes"); box.hidden = false;
     if (n < 4) { box.innerHTML = "<p>Answer all 4 questions first.</p>"; return; }
     const top = Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
-    box.innerHTML = `<p class="qrk">Your lane</p><p class="qrt">${L[top][0]}</p><p><b>Your first move:</b> ${L[top][1]}</p>`;
+    box.innerHTML = `<p class="qrk">Your lane</p><p class="qrt">${L[top][0]}</p><p><b>Your first move:</b> ${L[top][1]}</p><p style="margin-top:14px">Chapter 2 shows you how to find a product in this lane that people already buy. <a href="{{BUY}}" style="color:#fff;font-weight:700">Get the full guide · ${{PRICE}} →</a></p>`;
     try { localStorage.setItem("bp_lane", top); } catch {}
     window.track && track("quiz", top);
     box.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -164,6 +164,12 @@ In every chapter we follow **one example product** from idea to sales, so you se
 - Tell one person what you're doing (it makes you follow through)
 :::
 
-## Next chapter
+## What happens next
 
-In **Find products that sell** you'll use a simple method to find a product in your lane that people already want, before you print anything.
+You've picked your lane. Now it gets practical. In the next chapters you'll:
+
+- **Find a product people already buy**, with a 20-minute research routine (chapter 2)
+- **Design it yourself in Tinkercad**, free, in about an hour (chapter 3)
+- **Check that it's safe to sell**, so your shop never gets shut down (chapter 4)
+- **Set a price that pays you**, with the spreadsheet toolkit (chapter 5)
+- **Get your first 10 buyers** without ads, with copy-paste scripts (chapter 9)

@@ -3,8 +3,8 @@ product: playbook
 title: Print to Profit
 chapters:
   - slug: pick-your-lane
-    title: Pick your lane
-    summary: The 7 ways to make money with a 3D printer, a quick quiz to find yours, and a realistic first goal.
+    title: Start here, pick your lane
+    summary: What your printer can realistically earn, the 7 ways to make money with it, and a quick quiz to pick yours.
     minutes: 7
     free: true
   - slug: find-products-that-sell

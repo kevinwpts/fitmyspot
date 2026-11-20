@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Bygger hela boredprinter.com till public/ från content/ och site/.
 Kör: python3 tools/build.py"""
+from html import escape as html_escape
 import json, re, html, datetime, shutil, hashlib
 from pathlib import Path
 import yaml, markdown, sys
@@ -122,6 +123,21 @@ def signup(src="home", title="Free: The First Sale Checklist", text="A one-page 
 <p class="err" role="alert" hidden></p>
 <small>Free. No spam. Unsubscribe any time.</small>
 </form></div>"""
+
+def stack_tables(html):
+    """Ger varje cell en etikett från rubrikraden, så tabeller kan staplas på mobil."""
+    def one(m):
+        t = m.group(0)
+        heads = [re.sub(r"<[^>]+>", "", h).strip() for h in re.findall(r"<th[^>]*>(.*?)</th>", t, flags=re.S)]
+        if not heads: return t
+        def row(r):
+            i = [0]
+            def cell(c):
+                lab = heads[i[0]] if i[0] < len(heads) else ""; i[0] += 1
+                return f'<td data-label="{html_escape(lab)}"' + c.group(1) + ">"
+            return re.sub(r"<td([^>]*)>", cell, r.group(0))
+        return '<table class="stack">' + re.sub(r"<tr>.*?</tr>", row, t[len("<table>"):], flags=re.S)
+    return re.sub(r"<table>.*?</table>", one, html, flags=re.S)
 
 def card(g):
     meta = f'{e(g.get("kicker") or "Guide")} · {g["read"]} min read' if g["type"] == "free" else f'Online guide · ${g["price"]}'
@@ -287,7 +303,8 @@ write("/guides", gi); PAGES.append(("/guides", TODAY, "0.9"))
 MD = lambda: markdown.Markdown(extensions=["tables", "toc", "attr_list", "sane_lists", "md_in_html"], extension_configs={"toc": {"permalink": False}})
 for g in FREE:
     md = MD(); body = md.convert(preprocess(g["body"]))
-    body = re.sub(r"<table>", '<div class="tbl"><table>', body).replace("</table>", "</table></div>")
+    body = stack_tables(body)
+    body = re.sub(r"<table( class=\"stack\")?>", r'<div class="tbl"><table\1>', body).replace("</table>", "</table></div>")
     body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
     # upsell före "Sources" (eller sist)
     up = f"""<aside class="upsell">{cover('playbook', 'flat')}<div><b>Want the complete plan?</b><p>Print to Profit takes you step by step from idea to steady sales, with worksheets and templates.</p><a class="btn or" href="/guides/print-to-profit">See what's inside</a></div></aside>"""
@@ -335,8 +352,9 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
         src = gdir / f"{ch['slug']}.md"
         ch["ready"] = src.exists()
         if ch["ready"]:
-            md = MD(); body = md.convert(preprocess(src.read_text()))
-            body = re.sub(r"<table>", '<div class="tbl"><table>', body).replace("</table>", "</table></div>")
+            md = MD(); body = md.convert(preprocess(src.read_text().replace("{{BUY}}", e(buy_url)).replace("{{PRICE}}", str(P_["price"]))))
+            body = stack_tables(body)
+            body = re.sub(r"<table( class=\"stack\")?>", r'<div class="tbl"><table\1>', body).replace("</table>", "</table></div>")
             body = re.sub(r'<a href="(https?://[^"]+)"', r'<a href="\1" rel="noopener" target="_blank"', body)
         else:
             body = f'<div class="call note"><span class="calli"></span><div><p><b>This chapter is being written.</b></p><p>You\'ll get an email when it\'s ready. It\'s included in what you bought, no extra cost.</p></div></div>'
@@ -350,7 +368,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
             for j, x in enumerate(c["chapters"]))
         prev_ = c["chapters"][i - 1] if i > 0 else None; next_ = c["chapters"][i + 1] if i < n - 1 else None
         nav = '<nav class="rnav">' + (f'<a class="btn ghost" href="/guides/{c["guide"]}/{prev_["slug"]}">← {e(prev_["title"])}</a>' if prev_ else '<span></span>') + (f'<a class="btn" href="/guides/{c["guide"]}/{next_["slug"]}">Next: {e(next_["title"])} →</a>' if next_ else '') + '</nav>'
-        unlock = f"""<aside class="unlock"><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><div><b>Unlock all {n} chapters</b><p>{e(c['title'])} takes you from your first idea to your first 10 sales and beyond. Read it here, on any device.</p><a class="btn or" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">Instant access · Already bought? <a href="/library">Log in</a></p></div></aside>"""
+        unlock = f"""<aside class="unlock"><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><div><b>Unlock all {n} chapters</b><p>{e(c['title'])} takes you from your first idea to your first 10 sales and beyond. Read it here, on any device.</p><a class="btn or" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">Instant access · 30-day money-back guarantee · Already bought? <a href="/library">Log in</a></p></div></aside>"""
         if ch.get("free"):
             content = f'<div class="prose">{ch["html"]}</div>{unlock}'
         else:
