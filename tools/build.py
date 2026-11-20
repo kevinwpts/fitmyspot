@@ -130,12 +130,18 @@ def stack_tables(html):
         t = m.group(0)
         heads = [re.sub(r"<[^>]+>", "", h).strip() for h in re.findall(r"<th[^>]*>(.*?)</th>", t, flags=re.S)]
         if not heads: return t
+        if heads[:3] == ["Day", "Task", "Chapter"]:
+            rows = re.findall(r"<tr>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*</tr>", t, flags=re.S)
+            li = "".join(f'<li><span class="dn">Day {d.strip()}</span><span class="dt">{task}</span>{f"<span class=dc>Ch. {ch.strip()}</span>" if ch.strip() else ""}</li>' for d, task, ch in rows)
+            return f'<ol class="days">{li}</ol>'
         def row(r):
             i = [0]
             def cell(c):
                 lab = heads[i[0]] if i[0] < len(heads) else ""; i[0] += 1
                 return f'<td data-label="{html_escape(lab)}"' + c.group(1) + ">"
-            return re.sub(r"<td([^>]*)>", cell, r.group(0))
+            r2 = re.sub(r"<td([^>]*)>", cell, r.group(0))
+            # Första cellen är bara en siffra (t.ex. dag 1) → visa "Day 1"
+            return re.sub(r'<td data-label="([^"]*)"([^>]*)>(\s*\d+\s*)</td>', lambda x: f'<td data-label="{x.group(1)}" class="num"{x.group(2)}>{x.group(3)}</td>', r2, count=1)
         return '<table class="stack">' + re.sub(r"<tr>.*?</tr>", row, t[len("<table>"):], flags=re.S)
     return re.sub(r"<table>.*?</table>", one, html, flags=re.S)
 

@@ -433,11 +433,15 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
  .prose table.stack thead{display:none}
  .prose table.stack,.prose table.stack tbody,.prose table.stack tr,.prose table.stack td{display:block;width:100%}
  .prose table.stack tr{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:0 0 10px}
- .prose table.stack td{border:0;padding:5px 0;display:flex;justify-content:space-between;gap:14px;text-align:right}
- .prose table.stack td::before{content:attr(data-label);font-weight:600;color:var(--muted);text-align:left;flex:0 0 42%}
- .prose table.stack td:first-child{font-weight:650;text-align:left;font-size:16px}
+ .prose table.stack tr{padding:14px 16px}
+ .prose table.stack td{border:0;padding:0;display:block;text-align:left;line-height:1.5}
+ .prose table.stack td+td{margin-top:10px}
+ .prose table.stack td::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-bottom:1px}
+ .prose table.stack td:first-child{font-weight:650;font-size:16px}
  .prose table.stack td:first-child::before{content:none}
+ .prose table.stack td.num::before{content:attr(data-label) " ";display:inline;font-size:16px;font-weight:650;color:var(--ink);letter-spacing:0}
  .prose table.stack td[data-label=""]::before{content:none}
+ .prose table.stack td:empty{display:none}
 }
 /* Ikoner och Instagram */
 .i{flex:0 0 auto;vertical-align:middle}
@@ -495,3 +499,9 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
 .prose a.btn.ghost{color:var(--ink)}
 .prose .ic-card b{display:flex;align-items:center;gap:8px}
 .prose .ic-card b .ico{color:var(--or-ink);flex:0 0 auto;background:none!important;padding:0!important;width:18px;height:18px}
+.prose ol.days{list-style:none;padding:0;margin:18px 0;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
+.prose ol.days li{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:baseline;padding:12px 16px;margin:0;border-bottom:1px solid var(--line)}
+.prose ol.days li:last-child{border-bottom:0}
+.prose ol.days .dn{font-weight:650;font-size:14px;color:var(--or-ink);white-space:nowrap}
+.prose ol.days .dt{min-width:0}
+.prose ol.days .dc{font-size:13px;color:var(--muted);white-space:nowrap}
