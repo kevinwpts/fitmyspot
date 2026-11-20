@@ -71,7 +71,15 @@
     try { owned = localStorage.getItem("bp_owned") === "1" || JSON.parse(localStorage.getItem("bp_sess") || "[]").length > 0; last = localStorage.getItem("bp_last") || last; } catch {}
     if (!owned) return;
     const b = document.querySelector('.nav a.btn.or');
-    if (b) { b.textContent = "Continue reading"; b.href = last; }
+    document.querySelector(".nav")?.classList.add("owned");
+    if (b) {
+      b.innerHTML = '<span class="lgx2">Continue reading</span><span class="smx2">Continue</span>'; b.href = last;
+      if (!document.querySelector(".nav .pfl")) {
+        const a = document.createElement("a"); a.className = "pfl"; a.href = "/library"; a.setAttribute("aria-label", "My progress"); a.title = "My progress";
+        a.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg>';
+        b.before(a);
+      }
+    }
     const m = document.getElementById("mcta"); if (m) m.remove();
     document.querySelectorAll("aside.unlock").forEach((x) => x.remove());
     document.querySelectorAll('a.btn.or[href*="buy.stripe.com"]').forEach((x) => { x.textContent = "Continue reading →"; x.href = last; });

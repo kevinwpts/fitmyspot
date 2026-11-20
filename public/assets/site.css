@@ -550,3 +550,29 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
 .secbar li.on a{color:var(--or-ink);font-weight:650}
 .secbar[hidden]{display:none}
 .prose h2{scroll-margin-top:130px!important}
+.nav .pfl{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;color:var(--ink);background:var(--soft);flex:none}
+.nav .pfl:hover{background:var(--line)}
+.cbox.prog{display:block}
+.prog .phead{display:flex;gap:16px;align-items:center}
+.prog .phead img{width:64px;height:auto;border-radius:4px 8px 8px 4px;box-shadow:0 8px 18px -8px rgba(0,0,0,.4)}
+.prog .phead>div{flex:1;min-width:0}
+.prog small{color:var(--muted);font-weight:600}
+.prog h3{margin:2px 0 8px}
+.prog .pbar{height:8px;background:var(--line);border-radius:8px;overflow:hidden}
+.prog .pbar span{display:block;height:100%;background:var(--free);border-radius:8px}
+.prog .phead p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.prog .pstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}
+.prog .pstats div{background:var(--soft);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column}
+.prog .pstats b{font:700 20px var(--display)}
+.prog .pstats span{font-size:12.5px;color:var(--muted)}
+.prog .btn.wide{width:100%;justify-content:center;text-align:center}
+.prog .pch{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--line)}
+.prog .pch a{display:flex;gap:12px;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:15px}
+.prog .pch .pn{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--soft);color:var(--muted);flex:none}
+.prog .pch li.ok .pn{background:var(--free);color:#fff}
+.prog .pch li.ok a{color:var(--muted)}
+.prog .ctas{margin-top:16px}
+.prog .pnote{margin:12px 0 0;font-size:13px;color:var(--muted)}
+.nav .smx2{display:none}
+@media(max-width:520px){.nav .lgx2{display:none}.nav .smx2{display:inline}}
+@media(max-width:420px){.nav.owned>a:not(.btn):not(.pfl){display:none}}

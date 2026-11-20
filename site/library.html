@@ -15,13 +15,34 @@
   const NAMES = { playbook: "Print to Profit", design: "Design Your Own Bestseller" };
   const START = { playbook: "/guides/print-to-profit/pick-your-lane", design: "/guides/design-your-own-bestseller" };
   let tok = null;
+  const CH = __CHAPTERS__;
+  const ls = (k, d) => { try { return JSON.parse(localStorage.getItem(k) || "null") ?? d; } catch { return d; } };
+  // Profil: din framgång i guiden (sparas på enheten)
+  const card = (k) => {
+    if (k !== "playbook") return `<div class="cbox owned"><div><h3>${NAMES[k] || k}</h3></div><a class="btn or" href="${START[k] || "/guides"}">Read</a></div>`;
+    const read = ls("bp_read", {}), tasks = ls("bp_tasks", {}), last = ls("bp_last_raw", null);
+    const done = CH.filter(c => read[c.p]).length, pct = Math.round(done / CH.length * 100);
+    let ticked = 0; Object.entries(tasks).forEach(([key, v]) => { if (key.startsWith("/guides/print-to-profit/") && !key.endsWith("#days")) ticked += v.length; });
+    const days = (tasks["/guides/print-to-profit/your-30-day-plan#days"] || []).length;
+    let lastP = null; try { lastP = localStorage.getItem("bp_last"); } catch {}
+    const nextC = CH.find(c => c.p === lastP && !read[c.p]) || CH.find(c => !read[c.p]) || CH[CH.length - 1];
+    const ni = CH.indexOf(nextC) + 1;
+    return `<div class="cbox prog">
+      <div class="phead"><img src="/img/cover-playbook.webp" alt="" width="600" height="800"><div><small>Your progress</small><h3>Print to Profit</h3><div class="pbar"><span style="width:${pct}%"></span></div><p>${done} of ${CH.length} chapters done</p></div></div>
+      <div class="pstats"><div><b>${pct}%</b><span>of the guide</span></div><div><b>${ticked}</b><span>tasks ticked</span></div><div><b>${days}/30</b><span>plan days</span></div></div>
+      <a class="btn or big wide" href="${nextC.p}">${done || lastP ? "Continue" : "Start"}: Chapter ${ni} · ${nextC.t} →</a>
+      <ol class="pch">${CH.map((c, i) => `<li class="${read[c.p] ? "ok" : ""}"><a href="${c.p}"><span class="pn">${read[c.p] ? "✓" : i + 1}</span>${c.t}</a></li>`).join("")}</ol>
+      <div class="ctas"><a class="btn ghost" href="/guides/print-to-profit/your-30-day-plan#toolkit">Toolkit downloads</a><a class="btn ghost" href="/guides/print-to-profit/your-30-day-plan">30-day plan</a></div>
+      <p class="pnote">Progress is saved on this device.</p>
+    </div>`;
+  };
   async function load(){
     $("libLogin").hidden = true; const box = $("libList"); box.hidden = false; box.innerHTML = '<div class="cbox">Loading your guides…</div>';
     const r = await fetch("/api/library", { headers: { authorization: "Bearer " + tok } });
     if (r.status === 401) { try { localStorage.removeItem("bp_token"); } catch {} $("libLogin").hidden = false; box.hidden = true; return; }
     const d = await r.json().catch(() => ({}));
     const items = (d.products || []); if (items.length && window.bpOwned) window.bpOwned();
-    box.innerHTML = `<p style="margin:0 0 14px;color:var(--muted)">Logged in as <b style="color:var(--ink)">${(d.email || "").replace(/[<>&"]/g, "")}</b> · <a href="#" id="libOut">Log out</a></p>` + (items.length ? items.map(k => `<div class="cbox owned"><div><small style="color:var(--muted)">Online guide</small><h3 style="margin-top:4px">${NAMES[k] || k}</h3></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn or" href="${START[k] || "/guides"}">Read</a>${k === "playbook" ? `<a class="btn ghost" href="/guides/print-to-profit/your-30-day-plan#toolkit">Toolkit</a>` : ""}</span></div>`).join("") :
+    box.innerHTML = `<p style="margin:0 0 14px;color:var(--muted)">Logged in as <b style="color:var(--ink)">${(d.email || "").replace(/[<>&"]/g, "")}</b> · <a href="#" id="libOut">Log out</a></p>` + (items.length ? items.map(card).join("") :
       `<div class="cbox"><h3>No guides found for this email</h3><p style="color:var(--muted);margin:8px 0 0">Did you use another email at checkout? Log out and try that one. Or <a href="/guides">browse the guides</a>.</p></div>`);
     $("libOut").onclick = e => { e.preventDefault(); try { localStorage.removeItem("bp_token"); } catch {} location.reload(); };
   }
@@ -44,7 +65,9 @@
     const r = await fetch("/api/session?session_id=" + encodeURIComponent(sess[sess.length - 1])).then(r => r.json()).catch(() => ({}));
     if (!(r.products || []).length) return;
     const box = $("libList"); box.hidden = false;
-    box.innerHTML = r.products.map(k => `<div class="cbox owned" style="margin-bottom:12px"><div><small style="color:var(--muted)">Online guide · bought on this device</small><h3 style="margin-top:4px">${NAMES[k] || k}</h3></div><span style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn or" href="${START[k] || "/guides"}">Read</a>${k === "playbook" ? `<a class="btn ghost" href="/guides/print-to-profit/your-30-day-plan#toolkit">Toolkit</a>` : ""}</span></div>`).join("") + `<p style="color:var(--muted);font-size:15px;margin:4px 0 18px">Want it on another device too? Log in below.</p>`;
+    if (window.bpOwned) window.bpOwned();
+    box.innerHTML = r.products.map(card).join("") + `<p style="color:var(--muted);font-size:15px;margin:18px 0 12px">Want it on another device too? Log in below.</p>`;
+    $("libLogin").before(box);
   });
   if (document.readyState !== "loading" && tok) setTimeout(load, 0);
 })();

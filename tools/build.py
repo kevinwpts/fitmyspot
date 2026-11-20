@@ -520,7 +520,8 @@ page = head("3D Print Price Calculator (Free): What to Charge for 3D Prints", "F
 write(path, page); PAGES.append((path, TODAY, "0.9"))
 
 # ---------- My guides ----------
-lib_html = (ROOT / "site/library.html").read_text().replace('<label for="libEmail" style="font-weight:600">', f'<label for="libEmail" style="font-weight:600;display:flex;align-items:center;gap:8px">{ico("mail", 18)}')
+_cy = yaml.safe_load((ROOT / "content/course/print-to-profit/course.yaml").read_text())
+lib_html = (ROOT / "site/library.html").read_text().replace("__CHAPTERS__", json.dumps([{"p": f"/guides/print-to-profit/{c['slug']}", "t": c["title"]} for c in _cy["chapters"]])).replace('<label for="libEmail" style="font-weight:600">', f'<label for="libEmail" style="font-weight:600;display:flex;align-items:center;gap:8px">{ico("mail", 18)}')
 page = head("My guides | boredprinter", "Read the boredprinter guides you have bought.", "/library", noindex=True) + header("lib") + f"""
 <main id="main" class="art"><div class="wrap lib">
 <div class="ahead"><h1 style="font-size:clamp(34px,5vw,48px)">Your guides</h1><p class="lead">Log in with the email you used at checkout. We'll email you a link, no password needed.</p></div>
