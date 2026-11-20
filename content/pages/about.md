@@ -1,10 +1,12 @@
 ---
-title: About boredprinter | Honest 3D Printing Business Guides
+title: About Kevin and boredprinter | 3D Printing Business Guides
 h1: About boredprinter
 description: boredprinter makes honest, practical guides on making money with a home 3D printer, by the creator behind @boredprinter on Instagram.
 ---
 
-boredprinter started as an Instagram account about 3D printing at home. It grew to around 15,000 followers, and the most common question in the comments was always the same: **"Can you actually make money with this thing?"**
+<img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" style="width:160px;height:160px;border-radius:50%;margin:0 0 20px">
+
+Hi, I'm **Kevin**, the person behind boredprinter. It started as an Instagram account about 3D printing at home. It grew to around 15,000 followers, and the most common question in the comments was always the same: **"Can you actually make money with this thing?"**
 
 This site is the honest answer.
 

@@ -154,6 +154,9 @@ def write(path, html_):
     p = p.with_suffix(".html") if path != "/" else OUT / "index.html"
     p.parent.mkdir(parents=True, exist_ok=True); p.write_text(html_)
 
+AUTHOR = {"@type": "Person", "name": "Kevin", "url": URL + "/about", "image": URL + "/img/kevin.webp", "sameAs": [SITE["instagram"]], "jobTitle": "Creator of @boredprinter"}
+AUTHOR_BOX = f'<aside class="author"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><b>Written by Kevin</b><p>I run <a href="{SITE["instagram"]}" rel="noopener">@boredprinter</a> on Instagram, where {SITE["followers"]} people follow my 3D printing. I write these guides to show what actually works when you sell your prints, without the hype.</p><a class="more" href="/about">More about me →</a></div></aside>'
+
 PAGES = []  # för sitemap: (path, lastmod, prio)
 
 # ---------- startsida ----------
@@ -240,6 +243,8 @@ home += header() + f"""
 
 <section class="sec"><div class="wrap">{signup('home', anchor='waitlist')}</div></section>
 
+<section class="sec"><div class="wrap"><div class="me"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><h2>Hi, I'm Kevin</h2><p class="lead" style="margin-top:12px">I run <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a>, where {SITE['followers']} people follow my 3D printing. The question I get most is: "Can you actually make money with this thing?"</p><p>These guides are my honest answer. No "$10k a month" promises. Just the steps that work, written so anyone can follow them.</p><a class="btn ghost" href="/about">More about me</a></div></div></div></section>
+
 <section class="sec alt"><div class="wrap"><h2 style="margin-bottom:18px">Questions</h2>{faq_html(HOME_FAQ)}</div></section>
 
 <section class="sec"><div class="wrap final">
@@ -280,7 +285,7 @@ for g in FREE:
     path = f"/guides/{g['slug']}"
     ld = [crumbs_ld([("Home", "/"), ("Guides", "/guides"), (g["h1"], path)]),
           {"@context": "https://schema.org", "@type": "Article", "headline": g["h1"], "description": g["description"], "datePublished": str(g["updated"]), "dateModified": str(g["updated"]),
-           "author": {"@type": "Organization", "name": "boredprinter", "url": URL}, "publisher": {"@type": "Organization", "name": "boredprinter", "logo": {"@type": "ImageObject", "url": URL + "/icon-512.png"}},
+           "author": AUTHOR, "publisher": {"@type": "Organization", "name": "boredprinter", "logo": {"@type": "ImageObject", "url": URL + "/icon-512.png"}},
            "mainEntityOfPage": URL + path, "image": URL + "/og.png"}]
     if g.get("faq"): ld.append(faq_ld(g["faq"]))
     rel = [x for x in FREE if x["slug"] != g["slug"]][:3]
@@ -289,13 +294,14 @@ for g in FREE:
 <main id="main" class="art"><div class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>{e(g['kicker'])}</span></nav>
 <header class="ahead"><h1>{e(g['h1'])}</h1><p class="lead">{e(g['summary'])}</p>
-<div class="ameta"><span class="tag free">Free</span><span class="by">{LOGO}boredprinter</span><span>Updated <time datetime="{g['updated']}">{upd}</time></span><span>{g['read']} min read</span></div></header>
+<div class="ameta"><span class="tag free">Free</span><span class="by"><img src="/img/kevin-sm.webp" alt="" width="26" height="26">By Kevin</span><span>Updated <time datetime="{g['updated']}">{upd}</time></span><span>{g['read']} min read</span></div></header>
 <div class="agrid"><article class="prose">{body}
 {('<h2 id="faq">Frequently asked questions</h2>' + faq_html(g['faq'])) if g.get('faq') else ''}
 </article>
 <aside class="toc" aria-label="On this page"><b>On this page</b>{toc}{'<a href="#faq">FAQ</a>' if g.get('faq') else ''}<div class="tbox"><b style="text-transform:none;letter-spacing:0;color:var(--ink);font-size:15px;margin:0">Free checklist</b><p>The 12 steps to your first sale.</p><a class="btn or wide" href="#waitlist">Get it free</a></div></aside>
 </div>
 <div style="margin-top:56px">{signup(g['slug'][:40], light=True, anchor='waitlist')}</div>
+{AUTHOR_BOX}
 <section class="related" style="margin-top:56px"><h2 style="font-size:28px;margin-bottom:16px">Keep reading</h2><div class="cards">{"".join(card(x) for x in rel)}</div></section>
 </div></main>""" + footer()
     write(path, page); PAGES.append((path, str(g["updated"]), "0.8"))
@@ -339,7 +345,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
         title = f"{ch['title']} | {c['title']}, chapter {i+1}" + (" (free)" if ch.get("free") else "")
         ld = [crumbs_ld([("Home", "/"), ("Guides", "/guides"), (c["title"], f"/guides/{c['guide']}"), (ch["title"], path)])]
         if ch.get("free"):
-            ld.append({"@context": "https://schema.org", "@type": "Article", "headline": f"{ch['title']}: {c['title']} chapter {i+1}", "description": ch["summary"], "author": {"@type": "Organization", "name": "boredprinter"}, "mainEntityOfPage": URL + path, "image": URL + "/og.png", "datePublished": TODAY, "dateModified": TODAY})
+            ld.append({"@context": "https://schema.org", "@type": "Article", "headline": f"{ch['title']}: {c['title']} chapter {i+1}", "description": ch["summary"], "author": AUTHOR, "mainEntityOfPage": URL + path, "image": URL + "/og.png", "datePublished": TODAY, "dateModified": TODAY})
         page = head(title, ch["summary"], path, ld, "article", noindex=not ch.get("free")) + header("guides") + f"""
 <main id="main" class="art"><div class="wrap reader">
 <aside class="rside" aria-label="Chapters"><details class="rtoc" open><summary><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><span><b>{e(c['title'])}</b><small>{n} chapters</small></span></summary><nav>{side}</nav></details></aside>

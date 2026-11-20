@@ -355,3 +355,13 @@ h3{font-size:20px;font-weight:700;letter-spacing:-.02em}
 .prose .quiz input{accent-color:var(--or);width:18px;height:18px;flex:none}
 .prose .quizres{margin-top:18px;background:var(--ink);color:#fff;border-radius:16px;padding:20px}
 .prose .quizres p{margin:0 0 8px}.prose .quizres .qrk{color:#7BE0A6;font-weight:600;font-size:14px}.prose .quizres .qrt{font:800 28px/1.1 var(--display);letter-spacing:-.03em}
+.ameta .by img{width:26px;height:26px;border-radius:50%;object-fit:cover}
+.author{display:grid;grid-template-columns:88px 1fr;gap:18px;align-items:center;margin-top:48px;max-width:720px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
+.author img{width:88px;height:88px;border-radius:50%;object-fit:cover}
+.author b{font:700 19px var(--display);letter-spacing:-.02em}
+.author p{margin:6px 0 8px;color:var(--muted);font-size:15px}
+.me{display:grid;gap:28px;align-items:center}
+@media(min-width:800px){.me{grid-template-columns:240px 1fr;gap:44px}}
+.me img{width:100%;max-width:240px;aspect-ratio:1;height:auto;border-radius:24px;object-fit:cover}
+.me p{max-width:60ch}.me .btn{margin-top:8px}
+@media(max-width:520px){.author{grid-template-columns:64px 1fr;gap:14px;padding:16px}.author img{width:64px;height:64px}}
