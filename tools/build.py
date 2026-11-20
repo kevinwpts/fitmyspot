@@ -205,13 +205,13 @@ home += header() + f"""
 
 <section class="sec alt"><div class="wrap pain">
 <div><h2>Bought a 3D printer to make money, but…</h2></div>
-<ul class="xlist">{"".join(f"<li>{CROSS}<span>{e(x)}</span></li>" for x in pains)}</ul>
-<p class="pain-end">You're not alone. Most people who try to sell 3D prints give up within weeks. Not because it doesn't work, but because they guess. <b>Print to Profit replaces the guessing with a plan.</b></p>
+<ul class="xlist">{"".join(f"<li>{e(x)}</li>" for x in pains)}</ul>
+<p class="pain-end">I see it in my comments all the time. People buy a printer to make money, try a few random prints, sell nothing and stop. They guessed what to make, what to charge and where to sell. <b>Print to Profit is the plan I wish they'd had.</b></p>
 </div></section>
 
 <section class="sec"><div class="wrap">
 <div class="sech"><div><h2>What you'll learn in Print to Profit</h2><p>Everything you need to go from "I have a printer" to "people pay me for my prints".</p></div></div>
-<div class="learn">{"".join(f'<div><span class="ic">{CHECK}</span><b>{e(t)}</b><p>{e(d)}</p></div>' for t, d in learn)}</div>
+<ol class="learn">{"".join(f'<li><b>{e(t)}</b><p>{e(d)}</p></li>' for t, d in learn)}</ol>
 </div></section>
 
 <section class="sec"><div class="wrap">

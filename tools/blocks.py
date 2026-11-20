@@ -80,17 +80,17 @@ def preprocess(md):
         if kind == "step":
             step += 1
             ic, title = (args + ["", ""])[:2]
-            out.append(f'<section class="step" markdown="1">\n<div class="stepi" aria-hidden="true"><span class="stepn">{step}</span>{icon(ic, 26)}</div>\n<div class="stepb" markdown="1">\n\n## {title}\n\n{b}\n\n</div>\n</section>\n')
+            out.append(f'<section class="step" markdown="1">\n<div class="stepn" aria-hidden="true">{step:02d}</div>\n<div class="stepb" markdown="1">\n\n## {title}\n\n{b}\n\n</div>\n</section>\n')
         elif kind == "answer":
-            out.append(f'<div class="qa" markdown="1">\n<p class="qah">{icon("zap", 20)}Quick answer</p>\n\n{b}\n\n</div>\n')
+            out.append(f'<div class="qa" markdown="1">\n<p class="qah">The short answer</p>\n\n{b}\n\n</div>\n')
         elif kind in ("tip", "warn", "note"):
-            ic = {"tip": "bulb", "warn": "alert", "note": "file"}[kind]
             t = args[0] if args else ""
-            out.append(f'<div class="call {kind}" markdown="1">\n<span class="calli">{icon(ic, 22)}</span>\n<div markdown="1">\n\n{"**" + t + "**" if t else ""}\n\n{b}\n\n</div>\n</div>\n')
+            who = '<p class="kev"><img src="/img/kevin-sm.webp" alt="" width="28" height="28"><span>Kevin\'s tip</span></p>\n' if kind == "tip" else ""
+            out.append(f'<div class="call {kind}" markdown="1">\n{who}<div markdown="1">\n\n{"**" + t + "**" if t else ""}\n\n{b}\n\n</div>\n</div>\n')
         elif kind == "do":
             t = args[0] if args else "Do this now"
             items = "".join(f'<li><span class="cb" aria-hidden="true"></span><span>{inline(x[2:])}</span></li>' for x in body if x.startswith("- "))
-            out.append(f'<div class="dobox"><p class="doh">{icon("check", 20)}{html.escape(t)}</p><ul>{items}</ul></div>\n')
+            out.append(f'<div class="dobox"><p class="doh">{html.escape(t)}</p><ul>{items}</ul></div>\n')
         elif kind == "yesno":
             yt, nt = (args + ["Allowed", "Not allowed"])[:2] if len(args) >= 2 else ("Allowed", "Not allowed")
             ys = "".join(f'<li>{icon("check", 18)}<span>{inline(x[2:])}</span></li>' for x in body if x.startswith("+ "))
@@ -101,7 +101,7 @@ def preprocess(md):
             for x in body:
                 if "|" not in x: continue
                 ic, t, d = (p.strip() for p in (x.split("|") + ["", ""])[:3])
-                cards.append(f'<div class="ic-card"><span class="ici">{icon(ic, 24)}</span><b>{inline(t)}</b><p>{inline(d)}</p></div>')
+                cards.append(f'<div class="ic-card"><b>{inline(t)}</b><p>{inline(d)}</p></div>')
             out.append(f'<div class="icgrid">{"".join(cards)}</div>\n')
         elif kind == "figure":
             name = args[0] if args else ""; cap = args[1] if len(args) > 1 else ""
