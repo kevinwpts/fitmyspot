@@ -1,10 +1,10 @@
 ---
 title: Terms and refunds | boredprinter
 h1: Terms and refunds
-description: The terms for using boredprinter and buying our guides, including our 14-day refund policy.
+description: The terms for using boredprinter and buying our guides, including our refund policy.
 ---
 
-*Last updated: November 19, 2026*
+*Last updated: November 20, 2026*
 
 ## The guides
 
@@ -19,7 +19,9 @@ Our guides are information and education. They are **not legal, tax or financial
 
 ## Refunds
 
-If a guide isn't for you, contact us **within 14 days** of buying and you'll get a full refund. No questions asked. Contact us with your receipt via a DM on Instagram: [@boredprinter](https://www.instagram.com/boredprinter/).
+Our guides are digital content that you get **instant access** to. At checkout you agree that access starts right away and that you therefore **lose the right of withdrawal** (the 14-day right to cancel). This means **all sales are final**.
+
+If something doesn't work, for example you can't open a chapter you paid for, contact us and we'll fix it. If we can't, you get a refund. Contact us with your receipt via a DM on Instagram: [@boredprinter](https://www.instagram.com/boredprinter/).
 
 ## Free content and the calculator
 

@@ -162,7 +162,7 @@ HOME_FAQ = [
     {"q": "I'm a complete beginner at selling. Is this for me?", "a": "Yes. You need to know how to print. Everything about selling, from picking a product to getting paid, is explained step by step."},
     {"q": "What is Print to Profit, exactly?", "a": "A complete online guide you read on this site, on your phone or computer. It comes with pricing worksheets, listing templates and a 30-day plan, and you get free updates when rules or fees change."},
     {"q": "Do I need to know CAD or 3D design?", "a": "No. Print to Profit works without it. If you want to design your own products (which Etsy now requires), Design Your Own Bestseller takes you from zero."},
-    {"q": "What if it's not for me?", "a": "Contact us within 14 days and you get a full refund. No questions asked."},
+    {"q": "What if something doesn't work?", "a": "Contact us and we'll fix it. You get instant access, so all sales are final, except if something doesn't work."},
     {"q": "Do I need an account to buy?", "a": "No. You pay with your email and get access right away. To come back later, log in with a link we email you. No password."},
 ]
 P = PROD["playbook"]
@@ -192,7 +192,7 @@ home += header() + f"""
 <h1>Turn your 3D printer into a <em>side income.</em></h1>
 <p class="lead">Learn exactly what to print, what to charge and where to sell it. Step by step, and without breaking Etsy's new rules.</p>
 <div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
-<ul class="trust"><li>{CHECK}<span><b>{SITE['followers']}</b> follow <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a></span></li><li>{CHECK}<span>14-day money-back guarantee</span></li><li>{CHECK}<span>Read on your phone, instant access</span></li></ul>
+<ul class="trust"><li>{CHECK}<span><b>{SITE['followers']}</b> follow <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a></span></li><li>{CHECK}<span>Free updates when rules change</span></li><li>{CHECK}<span>Read on your phone, instant access</span></li></ul>
 </div>
 {cover('playbook')}
 </div></section>
@@ -219,14 +219,14 @@ home += header() + f"""
 <div>
 <h2>Print to Profit</h2>
 <p class="lead" style="margin-top:12px">The complete guide to selling your 3D prints.</p>
-<ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>14-day money-back guarantee</li></ul>
+<ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>Instant access on any device</li></ul>
 <div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{'one-time payment' if P.get('link') else 'at launch · join the list for a launch discount'}</span></div>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
 <p class="fine2">Secure checkout by Stripe. VAT handled for your country.</p>
 </div>
 </div></div></section>
 
-<section class="sec"><div class="wrap"><div class="guar"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke-linecap="round"/></svg><div><b>14-day money-back guarantee</b><p>Read it, try it. If it's not for you, contact us within 14 days and you get every cent back. No questions asked.</p></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="guar"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke-linecap="round"/></svg><div><b>Instant access, free updates</b><p>Start reading the second you buy. When rules or fees change, the guide is updated for you, free. Something not working? Contact us and we'll fix it.</p></div></div></div></section>
 
 <section class="sec alt"><div class="wrap">
 <div class="sech"><div><h2>Not ready to buy? Start free</h2><p>Our free guides answer the questions every beginner has.</p></div><a class="more" href="/guides">All guides →</a></div>
@@ -329,7 +329,7 @@ for cy in sorted((ROOT / "content/course").glob("*/course.yaml")):
             for j, x in enumerate(c["chapters"]))
         prev_ = c["chapters"][i - 1] if i > 0 else None; next_ = c["chapters"][i + 1] if i < n - 1 else None
         nav = '<nav class="rnav">' + (f'<a class="btn ghost" href="/guides/{c["guide"]}/{prev_["slug"]}">← {e(prev_["title"])}</a>' if prev_ else '<span></span>') + (f'<a class="btn" href="/guides/{c["guide"]}/{next_["slug"]}">Next: {e(next_["title"])} →</a>' if next_ else '') + '</nav>'
-        unlock = f"""<aside class="unlock"><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><div><b>Unlock all {n} chapters</b><p>{e(c['title'])} takes you from your first idea to your first 10 sales and beyond. Read it here, on any device.</p><a class="btn or" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">14-day money-back guarantee · Already bought? <a href="/library">Log in</a></p></div></aside>"""
+        unlock = f"""<aside class="unlock"><img src="/img/cover-{prod_k}.webp" alt="" width="600" height="800"><div><b>Unlock all {n} chapters</b><p>{e(c['title'])} takes you from your first idea to your first 10 sales and beyond. Read it here, on any device.</p><a class="btn or" href="{e(buy_url)}">{e(buy_lbl)}</a><p class="small">Instant access · Already bought? <a href="/library">Log in</a></p></div></aside>"""
         if ch.get("free"):
             content = f'<div class="prose">{ch["html"]}</div>{unlock}'
         else:
@@ -358,7 +358,7 @@ PREM_FAQ = [
     {"q": "What format is it?", "a": "An online guide you read on this site, on your phone, tablet or computer. You log in with your email, no password. Plus the worksheets and templates listed above."},
     {"q": "How do I get it after paying?", "a": "Right after checkout. You can come back any time via My guides by logging in with your email (no password)."},
     {"q": "Do I get updates?", "a": "Yes. When rules, fees or methods change, the guide is updated, and you see the new version right away. Free."},
-    {"q": "Can I get a refund?", "a": "Yes. If it's not for you, contact us within 14 days of buying for a full refund."},
+    {"q": "Can I get a refund?", "a": "You get instant access to the whole guide, so all sales are final. If something doesn't work, contact us and we'll fix it."},
     {"q": "Who handles payment and tax?", "a": "Payment is handled securely by Stripe, which also takes care of VAT and sales tax in your country."},
 ]
 for g in PREM:
@@ -384,7 +384,7 @@ for g in PREM:
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Guides</a> / <span>Premium</span></nav>
 <h1 style="margin-top:18px;font-size:clamp(34px,5vw,54px)">{e(g['h1'])}</h1>
 <p class="lead" style="margin-top:16px">{e(g['summary'])}</p>
-<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">Secure checkout by Stripe · 14-day refund · Free updates</p></div>
+<div class="buy"><div class="price">${p['price']} <span style="font:500 15px var(--body);color:var(--muted);letter-spacing:0">· Online guide · lifetime access</span></div>{buy_btn(k)}{(f'<a class="btn ghost big wide" href="/guides/{g["slug"]}/{crs["chapters"][0]["slug"]}">Read chapter 1 free</a>') if crs else ''}{soon}<p class="note">Secure checkout by Stripe · Instant access · Free updates</p></div>
 </div></div></section>
 <section class="sec alt"><div class="wrap cols">
 <div class="prose" style="font-size:17px">{intro}</div>
