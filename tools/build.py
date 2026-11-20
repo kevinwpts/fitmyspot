@@ -183,7 +183,7 @@ steps = [("Pick one product", "Use the research method to find something a speci
          ("Price it right", "Run the numbers once with the worksheet. Never sell at a loss again."),
          ("Make your first sales", "Follow the 30-day plan: photos, listing, and getting it in front of buyers.")]
 home = head("Make Money With Your 3D Printer | boredprinter",
-            "Learn what to print, what to charge and where to sell it. Step-by-step guides to making money with your 3D printer, by @boredprinter. Free guides + price calculator.",
+            "Learn what to print, what to charge and where to sell it. Simple step-by-step guides to making money with your 3D printer, plus a free price calculator.",
             "/", [faq_ld(HOME_FAQ), {"@context": "https://schema.org", "@type": "WebSite", "name": "boredprinter", "url": URL}])
 home += header() + f"""
 <main id="main">

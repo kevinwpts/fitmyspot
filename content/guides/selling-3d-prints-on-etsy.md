@@ -1,7 +1,7 @@
 ---
 title: "Selling 3D Prints on Etsy in 2026: The New Rules and Fees"
 h1: Selling 3D prints on Etsy in 2026
-description: Etsy's 2025 rules only allow 3D prints of your own designs. What that means, what you can still sell, Etsy's fees, and how to get your listings approved.
+description: "Etsy now only allows 3D prints of your own designs. What that means, what you can still sell, what Etsy charges, and how to keep listings safe."
 type: free
 order: 4
 updated: 2026-11-19
