@@ -13,9 +13,9 @@ Our guides are information and education. They are **not legal, tax or financial
 ## Buying a premium guide
 
 - Payment is processed by **Stripe**, which acts as the merchant of record and handles VAT and sales tax for your country.
-- You get a **personal license**: download, read and print the guide for your own use. Please don't share, resell or publish it.
-- You can download your guides again any time from **My guides** by logging in with the email you used at checkout.
-- When we update a guide, you can download the new version for free.
+- You get a **personal license**: read the guide online for your own use. Please don't share your access, copy, resell or publish it.
+- You can read your guides any time from **My guides** by logging in with the email you used at checkout.
+- When we update a guide, you see the new version right away, for free.
 
 ## Refunds
 
