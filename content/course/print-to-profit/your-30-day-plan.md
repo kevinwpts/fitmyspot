@@ -93,4 +93,4 @@ Answer these honestly:
 
 Thank you for reading. If it helped you, tell me: send a DM to [@boredprinter](https://www.instagram.com/boredprinter/) with what you made. I love seeing it, and I'd be happy to share your first sale.
 
-Want to design your own products from scratch? [Design Your Own Bestseller](/guides/design-your-own-bestseller) is the next step.
+Good luck. I can't wait to see what you make.

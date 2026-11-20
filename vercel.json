@@ -37,6 +37,11 @@
       "source": "/guides/side-hustle-playbook",
       "destination": "/guides/print-to-profit",
       "permanent": true
+    },
+    {
+      "source": "/guides/design-your-own-bestseller",
+      "destination": "/guides/print-to-profit",
+      "permanent": false
     }
   ],
   "headers": [

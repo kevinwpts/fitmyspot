@@ -123,7 +123,7 @@ The full tag formula, title templates and the research routine are in [Print to 
 - Pick **one** to replace with your own simple design
 :::
 
-Never designed anything? Start with [Design Your Own Bestseller](/guides/design-your-own-bestseller).
+Want the step-by-step plan for your first Etsy sales? Read [chapter 1 of Print to Profit free](/guides/print-to-profit/pick-your-lane).
 
 ## Sources
 

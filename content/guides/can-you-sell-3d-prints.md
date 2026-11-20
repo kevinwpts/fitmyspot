@@ -110,7 +110,7 @@ For everything you sell, keep a folder with your CAD file, 2–3 dated screensho
 - Write down one simple product you could design yourself instead
 :::
 
-Learn to design your own products in [Design Your Own Bestseller](/guides/design-your-own-bestseller).
+Want the full plan from idea to first sales? Read [chapter 1 of Print to Profit free](/guides/print-to-profit/pick-your-lane).
 
 ## Sources
 

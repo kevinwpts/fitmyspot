@@ -99,7 +99,7 @@ Take a proven product and add one thing: a size for a specific brand, a lid, a n
 - Sketch one product that fixes one of them
 :::
 
-Next: [price it right](/guides/how-to-price-3d-prints) and [learn the Etsy rules](/guides/selling-3d-prints-on-etsy). Want to design it yourself? [Design Your Own Bestseller](/guides/design-your-own-bestseller).
+Next: [price it right](/guides/how-to-price-3d-prints) and [learn the Etsy rules](/guides/selling-3d-prints-on-etsy).
 
 ## Sources
 

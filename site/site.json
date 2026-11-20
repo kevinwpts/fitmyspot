@@ -6,8 +6,11 @@
   "supabase_url": "https://rcntkzrbanwigypkumvd.supabase.co",
   "supabase_anon": "sb_publishable_Eoce1JVPaM-SgVSllLbi4g_ZiTaGejr",
   "products": {
-    "playbook": { "name": "Print to Profit", "price": 19, "slug": "print-to-profit", "link": "" },
-    "design": { "name": "Design Your Own Bestseller", "price": 19, "slug": "design-your-own-bestseller", "link": "" },
-    "bundle": { "name": "Both guides (bundle)", "price": 29, "slug": "print-to-profit", "link": "" }
+    "playbook": {
+      "name": "Print to Profit",
+      "price": 19,
+      "slug": "print-to-profit",
+      "link": ""
+    }
   }
 }

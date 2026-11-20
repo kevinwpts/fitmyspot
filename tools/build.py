@@ -136,9 +136,12 @@ def prod_cards(only=None):
         if only and g["product"] not in only: continue
         k = g["product"]; p = PROD[k]
         out.append(f"""<div class="prod">{cover(k, "flat")}<div><span class="tag pro">Premium guide</span><h3 style="margin-top:10px"><a href="/guides/{g['slug']}" style="text-decoration:none">{e(g['h1'])}</a></h3><p>{e(g['summary'])}</p><div class="row"><span class="price">${p['price']}</span><a class="btn" href="/guides/{g['slug']}">See what's inside</a></div></div></div>""")
-    b = PROD["bundle"]; full = PROD["playbook"]["price"] + PROD["design"]["price"]
+    one = " one" if len(out) == 1 else ""
+    if "bundle" not in PROD or len(PREM) < 2:
+        return f'<div class="prods{one}">{"".join(out)}</div>'
+    b = PROD["bundle"]; full = sum(PROD[g["product"]]["price"] for g in PREM)
     bl = f'<a class="btn or" href="{e(b["link"])}">Get both · ${b["price"]}</a>' if b.get("link") else '<a class="btn or" href="/guides/print-to-profit#waitlist">Get notified</a>'
-    return f'<div class="prods{" one" if only and len(only) == 1 else ""}">{"".join(out)}</div><div class="bundle"><div><b>Get both guides · ${b["price"]}</b><br><span>Save ${full - b["price"]} compared to buying them separately.</span></div>{bl}</div>'
+    return f'<div class="prods{one}">{"".join(out)}</div><div class="bundle"><div><b>Get both guides · ${b["price"]}</b><br><span>Save ${full - b["price"]} compared to buying them separately.</span></div>{bl}</div>'
 
 def faq_html(items):
     return '<div class="faq">' + "".join(f"<details><summary>{e(f['q'])}</summary><p>{e(f['a'])}</p></details>" for f in items) + "</div>"
@@ -164,7 +167,7 @@ HOME_FAQ = [
     {"q": "Can you really make money with a 3D printer?", "a": "Yes, but for most people it's a side income, not a salary. The people who do best sell their own designs to a specific group of buyers and price in their time. That's exactly what Print to Profit teaches."},
     {"q": "I'm a complete beginner at selling. Is this for me?", "a": "Yes. You need to know how to print. Everything about selling, from picking a product to getting paid, is explained step by step."},
     {"q": "What is Print to Profit, exactly?", "a": "A complete online guide you read on this site, on your phone or computer. It comes with pricing worksheets, listing templates and a 30-day plan, and you get free updates when rules or fees change."},
-    {"q": "Do I need to know CAD or 3D design?", "a": "No. Print to Profit works without it. If you want to design your own products (which Etsy now requires), Design Your Own Bestseller takes you from zero."},
+    {"q": "Do I need to know CAD or 3D design?", "a": "No. Print to Profit works without it, and shows you simple ways to make products that are your own design."},
     {"q": "What if something doesn't work?", "a": "Contact us and we'll fix it. You get instant access, so all sales are final, except if something doesn't work."},
     {"q": "Do I need an account to buy?", "a": "No. You pay with your email and get access right away. To come back later, log in with a link we email you. No password."},
 ]
@@ -245,10 +248,7 @@ home += header() + f"""
 <div class="cards">{"".join(card(g) for g in FREE[:5])}{CALC_CARD}</div>
 </div></section>
 
-<section class="sec"><div class="wrap">
-<div class="sech"><div><h2>Want to design your own products?</h2><p>Etsy now only allows 3D prints of your own designs. This guide teaches you how, even if you've never used CAD.</p></div></div>
-{prod_cards(["design"])}
-</div></section>
+
 
 <section class="sec"><div class="wrap">{signup('home', anchor='waitlist')}</div></section>
 
@@ -395,7 +395,7 @@ for g in PREM:
           {"@context": "https://schema.org", "@type": "Product", "name": g["h1"], "description": g["description"], "brand": {"@type": "Brand", "name": "boredprinter"}, "image": URL + "/og.png",
            "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": "USD", "availability": avail, "url": URL + path}}]
     soon = "" if p.get("link") else '<p class="note"><span class="tag soon">Coming soon</span> Join the list and get it first, with a launch discount.</p>'
-    other = next(x for x in PREM if x["product"] != k)
+    other = next((x for x in PREM if x["product"] != k), None)
     page = head(g["title"], g["description"], path, ld) + header("guides") + f"""
 <main id="main">
 <section class="phero"><div class="wrap">
@@ -415,7 +415,7 @@ for g in PREM:
 <div><h2 style="font-size:28px;margin-bottom:16px">Questions</h2>{faq_html(PREM_FAQ)}</div>
 </div></section>
 <section class="sec"><div class="wrap">{signup('wait-' + k, title='Get it first', text='Join the list and you\'ll get an email the day it launches, with a launch discount. Plus the free First Sale Checklist right away.', bullets=('Launch day email', 'Launch discount', 'Free checklist now'), anchor='waitlist') if not p.get('link') else ''}
-<div style="margin-top:40px"><h2 style="font-size:28px;margin-bottom:16px">Also available</h2><div class="cards">{card(other)}{card(FREE[0])}{CALC_CARD}</div></div>
+<div style="margin-top:40px"><h2 style="font-size:28px;margin-bottom:16px">Also available</h2><div class="cards">{card(other) if other else ""}{card(FREE[0])}{card(FREE[1])}{CALC_CARD}</div></div>
 </div></section>
 </main>""" + footer()
     write(path, page); PAGES.append((path, str(g["updated"]), "0.9"))
@@ -494,5 +494,5 @@ llms = f"""# boredprinter
 # säkerhet: om både x.html och mappen x/ finns, lägg en kopia som x/index.html
 for f in list(OUT.rglob("*.html")):
     d = f.with_suffix("")
-    if d.is_dir() and not (d / "index.html").exists(): (d / "index.html").write_text(f.read_text())
+    if d.is_dir() and f.name != "index.html": (d / "index.html").write_text(f.read_text())
 print("built", len(PAGES), "indexed pages")
