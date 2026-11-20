@@ -18,6 +18,8 @@
   <div class="cbox"><ul class="tl" id="pages"></ul></div>
   <h3 class="sth">Top buttons</h3>
   <div class="cbox"><ul class="tl" id="btns"></ul></div>
+  <h3 class="sth">Email list <span id="subN" style="color:var(--muted);font-weight:500"></span></h3>
+  <div class="cbox" style="display:block"><ul class="tl" id="subs"></ul><div class="ctas" style="margin-top:12px"><button class="btn ghost" type="button" id="subCopy">Copy all emails</button></div></div>
   <p class="small" style="color:var(--muted);margin-top:18px" id="stNote"></p>
 </div>
 <script>
@@ -50,6 +52,14 @@
     list($("pages"), s.pages, (r) => nice(r.path));
     list($("btns"), s.buttons, (r) => nice(r.path));
   }
+  async function subs() {
+    const r = await fetch(`${bp.SB}/rest/v1/rpc/stats_subscribers`, { method: "POST", headers: { apikey: bp.KEY, authorization: `Bearer ${bp.KEY}`, "content-type": "application/json" }, body: JSON.stringify({ p_key: key }) });
+    if (!r.ok) return; const L = await r.json();
+    $("subN").textContent = `· ${L.length}`;
+    $("subs").innerHTML = L.length ? L.slice(0, 50).map((x) => `<li><span>${esc(x.email)}</span><small style="color:var(--muted);position:relative;z-index:1">${esc(x.source || "")} · ${new Date(x.created_at).toLocaleDateString()}</small></li>`).join("") : "<li><span>No emails yet</span></li>";
+    $("subCopy").onclick = async () => { const t = L.map((x) => x.email).join("\n"); try { await navigator.clipboard.writeText(t); $("subCopy").textContent = "Copied ✓"; } catch { prompt("Copy:", t); } };
+  }
+  addEventListener("DOMContentLoaded", () => key && subs());
   document.querySelectorAll("#stTabs button").forEach((b) => b.onclick = () => { document.querySelectorAll("#stTabs button").forEach((x) => x.classList.toggle("on", x === b)); load(+b.dataset.d); });
   addEventListener("DOMContentLoaded", () => key ? load(7) : ($("stErr").hidden = false, $("stErr").textContent = "No access."));
 })();
