@@ -439,3 +439,22 @@ ol.learn>li::before{content:counter(l,decimal-leading-zero);display:block;font:8
  .prose table.stack td:first-child::before{content:none}
  .prose table.stack td[data-label=""]::before{content:none}
 }
+/* Ikoner och Instagram */
+.i{flex:0 0 auto;vertical-align:middle}
+.igchip{display:inline-flex;align-items:center;gap:12px;margin-top:26px;padding:6px 16px 6px 6px;background:var(--card);border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.igchip:hover{border-color:#D8D4CB;box-shadow:var(--shadow)}
+.igchip img{width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--card),0 0 0 4px #E1306C}
+.igchip span{display:flex;flex-direction:column;line-height:1.25}
+.igchip b{font-size:15px}
+.igchip small{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--muted)}
+.trust{margin-top:16px!important}
+.trust li .i{color:var(--free)}
+.inc{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px;font-size:16px}
+.inc li{display:flex;gap:12px;align-items:flex-start}
+.inc .i{color:var(--or-ink);margin-top:2px}
+.facts span::before{content:none!important}
+.facts .i{color:var(--or-ink)}
+.btn .i{margin-right:2px}
+.igl{display:inline-flex!important;align-items:center;gap:6px}
+.card.hasimg{padding-top:0;overflow:hidden}
+.card .cthumb{display:block;width:calc(100% + 44px);max-width:none;margin:0 -22px 4px;aspect-ratio:16/9;height:auto;object-fit:cover;border-bottom:1px solid var(--line)}

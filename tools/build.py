@@ -91,7 +91,7 @@ def footer():
 <div><a class="logo" href="/">{LOGO}boredprinter</a><p style="margin:0;max-width:34ch">Honest guides to making money with your 3D printer. Made by <a href="{SITE['instagram']}" rel="noopener" style="display:inline;color:var(--ink);font-weight:600">@boredprinter</a>.</p></div>
 <div><b>Free guides</b>{free}<a href="/tools/3d-print-price-calculator">Price calculator</a></div>
 <div><b>Premium</b>{prem}<a href="/library">My guides</a></div>
-<div><b>About</b><a href="/about">About</a><a href="{SITE['instagram']}" rel="noopener">Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
+<div><b>About</b><a href="/about">About</a><a href="{SITE['instagram']}" rel="noopener" class="igl">{ico('ig', 16)} Instagram</a><a href="/privacy">Privacy</a><a href="/terms">Terms &amp; refunds</a></div>
 <p class="fine">© {datetime.date.today().year} boredprinter. Not legal or tax advice. Rules and fees change, always check the source.</p>
 </div></footer>
 <script src="/assets/site.js?v={ver}" defer></script>
@@ -141,7 +141,9 @@ def stack_tables(html):
 
 def card(g):
     meta = f'{e(g.get("kicker") or "Guide")} · {g["read"]} min read' if g["type"] == "free" else f'Online guide · ${g["price"]}'
-    return f'<a class="card" href="/guides/{g["slug"]}"><h3>{e(g["h1"])}</h3><p>{e(g["summary"])}</p><span class="meta">{meta} →</span></a>'
+    th = OUT / "img/guides" / f'{g["slug"]}.webp'
+    img = f'<img class="cthumb" src="/img/guides/{g["slug"]}.webp" alt="" width="1600" height="900" loading="lazy">' if g["type"] == "free" and th.exists() else ""
+    return f'<a class="card{" hasimg" if img else ""}" href="/guides/{g["slug"]}">{img}<h3>{e(g["h1"])}</h3><p>{e(g["summary"])}</p><span class="meta">{meta} →</span></a>'
 
 CALC_CARD = '<a class="card tool" href="/tools/3d-print-price-calculator"><h3>3D print price calculator</h3><p>Filament, power, machine wear, your time and fees. Get a price that is worth it.</p><span class="meta">Free tool · Use it →</span></a>'
 
@@ -173,6 +175,28 @@ def write(path, html_):
     p.parent.mkdir(parents=True, exist_ok=True); p.write_text(html_)
 
 AUTHOR = {"@type": "Person", "name": "Kevin", "url": URL + "/about", "image": URL + "/img/kevin.webp", "sameAs": [SITE["instagram"]], "jobTitle": "Creator of @boredprinter"}
+def ico(name, size=20):
+    P = {
+      "ig": '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
+      "bolt": '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+      "refresh": '<path d="M20 11a8 8 0 0 0-14.5-4.5L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.5 4.5L20 16"/><path d="M20 21v-5h-5"/>',
+      "shield": '<path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+      "phone": '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
+      "book": '<path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20"/>',
+      "sheet": '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/>',
+      "file": '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/>',
+      "box": '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>',
+      "calendar": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+      "store": '<path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8h14v-8"/>',
+    }[name]
+    return f'<svg class="i" viewBox="0 0 24 24" width="{size}" height="{size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{P}</svg>'
+
+def inc_icon(x):
+    t = x.lower()
+    for k, n in (("spreadsheet", "sheet"), ("toolkit", "sheet"), ("template", "file"), ("script", "file"), ("example", "box"), ("checklist", "calendar"), ("sprint", "calendar"), ("update", "refresh"), ("online", "book"), ("phone", "phone"), ("device", "phone"), ("instant", "bolt")):
+        if k in t: return ico(n)
+    return ico("book")
+
 AUTHOR_BOX = f'<aside class="author"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><b>Written by Kevin</b><p>I run <a href="{SITE["instagram"]}" rel="noopener">@boredprinter</a> on Instagram, where {SITE["followers"]} people follow my 3D printing. I write these guides to show what actually works when you sell your prints, without the hype.</p><a class="more" href="/about">More about me →</a></div></aside>'
 
 PAGES = []  # för sitemap: (path, lastmod, prio)
@@ -203,7 +227,7 @@ learn = [
     ("What to charge", "A spreadsheet that includes filament, power, your time and fees, so every sale is actually worth it."),
     ("Where to sell", "Etsy, eBay, Facebook Marketplace, TikTok Shop, your own link or local shops. What each one costs, and which fits your product."),
     ("How to get your first 10 sales", "Photos, listings and posts that sell, without paying for ads."),
-    ("A 30-day plan", "What to do each day, from today until your first sales come in. With one real example product followed through every step."),
+    ("A 30-day plan", "What to do each day, from today until your first sales come in. With one worked example product followed through every step."),
 ]
 steps = [("Pick one product", "Use the research method to find something a specific group of people wants."),
          ("Price it right", "Run the numbers once with the worksheet. Never sell at a loss again."),
@@ -218,7 +242,8 @@ home += header() + f"""
 <h1>Turn your 3D printer into a <em>side income.</em></h1>
 <p class="lead">Learn exactly what to print, what to charge and where to sell it. Step by step, and without breaking Etsy's new rules.</p>
 <div class="ctas">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
-<ul class="trust"><li>{CHECK}<span><b>{SITE['followers']}</b> follow <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a></span></li><li>{CHECK}<span>Free updates when rules change</span></li><li>{CHECK}<span>Read on your phone, instant access</span></li></ul>
+<a class="igchip" href="{SITE['instagram']}" rel="noopener"><img src="/img/kevin-sm.webp" alt="" width="40" height="40"><span><b>{SITE['followers']} followers</b><small>{ico('ig', 15)} @boredprinter on Instagram</small></span></a>
+<ul class="trust"><li>{ico('refresh')}<span>Free updates when the rules change</span></li><li>{ico('shield')}<span>30-day money-back guarantee</span></li></ul>
 </div>
 {cover('playbook')}
 </div></section>
@@ -250,7 +275,7 @@ home += header() + f"""
 <div>
 <h2>Print to Profit</h2>
 <p class="lead" style="margin-top:12px">A step-by-step 30-day plan to your first 10 sales.</p>
-<ul class="chk big">{"".join(f"<li>{e(x)}</li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>Instant access on any device</li></ul>
+<ul class="inc">{"".join(f"<li>{inc_icon(x)}<span>{e(x)}</span></li>" for x in next(g for g in PREM if g['product']=='playbook')['includes'])}<li>{ico('phone')}<span>Instant access on any device</span></li></ul>
 <p class="vstack">12 chapters · about 80 minutes · spreadsheet toolkit, templates, a worked example and a 30-day plan</p>
 <div class="offer-buy"><span class="price big">${P['price']}</span><span class="once">{launch_note(P) or 'one-time payment'}</span></div><p class="valline">About the price of 1.5 spools of filament. Sell 3 of the example product and it has paid for itself.</p>
 <div class="ctas" style="margin-top:16px">{main_cta}<a class="btn ghost big" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free</a></div>
@@ -258,7 +283,7 @@ home += header() + f"""
 </div>
 </div></div></section>
 
-<section class="sec tight"><div class="wrap"><p class="facts"><span>Instant access</span><span>Free updates when the rules change</span><span>30-day money-back guarantee</span></p></div></section>
+<section class="sec tight"><div class="wrap"><p class="facts"><span>{ico('bolt')}Instant access</span><span>{ico('refresh')}Free updates when the rules change</span><span>{ico('shield')}30-day money-back guarantee</span></p></div></section>
 
 <section class="sec alt"><div class="wrap">
 <div class="sech"><div><h2>Not ready to buy? Start free</h2><p>Our free guides answer the questions every beginner has.</p></div><a class="more" href="/guides">All guides →</a></div>
@@ -269,7 +294,7 @@ home += header() + f"""
 
 <section class="sec"><div class="wrap">{signup('home', anchor='waitlist')}</div></section>
 
-<section class="sec"><div class="wrap"><div class="me"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><h2>Hi, I'm Kevin</h2><p class="lead" style="margin-top:12px">I run <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a>, where {SITE['followers']} people follow my 3D printing. The question I get most is: "Can you actually make money with this thing?"</p><p>These guides are my honest answer. No "$10k a month" promises. Just researched, up-to-date steps, checked against the current rules and written so anyone can follow them.</p><a class="btn ghost" href="/about">More about me</a></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="me"><img src="/img/kevin.webp" alt="Kevin, the creator of boredprinter" width="480" height="480" loading="lazy"><div><h2>Hi, I'm Kevin</h2><p class="lead" style="margin-top:12px">I run <a href="{SITE['instagram']}" rel="noopener">@boredprinter</a>, where {SITE['followers']} people follow my 3D printing. The question I get most is: "Can you actually make money with this thing?"</p><p>These guides are my honest answer. No "$10k a month" promises. Just researched, up-to-date steps, checked against the current rules and written so anyone can follow them.</p><div class="ctas" style="margin-top:8px"><a class="btn" href="{SITE['instagram']}" rel="noopener">{ico('ig', 18)} Follow @boredprinter</a><a class="btn ghost" href="/about">More about me</a></div></div></div></div></section>
 
 <section class="sec alt"><div class="wrap"><h2 style="margin-bottom:18px">Questions</h2>{faq_html(HOME_FAQ)}</div></section>
 
