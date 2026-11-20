@@ -10,7 +10,7 @@ We collect as little as possible. Here is everything.
 
 ## Email list
 
-If you sign up for the checklist or a waitlist, we store **your email address**, where you signed up and when. We use it only to send you boredprinter guides and news. Every email has an unsubscribe option, or contact us to be removed.
+If you sign up for the free plan or a waitlist, we store **your email address**, where you signed up and when. We use it only to send you boredprinter guides and news. Every email has an unsubscribe option, or contact us to be removed.
 
 ## Purchases
 

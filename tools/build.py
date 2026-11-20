@@ -111,12 +111,12 @@ def buy_btn(key, cls="btn or big wide"):
         return f'<a class="{cls}" href="{e(p["link"])}">Buy now · ${p["price"]}</a>'
     return f'<a class="{cls}" href="#waitlist">Get notified at launch</a>'
 
-def signup(src="home", title="Free: The First Sale Checklist", text="A one-page checklist that takes you from idea to your first sale, plus new guides when they come out.", bullets=("The 12 steps to your first sale", "The license check, in 30 seconds", "Pricing cheat sheet"), light=False, anchor=""):
-    ok = e('<p class="ok"><b>Done! 🎉</b> Your checklist: <a href="/free/first-sale-checklist.pdf" target="_blank" rel="noopener">open the PDF</a>. New guides will come to your inbox.</p>')
+def signup(src="home", title="Free: The 7-Day First Sale Plan", text="One small step a day, from idea to your first sale. With real examples, the license check and the pricing formula.", bullets=("What to print and how to prove it sells", "The 30-second license check", "Price, photos, listing and your first buyer"), light=False, anchor=""):
+    ok = e('<p class="ok"><b>Done! 🎉</b> Your free 7-day plan: <a href="/free/7-day-first-sale-plan.pdf" target="_blank" rel="noopener">open the PDF</a>. New guides will come to your inbox.</p>')
     lis = "".join(f"<li>{e(b)}</li>" for b in bullets)
     return f"""<div class="signup{' light' if light else ''}"{f' id="{anchor}"' if anchor else ''}>
 <div><h2>{e(title)}</h2><p>{e(text)}</p><ul>{lis}</ul></div>
-<form class="sform" data-src="{src}" data-btn="Send me the checklist" data-ok="{ok}" novalidate>
+<form class="sform" data-src="{src}" data-btn="Send me the free plan" data-ok="{ok}" novalidate>
 <label for="em-{src}" class="skip">Email</label>
 <input id="em-{src}" type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
 <button class="btn or big" type="submit">Send me the checklist</button>
@@ -384,7 +384,7 @@ for g in FREE:
 {hero}<div class="agrid"><article class="prose">{body}
 {('<h2 id="faq">Frequently asked questions</h2>' + faq_html(g['faq'])) if g.get('faq') else ''}
 </article>
-<aside class="toc" aria-label="On this page"><b>On this page</b>{toc}{'<a href="#faq">FAQ</a>' if g.get('faq') else ''}<div class="tbox"><b style="text-transform:none;letter-spacing:0;color:var(--ink);font-size:15px;margin:0">Free checklist</b><p>The 12 steps to your first sale.</p><a class="btn or wide" href="#waitlist">Get it free</a></div></aside>
+<aside class="toc" aria-label="On this page"><b>On this page</b>{toc}{'<a href="#faq">FAQ</a>' if g.get('faq') else ''}<div class="tbox"><b style="text-transform:none;letter-spacing:0;color:var(--ink);font-size:15px;margin:0">Free 7-day plan</b><p>From idea to your first sale, one step a day.</p><a class="btn or wide" href="#waitlist">Get it free</a></div></aside>
 </div>
 <div style="margin-top:56px">{signup(g['slug'][:40], light=True, anchor='waitlist')}</div>
 {AUTHOR_BOX}
@@ -530,7 +530,7 @@ page = head("Free 7-Day First Sale Plan for 3D Printer Owners | boredprinter", "
 <main id="main"><section class="sec"><div class="wrap" style="max-width:720px">
 <p class="kick" style="color:var(--or-ink);font-weight:700;margin:0 0 10px">Free · from @boredprinter</p>
 <h1 style="font-size:clamp(36px,7vw,58px);line-height:1.03">Your first sale with your 3D printer: the 7-day plan</h1>
-<p class="lead" style="margin-top:14px">Enter your email and get the free First Sale Checklist right away: 12 small steps, one or two a day. No fluff, no spam.</p>
+<p class="lead" style="margin-top:14px">Enter your email and get the free 7-day plan right away (11-page PDF). One step a day, with real examples and a task for each day. No fluff, no spam.</p>
 <div style="margin-top:22px">{signup('plan', title='Get the free plan', text='It opens right here as soon as you hit the button.', bullets=('What to print first, and how to check it sells', 'The 30-second license check', 'How to price it, list it and get the first buyer'), anchor='waitlist')}</div>
 <div class="cbox" style="margin-top:26px;display:block"><b>Also free:</b> the <a href="/tools/3d-print-price-calculator">3D print price calculator</a>. Fill in your numbers, get a price that's worth it.</div>
 <div class="cbox plcov" style="margin-top:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">{cover("playbook", "flat")}<div style="flex:1;min-width:220px"><b>Want every step in detail?</b><p style="margin:6px 0 12px;color:var(--muted)">Print to Profit: 12 chapters, a spreadsheet toolkit and a 30-day plan. $10 off with code <b>BORED10</b>.</p><a class="btn or" href="/guides/print-to-profit">See what's inside</a></div></div>
