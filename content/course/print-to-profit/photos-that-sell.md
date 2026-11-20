@@ -157,6 +157,12 @@ Shoot all products in one session per month. Same light, same background, same s
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Window light from the side, ceiling light off, plain background.
+- Shoot the 5 photos in order: hero, in use, size, detail, variations.
+- Show the product honestly. Photos that oversell bring returns and bad reviews.
+:::
+
 ::: do | Your task for this chapter
 - Set up your window studio (10 minutes)
 - Take the **5 photos** of your product

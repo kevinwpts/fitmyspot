@@ -226,6 +226,12 @@ Keeps 12 Switch game cards upright, sorted and easy to grab. The slots are tight
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Title under about 15 words, the most important words first, no fluff.
+- Use all 13 tags, each a phrase of up to 20 characters.
+- Fill in every attribute and Etsy's policy template. Search uses both.
+:::
+
 ::: do | Your task for this chapter
 - Collect 10–15 real search phrases for your product
 - Write your title using the template

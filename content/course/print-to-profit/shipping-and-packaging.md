@@ -116,6 +116,12 @@ Pre-fold boxes, pre-cut padding, pre-written thank-you cards. Pack 5 orders at o
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Design for the mailbox. Under about 25 mm high often ships as a letter.
+- Check real postage before you set your price.
+- Fill every gap, shake-test it, and always use tracking.
+:::
+
 ::: do | Your task for this chapter
 - Weigh and measure your product with packaging
 - Check postage at 2–3 carriers and write down the prices

@@ -237,6 +237,16 @@ HOME_FAQ = [
     {"q": "What if it's not for me?", "a": "You have a 30-day money-back guarantee. Read it, try the plan. If it's not worth it to you, message me within 30 days and you get all your money back. No questions."},
     {"q": "Do I need an account to buy?", "a": "No. You pay with your email and get access right away. To come back later, log in with a link we email you. No password."},
 ]
+STRIP_IMGS = [("how-to-make-money-with-a-3d-printer", "Desk organizers"), ("selling-3d-prints-on-etsy", "Planters"), ("how-to-price-3d-prints", "Cable clips"), ("best-3d-prints-to-sell", "Home helpers"), ("how-to-ship-3d-prints", "Phone stands"), ("can-you-sell-3d-prints", "Lamp bases"), ("how-to-photograph-3d-prints", "Vases"), ("how-much-does-it-cost-to-3d-print", "Drawer trays")]
+_strip_items = "".join(f'<figure><img src="/img/guides/{n}.webp" alt="" width="1600" height="900" loading="lazy"><figcaption>{t}</figcaption></figure>' for n, t in STRIP_IMGS if (OUT / "img/guides" / f"{n}.webp").exists())
+STRIP = f"""<section class="strip" aria-label="Examples of 3D printed products that sell"><p class="wrap stl">Small, useful prints. The kind this guide teaches you to make, price and sell.</p><div class="mq"><div class="mqi">{_strip_items}{_strip_items}</div></div></section>"""
+TOOLKIT = f"""<section class="sec"><div class="wrap">
+<div class="sech"><div><h2>Plus a toolkit you'll actually use</h2><p>Download once, use for every product.</p></div></div>
+<div class="tkg">
+<figure class="tk1"><img src="/img/toolkit/sheet.webp" alt="The pricing spreadsheet with example products, costs, suggested prices and profit per sale" width="1520" height="560" loading="lazy"><figcaption><b>{ico('sheet', 18)} Pricing spreadsheet</b>Costs, suggested price and profit for 20 products. Excel and Google Sheets.</figcaption></figure>
+<figure><img src="/img/toolkit/templates.webp" alt="Listing templates PDF: search phrases, title formula and the 13 tags" width="1100" height="900" loading="lazy"><figcaption><b>{ico('file', 18)} Listing templates</b>Title formula, 13-tag sheet, description and copy-paste messages.</figcaption></figure>
+<figure><img src="/img/toolkit/checklist.webp" alt="The printable 30-day checklist, one task per day" width="1100" height="900" loading="lazy"><figcaption><b>{ico('calendar', 18)} 30-day checklist</b>One task a day. Print it, tick it, stick with it.</figcaption></figure>
+</div></div></section>"""
 INSIDE = f"""<div class="sech"><div><h2>Look inside</h2><p>Short chapters, made for your phone. Every one ends with a task you can do the same day.</p></div><a class="more" href="/guides/print-to-profit/pick-your-lane">Read chapter 1 free →</a></div>
 <div class="inside">
 <figure><div class="phone"><img src="/img/inside/quiz.webp" alt="A quiz in chapter 1 that picks your way to make money" width="780" height="1560" loading="lazy"></div><figcaption><b>Quizzes that decide for you</b>Find the way to earn that fits you.</figcaption></figure>
@@ -283,6 +293,7 @@ home += header() + f"""
 </div>
 {cover('playbook')}
 </div></section>
+{STRIP}
 
 <section class="sec alt"><div class="wrap pain">
 <div><h2>Bought a 3D printer to make money, but…</h2></div>
@@ -297,6 +308,7 @@ home += header() + f"""
 
 <section class="sec"><div class="wrap">
 {INSIDE}</div></section>
+{TOOLKIT}
 
 
 
@@ -333,7 +345,7 @@ home += header() + f"""
 <p class="lead" style="margin:14px auto 26px">Start today with Print to Profit, or read the free guide first.</p>
 <div class="ctas" style="justify-content:center">{main_cta}<a class="btn ghost big" href="/guides/how-to-make-money-with-a-3d-printer">Read the free guide</a></div>
 </div></section>
-<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>30-day plan to your first 10 sales</small></span>{main_cta.replace('btn or big', 'btn or')}</div>
+<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>30-day money-back guarantee</small></span><a class="btn or" href="{e(P['link'] or '/guides/print-to-profit')}">Get it · ${P['price']}</a></div>
 <script>(()=>{{const b=document.getElementById("mcta"),h=document.querySelector(".hero,.phero .buy");if(!b||!h||!("IntersectionObserver" in window))return;new IntersectionObserver(es=>{{b.hidden=es[0].isIntersecting}}).observe(h)}})();</script>
 </main>""" + footer()
 write("/", home); PAGES.append(("/", TODAY, "1.0"))
@@ -490,6 +502,7 @@ for g in PREM:
 <div class="prose" style="font-size:17px">{intro}</div>
 <div><h2 style="font-size:28px;margin-bottom:16px">What's inside</h2><ol class="list2">{outline}</ol></div>
 </div></section>
+{TOOLKIT}
 <section class="sec"><div class="wrap cols">
 <div><h2 style="font-size:28px;margin-bottom:16px">You get</h2><ul class="inc">{inc}<li>{ico('phone')}<span>Instant access on any device</span></li></ul><div class="ctas" style="margin-top:18px">{buy_btn(k, "btn or big")}</div>{trust_row()}</div>
 <div><h2 style="font-size:28px;margin-bottom:16px">Questions</h2>{faq_html(PREM_FAQ)}</div>
@@ -499,7 +512,7 @@ for g in PREM:
 <div class="mini">{IGCHIP}<p>Written by Kevin. I research every rule, fee and step so you don't have to guess.</p></div>
 <div style="margin-top:40px"><h2 style="font-size:28px;margin-bottom:16px">Also available</h2><div class="cards">{card(other) if other else ""}{card(FREE[0])}{card(FREE[1])}{CALC_CARD}</div></div>
 </div></section>
-<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>30-day plan to your first 10 sales</small></span>{main_cta.replace('btn or big', 'btn or')}</div>
+<div class="mcta" id="mcta" hidden><span><b>Print to Profit</b><small>30-day money-back guarantee</small></span><a class="btn or" href="{e(P['link'] or '/guides/print-to-profit')}">Get it · ${P['price']}</a></div>
 <script>(()=>{{const b=document.getElementById("mcta"),h=document.querySelector(".hero,.phero .buy");if(!b||!h||!("IntersectionObserver" in window))return;new IntersectionObserver(es=>{{b.hidden=es[0].isIntersecting}}).observe(h)}})();</script>
 </main>""" + footer()
     write(path, page); PAGES.append((path, str(g["updated"]), "0.9"))

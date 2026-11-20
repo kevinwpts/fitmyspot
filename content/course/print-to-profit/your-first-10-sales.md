@@ -176,6 +176,12 @@ Etsy Ads can be tested with a small daily budget. Run it for 2 weeks on your bes
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Your first buyers come from you, not from search.
+- Share, don't sell: show the making-of in communities.
+- Ask every early buyer for a review. It unlocks the next sales.
+:::
+
 ::: do | Your task for this chapter
 - Start the **14-day sprint** today
 - Make a simple tracking note: sale, date, where they came from

@@ -140,6 +140,12 @@ Upload a simple free version of your product (for example a basic, non-personali
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Save time before you add printers: batch printing and templates first.
+- Raise the value per order with sets, bundles and personalization.
+- Look at profit per hour every month, not just sales.
+:::
+
 ::: do | Your task for this chapter
 - Check the "ready to scale" list honestly
 - Pick **one** time-saver and set it up this week

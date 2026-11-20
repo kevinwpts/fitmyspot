@@ -113,6 +113,12 @@ A short video can send buyers to your Etsy listing. Those visits and sales also 
 *Example to show the method. Your results will differ.*
 :::
 
+::: note | In short
+- Go where your buyer already searches, not where a YouTuber sells.
+- Start with one marketplace plus one local or personal channel.
+- Put the fees of your main channel into your price.
+:::
+
 ::: do | Your task: choose your 2 channels
 - Search your product on Etsy, eBay and Facebook Marketplace
 - Write down your main marketplace and your local channel

@@ -182,6 +182,12 @@ Don't copy a winner. Take a proven product and add one thing it doesn't have: a 
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Start from a buyer's problem, not from a cool model.
+- Prove demand first: reviews × 15–30 ≈ sales, plus Etsy autocomplete.
+- Take what already sells and add one thing: your "+1".
+:::
+
 ::: do | Your task for this chapter
 - Collect **20 annoyances** from your buyers in 30 minutes
 - Check demand on Etsy/eBay for the best 5

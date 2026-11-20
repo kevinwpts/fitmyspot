@@ -169,6 +169,12 @@ Tinkercad is enough for most products that sell. When you want curves, threads o
 *Example numbers for one product. Yours will differ.*
 :::
 
+::: note | In short
+- Most products that sell are boxes, holes and text. Tinkercad is enough.
+- Add 0.2–0.4 mm of room per side, and print a small fit test first.
+- Save a Bambu Studio template, so a new name takes under a minute.
+:::
+
 ::: do | Your task: design version 1 today
 - Measure the thing your product fits, and add your clearance
 - Build it in Tinkercad (boxes, holes, Group)

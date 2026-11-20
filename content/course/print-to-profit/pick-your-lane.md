@@ -159,6 +159,12 @@ In every chapter we follow **one example product** from idea to sales, so you se
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Pick **one** lane for the next 30 days. You can add more later.
+- Personalized items and your own designs are the sweet spot for most beginners.
+- Block 2 fixed times a week. Four focused hours beat a whole weekend once a month.
+:::
+
 ::: do | Your task for this chapter
 - Do the quiz above and pick your lane
 - Write your lane sentence: **what** + **for whom**

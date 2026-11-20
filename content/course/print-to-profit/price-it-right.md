@@ -178,6 +178,12 @@ If it's below what you'd accept for a normal side job, raise prices or drop the 
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- Filament is the smallest cost. Your time is usually the biggest.
+- Price = all costs × 2.5 + fees. Round up, not down.
+- Offer a single, a set of 4 and a set of 10. Most buyers pick the middle.
+:::
+
 ::: do | Your task for this chapter
 - Fill in the worksheet for your product (or use the [calculator](/tools/3d-print-price-calculator))
 - Compare with 5 similar listings

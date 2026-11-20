@@ -140,6 +140,12 @@ star | Stay ahead | Improve your product, add personalization, build your name. 
 *Example numbers to show the method. Yours will differ.*
 :::
 
+::: note | In short
+- On Etsy, physical items must come from your own design.
+- No logos, characters or brand names on the product. Fonts need a license too.
+- Selling to the EU: your name, address and a product code on every listing.
+:::
+
 ::: do | Your task for this chapter
 - Run the **5 checks** on your product from chapter 2
 - Fix anything that fails (or pick your second idea)
