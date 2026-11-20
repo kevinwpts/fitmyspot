@@ -2,6 +2,7 @@
 title: "How to Price 3D Prints (Most Sellers Charge Too Little)"
 h1: "How to Price 3D Prints (Most Sellers Charge Half What They Should)"
 description: "A simple formula to price 3D prints so every sale is worth it: filament, electricity, machine wear, your time, packaging and fees. Includes a free calculator."
+image_alt: "A 3D printed cable clip on a kitchen scale next to a filament spool and a calculator, working out the cost of a print"
 nav: How to price 3D prints
 type: free
 order: 3
