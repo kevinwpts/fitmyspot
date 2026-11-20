@@ -8,6 +8,10 @@
 - [How to price 3D prints](https://boredprinter.com/guides/how-to-price-3d-prints): The formula, the costs people forget, and why you're probably charging too little.
 - [Selling 3D prints on Etsy in 2026](https://boredprinter.com/guides/selling-3d-prints-on-etsy): What changed in 2025, what you can still sell, what Etsy charges, and how to stay on the right side of the rules.
 - [The best 3D prints to sell](https://boredprinter.com/guides/best-3d-prints-to-sell): Product types that sell, the pattern behind them, and how to find your own winner.
+- [How much does it cost to 3D print?](https://boredprinter.com/guides/how-much-does-it-cost-to-3d-print): What a print really costs you, from a keychain to a big organizer, and the costs people forget.
+- [25 3D printing business ideas](https://boredprinter.com/guides/3d-printing-business-ideas): 25 ideas you can start with one printer at home, and how to pick the right one for you.
+- [How to ship 3D prints](https://boredprinter.com/guides/how-to-ship-3d-prints): Pack fast, ship cheap, and make sure your prints arrive in one piece.
+- [How to photograph 3D prints](https://boredprinter.com/guides/how-to-photograph-3d-prints): A 10-minute home studio, the 5 photos that sell, and the mistakes to avoid.
 - [3D print price calculator](https://boredprinter.com/tools/3d-print-price-calculator): free tool to price a 3D print including filament, electricity, machine wear, labour, packaging and fees.
 
 ## Premium guides

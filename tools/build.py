@@ -230,7 +230,7 @@ home += header() + f"""
 
 <section class="sec alt"><div class="wrap">
 <div class="sech"><div><h2>Not ready to buy? Start free</h2><p>Our free guides answer the questions every beginner has.</p></div><a class="more" href="/guides">All guides →</a></div>
-<div class="cards">{"".join(card(g) for g in FREE)}{CALC_CARD}</div>
+<div class="cards">{"".join(card(g) for g in FREE[:5])}{CALC_CARD}</div>
 </div></section>
 
 <section class="sec"><div class="wrap">
