@@ -100,6 +100,23 @@ calendar | Markets and fairs | Great for personalized items.
 file | Sell the file | MakerWorld, Printables, Cults.
 :::
 
+## What the rule says, word for word
+
+Etsy's policy says items made by a seller (including 3D printing) **"must be produced based on a seller's original design"**. Before June 2025 it also allowed "a templated design or pattern". That part was removed. So changing the name on someone else's template doesn't count as your design.
+
+## Get found: Etsy's 2026 title and tag rules
+
+::: icons
+pencil | Short titles | Etsy recommends under about 15 words, most important traits first.
+x | No fluff | Skip "perfect", "beautiful", gift phrases and shipping info in the title.
+tag | All 13 tags | Multi-word phrases, each up to 20 characters.
+truck | Shipping under $6 | For US buyers, Etsy prioritizes listings with shipping under $6.
+:::
+
+**Example title:** "Personalized Cat Name Sign for Door, Black and Orange PLA"
+
+The full tag formula, title templates and the research routine are in [Print to Profit](/guides/print-to-profit), chapter 6.
+
 ::: do | Do this today
 - Go through your Etsy listings (or ideas)
 - Mark anything that isn't your own design
@@ -110,6 +127,9 @@ Never designed anything? Start with [Design Your Own Bestseller](/guides/design-
 
 ## Sources
 
+- [New guidance for listing titles (Etsy Seller Handbook)](https://www.etsy.com/seller-handbook/article/1399426136697)
+- [Checklist: optimize your shop for Etsy search (Etsy Seller Handbook)](https://www.etsy.com/seller-handbook/article/366470356778)
+- [Etsy creativity standards update, June 2025 (Value Added Resource)](https://www.valueaddedresource.net/etsy-creativity-standards-update-june-2025/)
 - [Etsy cracks down on 3D printed products (Tom's Hardware)](https://www.tomshardware.com/3d-printing/etsy-cracks-down-on-3d-printed-products-new-rules-exclude-many-3d-printed-items-from-listings)
 - [Etsy's creativity standards: what you can sell in 2026 (Listadum)](https://www.listadum.com/blog/etsy-creativity-standards)
 - [Etsy fees in 2026 (Checkout Page)](https://checkoutpage.com/blog/etsy-fees)

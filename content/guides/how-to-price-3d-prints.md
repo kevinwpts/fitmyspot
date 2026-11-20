@@ -97,6 +97,16 @@ heart | Offer personalization | A name on it can double what people will pay.
 target | Don't race to the bottom | Someone selling for $3 isn't counting their time. They won't last.
 :::
 
+## Two moves that raise every order
+
+::: step list | Good, better, best
+Offer a single, a **set of 4** and a set of 10 in one listing. Most buyers pick the middle. The single makes the set look like a deal.
+:::
+
+::: step truck | Keep US shipping under $6
+Etsy prioritizes US listings with shipping under $6. Put the rest of the shipping cost into the item price. Same total, better ranking.
+:::
+
 ::: do | Do this today
 - Pick your best product
 - Put its numbers in the [price calculator](/tools/3d-print-price-calculator)
@@ -107,4 +117,5 @@ Want ready-made pricing worksheets? They're in [Print to Profit](/guides/print-t
 
 ## Sources
 
+- [Checklist: optimize your shop for Etsy search (Etsy Seller Handbook)](https://www.etsy.com/seller-handbook/article/366470356778)
 - [Etsy fees in 2026 (Checkout Page)](https://checkoutpage.com/blog/etsy-fees)

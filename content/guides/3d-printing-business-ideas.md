@@ -105,6 +105,10 @@ Not "organizer", but "insert for the Wingspan box". Specific is easier to sell a
 Make one version, photograph it in use, post it. Let buyers tell you if it's a winner.
 :::
 
+::: tip | The +1 rule
+Don't copy a winner. Take a proven product and add one thing it doesn't have: a size for a specific brand, a lid, a name, a stackable version. That one difference is why people buy yours.
+:::
+
 ::: do | Do this today
 - Pick 3 ideas that match something you know
 - Search for each on Etsy and note how many have reviews

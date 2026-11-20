@@ -100,6 +100,10 @@ Since June 2025, Etsy only allows 3D prints of **your own designs** (or items pe
 
 Your own design = no license worries, sell anywhere, nobody can claim it. Most bestsellers are simple shapes made in free tools like Tinkercad or Onshape.
 
+## Keep a design log
+
+For everything you sell, keep a folder with your CAD file, 2–3 dated screenshots of the design process and the first test print photo. If a marketplace or another designer questions your product, you can prove it's yours in minutes.
+
 ::: do | Do this today
 - Open the last model you printed and find its license
 - Is it NC or "personal use"? Then it's for you, not for sale

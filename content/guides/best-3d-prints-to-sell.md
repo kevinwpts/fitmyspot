@@ -71,6 +71,28 @@ A few days in real life. Fix what annoys you. Photograph it **in use**.
 List it or post it. See what people click and ask about. Improve, repeat.
 :::
 
+## Check demand in 10 minutes
+
+::: step search | Use Etsy's autocomplete
+Type the first word of your idea on Etsy and stop. Every suggestion is a real search.
+:::
+
+::: step chart | Estimate sales from reviews
+Only about 3–8% of buyers leave a review. So **sales ≈ reviews × 15 to 30**. 40 reviews ≈ 600–1,200 sales. Rough, but enough to spot real demand.
+:::
+
+::: step star | Read Amazon's 2–3 star reviews
+Search the mass-market version on Amazon. The complaints ("too shallow", "doesn't fit") are your product ideas.
+:::
+
+::: step printer | Check MakerWorld prints
+A free model with thousands of prints proves people want that kind of thing. Design your own, better version.
+:::
+
+::: tip | The +1 rule
+Take a proven product and add one thing: a size for a specific brand, a lid, a name, a set of 3. That difference is your marketing.
+:::
+
 ::: do | Do this today
 - Pick one buyer group
 - Find 3 complaints they have online
@@ -78,3 +100,7 @@ List it or post it. See what people click and ask about. Improve, repeat.
 :::
 
 Next: [price it right](/guides/how-to-price-3d-prints) and [learn the Etsy rules](/guides/selling-3d-prints-on-etsy). Want to design it yourself? [Design Your Own Bestseller](/guides/design-your-own-bestseller).
+
+## Sources
+
+- [How to see how many sales an Etsy product has (Insight Agent)](https://www.insightagent.app/guides/how-to-see-how-many-sales-an-etsy-product-has)

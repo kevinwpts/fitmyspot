@@ -66,6 +66,13 @@ palette | One look | Same tape, note and wrap every time.
 Outside your trade area (for example EU to UK or US), parcels may need a customs form, and buyers may pay import fees. Say it in your listing.
 :::
 
+## Two money savers
+
+::: icons
+tag | Buy labels on the marketplace | In many countries (like the US, UK and Canada) Etsy sells discounted labels with tracking in the order screen.
+truck | US: shipping under $6 | Etsy prioritizes US listings with shipping under $6. Move the rest into the price.
+:::
+
 ::: do | Do this today
 - Weigh your product with packaging
 - Check postage at 2 carriers
@@ -73,3 +80,7 @@ Outside your trade area (for example EU to UK or US), parcels may need a customs
 :::
 
 More on packing, unboxing and handling problems in [Print to Profit](/guides/print-to-profit), chapter 7.
+
+## Sources
+
+- [Checklist: optimize your shop for Etsy search (Etsy Seller Handbook)](https://www.etsy.com/seller-handbook/article/366470356778)

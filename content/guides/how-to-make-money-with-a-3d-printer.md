@@ -139,6 +139,10 @@ box | Packaging | Often the biggest cost per order.
 percent | Fees | Marketplaces like Etsy take a cut.
 :::
 
+## Good to know: what selling files pays
+
+On MakerWorld, regular points buy gift cards (mostly for the Bambu Lab store). Only models in the **Exclusive program** earn points you can cash out, about **$0.066 per point** from $100. Models without a print profile or real photos earn far fewer points. Files are great passive income later, but rarely your first income.
+
 ::: do | Do this today
 - Write down **3 product ideas** for **one** type of buyer
 - Check the license of anything you didn't design
@@ -150,6 +154,7 @@ Want every step in detail, with worksheets and a 30-day plan? That's [Print to P
 
 ## Sources
 
+- [How much are MakerWorld points worth? (MakerStats)](https://makerstats.io/makerworld-points/)
 - [Etsy cracks down on 3D printed products (Tom's Hardware)](https://www.tomshardware.com/3d-printing/etsy-cracks-down-on-3d-printed-products-new-rules-exclude-many-3d-printed-items-from-listings)
 - [Etsy fees in 2026 (Checkout Page)](https://checkoutpage.com/blog/etsy-fees)
 - [Commercial license to sell 3D prints (Makers101)](https://makers101.com/commercial-license-to-sell-3d-prints/)

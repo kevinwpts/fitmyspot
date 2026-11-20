@@ -68,6 +68,12 @@ palette | 5. Variations | All colors or sizes together.
 Crop square or 4:5, a little brightness, straighten. Don't change the colors: the buyer should get what they saw.
 :::
 
+## What Etsy looks at
+
+Etsy's own checklist: make the **first photo a clear thumbnail** of the item and **use all photo slots**. Etsy search also looks at the first photo to understand what you sell. So the hero shot shows only the product, clearly, filling the frame.
+
+**More photo ideas to fill the slots:** before/after (messy vs. tidy), next to a ruler with the size visible, a personalization example, the packaging, and a simple graphic with the size in cm and inches.
+
 ::: do | Do this today
 - Set up the window studio
 - Take the 5 photos of one product
@@ -75,3 +81,7 @@ Crop square or 4:5, a little brightness, straighten. Don't change the colors: th
 :::
 
 More on photos, listings and getting your first sales in [Print to Profit](/guides/print-to-profit).
+
+## Sources
+
+- [Checklist: optimize your shop for Etsy search (Etsy Seller Handbook)](https://www.etsy.com/seller-handbook/article/366470356778)
