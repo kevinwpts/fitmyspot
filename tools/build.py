@@ -480,4 +480,8 @@ llms = f"""# boredprinter
 ## Premium guides
 """ + "".join(f"- [{g['h1']}]({URL}/guides/{g['slug']}): {g['summary']} (${PROD[g['product']]['price']}, online guide)\n" for g in PREM)
 (OUT / "llms.txt").write_text(llms)
+# säkerhet: om både x.html och mappen x/ finns, lägg en kopia som x/index.html
+for f in list(OUT.rglob("*.html")):
+    d = f.with_suffix("")
+    if d.is_dir() and not (d / "index.html").exists(): (d / "index.html").write_text(f.read_text())
 print("built", len(PAGES), "indexed pages")
