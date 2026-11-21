@@ -45,6 +45,41 @@
       "source": "/guides/design-your-own-bestseller",
       "destination": "/guides/print-to-profit",
       "permanent": false
+    },
+    {
+      "source": "/plans",
+      "destination": "/plan",
+      "permanent": false
+    },
+    {
+      "source": "/free",
+      "destination": "/plan",
+      "permanent": false
+    },
+    {
+      "source": "/freeplan",
+      "destination": "/plan",
+      "permanent": false
+    },
+    {
+      "source": "/free-plan",
+      "destination": "/plan",
+      "permanent": false
+    },
+    {
+      "source": "/7-day-plan",
+      "destination": "/plan",
+      "permanent": false
+    },
+    {
+      "source": "/guide",
+      "destination": "/guides/print-to-profit",
+      "permanent": false
+    },
+    {
+      "source": "/book",
+      "destination": "/guides/print-to-profit",
+      "permanent": false
     }
   ],
   "headers": [
